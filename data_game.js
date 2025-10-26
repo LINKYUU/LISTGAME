@@ -649,10 +649,11 @@ People Playground,452.04 KB,Ringan
 Persona 3,8.11 GB,Sedang
 Persona 4 Arena Ultimax,15.43 GB,Sedang
 Persona 5 Royal,34.26 GB,Agak Berat
+It Takes Two,50 GB , Berat
 Persona 5 Strikers,25.03 GB,Agak Berat
 Persona 5 Tactica,7.43 GB,Sedang
 Persona 4 Golden Digital Deluxe Edition,12.8 GB,Sedang
-Pro Evolution Soccer [ PES ] 2013 ,11.4 GB,Sedang
+Pro Evolution Soccer [ PES ] 2013 ,11.4 GB,Ringan
 Pro Evolution Soccer [ PES ] 6,3.67 GB,Ringan
 PixARK,17.77 GB,Sedang
 Planet Coaster,12.06 GB,Sedang
@@ -991,6 +992,7 @@ Yu Gi Oh RUSH DUEL Dawn of the Battle,3.43 GB,Ringan
 Zombie Army 4,59.07 GB,Berat
 
 `;
+
 
 
 
