@@ -990,8 +990,13 @@ Ys IX Monstrum Nox,9.67 GB,Sedang
 Ys VIII Lacrimosa of Dana,29.38 GB,Agak Berat
 Yu Gi Oh RUSH DUEL Dawn of the Battle,3.43 GB,Ringan
 Zombie Army 4,59.07 GB,Berat
+Ninja Gaiden 4, 40 GB, Berat
+The Crew 1, 40 GB,Berat
+THe Crew 2 , 40 GB , Berat
+Little Nightmares 3 , 15 GB, Agak Berat
 
 `;
+
 
 
 
