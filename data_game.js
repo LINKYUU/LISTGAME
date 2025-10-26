@@ -250,7 +250,7 @@ Earth Defense Force 5,21.08 GB,Agak Berat
 EARTH DEFENSE FORCE 6,43.28 GB,Berat
 Ebola 2,428.71 MB,Ringan
 Echoes of Yi Samsara,24.73 GB,Agak Berat
-Pro Evolution Soccer [ PES ] 2021,80 GB,Berat
+Pro Evolution Soccer 2021 / PES,80 GB,Berat
 ELDEN RING NIGHTREIGN,21.7 GB,Agak Berat
 ELDEN RING Shadow of the Erdtree,69.40 GB,Berat
 ELDEN RING,69.4 GB,Berat
@@ -556,7 +556,7 @@ MotoGP 23,23.43 GB,Agak Berat
 MotoGP 24,25.65 GB,Agak Berat
 MotoGP 25,26.00 GB,Agak Berat
 MotoGP 22,31.1 GB,Agak Berat
-Mount_&_Blade_III_Bannerlord,49.4 GB,Berat
+Mount_&_Blade III_Bannerlord,49.4 GB,Berat
 Moving Out,715.92 MB,Ringan
 Moving Out 2,1.39 GB,Ringan
 Ms Office 2021,1.98 GB,Ringan
@@ -653,8 +653,8 @@ It Takes Two,50 GB , Berat
 Persona 5 Strikers,25.03 GB,Agak Berat
 Persona 5 Tactica,7.43 GB,Sedang
 Persona 4 Golden Digital Deluxe Edition,12.8 GB,Sedang
-Pro Evolution Soccer [ PES ] 2013 ,11.4 GB,Ringan
-Pro Evolution Soccer [ PES ] 6,3.67 GB,Ringan
+Pro Evolution Soccer 2013 / PES ,11.4 GB,Ringan
+Pro Evolution Soccer 6 / PES ,3.67 GB,Ringan
 PixARK,17.77 GB,Sedang
 Planet Coaster,12.06 GB,Sedang
 Planet of the A Last Frontier,19.63 GB,Sedang
@@ -677,10 +677,10 @@ PowerWash Simulator,10.95 GB,Sedang
 Praetorians   HD Remaster,1.73 GB,Ringan
 Prince of Persia The Lost Crown,6.77 GB,Sedang
 Prison Simulator,3.52 GB,Ringan
-Pro Evolution Soccer [ PES ] 2016  ,23.8 GB,Ringan
-Pro Evolution Soccer [ PES ] 2017,45 GB,Sedang
-Pro Evolution Soccer [ PES ] 2018 ,43 GB,Sedang
-Pro Evolution Soccer [ PES ] 2019,44 GB,Agak Berat
+Pro Evolution Soccer 2016 / PES ,23.8 GB,Ringan
+Pro Evolution Soccer 2017 / PES,45 GB,Sedang
+Pro Evolution Soccer 2018 / PES ,43 GB,Sedang
+Pro Evolution Soccer 2019 / PES ,44 GB,Agak Berat
 Project Cars 3,51.85 GB,Berat
 Project Wingman,13.95 GB,Sedang
 Project Zomboid,1.99 GB,Ringan
@@ -758,7 +758,6 @@ Sleeping Dogs Definitive Edition,17.32 GB,Sedang
 Sniper Elite 3,27.49 GB,Agak Berat
 Sniper Elite V2 Remastered,13.67 GB,Sedang
 Sniper Ghost Warrior   Gold Edition,7.2 GB,Sedang
-Sniper Ghost Warrior 2,8.63 GB,Sedang
 Sniper Ghost Warrior 2,8.63 GB,Sedang
 Sniper Ghost Warrior 3,60.25 GB,Berat
 Sniper Ghost Warrior 3,60.25 GB,Berat
@@ -991,11 +990,11 @@ Ys VIII Lacrimosa of Dana,29.38 GB,Agak Berat
 Yu Gi Oh RUSH DUEL Dawn of the Battle,3.43 GB,Ringan
 Zombie Army 4,59.07 GB,Berat
 Ninja Gaiden 4, 40 GB, Berat
-The Crew 1, 40 GB,Berat
 THe Crew 2 , 40 GB , Berat
 Little Nightmares 3 , 15 GB, Agak Berat
 
 `;
+
 
 
 
