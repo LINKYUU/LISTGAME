@@ -656,7 +656,7 @@ Pro Evolution Soccer [ PES ] 2013 ,11.4 GB,Sedang
 Pro Evolution Soccer [ PES ] 6,3.67 GB,Ringan
 PixARK,17.77 GB,Sedang
 Planet Coaster,12.06 GB,Sedang
-Planet of the APro Evolution Soccer [ PES ] Last Frontier,19.63 GB,Sedang
+Planet of the A Last Frontier,19.63 GB,Sedang
 Planet Zoo,10.33 GB,Sedang
 Plants Vs Zombies Game Of The Year Edition,48.07 GB,Berat
 Pokemon Lets Go Pikachu,4.82 GB,Ringan
@@ -992,4 +992,5 @@ Yu Gi Oh RUSH DUEL Dawn of the Battle,3.43 GB,Ringan
 Zombie Army 4,59.07 GB,Berat
 
 `;
+
 
