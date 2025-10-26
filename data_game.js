@@ -676,11 +676,10 @@ PowerWash Simulator,10.95 GB,Sedang
 Praetorians   HD Remaster,1.73 GB,Ringan
 Prince of Persia The Lost Crown,6.77 GB,Sedang
 Prison Simulator,3.52 GB,Ringan
-Pro Evolution Soccer [ PES ] 2016  ,23.8 GB,Agak Berat
-Pro Evolution Soccer [ PES ] 2017,11.15 GB,Sedang
-Pro Evolution Soccer [ PES ] 2018 ,43.8 GB,Berat
-Pro Evolution Soccer [ PES ] 2018  ,50.3 GB,Berat
-Pro Evolution Soccer [ PES ] 2019,23.74 GB,Agak Berat
+Pro Evolution Soccer [ PES ] 2016  ,23.8 GB,Ringan
+Pro Evolution Soccer [ PES ] 2017,45 GB,Sedang
+Pro Evolution Soccer [ PES ] 2018 ,43 GB,Sedang
+Pro Evolution Soccer [ PES ] 2019,44 GB,Agak Berat
 Project Cars 3,51.85 GB,Berat
 Project Wingman,13.95 GB,Sedang
 Project Zomboid,1.99 GB,Ringan
@@ -928,7 +927,7 @@ Unravel Two,7.09 GB,Sedang
 Until Dawn,62.32 GB,Berat
 Until Dawn,62.3 GB,Berat
 Untitled Goose Game,918.95 KB,Ringan
-Upin and Ipin Universe,5.51 GB,Sedang
+Upin and Ipin Universe,5.51 GB,Berat
 Valiant Hearts The Great War,1.21 GB,Ringan
 Valkyrie Elysium,19.6 GB,Valkyrie Elysium
 Viking Battle for Asgard,5.6 GB,Viking Battle
@@ -992,5 +991,6 @@ Yu Gi Oh RUSH DUEL Dawn of the Battle,3.43 GB,Ringan
 Zombie Army 4,59.07 GB,Berat
 
 `;
+
 
 
