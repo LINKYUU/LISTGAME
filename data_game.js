@@ -98,7 +98,6 @@ Beyond Two Souls,45.28 GB,Berat
 Biomutant,26.57 GB,Agak Berat
 Bioshock Infinite,46.65 GB,Berat
 BioShock Remastered,21.76 GB,Agak Berat
-BlacMBox PES13,2.80 GB,Ringan
 Blasphemous 2,3.49 GB,Ringan
 BLERCH Rebirth of Souls,75.4 GB,Berat
 Bloody Spell,21.76 GB,Agak Berat
@@ -251,7 +250,7 @@ Earth Defense Force 5,21.08 GB,Agak Berat
 EARTH DEFENSE FORCE 6,43.28 GB,Berat
 Ebola 2,428.71 MB,Ringan
 Echoes of Yi Samsara,24.73 GB,Agak Berat
-eFootball PES 2021,40.52 GB,Berat
+PES 2021,80 GB,Berat
 ELDEN RING NIGHTREIGN,21.7 GB,Agak Berat
 ELDEN RING Shadow of the Erdtree,69.40 GB,Berat
 ELDEN RING,69.4 GB,Berat
@@ -653,7 +652,7 @@ Persona 5 Royal,34.26 GB,Agak Berat
 Persona 5 Strikers,25.03 GB,Agak Berat
 Persona 5 Tactica,7.43 GB,Sedang
 Persona 4 Golden Digital Deluxe Edition,12.8 GB,Sedang
-PES 2013 UPDATE SEPTEMBER,11.4 GB,Sedang
+PES 2013 ,11.4 GB,Sedang
 PES 6,3.67 GB,Ringan
 PixARK,17.77 GB,Sedang
 Planet Coaster,12.06 GB,Sedang
@@ -677,11 +676,11 @@ PowerWash Simulator,10.95 GB,Sedang
 Praetorians   HD Remaster,1.73 GB,Ringan
 Prince of Persia The Lost Crown,6.77 GB,Sedang
 Prison Simulator,3.52 GB,Ringan
-Pro Evolution Soccer 2016 UPDATE SEPTEMBER,23.8 GB,Agak Berat
-Pro Evolution Soccer 2017,11.15 GB,Sedang
-Pro Evolution Soccer 2018 SEPTEMBER,43.8 GB,Berat
-Pro Evolution Soccer 2018 UPDATE JUNI,50.3 GB,Berat
-Pro Evolution Soccer 2019,23.74 GB,Agak Berat
+PES 2016  ,23.8 GB,Agak Berat
+PES 2017,11.15 GB,Sedang
+PES 2018 ,43.8 GB,Berat
+PES 2018  ,50.3 GB,Berat
+PES 2019,23.74 GB,Agak Berat
 Project Cars 3,51.85 GB,Berat
 Project Wingman,13.95 GB,Sedang
 Project Zomboid,1.99 GB,Ringan
@@ -991,4 +990,5 @@ Ys IX Monstrum Nox,9.67 GB,Sedang
 Ys VIII Lacrimosa of Dana,29.38 GB,Agak Berat
 Yu Gi Oh RUSH DUEL Dawn of the Battle,3.43 GB,Ringan
 Zombie Army 4,59.07 GB,Berat
+
 `;
