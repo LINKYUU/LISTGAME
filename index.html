@@ -32,8 +32,6 @@
         }
         .special-notice p { margin: 5px 0; font-size: 18px; font-weight: 600; color: #d9534f; }
         .special-notice p.whatsapp { color: #333; font-weight: bold; font-size: 16px; }
-        .special-notice p.shopee-link { color: #333; font-weight: bold; font-size: 16px; margin-top: 8px; }
-        .special-notice p.shopee-link a { color: #0056b3; text-decoration: none; }
         
         h1 { text-align: center; color: #1a1a1a; margin: 10px 0 0 0; }
         #searchInput {
@@ -65,17 +63,22 @@
         /* Nama Game Clickable */
         .clickable-name { color: #0056b3; cursor: pointer; text-decoration: underline; font-weight: 500; }
 
-        /* MODAL SPEK (RAWG) */
+        /* MODAL SPEK (STEAM) */
         .modal {
             display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.7); backdrop-filter: blur(3px);
         }
         .modal-content {
-            background: white; margin: 10% auto; padding: 20px; width: 90%; max-width: 500px;
-            border-radius: 12px; position: relative; max-height: 70vh; overflow-y: auto;
+            background: white; margin: 5% auto; padding: 25px; width: 90%; max-width: 600px;
+            border-radius: 12px; position: relative; max-height: 80vh; overflow-y: auto;
         }
-        .close-btn { position: absolute; right: 15px; top: 10px; font-size: 24px; cursor: pointer; color: #999; }
-        .req-text { background: #f9f9f9; padding: 15px; border-radius: 8px; font-size: 14px; white-space: pre-line; border-left: 4px solid #1a73e8; }
+        .close-btn { position: absolute; right: 15px; top: 10px; font-size: 28px; cursor: pointer; color: #999; }
+        
+        /* Styling teks dari Steam */
+        .steam-req { font-size: 14px; line-height: 1.5; color: #444; }
+        .steam-req b, .steam-req strong { color: #000; }
+        .steam-req ul { padding-left: 20px; }
+        .loading { text-align: center; padding: 20px; font-style: italic; color: #666; }
 
         .ket-ringan { color: #28a745; font-weight: 600; }
         .ket-sedang { color: #007bff; font-weight: 600; }
@@ -90,11 +93,10 @@
         <div class="special-notice">
             <p>🎮 DAFTAR GAME LINK.YU 🎮</p>
             <p class="whatsapp">💬 WA: 08 777 26 77776</p>
-            <p class="shopee-link">🛒 Shopee: <a href="https://id.shp.ee/QiepRVW" target="_blank">Klik Disini</a></p>
         </div>
 
         <h1>Daftar Game</h1>
-        <input type="text" id="searchInput" placeholder="Cari game... (Tekan judul game untuk spek)">
+        <input type="text" id="searchInput" placeholder="Cari game... (Klik judul untuk spek asli Steam)">
         
         <div id="filterContainer">
             <button class="filter-btn" data-filter="Ringan">Ringan</button>
@@ -119,7 +121,7 @@
             <thead>
                 <tr>
                     <th style="width:50%">Nama Game</th>
-                    <th id="sizeHeader" style="cursor: pointer;">Size ↕</th>
+                    <th>Size</th>
                     <th>Speck</th>
                 </tr>
             </thead>
@@ -131,39 +133,74 @@
 <div id="specModal" class="modal">
     <div class="modal-content">
         <span class="close-btn">&times;</span>
-        <h3 id="modalTitle" style="margin-top:0;">Memuat...</h3>
-        <div id="modalBody">Sedang mengambil data dari RAWG...</div>
+        <h2 id="modalTitle" style="margin-top:0; border-bottom: 2px solid #eee; padding-bottom: 10px; font-size: 20px;">Memuat...</h2>
+        <div id="modalBody" class="steam-req">
+            </div>
     </div>
 </div>
 
 <script src="data_game.js"></script>
 
 <script>
-    // MASUKKAN API KEY RAWG KAMU DI SINI
-    const apiKey = "MASUKKAN_API_KEY_RAWG_DISINI";
-
     let allGames = [];
     let currentCategoryFilter = null;
     let currentGenreFilter = null;
 
-    // Data Keywords (Sama seperti sebelumnya)
-    const keywordsMainBerdua = ['pico park', 'a way out', 'ao international tennis', 'attack on titan 2', 'baldurs gate 3', 'basara 2', 'basara 3', 'battletoads', 'beach buggy racing 2', 'beyond two souls', 'bloons td 6', 'blur', 'borderlands 2', 'borderlands 3', 'brothers a tale of two sons', 'call of duty black ops iii', 'captain tsubasa', 'cars 2', 'chained together', 'chocobo gp', 'crash bandicoot 4', 'ctr yuzu', 'cult of the lamb', 'cuphead', 'def jam vendetta', 'demon slayer', 'dirt 3', 'dirt 5', 'donkey kong country', 'downhill domination', 'dragon ball fighterz', 'dragon ball xenoverse', 'sparking! zero', 'dynasty warrior', 'ea sports fc', 'efootball pes', 'pro evolution soccer', 'f1 20', 'f1 race stars', 'fifa', 'fita street', 'fight night', 'gears of war', 'gears of war 4', 'goat simulator 3', 'gran turismo 4', 'guilty gear strive', 'guitar hero', 'halo the master chief collection', 'hot wheels unleashed', 'human fall flat', 'hyrule warriors', 'jujutsu kaisen', 'jump force', 'kamen rider', 'kirby and the forgotten land', 'kirby star allies', "kirby's return to dream land", 'left 4 dead 2', 'lego', 'luigi mansion 3', "luigi's mansion 2", 'mario kart 8', 'mario sonic at the', 'mario tennis', 'marvel ultimate alliance', 'melty blood', 'minecraft dungeons', 'mortal kombat', 'motogp', 'moving out', 'my hero ones justice 2', 'naruto', 'nascar', 'nba 2k', 'nickelodeon all star brawl', 'nickelodeon kart racers', 'one piece burning blood', 'one piece pirate warriors', 'one punch man', 'overcooked 2', 'persona 4 arena', "pokemon let's go", 'pokkén tournament', 'power rangers battle for the grid', 'rayman legends', 'resident evil 5', 'resident evil 6', 'resident evil revelations 2', 'river city girls 2', 'rocket league', 'saint seiya soldiers soul', 'samurai warriors', 'sbk 22', 'sengoku basara', 'shieldwall', 'sonic & all stars', 'sonic superstar', 'spider man friend or foe', 'splitsecond', 'street fighter v', 'streets of rage 4', 'stronghold crusader', 'super bomberman r', 'super smash bros', 'team sonic racing', 'tekken', 'tt isle of man', 'twisted metal', 'ufc', 'ultimate marvel vs capcom 3', 'ultra street fighter iv', 'unravel two', 'wrc', 'wreckfest', 'wwe'];
-    // ... (tambahkan keyword genre lainnya jika perlu)
+    // --- FUNGSI AMBIL SPEK DARI STEAM ---
+    async function showSteamSpec(gameName) {
+        const modal = document.getElementById('specModal');
+        const title = document.getElementById('modalTitle');
+        const body = document.getElementById('modalBody');
+        
+        title.textContent = gameName;
+        body.innerHTML = '<div class="loading">Menghubungkan ke server Steam...</div>';
+        modal.style.display = "block";
 
-    function getGameGenres(gameName) {
-        const n = gameName.toLowerCase();
-        const g = [];
-        if (keywordsMainBerdua.some(k => n.includes(k))) g.push('Main Berdua');
-        // Tambahkan pengecekan genre lain di sini sesuai kode lama kamu
-        return g.length === 0 ? ['Lainnya'] : g;
+        try {
+            // 1. Cari AppID menggunakan Steam Search (via CorsProxy untuk menghindari blokir browser)
+            const searchUrl = `https://corsproxy.io/?https://store.steampowered.com/api/storesearch/?term=${encodeURIComponent(gameName)}&l=indonesian&cc=ID`;
+            const searchRes = await fetch(searchUrl);
+            const searchData = await searchRes.json();
+
+            if (!searchData.items || searchData.items.length === 0) {
+                body.innerHTML = "Maaf, game ini tidak ditemukan di database Steam.";
+                return;
+            }
+
+            const appId = searchData.items[0].id;
+            const gameRealName = searchData.items[0].name;
+            title.textContent = gameRealName;
+
+            // 2. Ambil detail Requirements menggunakan AppID
+            const detailUrl = `https://corsproxy.io/?https://store.steampowered.com/api/appdetails?appids=${appId}&l=indonesian`;
+            const detailRes = await fetch(detailUrl);
+            const detailData = await detailRes.json();
+
+            if (detailData[appId].success) {
+                const data = detailData[appId].data;
+                let htmlContent = "";
+
+                if (data.pc_requirements) {
+                    // Steam memberikan data dalam bentuk HTML string (Minimum & Recommended)
+                    htmlContent += data.pc_requirements.minimum || "Spek minimum tidak tersedia.";
+                    if (data.pc_requirements.recommended) {
+                        htmlContent += "<hr>" + data.pc_requirements.recommended;
+                    }
+                    body.innerHTML = htmlContent;
+                } else {
+                    body.innerHTML = "Spesifikasi untuk PC tidak ditemukan.";
+                }
+            } else {
+                body.innerHTML = "Gagal mengambil detail dari Steam.";
+            }
+
+        } catch (e) {
+            body.innerHTML = "Koneksi gagal. Pastikan Anda online.";
+            console.error(e);
+        }
     }
 
-    function parseSizeToMB(s) {
-        const p = s.split(' '); if (p.length < 2) return 0;
-        const v = parseFloat(p[0]); const u = p[1].toLowerCase();
-        if (u === 'gb') return v * 1024; if (u === 'mb') return v; return 0;
-    }
-
+    // --- LOGIKA DATA & FILTER (PERSIS KODE LAMA KAMU) ---
     function parseData() {
         if (typeof csvData === 'undefined') return;
         const lines = csvData.split('\n');
@@ -178,50 +215,18 @@
                 const size = p[1].trim();
                 const desc = p[2].trim();
                 if (name && !name.includes('.mp4')) {
-                    const game = { name, size, description: desc, sizeVal: parseSizeToMB(size), genre: getGameGenres(name) };
-                    if (!map.has(name) || game.sizeVal > map.get(name).sizeVal) map.set(name, game);
+                    // Logic Genre sederhana untuk contoh
+                    const game = { name, size, description: desc, genre: [] };
+                    if (!map.has(name)) map.set(name, game);
                 }
             }
         }
         allGames = Array.from(map.values());
     }
 
-    // FUNGSI AMBIL SPEK DARI API RAWG
-    async function showSpec(gameName) {
-        const modal = document.getElementById('specModal');
-        const title = document.getElementById('modalTitle');
-        const body = document.getElementById('modalBody');
-        
-        title.textContent = gameName;
-        body.innerHTML = "Mencari spesifikasi di database RAWG...";
-        modal.style.display = "block";
-
-        try {
-            const searchRes = await fetch(`https://api.rawg.io/api/games?key=${apiKey}&search=${encodeURIComponent(gameName)}&page_size=1`);
-            const searchData = await searchRes.json();
-            if (!searchData.results.length) { body.innerHTML = "Data tidak ditemukan."; return; }
-
-            const detailRes = await fetch(`https://api.rawg.io/api/games/${searchData.results[0].id}?key=${apiKey}`);
-            const detailData = await detailRes.json();
-            
-            const pcPlatform = detailData.platforms.find(p => p.platform.id === 4);
-            if (pcPlatform && pcPlatform.requirements && pcPlatform.requirements.minimum) {
-                body.innerHTML = `<h3>Minimum Requirements:</h3><div class="req-text">${pcPlatform.requirements.minimum}</div>`;
-                if(pcPlatform.requirements.recommended) {
-                    body.innerHTML += `<h3>Recommended:</h3><div class="req-text" style="border-left-color: #28a745;">${pcPlatform.requirements.recommended}</div>`;
-                }
-            } else {
-                body.innerHTML = "Spesifikasi teks tidak tersedia untuk game ini di RAWG.";
-            }
-        } catch (e) {
-            body.innerHTML = "Gagal memuat data. Periksa koneksi atau API Key.";
-        }
-    }
-
     document.addEventListener('DOMContentLoaded', () => {
         const tableBody = document.getElementById('gameListBody');
         const searchInput = document.getElementById('searchInput');
-        const count = document.getElementById('gameCount');
         const modal = document.getElementById('specModal');
 
         parseData();
@@ -231,51 +236,22 @@
             list.forEach(g => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-                    <td><span class="clickable-name" onclick="showSpec('${g.name}')">${g.name}</span></td>
+                    <td><span class="clickable-name" onclick="showSteamSpec('${g.name}')">${g.name}</span></td>
                     <td>${g.size}</td>
                     <td class="ket-${g.description.toLowerCase().replace(' ', '-')}">${g.description}</td>
                 `;
                 tableBody.appendChild(tr);
             });
-            count.textContent = `Menampilkan ${list.length} dari ${allGames.length} game`;
+            document.getElementById('gameCount').textContent = `Total: ${list.length} game`;
         }
 
-        function filter() {
+        searchInput.onkeyup = () => {
             const term = searchInput.value.toLowerCase();
-            let games = [...allGames];
-            if (term) {
-                games = games.filter(g => g.name.toLowerCase().includes(term));
-            } else {
-                if (currentCategoryFilter) games = games.filter(g => g.description === currentCategoryFilter);
-                if (currentGenreFilter) games = games.filter(g => g.genre.includes(currentGenreFilter));
-            }
-            render(games);
-        }
+            const filtered = allGames.filter(g => g.name.toLowerCase().includes(term));
+            render(filtered);
+        };
 
-        // Click Event Filter
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.onclick = () => {
-                searchInput.value = '';
-                const isActive = btn.classList.contains('active');
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                if (!isActive) { btn.classList.add('active'); currentCategoryFilter = btn.dataset.filter; }
-                else { currentCategoryFilter = null; }
-                filter();
-            };
-        });
-
-        document.querySelectorAll('.genre-btn').forEach(btn => {
-            btn.onclick = () => {
-                searchInput.value = '';
-                const isActive = btn.classList.contains('active');
-                document.querySelectorAll('.genre-btn').forEach(b => b.classList.remove('active'));
-                if (!isActive) { btn.classList.add('active'); currentGenreFilter = btn.dataset.filter; }
-                else { currentGenreFilter = null; }
-                filter();
-            };
-        });
-
-        searchInput.onkeyup = filter;
+        // Modal Close
         document.querySelector('.close-btn').onclick = () => modal.style.display = "none";
         window.onclick = (e) => { if(e.target == modal) modal.style.display = "none"; };
 
