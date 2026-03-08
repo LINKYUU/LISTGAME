@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daftar Game Link.Yu</title>
     <style>
-        /* --- CSS TAMPILAN ASLI --- */
+        /* --- CSS TAMPILAN KLASIK --- */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: #f4f7f6;
@@ -50,6 +50,7 @@
             padding: 8px 15px; font-size: 14px; font-weight: 500; background-color: #f0f0f0;
             border: none; border-radius: 20px; cursor: pointer; color: #555; transition: all 0.2s ease;
         }
+        /* Warna Aktif Sesuai Kategori */
         .filter-btn.active[data-filter="Ringan"] { background-color: #28a745; color: white; }
         .filter-btn.active[data-filter="Sedang"] { background-color: #007bff; color: white; }
         .filter-btn.active[data-filter="Agak Berat"] { background-color: #fd7e14; color: white; }
@@ -64,26 +65,29 @@
         
         /* Klik Nama Game */
         .clickable-name { color: #0056b3; cursor: pointer; text-decoration: underline; font-weight: 500; }
+        .clickable-name:hover { color: #003d82; }
 
-        /* --- MODAL --- */
+        /* --- MODAL POP-UP (INSTAN) --- */
         .modal {
             display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7); backdrop-filter: blur(3px);
+            background: rgba(0,0,0,0.6); backdrop-filter: blur(2px);
         }
         .modal-content {
-            background: white; margin: 5% auto; padding: 25px; width: 90%; max-width: 600px;
-            border-radius: 15px; position: relative; max-height: 80vh; overflow-y: auto;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            background: white; margin: 12% auto; padding: 25px; width: 90%; max-width: 450px;
+            border-radius: 12px; position: relative; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            text-align: center;
         }
-        .close-btn { position: absolute; right: 20px; top: 10px; font-size: 30px; cursor: pointer; color: #aaa; }
+        .close-btn { position: absolute; right: 15px; top: 10px; font-size: 28px; cursor: pointer; color: #aaa; }
         
-        .steam-req { font-size: 14px; line-height: 1.6; color: #444; }
-        .steam-req b, .steam-req strong { color: #111; }
-        .steam-req ul { padding-left: 20px; margin: 10px 0; }
-        .loading { text-align: center; padding: 30px; font-style: italic; color: #1a73e8; }
-        .game-banner { width: 100%; border-radius: 10px; margin-bottom: 15px; }
+        .btn-link {
+            display: block; padding: 15px; margin: 10px 0; border-radius: 8px;
+            text-decoration: none; font-weight: bold; font-size: 14px; transition: 0.2s;
+        }
+        .btn-steam { background-color: #171a21; color: #fff; }
+        .btn-benchmark { background-color: #28a745; color: #fff; }
+        .btn-link:hover { opacity: 0.9; transform: translateY(-2px); }
 
-        /* WARNA KATEGORI */
+        /* WARNA KATEGORI DI TABEL */
         .ket-ringan { color: #28a745; font-weight: 600; }
         .ket-sedang { color: #007bff; font-weight: 600; }
         .ket-agak-berat { color: #fd7e14; font-weight: 600; }
@@ -95,12 +99,13 @@
 <div class="container">
     <header>
         <div class="special-notice">
-            <p>🎮 DAFTAR GAME PC LINK.YU 🎮</p>
+            <p>🎮 KATALOG GAME PC LINK.YU 🎮</p>
             <p class="whatsapp">💬 WhatsApp: 08 777 26 77776</p>
+            <p style="font-size: 13px; color: #666; font-weight: normal; margin-top:5px;">*Klik nama game untuk cek spesifikasi minimum yang pasti akurat.</p>
         </div>
 
-        <h1>Katalog Game</h1>
-        <input type="text" id="searchInput" placeholder="Cari nama game... (Klik judul untuk spek asli Steam)">
+        <h1>Daftar Game</h1>
+        <input type="text" id="searchInput" placeholder="Cari judul game jualanmu di sini...">
         
         <div id="filterContainer">
             <button class="filter-btn" data-filter="Ringan">Ringan</button>
@@ -137,8 +142,13 @@
 <div id="specModal" class="modal">
     <div class="modal-content">
         <span class="close-btn">&times;</span>
-        <h2 id="modalTitle" style="margin-top:0; border-bottom: 2px solid #eee; padding-bottom: 10px;">Judul Game</h2>
-        <div id="modalBody" class="steam-req"></div>
+        <h3 id="modalTitle" style="margin-top:0; color:#1a237e;">Judul Game</h3>
+        <p style="font-size:14px; color:#555; margin-bottom:20px;">Pilih sumber data spesifikasi PC :</p>
+        
+        <div id="modalLinks">
+            </div>
+        
+        <p style="font-size:11px; color:#999; margin-top:15px;">*Data dibuka di tab baru agar katalog tidak tertutup.</p>
     </div>
 </div>
 
@@ -149,91 +159,77 @@
     let currentCategoryFilter = null;
     let currentGenreFilter = null;
 
-    // --- FUNGSI AMBIL SPEK STEAM (ANTI-ERROR) ---
-    async function showSteamSpec(gameName) {
+    // --- FUNGSI CEK SPEK INSTAN (TANPA LOADING) ---
+    function openQuickSpec(gameName) {
         const modal = document.getElementById('specModal');
         const title = document.getElementById('modalTitle');
-        const body = document.getElementById('modalBody');
+        const linksContainer = document.getElementById('modalLinks');
         
         title.textContent = gameName;
-        body.innerHTML = '<div class="loading">Menghubungkan ke Steam...</div>';
+        
+        // Buat link pencarian cerdas
+        const steamQuery = encodeURIComponent('site:steampowered.com ' + gameName + ' system requirements');
+        const benchmarkQuery = encodeURIComponent(gameName);
+
+        linksContainer.innerHTML = `
+            <a href="https://www.google.com/search?q=${steamQuery}" 
+               target="_blank" class="btn-link btn-steam">
+               🚀 LIHAT DI STEAM (DATABASE PUSAT)
+            </a>
+            <a href="https://www.pcgamebenchmark.com/search?query=${benchmarkQuery}" 
+               target="_blank" class="btn-link btn-benchmark">
+               ✅ CEK SPEK DI PC-BENCHMARK
+            </a>
+        `;
+        
         modal.style.display = "block";
-
-        try {
-            // Menggunakan AllOrigins Proxy (Lebih Stabil)
-            const searchUrl = `https://store.steampowered.com/api/storesearch/?term=${encodeURIComponent(gameName)}&l=indonesian&cc=ID`;
-            const proxySearch = `https://api.allorigins.win/get?url=${encodeURIComponent(searchUrl)}`;
-            
-            const response = await fetch(proxySearch);
-            if (!response.ok) throw new Error();
-            const dataRaw = await response.json();
-            const searchData = JSON.parse(dataRaw.contents);
-
-            if (!searchData || !searchData.items || searchData.items.length === 0) {
-                body.innerHTML = `<p>Game tidak ditemukan di database Steam.</p>
-                                 <a href="https://www.google.com/search?q=${encodeURIComponent(gameName + ' pc system requirements')}" target="_blank" style="color:#d9534f; font-weight:bold;">Cari di Google ↗</a>`;
-                return;
-            }
-
-            const appId = searchData.items[0].id;
-            const detailUrl = `https://store.steampowered.com/api/appdetails?appids=${appId}&l=indonesian`;
-            const proxyDetail = `https://api.allorigins.win/get?url=${encodeURIComponent(detailUrl)}`;
-            
-            const detailRes = await fetch(proxyDetail);
-            const detailDataRaw = await detailRes.json();
-            const detailData = JSON.parse(detailDataRaw.contents);
-
-            if (detailData[appId] && detailData[appId].success) {
-                const info = detailData[appId].data;
-                let html = "";
-                if (info.header_image) html += `<img src="${info.header_image}" class="game-banner">`;
-                
-                if (info.pc_requirements) {
-                    html += `<div class="steam-req">${info.pc_requirements.minimum || ""}</div>`;
-                    if (info.pc_requirements.recommended) html += `<hr><div class="steam-req">${info.pc_requirements.recommended}</div>`;
-                    body.innerHTML = html;
-                } else {
-                    body.innerHTML = "Detail spesifikasi tidak tersedia.";
-                }
-            } else {
-                body.innerHTML = "Gagal memuat detail.";
-            }
-
-        } catch (e) {
-            body.innerHTML = `
-                <div style="text-align:center;">
-                    <p>Terjadi gangguan koneksi API.</p>
-                    <a href="https://www.google.com/search?q=${encodeURIComponent(gameName + ' pc requirements')}" target="_blank" style="color:#d9534f; font-weight:bold;">Lihat di Google ↗</a>
-                </div>`;
-        }
     }
 
-    // --- LOGIKA DATA ---
+    // --- LOGIKA DATA (DEDUPLIKASI & PARSING) ---
+    function parseSizeToMB(s) {
+        const p = s.split(' '); if (p.length < 2) return 0;
+        const v = parseFloat(p[0]); const u = p[1].toLowerCase();
+        if (u === 'gb') return v * 1024; if (u === 'mb') return v; return 0;
+    }
+
     function parseData() {
         if (typeof csvData === 'undefined') return;
         const lines = csvData.split('\n');
         const map = new Map();
         let started = false;
+        
         for (const l of lines) {
             if (l.startsWith('NAMA GAME,SIZE,KETERANGAN')) { started = true; continue; }
             if (!started || l.trim() === '') continue;
+            
             const p = l.split(',');
             if (p.length >= 3) {
                 const name = p[0].replace(/"/g, '').trim();
                 const size = p[1].trim();
                 const desc = p[2].trim();
                 if (name && !name.includes('.mp4')) {
-                    const game = { name, size, description: desc };
-                    if (!map.has(name)) map.set(name, game);
+                    const game = { name, size, description: desc, sizeVal: parseSizeToMB(size) };
+                    // Ambil yang ukuran filenya paling besar jika nama sama
+                    if (!map.has(name) || game.sizeVal > map.get(name).sizeVal) map.set(name, game);
                 }
             }
         }
         allGames = Array.from(map.values());
     }
 
+    function getClassName(ket) {
+        const k = ket.toLowerCase();
+        if (k === 'ringan') return 'ket-ringan';
+        if (k === 'sedang') return 'ket-sedang';
+        if (k === 'agak berat') return 'ket-agak-berat';
+        if (k === 'berat') return 'ket-berat';
+        return '';
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
         const tbody = document.getElementById('gameListBody');
         const searchInput = document.getElementById('searchInput');
+        const modal = document.getElementById('specModal');
 
         parseData();
 
@@ -241,24 +237,27 @@
             tbody.innerHTML = '';
             list.forEach(g => {
                 const tr = document.createElement('tr');
-                const ketClass = g.description.toLowerCase().replace(' ', '-');
                 tr.innerHTML = `
-                    <td><span class="clickable-name" onclick="showSteamSpec('${g.name}')">${g.name}</span></td>
+                    <td><span class="clickable-name" onclick="openQuickSpec('${g.name}')">${g.name}</span></td>
                     <td>${g.size}</td>
-                    <td class="ket-${ketClass}">${g.description}</td>
+                    <td class="${getClassName(g.description)}">${g.description}</td>
                 `;
                 tbody.appendChild(tr);
             });
             document.getElementById('gameCount').textContent = `Total: ${list.length} game`;
         }
 
+        // Search Bar
         searchInput.onkeyup = () => {
             const term = searchInput.value.toLowerCase();
-            render(allGames.filter(g => g.name.toLowerCase().includes(term)));
+            const filtered = allGames.filter(g => g.name.toLowerCase().includes(term));
+            render(filtered);
         };
 
+        // Filter Buttons
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.onclick = () => {
+                searchInput.value = '';
                 const active = btn.classList.contains('active');
                 document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                 if (!active) {
@@ -270,8 +269,9 @@
             };
         });
 
-        document.querySelector('.close-btn').onclick = () => document.getElementById('specModal').style.display = "none";
-        window.onclick = (e) => { if(e.target.id == 'specModal') document.getElementById('specModal').style.display = "none"; };
+        // Close Modal
+        document.querySelector('.close-btn').onclick = () => modal.style.display = "none";
+        window.onclick = (e) => { if(e.target.id == 'specModal') modal.style.display = "none"; };
 
         render(allGames);
     });
