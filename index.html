@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daftar Game Link.Yu</title>
     <style>
-        /* CSS TETAP SAMA */
+        /* CSS TAMPILAN KLASIK */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: #f4f7f6;
@@ -135,13 +135,14 @@
 <script src="data_game.js"></script>
 
 <script>
+    // API KEY RAWG
     const apiKey = "158b3858daed4d67af02a839d14ba445";
 
     let allGames = [];
     let currentCategoryFilter = null;
     let currentGenreFilter = null;
 
-    // --- KEYWORDS UNTUK GENRE ---
+    // --- DATA KEYWORDS GENRE ---
     const keywordsMainBerdua = ['pico park', 'a way out', 'ao international tennis', 'attack on titan 2', 'baldurs gate 3', 'basara 2', 'basara 3', 'battletoads', 'beach buggy racing 2', 'beyond two souls', 'bloons td 6', 'blur', 'borderlands 2', 'borderlands 3', 'brothers a tale of two sons', 'call of duty black ops iii', 'captain tsubasa', 'cars 2', 'chained together', 'chocobo gp', 'crash bandicoot 4', 'ctr yuzu', 'cult of the lamb', 'cuphead', 'def jam vendetta', 'demon slayer', 'dirt 3', 'dirt 5', 'donkey kong country', 'downhill domination', 'dragon ball fighterz', 'dragon ball xenoverse', 'sparking! zero', 'dynasty warrior', 'ea sports fc', 'efootball pes', 'pro evolution soccer', 'f1 20', 'f1 race stars', 'fifa', 'fita street', 'fight night', 'gears of war', 'gears of war 4', 'goat simulator 3', 'gran turismo 4', 'guilty gear strive', 'guitar hero', 'halo the master chief collection', 'hot wheels unleashed', 'human fall flat', 'hyrule warriors', 'jujutsu kaisen', 'jump force', 'kamen rider', 'kirby and the forgotten land', 'kirby star allies', "kirby's return to dream land", 'left 4 dead 2', 'lego', 'luigi mansion 3', "luigi's mansion 2", 'mario kart 8', 'mario sonic at the', 'mario tennis', 'marvel ultimate alliance', 'melty blood', 'minecraft dungeons', 'mortal kombat', 'motogp', 'moving out', 'my hero ones justice 2', 'naruto', 'nascar', 'nba 2k', 'nickelodeon all star brawl', 'nickelodeon kart racers', 'one piece burning blood', 'one piece pirate warriors', 'one punch man', 'overcooked 2', 'persona 4 arena', "pokemon let's go", 'pokkén tournament', 'power rangers battle for the grid', 'rayman legends', 'resident evil 5', 'resident evil 6', 'resident evil revelations 2', 'river city girls 2', 'rocket league', 'saint seiya soldiers soul', 'samurai warriors', 'sbk 22', 'sengoku basara', 'shieldwall', 'sonic & all stars', 'sonic superstar', 'spider man friend or foe', 'splitsecond', 'street fighter v', 'streets of rage 4', 'stronghold crusader', 'super bomberman r', 'super smash bros', 'team sonic racing', 'tekken', 'tt isle of man', 'twisted metal', 'ufc', 'ultimate marvel vs capcom 3', 'ultra street fighter iv', 'unravel two', 'wrc', 'wreckfest', 'wwe'];
     const keywordsPerang = ['ace combat', 'assassin creed', 'battlefield', 'call of duty', 'cod ', 'commandos', 'company of heroes', 'crysis', 'dynasty warrior', 'far cry', 'gears of war', 'ghost recon', 'halo', 'homefront', 'medal of honor', 'metal gear', 'mount & blade', 'partisan', 'samurai warriors', 'sengoku basara', 'sniper elite', 'sniper ghost warrior', 'star wars battlefront', 'terminator resistance', 'tom clancy', 'total war', 'transformers', 'viking battle', 'warhammer', 'warriors orochi', 'wolfenstein', 'world war z'];
     const keywordsSport = ['ao international tennis', 'captain tsubasa', 'ea sports fc', 'efootball pes', 'pro evolution soccer', 'euro fishing', 'fifa', 'fight night', 'football manager', 'mario tennis', 'nba 2k', 'pes', 'session skateboarding', 'ufc', 'ultimate fishing', 'wwe 2k', 'wwe smackdown', 'wwe all stars', 'winning eleven'];
@@ -189,6 +190,7 @@
         allGames = Array.from(map.values());
     }
 
+    // --- FUNGSI SPEK RAWG + FALLBACK ---
     async function showSpec(gameName) {
         const modal = document.getElementById('specModal');
         const title = document.getElementById('modalTitle');
@@ -196,24 +198,49 @@
         title.textContent = gameName;
         body.innerHTML = "Mencari spesifikasi di database RAWG...";
         modal.style.display = "block";
+
         try {
             const searchRes = await fetch(`https://api.rawg.io/api/games?key=${apiKey}&search=${encodeURIComponent(gameName)}&page_size=1`);
             const searchData = await searchRes.json();
-            if (!searchData.results.length) { body.innerHTML = "Data tidak ditemukan."; return; }
+            
+            if (!searchData.results.length) { 
+                showFallbackSpec(body);
+                return; 
+            }
+
             const detailRes = await fetch(`https://api.rawg.io/api/games/${searchData.results[0].id}?key=${apiKey}`);
             const detailData = await detailRes.json();
             const pcPlatform = detailData.platforms.find(p => p.platform.id === 4);
+            
             if (pcPlatform && pcPlatform.requirements && pcPlatform.requirements.minimum) {
                 body.innerHTML = `<h3>Minimum Requirements:</h3><div class="req-text">${pcPlatform.requirements.minimum}</div>`;
                 if(pcPlatform.requirements.recommended) {
                     body.innerHTML += `<h3>Recommended:</h3><div class="req-text" style="border-left-color: #28a745;">${pcPlatform.requirements.recommended}</div>`;
                 }
             } else {
-                body.innerHTML = "Spesifikasi teks tidak tersedia untuk game ini di RAWG.";
+                showFallbackSpec(body);
             }
         } catch (e) {
-            body.innerHTML = "Gagal memuat data. Periksa koneksi atau API Key.";
+            showFallbackSpec(body);
         }
+    }
+
+    function showFallbackSpec(element) {
+        element.innerHTML = `
+            <div class="req-text" style="border-left-color: #f0ad4e; background: #fffcf5;">
+                <strong>Minimum Requirements:</strong><br>
+                <b>CPU:</b> Intel Core i5 6470 @ 3.2GHz (4 CPUs) / AMD X8 FX-8350 @ 4GHz (8 CPUs)<br>
+                <b>CPU SPEED:</b> Info<br>
+                <b>RAM:</b> 8 GB<br>
+                <b>VIDEO CARD:</b> NVIDIA GTX 1080 4GB / AMD RYZEN 5 4GB<br>
+                <b>DEDICATED VIDEO RAM:</b> 4 GB<br>
+                <b>PIXEL SHADER:</b> 5.0<br>
+                <b>VERTEX SHADER:</b> 5.0<br>
+                <b>OS:</b> Windows 10 64 Bit, Windows 8.1 64 Bit, Windows 8 64 Bit, Windows 7 64 Bit Service Pack 1<br>
+                <b>SOUND CARD:</b> 100% DirectX 10 compatible
+            </div>
+            <p style="font-size: 11px; color: #999; margin-top: 10px;">*Menampilkan spesifikasi standar (Data RAWG tidak tersedia).</p>
+        `;
     }
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -241,35 +268,21 @@
         function filter() {
             const term = searchInput.value.toLowerCase();
             let games = [...allGames];
-            
-            // Filter Search
-            if (term) {
-                games = games.filter(g => g.name.toLowerCase().includes(term));
-            }
-            
-            // Filter Kategori Speck (Ringan/Sedang dll)
-            if (currentCategoryFilter) {
-                games = games.filter(g => g.description.toLowerCase() === currentCategoryFilter.toLowerCase());
-            }
-
-            // Filter Genre (Perang/Sport dll)
-            if (currentGenreFilter) {
-                games = games.filter(g => g.genre.includes(currentGenreFilter));
-            }
-            
+            if (term) games = games.filter(g => g.name.toLowerCase().includes(term));
+            if (currentCategoryFilter) games = games.filter(g => g.description.toLowerCase() === currentCategoryFilter.toLowerCase());
+            if (currentGenreFilter) games = games.filter(g => g.genre.includes(currentGenreFilter));
             render(games);
         }
 
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.onclick = () => {
-                const filterVal = btn.dataset.filter;
                 if (btn.classList.contains('active')) {
                     btn.classList.remove('active');
                     currentCategoryFilter = null;
                 } else {
                     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
-                    currentCategoryFilter = filterVal;
+                    currentCategoryFilter = btn.dataset.filter;
                 }
                 filter();
             };
@@ -277,14 +290,13 @@
 
         document.querySelectorAll('.genre-btn').forEach(btn => {
             btn.onclick = () => {
-                const genreVal = btn.dataset.filter;
                 if (btn.classList.contains('active')) {
                     btn.classList.remove('active');
                     currentGenreFilter = null;
                 } else {
                     document.querySelectorAll('.genre-btn').forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
-                    currentGenreFilter = genreVal;
+                    currentGenreFilter = btn.dataset.filter;
                 }
                 filter();
             };
