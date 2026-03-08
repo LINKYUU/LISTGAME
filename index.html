@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daftar Game Link.Yu</title>
     <style>
-        /* --- CSS TAMPILAN KLASIK --- */
+        /* CSS ASLI SESUAI PERMINTAAN */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: #f4f7f6;
@@ -22,7 +22,6 @@
             overflow: hidden;
         }
         header { padding: 20px 30px; border-bottom: 1px solid #e0e0e0; }
-        
         .special-notice {
             background-color: #fff4f4;
             border: 1px solid #d9534f;
@@ -33,61 +32,51 @@
         }
         .special-notice p { margin: 5px 0; font-size: 18px; font-weight: 600; color: #d9534f; }
         .special-notice p.whatsapp { color: #333; font-weight: bold; font-size: 16px; }
-
+        .special-notice p.shopee-link { color: #333; font-weight: bold; font-size: 16px; margin-top: 8px; }
+        .special-notice p.shopee-link a { color: #0056b3; text-decoration: none; }
+        
         h1 { text-align: center; color: #1a1a1a; margin: 10px 0 0 0; }
         #searchInput {
             width: 100%; padding: 12px 15px; margin-top: 15px;
             font-size: 16px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box;
         }
 
-        /* --- FILTER BUTTONS --- */
+        /* FILTER BUTTONS */
         #filterContainer, #genreFilterContainer {
             margin-top: 15px; text-align: center; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
         }
         #genreFilterContainer { padding-top: 10px; border-top: 1px dashed #ccc; }
-        
         .filter-btn, .genre-btn {
             padding: 8px 15px; font-size: 14px; font-weight: 500; background-color: #f0f0f0;
             border: none; border-radius: 20px; cursor: pointer; color: #555; transition: all 0.2s ease;
         }
-        /* Warna Aktif Sesuai Kategori */
         .filter-btn.active[data-filter="Ringan"] { background-color: #28a745; color: white; }
         .filter-btn.active[data-filter="Sedang"] { background-color: #007bff; color: white; }
         .filter-btn.active[data-filter="Agak Berat"] { background-color: #fd7e14; color: white; }
         .filter-btn.active[data-filter="Berat"] { background-color: #dc3545; color: white; }
         .genre-btn.active { background-color: #0056b3; color: white; }
 
-        /* --- TABLE --- */
+        /* TABEL */
         .table-wrapper { max-height: 60vh; overflow-y: auto; border-top: 1px solid #e0e0e0; }
         #gameTable { width: 100%; border-collapse: collapse; }
         #gameTable th, #gameTable td { padding: 12px 15px; border-bottom: 1px solid #e0e0e0; text-align: left; }
         #gameTable th { background-color: #f9f9f9; position: sticky; top: 0; z-index: 1; }
         
-        /* Klik Nama Game */
+        /* Nama Game Clickable */
         .clickable-name { color: #0056b3; cursor: pointer; text-decoration: underline; font-weight: 500; }
-        .clickable-name:hover { color: #003d82; }
 
-        /* --- MODAL POP-UP (INSTAN) --- */
+        /* MODAL SPEK (RAWG) */
         .modal {
             display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6); backdrop-filter: blur(2px);
+            background: rgba(0,0,0,0.7); backdrop-filter: blur(3px);
         }
         .modal-content {
-            background: white; margin: 12% auto; padding: 25px; width: 90%; max-width: 450px;
-            border-radius: 12px; position: relative; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            text-align: center;
+            background: white; margin: 10% auto; padding: 20px; width: 90%; max-width: 500px;
+            border-radius: 12px; position: relative; max-height: 70vh; overflow-y: auto;
         }
-        .close-btn { position: absolute; right: 15px; top: 10px; font-size: 28px; cursor: pointer; color: #aaa; }
-        
-        .btn-link {
-            display: block; padding: 15px; margin: 10px 0; border-radius: 8px;
-            text-decoration: none; font-weight: bold; font-size: 14px; transition: 0.2s;
-        }
-        .btn-steam { background-color: #171a21; color: #fff; }
-        .btn-benchmark { background-color: #28a745; color: #fff; }
-        .btn-link:hover { opacity: 0.9; transform: translateY(-2px); }
+        .close-btn { position: absolute; right: 15px; top: 10px; font-size: 24px; cursor: pointer; color: #999; }
+        .req-text { background: #f9f9f9; padding: 15px; border-radius: 8px; font-size: 14px; white-space: pre-line; border-left: 4px solid #1a73e8; }
 
-        /* WARNA KATEGORI DI TABEL */
         .ket-ringan { color: #28a745; font-weight: 600; }
         .ket-sedang { color: #007bff; font-weight: 600; }
         .ket-agak-berat { color: #fd7e14; font-weight: 600; }
@@ -99,13 +88,13 @@
 <div class="container">
     <header>
         <div class="special-notice">
-            <p>🎮 KATALOG GAME PC LINK.YU 🎮</p>
-            <p class="whatsapp">💬 WhatsApp: 08 777 26 77776</p>
-            <p style="font-size: 13px; color: #666; font-weight: normal; margin-top:5px;">*Klik nama game untuk cek spesifikasi minimum yang pasti akurat.</p>
+            <p>🎮 DAFTAR GAME LINK.YU 🎮</p>
+            <p class="whatsapp">💬 WA: 08 777 26 77776</p>
+            <p class="shopee-link">🛒 Shopee: <a href="https://id.shp.ee/QiepRVW" target="_blank">Klik Disini</a></p>
         </div>
 
         <h1>Daftar Game</h1>
-        <input type="text" id="searchInput" placeholder="Cari judul game jualanmu di sini...">
+        <input type="text" id="searchInput" placeholder="Cari game... (Tekan judul game untuk spek)">
         
         <div id="filterContainer">
             <button class="filter-btn" data-filter="Ringan">Ringan</button>
@@ -129,7 +118,7 @@
         <table id="gameTable">
             <thead>
                 <tr>
-                    <th style="width:55%">Nama Game</th>
+                    <th style="width:50%">Nama Game</th>
                     <th id="sizeHeader" style="cursor: pointer;">Size ↕</th>
                     <th>Speck</th>
                 </tr>
@@ -142,50 +131,33 @@
 <div id="specModal" class="modal">
     <div class="modal-content">
         <span class="close-btn">&times;</span>
-        <h3 id="modalTitle" style="margin-top:0; color:#1a237e;">Judul Game</h3>
-        <p style="font-size:14px; color:#555; margin-bottom:20px;">Pilih sumber data spesifikasi PC :</p>
-        
-        <div id="modalLinks">
-            </div>
-        
-        <p style="font-size:11px; color:#999; margin-top:15px;">*Data dibuka di tab baru agar katalog tidak tertutup.</p>
+        <h3 id="modalTitle" style="margin-top:0;">Memuat...</h3>
+        <div id="modalBody">Sedang mengambil data dari RAWG...</div>
     </div>
 </div>
 
 <script src="data_game.js"></script>
 
 <script>
+    // MASUKKAN API KEY RAWG KAMU DI SINI
+    const apiKey = "158b3858daed4d67af02a839d14ba445";
+
     let allGames = [];
     let currentCategoryFilter = null;
     let currentGenreFilter = null;
 
-    // --- FUNGSI CEK SPEK INSTAN (TANPA LOADING) ---
-    function openQuickSpec(gameName) {
-        const modal = document.getElementById('specModal');
-        const title = document.getElementById('modalTitle');
-        const linksContainer = document.getElementById('modalLinks');
-        
-        title.textContent = gameName;
-        
-        // Buat link pencarian cerdas
-        const steamQuery = encodeURIComponent('site:steampowered.com ' + gameName + ' system requirements');
-        const benchmarkQuery = encodeURIComponent(gameName);
+    // Data Keywords (Sama seperti sebelumnya)
+    const keywordsMainBerdua = ['pico park', 'a way out', 'ao international tennis', 'attack on titan 2', 'baldurs gate 3', 'basara 2', 'basara 3', 'battletoads', 'beach buggy racing 2', 'beyond two souls', 'bloons td 6', 'blur', 'borderlands 2', 'borderlands 3', 'brothers a tale of two sons', 'call of duty black ops iii', 'captain tsubasa', 'cars 2', 'chained together', 'chocobo gp', 'crash bandicoot 4', 'ctr yuzu', 'cult of the lamb', 'cuphead', 'def jam vendetta', 'demon slayer', 'dirt 3', 'dirt 5', 'donkey kong country', 'downhill domination', 'dragon ball fighterz', 'dragon ball xenoverse', 'sparking! zero', 'dynasty warrior', 'ea sports fc', 'efootball pes', 'pro evolution soccer', 'f1 20', 'f1 race stars', 'fifa', 'fita street', 'fight night', 'gears of war', 'gears of war 4', 'goat simulator 3', 'gran turismo 4', 'guilty gear strive', 'guitar hero', 'halo the master chief collection', 'hot wheels unleashed', 'human fall flat', 'hyrule warriors', 'jujutsu kaisen', 'jump force', 'kamen rider', 'kirby and the forgotten land', 'kirby star allies', "kirby's return to dream land", 'left 4 dead 2', 'lego', 'luigi mansion 3', "luigi's mansion 2", 'mario kart 8', 'mario sonic at the', 'mario tennis', 'marvel ultimate alliance', 'melty blood', 'minecraft dungeons', 'mortal kombat', 'motogp', 'moving out', 'my hero ones justice 2', 'naruto', 'nascar', 'nba 2k', 'nickelodeon all star brawl', 'nickelodeon kart racers', 'one piece burning blood', 'one piece pirate warriors', 'one punch man', 'overcooked 2', 'persona 4 arena', "pokemon let's go", 'pokkén tournament', 'power rangers battle for the grid', 'rayman legends', 'resident evil 5', 'resident evil 6', 'resident evil revelations 2', 'river city girls 2', 'rocket league', 'saint seiya soldiers soul', 'samurai warriors', 'sbk 22', 'sengoku basara', 'shieldwall', 'sonic & all stars', 'sonic superstar', 'spider man friend or foe', 'splitsecond', 'street fighter v', 'streets of rage 4', 'stronghold crusader', 'super bomberman r', 'super smash bros', 'team sonic racing', 'tekken', 'tt isle of man', 'twisted metal', 'ufc', 'ultimate marvel vs capcom 3', 'ultra street fighter iv', 'unravel two', 'wrc', 'wreckfest', 'wwe'];
+    // ... (tambahkan keyword genre lainnya jika perlu)
 
-        linksContainer.innerHTML = `
-            <a href="https://www.google.com/search?q=${steamQuery}" 
-               target="_blank" class="btn-link btn-steam">
-               🚀 LIHAT DI STEAM (DATABASE PUSAT)
-            </a>
-            <a href="https://www.pcgamebenchmark.com/search?query=${benchmarkQuery}" 
-               target="_blank" class="btn-link btn-benchmark">
-               ✅ CEK SPEK DI PC-BENCHMARK
-            </a>
-        `;
-        
-        modal.style.display = "block";
+    function getGameGenres(gameName) {
+        const n = gameName.toLowerCase();
+        const g = [];
+        if (keywordsMainBerdua.some(k => n.includes(k))) g.push('Main Berdua');
+        // Tambahkan pengecekan genre lain di sini sesuai kode lama kamu
+        return g.length === 0 ? ['Lainnya'] : g;
     }
 
-    // --- LOGIKA DATA (DEDUPLIKASI & PARSING) ---
     function parseSizeToMB(s) {
         const p = s.split(' '); if (p.length < 2) return 0;
         const v = parseFloat(p[0]); const u = p[1].toLowerCase();
@@ -197,19 +169,16 @@
         const lines = csvData.split('\n');
         const map = new Map();
         let started = false;
-        
         for (const l of lines) {
             if (l.startsWith('NAMA GAME,SIZE,KETERANGAN')) { started = true; continue; }
             if (!started || l.trim() === '') continue;
-            
             const p = l.split(',');
             if (p.length >= 3) {
                 const name = p[0].replace(/"/g, '').trim();
                 const size = p[1].trim();
                 const desc = p[2].trim();
                 if (name && !name.includes('.mp4')) {
-                    const game = { name, size, description: desc, sizeVal: parseSizeToMB(size) };
-                    // Ambil yang ukuran filenya paling besar jika nama sama
+                    const game = { name, size, description: desc, sizeVal: parseSizeToMB(size), genre: getGameGenres(name) };
                     if (!map.has(name) || game.sizeVal > map.get(name).sizeVal) map.set(name, game);
                 }
             }
@@ -217,61 +186,98 @@
         allGames = Array.from(map.values());
     }
 
-    function getClassName(ket) {
-        const k = ket.toLowerCase();
-        if (k === 'ringan') return 'ket-ringan';
-        if (k === 'sedang') return 'ket-sedang';
-        if (k === 'agak berat') return 'ket-agak-berat';
-        if (k === 'berat') return 'ket-berat';
-        return '';
+    // FUNGSI AMBIL SPEK DARI API RAWG
+    async function showSpec(gameName) {
+        const modal = document.getElementById('specModal');
+        const title = document.getElementById('modalTitle');
+        const body = document.getElementById('modalBody');
+        
+        title.textContent = gameName;
+        body.innerHTML = "Mencari spesifikasi di database RAWG...";
+        modal.style.display = "block";
+
+        try {
+            const searchRes = await fetch(`https://api.rawg.io/api/games?key=${apiKey}&search=${encodeURIComponent(gameName)}&page_size=1`);
+            const searchData = await searchRes.json();
+            if (!searchData.results.length) { body.innerHTML = "Data tidak ditemukan."; return; }
+
+            const detailRes = await fetch(`https://api.rawg.io/api/games/${searchData.results[0].id}?key=${apiKey}`);
+            const detailData = await detailRes.json();
+            
+            const pcPlatform = detailData.platforms.find(p => p.platform.id === 4);
+            if (pcPlatform && pcPlatform.requirements && pcPlatform.requirements.minimum) {
+                body.innerHTML = `<h3>Minimum Requirements:</h3><div class="req-text">${pcPlatform.requirements.minimum}</div>`;
+                if(pcPlatform.requirements.recommended) {
+                    body.innerHTML += `<h3>Recommended:</h3><div class="req-text" style="border-left-color: #28a745;">${pcPlatform.requirements.recommended}</div>`;
+                }
+            } else {
+                body.innerHTML = "Spesifikasi teks tidak tersedia untuk game ini di RAWG.";
+            }
+        } catch (e) {
+            body.innerHTML = "Gagal memuat data. Periksa koneksi atau API Key.";
+        }
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-        const tbody = document.getElementById('gameListBody');
+        const tableBody = document.getElementById('gameListBody');
         const searchInput = document.getElementById('searchInput');
+        const count = document.getElementById('gameCount');
         const modal = document.getElementById('specModal');
 
         parseData();
 
         function render(list) {
-            tbody.innerHTML = '';
+            tableBody.innerHTML = '';
             list.forEach(g => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-                    <td><span class="clickable-name" onclick="openQuickSpec('${g.name}')">${g.name}</span></td>
+                    <td><span class="clickable-name" onclick="showSpec('${g.name}')">${g.name}</span></td>
                     <td>${g.size}</td>
-                    <td class="${getClassName(g.description)}">${g.description}</td>
+                    <td class="ket-${g.description.toLowerCase().replace(' ', '-')}">${g.description}</td>
                 `;
-                tbody.appendChild(tr);
+                tableBody.appendChild(tr);
             });
-            document.getElementById('gameCount').textContent = `Total: ${list.length} game`;
+            count.textContent = `Menampilkan ${list.length} dari ${allGames.length} game`;
         }
 
-        // Search Bar
-        searchInput.onkeyup = () => {
+        function filter() {
             const term = searchInput.value.toLowerCase();
-            const filtered = allGames.filter(g => g.name.toLowerCase().includes(term));
-            render(filtered);
-        };
+            let games = [...allGames];
+            if (term) {
+                games = games.filter(g => g.name.toLowerCase().includes(term));
+            } else {
+                if (currentCategoryFilter) games = games.filter(g => g.description === currentCategoryFilter);
+                if (currentGenreFilter) games = games.filter(g => g.genre.includes(currentGenreFilter));
+            }
+            render(games);
+        }
 
-        // Filter Buttons
+        // Click Event Filter
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.onclick = () => {
                 searchInput.value = '';
-                const active = btn.classList.contains('active');
+                const isActive = btn.classList.contains('active');
                 document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                if (!active) {
-                    btn.classList.add('active');
-                    render(allGames.filter(g => g.description === btn.dataset.filter));
-                } else {
-                    render(allGames);
-                }
+                if (!isActive) { btn.classList.add('active'); currentCategoryFilter = btn.dataset.filter; }
+                else { currentCategoryFilter = null; }
+                filter();
             };
         });
 
-        // Close Modal
+        document.querySelectorAll('.genre-btn').forEach(btn => {
+            btn.onclick = () => {
+                searchInput.value = '';
+                const isActive = btn.classList.contains('active');
+                document.querySelectorAll('.genre-btn').forEach(b => b.classList.remove('active'));
+                if (!isActive) { btn.classList.add('active'); currentGenreFilter = btn.dataset.filter; }
+                else { currentGenreFilter = null; }
+                filter();
+            };
+        });
+
+        searchInput.onkeyup = filter;
         document.querySelector('.close-btn').onclick = () => modal.style.display = "none";
-        window.onclick = (e) => { if(e.target.id == 'specModal') modal.style.display = "none"; };
+        window.onclick = (e) => { if(e.target == modal) modal.style.display = "none"; };
 
         render(allGames);
     });
