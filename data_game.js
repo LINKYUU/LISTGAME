@@ -20,7 +20,7 @@ Alan Wake Remastered,39.67 GB,Agak Berat
 Alan Wake 2,112.2 GB,Berat
 Albatroz,41.27 GB,Berat
 Alien Rogue Incursion Evolved Edition,21.0 GB,Agak Berat
-"Altered Beast (En,Fr,De,Es,It)",2.2 GB,Ringan
+"Altered Beast ",2.2 GB,Ringan
 American Truck Simulator,24.16 GB,Agak Berat
 Amnesia Rebirth,36.46 GB,Agak Berat
 Among Us,762.88 MB,Ringan
@@ -577,3 +577,4 @@ MY HERO ACADEMIA ALL JUSTICE,10 GB,Berat
 CAIRN,2 GB,Sedang
 STORY OF SEASON GRAND BAZZAR,5 GB,Sedang
 `;
+
