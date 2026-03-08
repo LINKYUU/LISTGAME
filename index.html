@@ -72,7 +72,6 @@
         }
         .close-btn { position: absolute; right: 15px; top: 10px; font-size: 24px; cursor: pointer; color: #999; }
         
-        /* CSS REQ TEXT AGAR RAPI & RAPAT */
         .req-text { 
             background: #f9f9f9; 
             padding: 12px; 
@@ -152,7 +151,7 @@
     <div class="modal-content">
         <span class="close-btn">&times;</span>
         <h3 id="modalTitle" style="margin-top:0;">Memuat...</h3>
-        <div id="modalBody">Tunggu Sebentar Om Lagi Loading...</div>
+        <div id="modalBody">Tunggu Bentar Om Lagi Loading...</div>
     </div>
 </div>
 
@@ -216,8 +215,11 @@
     // --- FUNGSI FORMATTING TEKS RAWG AGAR RAPI BERBARIS ---
     function formatReqText(text) {
         if (!text) return "";
-        return text
-            .replace(/Minimum:|Minimum Requirements:/gi, "<strong>Minimum:</strong><br>")
+        // Hanya ambil bagian Minimum, bagian Recommended dibuang lewat regex
+        let cleanText = text.split(/Recommended:|Recommended Requirements:/gi)[0];
+
+        return cleanText
+            .replace(/Minimum:|Minimum Requirements:/gi, "<strong>Minimum Requirements:</strong><br>")
             .replace(/OS:/g, "<br><b>OS:</b>")
             .replace(/Processor:/g, "<br><b>Processor:</b>")
             .replace(/Memory:/g, "<br><b>Memory:</b>")
@@ -225,8 +227,6 @@
             .replace(/DirectX:/g, "<br><b>DirectX:</b>")
             .replace(/Storage:/g, "<br><b>Storage:</b>")
             .replace(/Sound Card:/g, "<br><b>Sound Card:</b>")
-            // PERBAIKAN: Memberikan enter tambahan sebelum tulisan Recommended agar tidak menempel ke Storage
-            .replace(/Recommended:|Recommended Requirements:/gi, "<br><br><strong>Recommended:</strong><br>")
             .replace(/^<br>/, ""); 
     }
 
@@ -250,10 +250,9 @@
             const detailData = await detailRes.json();
             const pcPlatform = detailData.platforms.find(p => p.platform.id === 4);
             
-            if (pcPlatform && pcPlatform.requirements && (pcPlatform.requirements.minimum || pcPlatform.requirements.recommended)) {
-                let minReq = formatReqText(pcPlatform.requirements.minimum || "");
-                let recReq = formatReqText(pcPlatform.requirements.recommended || "");
-                body.innerHTML = `<div class="req-text">${minReq}${recReq}</div>`;
+            if (pcPlatform && pcPlatform.requirements && pcPlatform.requirements.minimum) {
+                let minReq = formatReqText(pcPlatform.requirements.minimum);
+                body.innerHTML = `<div class="req-text">${minReq}</div>`;
             } else {
                 showFallbackSpec(body, kategori);
             }
@@ -280,7 +279,7 @@
         } else {
             content = `<b>CPU:</b> Intel i5 / AMD Ryzen 5<br><b>RAM:</b> 8 GB<br><b>GPU:</b> GTX 1080 4GB<br><b>OS:</b> Windows 10 64-bit`;
         }
-        element.innerHTML = `<div class="req-text" style="border-left-color: ${color}; line-height: 1.2; font-size: 13px; padding: 12px; background: #fafafa;"><strong style="display:block; margin-bottom:5px; color:${color};">Minimum Requirements (${kategori.toUpperCase()}):</strong>${content}</div><p style="font-size: 10px; color: #999; margin-top: 10px;">*Menampilkan spek berdasarkan kategori Link.Yu (Data RAWG kosong).</p>`;
+        element.innerHTML = `<div class="req-text" style="border-left-color: ${color}; line-height: 1.2; font-size: 13px; padding: 12px; background: #fafafa;"><strong style="display:block; margin-bottom:5px; color:${color};">Minimum Requirements:</strong>${content}</div><p style="font-size: 10px; color: #999; margin-top: 10px;">*Menampilkan spek berdasarkan kategori Link.Yu (Data RAWG kosong).</p>`;
     }
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -333,5 +332,3 @@
 </script>
 </body>
 </html>
-
-
