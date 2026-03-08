@@ -223,14 +223,14 @@
         }
     }
 
-    function showFallbackSpec(element, kategori) {
+   function showFallbackSpec(element, kategori) {
         let content = "";
         let color = "#f0ad4e"; 
 
         if (kategori.includes("ringan")) {
             color = "#28a745"; 
             content = `
-                <b>CPU:</b> Intel Core 2 Quad Q6600 @ 2.40GHz / AMD Phenom 9850 @ 2.5GHz<br>
+                <b>CPU:</b> Intel Core 2 Quad Q6600 / AMD Phenom 9850<br>
                 <b>CPU SPEED:</b> Info | <b>RAM:</b> 4 GB<br>
                 <b>VIDEO CARD:</b> NVIDIA 9800 GT 1GB / AMD HD 4870 1GB<br>
                 <b>DEDICATED VIDEO RAM:</b> 1 GB<br>
@@ -241,7 +241,7 @@
         else if (kategori.includes("sedang")) {
             color = "#007bff"; 
             content = `
-                <b>CPU:</b> Intel i5-2500k (3.3 GHz) / AMD Ryzen 3 1200 (3.1 GHz)<br>
+                <b>CPU:</b> Intel i5-2500k (3.3 GHz) / AMD Ryzen 3 1200<br>
                 <b>RAM:</b> 8 GB<br>
                 <b>VIDEO CARD:</b> NVIDIA GTX 960 (4 GB) / AMD R9 290X (4 GB)<br>
                 <b>DEDICATED VIDEO RAM:</b> 4 GB<br>
@@ -252,7 +252,7 @@
         else if (kategori.includes("agak berat")) {
             color = "#fd7e14"; 
             content = `
-                <b>CPU:</b> Intel i5-6600k (3.5 GHz) / AMD Ryzen 5 2400 G (3.6 GHz)<br>
+                <b>CPU:</b> Intel i5-6600k (3.5 GHz) / AMD Ryzen 5 2400 G<br>
                 <b>RAM:</b> 8 GB<br>
                 <b>VIDEO CARD:</b> NVIDIA GTX 1060 (6 GB) / AMD RX 570 (4 GB)<br>
                 <b>DEDICATED VIDEO RAM:</b> 6 GB (AMD 4GB)<br>
@@ -275,12 +275,13 @@
             content = `<b>CPU:</b> Intel i5 / AMD Ryzen 5<br><b>RAM:</b> 8 GB<br><b>GPU:</b> GTX 1080 4GB<br><b>OS:</b> Windows 10 64-bit`;
         }
 
+        // line-height: 1.2 di bawah ini yang akan merapatkan jarak antar baris
         element.innerHTML = `
-            <div class="req-text" style="border-left-color: ${color}; line-height: 1.5; font-size: 13px; padding: 15px; background: #fafafa;">
-                <strong style="display:block; margin-bottom:5px; color:${color};">Minimum Requirements (${kategori.toUpperCase()}):</strong>
-                ${content}
+            <div class="req-text" style="border-left-color: ${color}; line-height: 1.2; font-size: 13px; padding: 12px; background: #fafafa; margin: 0;">
+                <strong style="display:block; margin-bottom: 4px; color:${color};">Minimum Requirements (${kategori.toUpperCase()}):</strong>
+                <div style="margin: 0; padding: 0;">${content}</div>
             </div>
-            <p style="font-size: 10px; color: #999; margin-top: 10px;">*Menampilkan spek berdasarkan kategori Link.Yu (Data RAWG kosong).</p>
+            <p style="font-size: 10px; color: #999; margin-top: 5px;">*Menampilkan spek berdasarkan kategori Link.Yu (Data RAWG kosong).</p>
         `;
     }
 
@@ -352,3 +353,4 @@
 </script>
 </body>
 </html>
+
