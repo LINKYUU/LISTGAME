@@ -28,7 +28,7 @@ Alan Wake Remastered,39.67 GB,Agak Berat
 Alan Wake 2,112.2 GB,Berat
 Albatroz,41.27 GB,Berat
 Alien Rogue Incursion Evolved Edition,21.0 GB,Agak Berat
-"Altered Beast (En,Fr,De,Es,It)",2.2 GB,Ringan
+"Altered Beast (En,Fr,De,Es,It)",2.2 GB, Ringan
 American Truck Simulator,24.16 GB,Agak Berat
 Amnesia Rebirth,36.46 GB,Agak Berat
 Among Us,762.88 MB,Ringan
@@ -39,20 +39,20 @@ AO International Tennis,13.36 GB,Sedang
 AOE 3 Complete Edition,2.0 GB,Ringan
 Aragami 2,9.19 GB,Sedang
 Assassin Creed Odyssey,103.47 GB,Berat
-Assassin's Creed,6.98 GB,Sedang
-Assassin's Creed,7.0 GB,Sedang
-Assassin's Creed   Unity,47.5 GB,Berat
+Assassins Creed,6.98 GB,Sedang
+Assassins Creed,7.0 GB,Sedang
+Assassins Creed   Unity,47.5 GB,Berat
 Assassins Creed Brotherhood,7.50 GB,Sedang
-Assassin's Creed II Deluxe Edition,4.08 GB,Ringan
-Assassin's Creed III,16.44 GB,Sedang
-Assassin's Creed III Remastered,41.64 GB,Berat
-Assassin's Creed IV Black Flag,18.27 GB,Sedang
-Assassin's Creed Liberation HD,3.47 GB,Ringan
-Assassin's Creed Mirage,43.16 GB,Berat
+Assassins Creed II Deluxe Edition,4.08 GB,Ringan
+Assassins Creed III,16.44 GB,Sedang
+Assassins Creed III Remastered,41.64 GB,Berat
+Assassins Creed IV Black Flag,18.27 GB,Sedang
+Assassins Creed Liberation HD,3.47 GB,Ringan
+Assassins Creed Mirage,43.16 GB,Berat
 Assassins Creed Revelations,9.44 GB,Sedang
-Assassin's Creed Rogue,12.24 GB,Sedang
+Assassins Creed Rogue,12.24 GB,Sedang
 Assassins Creed Syndicate Gold Edition,65.13 GB,Berat
-Assassin's Creed Unity,47.50 GB,Berat
+Assassins Creed Unity,47.50 GB,Berat
 Assassins Creed Valhalla,165.96 GB,Berat
 Assetto Corsa,42.17 GB,Berat
 Assetto Corsa Competizione,19.87 GB,Sedang
@@ -1008,6 +1008,7 @@ CAIRN , 2 GB , SEDANG
 STORY OF SEASON GRAND BAZZAR , 5 GB SEDANG
 
 `;
+
 
 
 
