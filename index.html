@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daftar Game Link.Yu</title>
     <style>
-        /* CSS ASLI SESUAI TAMPILAN AWAL */
+        /* --- CSS TAMPILAN ASLI --- */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: #f4f7f6;
@@ -40,7 +40,7 @@
             font-size: 16px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box;
         }
 
-        /* FILTER KATEGORI & GENRE */
+        /* --- FILTER BUTTONS --- */
         #filterContainer, #genreFilterContainer {
             margin-top: 15px; text-align: center; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
         }
@@ -50,23 +50,22 @@
             padding: 8px 15px; font-size: 14px; font-weight: 500; background-color: #f0f0f0;
             border: none; border-radius: 20px; cursor: pointer; color: #555; transition: all 0.2s ease;
         }
-        /* Warna Tombol Aktif */
         .filter-btn.active[data-filter="Ringan"] { background-color: #28a745; color: white; }
         .filter-btn.active[data-filter="Sedang"] { background-color: #007bff; color: white; }
         .filter-btn.active[data-filter="Agak Berat"] { background-color: #fd7e14; color: white; }
         .filter-btn.active[data-filter="Berat"] { background-color: #dc3545; color: white; }
         .genre-btn.active { background-color: #0056b3; color: white; }
 
-        /* TABEL DAFTAR GAME */
+        /* --- TABLE --- */
         .table-wrapper { max-height: 60vh; overflow-y: auto; border-top: 1px solid #e0e0e0; }
         #gameTable { width: 100%; border-collapse: collapse; }
         #gameTable th, #gameTable td { padding: 12px 15px; border-bottom: 1px solid #e0e0e0; text-align: left; }
         #gameTable th { background-color: #f9f9f9; position: sticky; top: 0; z-index: 1; }
         
-        /* Nama Game Klikable */
+        /* Klik Nama Game */
         .clickable-name { color: #0056b3; cursor: pointer; text-decoration: underline; font-weight: 500; }
 
-        /* MODAL POP-UP SPEK */
+        /* --- MODAL --- */
         .modal {
             display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.7); backdrop-filter: blur(3px);
@@ -78,14 +77,13 @@
         }
         .close-btn { position: absolute; right: 20px; top: 10px; font-size: 30px; cursor: pointer; color: #aaa; }
         
-        /* Konten Spesifikasi Steam */
         .steam-req { font-size: 14px; line-height: 1.6; color: #444; }
         .steam-req b, .steam-req strong { color: #111; }
         .steam-req ul { padding-left: 20px; margin: 10px 0; }
         .loading { text-align: center; padding: 30px; font-style: italic; color: #1a73e8; }
-        .game-banner { width: 100%; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .game-banner { width: 100%; border-radius: 10px; margin-bottom: 15px; }
 
-        /* PEWARNAAN TEKS KATEGORI */
+        /* WARNA KATEGORI */
         .ket-ringan { color: #28a745; font-weight: 600; }
         .ket-sedang { color: #007bff; font-weight: 600; }
         .ket-agak-berat { color: #fd7e14; font-weight: 600; }
@@ -99,11 +97,10 @@
         <div class="special-notice">
             <p>🎮 DAFTAR GAME PC LINK.YU 🎮</p>
             <p class="whatsapp">💬 WhatsApp: 08 777 26 77776</p>
-            <p style="font-size: 14px; color: #666; font-weight: normal;">*Klik pada nama game untuk melihat spek minimum asli dari Steam</p>
         </div>
 
         <h1>Katalog Game</h1>
-        <input type="text" id="searchInput" placeholder="Ketik nama game untuk mencari...">
+        <input type="text" id="searchInput" placeholder="Cari nama game... (Klik judul untuk spek asli Steam)">
         
         <div id="filterContainer">
             <button class="filter-btn" data-filter="Ringan">Ringan</button>
@@ -140,9 +137,8 @@
 <div id="specModal" class="modal">
     <div class="modal-content">
         <span class="close-btn">&times;</span>
-        <h2 id="modalTitle" style="margin-top:0; border-bottom: 2px solid #eee; padding-bottom: 10px; font-size: 20px;">Memuat...</h2>
-        <div id="modalBody" class="steam-req">
-            </div>
+        <h2 id="modalTitle" style="margin-top:0; border-bottom: 2px solid #eee; padding-bottom: 10px;">Judul Game</h2>
+        <div id="modalBody" class="steam-req"></div>
     </div>
 </div>
 
@@ -152,85 +148,67 @@
     let allGames = [];
     let currentCategoryFilter = null;
     let currentGenreFilter = null;
-    let sizeSortDirection = 'none';
 
-    // --- FUNGSI AMBIL DATA ASLI STEAM (Pasti & Akurat) ---
+    // --- FUNGSI AMBIL SPEK STEAM (ANTI-ERROR) ---
     async function showSteamSpec(gameName) {
         const modal = document.getElementById('specModal');
         const title = document.getElementById('modalTitle');
         const body = document.getElementById('modalBody');
         
         title.textContent = gameName;
-        body.innerHTML = '<div class="loading">Sedang mencari data resmi di database Steam...</div>';
+        body.innerHTML = '<div class="loading">Menghubungkan ke Steam...</div>';
         modal.style.display = "block";
 
         try {
-            // 1. Cari AppID Game (CORS Proxy allorigins agar stabil)
+            // Menggunakan AllOrigins Proxy (Lebih Stabil)
             const searchUrl = `https://store.steampowered.com/api/storesearch/?term=${encodeURIComponent(gameName)}&l=indonesian&cc=ID`;
-            const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(searchUrl)}`;
+            const proxySearch = `https://api.allorigins.win/get?url=${encodeURIComponent(searchUrl)}`;
             
-            const searchRes = await fetch(proxyUrl);
-            const searchDataRaw = await searchRes.json();
-            const searchData = JSON.parse(searchDataRaw.contents);
+            const response = await fetch(proxySearch);
+            if (!response.ok) throw new Error();
+            const dataRaw = await response.json();
+            const searchData = JSON.parse(dataRaw.contents);
 
-            if (!searchData.items || searchData.items.length === 0) {
-                throw new Error("Game tidak ditemukan");
+            if (!searchData || !searchData.items || searchData.items.length === 0) {
+                body.innerHTML = `<p>Game tidak ditemukan di database Steam.</p>
+                                 <a href="https://www.google.com/search?q=${encodeURIComponent(gameName + ' pc system requirements')}" target="_blank" style="color:#d9534f; font-weight:bold;">Cari di Google ↗</a>`;
+                return;
             }
 
             const appId = searchData.items[0].id;
-            title.textContent = searchData.items[0].name;
-
-            // 2. Ambil Detail Requirements
             const detailUrl = `https://store.steampowered.com/api/appdetails?appids=${appId}&l=indonesian`;
-            const detailProxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(detailUrl)}`;
+            const proxyDetail = `https://api.allorigins.win/get?url=${encodeURIComponent(detailUrl)}`;
             
-            const detailRes = await fetch(detailProxyUrl);
+            const detailRes = await fetch(proxyDetail);
             const detailDataRaw = await detailRes.json();
             const detailData = JSON.parse(detailDataRaw.contents);
 
-            if (detailData[appId].success) {
-                const gameInfo = detailData[appId].data;
+            if (detailData[appId] && detailData[appId].success) {
+                const info = detailData[appId].data;
                 let html = "";
-
-                // Poster Game
-                if (gameInfo.header_image) {
-                    html += `<img src="${gameInfo.header_image}" class="game-banner">`;
-                }
-
-                if (gameInfo.pc_requirements) {
-                    html += gameInfo.pc_requirements.minimum || "Detail minimum tidak tersedia.";
-                    if (gameInfo.pc_requirements.recommended) {
-                        html += "<hr style='margin:15px 0'>" + gameInfo.pc_requirements.recommended;
-                    }
+                if (info.header_image) html += `<img src="${info.header_image}" class="game-banner">`;
+                
+                if (info.pc_requirements) {
+                    html += `<div class="steam-req">${info.pc_requirements.minimum || ""}</div>`;
+                    if (info.pc_requirements.recommended) html += `<hr><div class="steam-req">${info.pc_requirements.recommended}</div>`;
                     body.innerHTML = html;
                 } else {
-                    body.innerHTML = "Spesifikasi PC tidak ditemukan di database resmi.";
+                    body.innerHTML = "Detail spesifikasi tidak tersedia.";
                 }
             } else {
-                throw new Error("Gagal ambil detail");
+                body.innerHTML = "Gagal memuat detail.";
             }
 
         } catch (e) {
-            console.error(e);
             body.innerHTML = `
-                <div style="text-align:center; padding:10px;">
-                    <p>Maaf, gagal mengambil data otomatis.</p>
-                    <a href="https://www.google.com/search?q=${encodeURIComponent(gameName + ' pc minimum requirements')}" 
-                       target="_blank" 
-                       style="display:inline-block; background:#d9534f; color:white; padding:10px 15px; border-radius:6px; text-decoration:none; font-weight:bold; font-size:13px;">
-                       Klik untuk Lihat Spek di Google ↗
-                    </a>
+                <div style="text-align:center;">
+                    <p>Terjadi gangguan koneksi API.</p>
+                    <a href="https://www.google.com/search?q=${encodeURIComponent(gameName + ' pc requirements')}" target="_blank" style="color:#d9534f; font-weight:bold;">Lihat di Google ↗</a>
                 </div>`;
         }
     }
 
-    // --- LOGIKA DATA (SAMA SEPERTI KODE LAMA KAMU) ---
-    function parseSizeToMB(s) {
-        const p = s.split(' '); if (p.length < 2) return 0;
-        const v = parseFloat(p[0]); const u = p[1].toLowerCase();
-        if (u === 'gb') return v * 1024; if (u === 'mb') return v; return 0;
-    }
-
+    // --- LOGIKA DATA ---
     function parseData() {
         if (typeof csvData === 'undefined') return;
         const lines = csvData.split('\n');
@@ -245,29 +223,17 @@
                 const size = p[1].trim();
                 const desc = p[2].trim();
                 if (name && !name.includes('.mp4')) {
-                    const game = { name, size, description: desc, sizeVal: parseSizeToMB(size), genre: [] };
-                    // Deduplikasi: ambil size terbesar
-                    if (!map.has(name) || game.sizeVal > map.get(name).sizeVal) map.set(name, game);
+                    const game = { name, size, description: desc };
+                    if (!map.has(name)) map.set(name, game);
                 }
             }
         }
         allGames = Array.from(map.values());
     }
 
-    function getClassName(ket) {
-        const k = ket.toLowerCase();
-        if (k === 'ringan') return 'ket-ringan';
-        if (k === 'sedang') return 'ket-sedang';
-        if (k === 'agak berat') return 'ket-agak-berat';
-        if (k === 'berat') return 'ket-berat';
-        return '';
-    }
-
     document.addEventListener('DOMContentLoaded', () => {
         const tbody = document.getElementById('gameListBody');
-        const search = document.getElementById('searchInput');
-        const count = document.getElementById('gameCount');
-        const modal = document.getElementById('specModal');
+        const searchInput = document.getElementById('searchInput');
 
         parseData();
 
@@ -275,45 +241,37 @@
             tbody.innerHTML = '';
             list.forEach(g => {
                 const tr = document.createElement('tr');
+                const ketClass = g.description.toLowerCase().replace(' ', '-');
                 tr.innerHTML = `
                     <td><span class="clickable-name" onclick="showSteamSpec('${g.name}')">${g.name}</span></td>
                     <td>${g.size}</td>
-                    <td class="${getClassName(g.description)}">${g.description}</td>
+                    <td class="ket-${ketClass}">${g.description}</td>
                 `;
                 tbody.appendChild(tr);
             });
-            count.textContent = `Menampilkan ${list.length} dari ${allGames.length} game`;
+            document.getElementById('gameCount').textContent = `Total: ${list.length} game`;
         }
 
-        function filter() {
-            const term = search.value.toLowerCase();
-            let games = [...allGames];
-            if (term) {
-                games = games.filter(g => g.name.toLowerCase().includes(term));
-            } else {
-                if (currentCategoryFilter) games = games.filter(g => g.description === currentCategoryFilter);
-            }
-            render(games);
-        }
+        searchInput.onkeyup = () => {
+            const term = searchInput.value.toLowerCase();
+            render(allGames.filter(g => g.name.toLowerCase().includes(term)));
+        };
 
-        // Search
-        search.onkeyup = filter;
-
-        // Filter Buttons Logic
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.onclick = () => {
-                search.value = '';
                 const active = btn.classList.contains('active');
                 document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                if (!active) { btn.classList.add('active'); currentCategoryFilter = btn.dataset.filter; }
-                else { currentCategoryFilter = null; }
-                filter();
+                if (!active) {
+                    btn.classList.add('active');
+                    render(allGames.filter(g => g.description === btn.dataset.filter));
+                } else {
+                    render(allGames);
+                }
             };
         });
 
-        // Close Modal
-        document.querySelector('.close-btn').onclick = () => modal.style.display = "none";
-        window.onclick = (e) => { if(e.target == modal) modal.style.display = "none"; };
+        document.querySelector('.close-btn').onclick = () => document.getElementById('specModal').style.display = "none";
+        window.onclick = (e) => { if(e.target.id == 'specModal') document.getElementById('specModal').style.display = "none"; };
 
         render(allGames);
     });
