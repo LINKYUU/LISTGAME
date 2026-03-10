@@ -5,114 +5,97 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daftar Game Link.Yu</title>
     <style>
-        /* --- TEMA BIRU NAVY --- */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #0a192f; /* Background luar Navy Gelap */
-            color: #e6f1ff;
+            background-color: #f4f7f6;
+            color: #333;
             margin: 0;
             padding: 20px;
         }
         .container {
             max-width: 900px;
             margin: 0 auto;
-            background-color: #112240; /* Box Navy sedikit lebih terang */
+            background-color: #ffffff;
             border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
             overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.1);
         }
-        header { 
-            padding: 20px 30px; 
-            border-bottom: 1px solid rgba(255,255,255,0.1); 
-        }
+        header { padding: 20px 30px; border-bottom: 1px solid #e0e0e0; }
         .special-notice {
-            background-color: rgba(217, 83, 79, 0.1);
+            background-color: #fff4f4;
             border: 1px solid #d9534f;
             padding: 10px 20px;
             margin-bottom: 15px;
             border-radius: 6px;
             text-align: center;
         }
-        .special-notice p { margin: 5px 0; font-size: 18px; font-weight: 600; color: #ff6b6b; }
-        .special-notice p.whatsapp { color: #ccd6f6; font-weight: bold; font-size: 16px; }
-        .special-notice p.shopee-link { color: #ccd6f6; font-weight: bold; font-size: 16px; margin-top: 8px; }
-        .special-notice p.shopee-link a { color: #64ffda; text-decoration: none; }
+        .special-notice p { margin: 5px 0; font-size: 18px; font-weight: 600; color: #d9534f; }
+        .special-notice p.whatsapp { color: #333; font-weight: bold; font-size: 16px; }
+        .special-notice p.shopee-link { color: #333; font-weight: bold; font-size: 16px; margin-top: 8px; }
+        .special-notice p.shopee-link a { color: #0056b3; text-decoration: none; }
         
-        h1 { text-align: center; color: #ffffff; margin: 10px 0 0 0; }
-        
+        h1 { text-align: center; color: #1a1a1a; margin: 10px 0 0 0; }
         #searchInput {
             width: 100%; padding: 12px 15px; margin-top: 15px;
-            font-size: 16px; border: 1px solid #233554; border-radius: 6px; box-sizing: border-box;
-            background-color: #0a192f; color: white;
+            font-size: 16px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box;
         }
 
         #filterContainer, #genreFilterContainer {
             margin-top: 15px; text-align: center; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
         }
-        #genreFilterContainer { padding-top: 10px; border-top: 1px dashed #233554; }
+        #genreFilterContainer { padding-top: 10px; border-top: 1px dashed #ccc; }
         
         .filter-btn, .genre-btn {
-            padding: 8px 15px; font-size: 14px; font-weight: 500; background-color: #233554;
-            border: none; border-radius: 20px; cursor: pointer; color: #8892b0; transition: all 0.2s ease;
+            padding: 8px 15px; font-size: 14px; font-weight: 500; background-color: #f0f0f0;
+            border: none; border-radius: 20px; cursor: pointer; color: #555; transition: all 0.2s ease;
         }
-        .filter-btn:hover, .genre-btn:hover { background-color: #1d2d44; color: white; }
-
         .filter-btn.active[data-filter="Ringan"] { background-color: #28a745; color: white; }
         .filter-btn.active[data-filter="Sedang"] { background-color: #007bff; color: white; }
         .filter-btn.active[data-filter="Agak Berat"] { background-color: #fd7e14; color: white; }
         .filter-btn.active[data-filter="Berat"] { background-color: #dc3545; color: white; }
-        .genre-btn.active { background-color: #64ffda; color: #0a192f; }
+        .genre-btn.active { background-color: #0056b3; color: white; }
 
-        .table-wrapper { max-height: 60vh; overflow-y: auto; border-top: 1px solid rgba(255,255,255,0.1); }
+        .table-wrapper { max-height: 60vh; overflow-y: auto; border-top: 1px solid #e0e0e0; }
         #gameTable { width: 100%; border-collapse: collapse; }
-        #gameTable th, #gameTable td { padding: 12px 15px; border-bottom: 1px solid rgba(255,255,255,0.05); text-align: left; }
-        #gameTable th { background-color: #0d1b33; color: #64ffda; position: sticky; top: 0; z-index: 1; }
+        #gameTable th, #gameTable td { padding: 12px 15px; border-bottom: 1px solid #e0e0e0; text-align: left; }
+        #gameTable th { background-color: #f9f9f9; position: sticky; top: 0; z-index: 1; }
         
-        .clickable-name { color: #64ffda; cursor: pointer; text-decoration: underline; font-weight: 500; }
+        .clickable-name { color: #0056b3; cursor: pointer; text-decoration: underline; font-weight: 500; }
 
-        /* Modal Navy Style */
         .modal {
             display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%;
-            background: rgba(10, 25, 47, 0.85); backdrop-filter: blur(3px);
+            background: rgba(0,0,0,0.7); backdrop-filter: blur(3px);
         }
         .modal-content {
-            background: #112240; border: 1px solid #64ffda; color: white;
-            margin: 10% auto; padding: 20px; width: 90%; max-width: 500px;
+            background: white; margin: 10% auto; padding: 20px; width: 90%; max-width: 500px;
             border-radius: 12px; position: relative; max-height: 70vh; overflow-y: auto;
         }
-        .close-btn { position: absolute; right: 15px; top: 10px; font-size: 24px; cursor: pointer; color: #8892b0; }
+        .close-btn { position: absolute; right: 15px; top: 10px; font-size: 24px; cursor: pointer; color: #999; }
         
         .req-text { 
-            background: #0a192f; 
+            background: #f9f9f9; 
             padding: 15px; 
             border-radius: 8px; 
-            font-size: 13px; 
-            line-height: 1.5; 
-            border-left: 4px solid #64ffda;
+            font-size: 14px; 
+            line-height: 1.6; 
+            border-left: 4px solid #1a73e8;
             word-wrap: break-word;
         }
 
-        .ket-ringan { color: #2ecc71; font-weight: 600; }
-        .ket-sedang { color: #3498db; font-weight: 600; }
-        .ket-agak-berat { color: #e67e22; font-weight: 600; }
-        .ket-berat { color: #e74c3c; font-weight: 600; }
+        .ket-ringan { color: #28a745; font-weight: 600; }
+        .ket-sedang { color: #007bff; font-weight: 600; }
+        .ket-agak-berat { color: #fd7e14; font-weight: 600; }
+        .ket-berat { color: #dc3545; font-weight: 600; }
 
         .instruction-text {
             text-align: center; 
             margin: 15px 0 5px 0; 
             font-weight: bold; 
-            color: #ffda79; 
+            color: #d9534f; 
             font-size: 18px;
             animation: blink 1.5s linear infinite;
         }
         @keyframes blink { 50% { opacity: 0.6; } }
-
-        /* Scrollbar Keren */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0a192f; }
-        ::-webkit-scrollbar-thumb { background: #233554; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #64ffda; }
     </style>
 </head>
 <body>
@@ -147,7 +130,7 @@
         <div class="instruction-text">
             TEKAN JUDUL GAME UNTUK MELIHAT SPESIFIKASI GAME
         </div>
-        <div id="gameCount" style="text-align:center; padding-top:0; color:#8892b0; font-size:13px;"></div>
+        <div id="gameCount" style="text-align:center; padding-top:0; color:#777; font-size:13px;"></div>
     </header>
     
     <div class="table-wrapper">
@@ -228,9 +211,16 @@
         allGames = Array.from(map.values());
     }
 
+    // --- FUNGSI FORMATTING SINGKAT & BERSIH ---
     function formatReqText(text) {
         if (!text) return "";
+
+        // 1. Ambil bagian Minimum saja
         let cleanText = text.split(/Recommended:|Recommended Requirements:/gi)[0];
+
+        // 2. Buang simbol menyebalkan (®, ™)
+        cleanText = cleanText.replace(/[®™]/g, '');
+
         let lines = cleanText.split('<br>');
         let formattedLines = [];
 
@@ -245,11 +235,25 @@
             for (let key in targets) {
                 if (line.includes(key + ":")) {
                     let data = line.split(key + ":")[1].trim();
+
+                    // Hapus info dalam kurung (misal: 2GB, Tiger Lake)
+                    data = data.replace(/\s?\([^)]*\)/g, '');
+                    
+                    // Hapus kata-kata panjang yang tidak perlu
+                    data = data.replace(/available space|minimum requirements|Home 64 Bit/gi, '').trim();
+
+                    // Jika ada daftar GPU/CPU panjang pakai "or", ambil yang pertama saja + "or equivalent"
+                    if (data.includes(" or ")) {
+                        let options = data.split(" or ");
+                        data = options[0] + " or equivalent"; 
+                    }
+
                     formattedLines.push(`<b>${targets[key]}:</b> ${data}`);
                 }
             }
         });
 
+        // Jika pencarian gagal, gunakan filter string kasar
         if(formattedLines.length === 0) {
             return cleanText
                 .replace(/Minimum:|Minimum Requirements:/gi, "<strong>Minimum Requirements:</strong><br>")
@@ -257,6 +261,8 @@
                 .replace(/Memory:/g, "<br><b>Memory / Ram:</b>")
                 .replace(/Graphics:/g, "<br><b>Graphics:</b>")
                 .replace(/OS:/g, "<br><b>Windows:</b>")
+                .replace(/[®™]/g, '')
+                .replace(/\s?\([^)]*\)/g, '')
                 .replace(/Storage:.*?(?=<br>|$)/gi, "")
                 .replace(/DirectX:.*?(?=<br>|$)/gi, "")
                 .replace(/Sound Card:.*?(?=<br>|$)/gi, "");
@@ -301,18 +307,18 @@
         let color = "#f0ad4e"; 
         if (kategori.includes("ringan")) {
             color = "#28a745"; 
-            content = `<b>Processor:</b> Core 2 Quad Q6600 / Phenom 9850<br><b>Memory / Ram:</b> 4 GB<br><b>Graphics:</b> 9800 GT 1GB / HD 4870 1GB<br><b>Windows:</b> 7/8/10 (64 Bit)`;
+            content = `<b>Processor:</b> Core 2 Quad Q6600<br><b>Memory / Ram:</b> 4 GB<br><b>Graphics:</b> 9800 GT 1GB<br><b>Windows:</b> 7/8/10`;
         } else if (kategori.includes("sedang")) {
             color = "#007bff"; 
-            content = `<b>Processor:</b> Intel i3-5500k / Ryzen 3 1200<br><b>Memory / Ram:</b> 6 GB<br><b>Graphics:</b> GTX 960 / R9 290X<br><b>Windows:</b> 10 (64 Bit)`;
+            content = `<b>Processor:</b> Intel i3-5500k<br><b>Memory / Ram:</b> 6 GB<br><b>Graphics:</b> GTX 960<br><b>Windows:</b> 10`;
         } else if (kategori.includes("agak berat")) {
             color = "#fd7e14"; 
-            content = `<b>Processor:</b> Intel i5-7600k / Ryzen 5 2400 G<br><b>Memory / Ram:</b> 8 GB<br><b>Graphics:</b> GTX 1060 / RX 570<br><b>Windows:</b> 10 (64 Bit)`;
+            content = `<b>Processor:</b> Intel i5-7600k<br><b>Memory / Ram:</b> 8 GB<br><b>Graphics:</b> GTX 1060<br><b>Windows:</b> 10`;
         } else if (kategori.includes("berat")) {
             color = "#dc3545"; 
-            content = `<b>Processor:</b> Intel Core i7-9700 / Ryzen 5 5500<br><b>Memory / Ram:</b> 16 GB<br><b>Graphics:</b> RTX 2060 / RX 5700 XT<br><b>Windows:</b> 10 (64 Bit)`;
+            content = `<b>Processor:</b> Intel Core i7-9700<br><b>Memory / Ram:</b> 16 GB<br><b>Graphics:</b> RTX 2060<br><b>Windows:</b> 10`;
         } else {
-            content = `<b>Processor:</b> Intel i5 / AMD Ryzen 5<br><b>Memory / Ram:</b> 8 GB<br><b>Graphics:</b> GTX 1080 4GB<br><b>Windows:</b> 10 (64 Bit)`;
+            content = `<b>Processor:</b> Intel i5 or equivalent<br><b>Memory / Ram:</b> 8 GB<br><b>Graphics:</b> GTX 1050<br><b>Windows:</b> 10`;
         }
         element.innerHTML = `<div class="req-text" style="border-left-color: ${color};"><strong style="display:block; margin-bottom:5px; color:${color};">Minimum Requirements:</strong>${content}</div>`;
     }
@@ -328,7 +334,7 @@
             tableBody.innerHTML = '';
             list.forEach(g => {
                 const tr = document.createElement('tr');
-                tr.innerHTML = `<td><span class="clickable-name" onclick="showSpec('${g.name}')">${g.name}</span></td><td>${g.size}</td><td class="ket-${g.description.toLowerCase().replace(/\s+/g, '-')}">${g.description}</td>`;
+                tr.innerHTML = `<td><span class="clickable-name" onclick="showSpec('${g.name}')">${g.name}</span></td><td>${g.size}</td><td class="ket-${g.description.toLowerCase().replace(' ', '-')}">${g.description}</td>`;
                 tableBody.appendChild(tr);
             });
             count.textContent = `Menampilkan ${list.length} dari ${allGames.length} game`;
