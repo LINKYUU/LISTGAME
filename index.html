@@ -211,63 +211,47 @@
         allGames = Array.from(map.values());
     }
 
-    // --- FUNGSI FORMATTING SINGKAT & BERSIH ---
+    // --- LOGIKA PEMBERSIHAN TOTAL (ANTI-PANJANG) ---
     function formatReqText(text) {
         if (!text) return "";
-
-        // 1. Ambil bagian Minimum saja
+        
+        // 1. Ambil Minimum saja & Buang simbol
         let cleanText = text.split(/Recommended:|Recommended Requirements:/gi)[0];
-
-        // 2. Buang simbol menyebalkan (®, ™)
         cleanText = cleanText.replace(/[®™]/g, '');
 
-        let lines = cleanText.split('<br>');
+        // 2. Normalisasi: Ganti titik dua (:) menjadi satu baris per poin
+        // Ini untuk menangani teks API yang tidak pakai <br>
+        let labels = ["Processor:", "Memory:", "Graphics:", "OS:"];
         let formattedLines = [];
 
-        const targets = {
-            "Processor": "Processor",
-            "Memory": "Memory / Ram",
-            "Graphics": "Graphics",
-            "OS": "Windows"
-        };
+        labels.forEach(label => {
+            if (cleanText.includes(label)) {
+                let start = cleanText.indexOf(label) + label.length;
+                // Ambil teks sampai ketemu label berikutnya atau kata kunci stop
+                let temp = cleanText.substring(start);
+                
+                // Cari titik potong terdekat agar tidak bablas ke Additional Notes
+                let endIdx = temp.search(/Memory:|Graphics:|OS:|DirectX:|Storage:|Sound Card:|Additional Notes:|Notes:|<br>/i);
+                let data = (endIdx !== -1) ? temp.substring(0, endIdx) : temp;
 
-        lines.forEach(line => {
-            for (let key in targets) {
-                if (line.includes(key + ":")) {
-                    let data = line.split(key + ":")[1].trim();
+                // Pembersihan data dalam poin
+                data = data.trim();
+                data = data.replace(/\s?\([^)]*\)/g, ''); // Hapus semua di dalam kurung ( )
+                data = data.replace(/available space|minimum requirements|Home 64 Bit/gi, '').trim();
+                
+                // Singkatkan pilihan "or"
+                if (data.includes(" / ")) data = data.split(" / ")[0] + " or equivalent";
+                if (data.includes(" or ")) data = data.split(" or ")[0] + " or equivalent";
 
-                    // Hapus info dalam kurung (misal: 2GB, Tiger Lake)
-                    data = data.replace(/\s?\([^)]*\)/g, '');
-                    
-                    // Hapus kata-kata panjang yang tidak perlu
-                    data = data.replace(/available space|minimum requirements|Home 64 Bit/gi, '').trim();
-
-                    // Jika ada daftar GPU/CPU panjang pakai "or", ambil yang pertama saja + "or equivalent"
-                    if (data.includes(" or ")) {
-                        let options = data.split(" or ");
-                        data = options[0] + " or equivalent"; 
-                    }
-
-                    formattedLines.push(`<b>${targets[key]}:</b> ${data}`);
+                if (data && data.toUpperCase() !== "TBA") {
+                    let displayLabel = label === "Memory:" ? "Memory / Ram:" : label.replace(':', ':');
+                    if(label === "OS:") displayLabel = "Windows:";
+                    formattedLines.push(`<b>${displayLabel}</b> ${data}`);
                 }
             }
         });
 
-        // Jika pencarian gagal, gunakan filter string kasar
-        if(formattedLines.length === 0) {
-            return cleanText
-                .replace(/Minimum:|Minimum Requirements:/gi, "<strong>Minimum Requirements:</strong><br>")
-                .replace(/Processor:/g, "<b>Processor:</b>")
-                .replace(/Memory:/g, "<br><b>Memory / Ram:</b>")
-                .replace(/Graphics:/g, "<br><b>Graphics:</b>")
-                .replace(/OS:/g, "<br><b>Windows:</b>")
-                .replace(/[®™]/g, '')
-                .replace(/\s?\([^)]*\)/g, '')
-                .replace(/Storage:.*?(?=<br>|$)/gi, "")
-                .replace(/DirectX:.*?(?=<br>|$)/gi, "")
-                .replace(/Sound Card:.*?(?=<br>|$)/gi, "");
-        }
-
+        if (formattedLines.length < 2) return ""; 
         return "<strong>Minimum Requirements:</strong><br>" + formattedLines.join("<br>");
     }
 
@@ -285,6 +269,7 @@
         try {
             const searchRes = await fetch(`https://api.rawg.io/api/games?key=${apiKey}&search=${encodeURIComponent(gameName)}&page_size=1`);
             const searchData = await searchRes.json();
+            
             if (!searchData.results.length) { showFallbackSpec(body, kategori); return; }
 
             const detailRes = await fetch(`https://api.rawg.io/api/games/${searchData.results[0].id}?key=${apiKey}`);
@@ -293,7 +278,11 @@
             
             if (pcPlatform && pcPlatform.requirements && pcPlatform.requirements.minimum) {
                 let minReq = formatReqText(pcPlatform.requirements.minimum);
-                body.innerHTML = `<div class="req-text">${minReq}</div>`;
+                if (minReq === "" || minReq.includes("TBA")) {
+                    showFallbackSpec(body, kategori);
+                } else {
+                    body.innerHTML = `<div class="req-text">${minReq}</div>`;
+                }
             } else {
                 showFallbackSpec(body, kategori);
             }
@@ -307,18 +296,18 @@
         let color = "#f0ad4e"; 
         if (kategori.includes("ringan")) {
             color = "#28a745"; 
-            content = `<b>Processor:</b> Core 2 Quad Q6600<br><b>Memory / Ram:</b> 4 GB<br><b>Graphics:</b> 9800 GT 1GB<br><b>Windows:</b> 7/8/10`;
+            content = `<b>Processor:</b> Intel Core 2 Quad or equivalent<br><b>Memory / Ram:</b> 4 GB RAM<br><b>Graphics:</b> NVIDIA GT 730 or equivalent<br><b>Windows:</b> 7 / 8 / 10`;
         } else if (kategori.includes("sedang")) {
             color = "#007bff"; 
-            content = `<b>Processor:</b> Intel i3-5500k<br><b>Memory / Ram:</b> 6 GB<br><b>Graphics:</b> GTX 960<br><b>Windows:</b> 10`;
+            content = `<b>Processor:</b> Intel Core i3 or equivalent<br><b>Memory / Ram:</b> 8 GB RAM<br><b>Graphics:</b> NVIDIA GTX 750 Ti or equivalent<br><b>Windows:</b> 10`;
         } else if (kategori.includes("agak berat")) {
             color = "#fd7e14"; 
-            content = `<b>Processor:</b> Intel i5-7600k<br><b>Memory / Ram:</b> 8 GB<br><b>Graphics:</b> GTX 1060<br><b>Windows:</b> 10`;
+            content = `<b>Processor:</b> Intel Core i5 or equivalent<br><b>Memory / Ram:</b> 8 GB RAM<br><b>Graphics:</b> NVIDIA GTX 1050 or equivalent<br><b>Windows:</b> 10`;
         } else if (kategori.includes("berat")) {
             color = "#dc3545"; 
-            content = `<b>Processor:</b> Intel Core i7-9700<br><b>Memory / Ram:</b> 16 GB<br><b>Graphics:</b> RTX 2060<br><b>Windows:</b> 10`;
+            content = `<b>Processor:</b> Intel Core i7 or equivalent<br><b>Memory / Ram:</b> 16 GB RAM<br><b>Graphics:</b> NVIDIA GTX 1660 or equivalent<br><b>Windows:</b> 10`;
         } else {
-            content = `<b>Processor:</b> Intel i5 or equivalent<br><b>Memory / Ram:</b> 8 GB<br><b>Graphics:</b> GTX 1050<br><b>Windows:</b> 10`;
+            content = `<b>Processor:</b> Intel Core i5 or equivalent<br><b>Memory / Ram:</b> 8 GB RAM<br><b>Graphics:</b> NVIDIA GTX 1050 or equivalent<br><b>Windows:</b> 10`;
         }
         element.innerHTML = `<div class="req-text" style="border-left-color: ${color};"><strong style="display:block; margin-bottom:5px; color:${color};">Minimum Requirements:</strong>${content}</div>`;
     }
