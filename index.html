@@ -143,21 +143,20 @@
     const apiKey = "158b3858daed4d67af02a839d14ba445";
     let slideIndex = 1, allGames = [], currentSpecFilter = null, currentGenreFilter = null;
 
-    // --- DAFTAR KATA KUNCI GENRE SUPER LENGKAP ---
     function getGameGenres(name) {
         const n = name.toLowerCase(); const g = [];
-        const k2 = ['pico park', 'a way out', 'ao international', 'attack on titan', 'basara', 'beach buggy', 'blur', 'borderlands', 'brothers', 'captain tsubasa', 'cars 2', 'chained together', 'chocobo', 'cuphead', 'def jam', 'demon slayer', 'dirt 3', 'dirt 5', 'dragon ball', 'dynasty warrior', 'ea sports fc', 'efootball', 'pes 20', 'pro evolution', 'fifa', 'jump force', 'lego', 'mario', 'mortal kombat', 'motogp', 'naruto', 'nba 2k', 'nickelodeon', 'one piece', 'overcooked', 'resident evil 5', 'resident evil 6', 'samurai warriors', 'sonic', 'street fighter', 'tekken', 'wwe'];
-        const kP = ['ace combat', 'assassin creed', 'battlefield', 'call of duty', 'cod ', 'commandos', 'company of heroes', 'crysis', 'far cry', 'gears of war', 'ghost recon', 'halo', 'homefront', 'medal of honor', 'metal gear', 'mount & blade', 'sniper elite', 'sniper ghost', 'tom clancy', 'total war', 'wolfenstein'];
-        const kH = ['alan wake', 'amnesia', 'back 4 blood', 'days gone', 'dead island', 'dead space', 'dead rising', 'dreadout', 'dying light', 'fatal frame', 'five nights', 'hello neighbor', 'little nightmares', 'outlast', 'resident evil', 'silent hill', 'the evil within', 'the forest', 'the last of us', 'until dawn'];
-        const kS = ['age of empires', 'age of mythology', 'battle realms', 'cities skylines', 'civilization', 'command and conquer', 'red alert', 'cooking simulator', 'farming simulator', 'frostpunk', 'internet cafe', 'jurassic world', 'manor lords', 'rollercoaster', 'simcity', 'stronghold', 'tropico', 'warcraft'];
-        const kB = ['american truck', 'assetto corsa', 'beamng', 'burnout', 'carx', 'dirt', 'driver san francisco', 'euro truck', 'expeditions', 'f1 20', 'forza', 'gran turismo', 'grid', 'hot wheels', 'motogp', 'need for speed', 'nfs', 'project cars', 'ride', 'snowrunner', 'taxi life', 'wrc', 'wreckfest'];
-        const kSp = ['ao international', 'captain tsubasa', 'ea sports fc', 'efootball', 'pes 20', 'pro evolution', 'fifa', 'football manager', 'nba 2k', 'ufc', 'wwe', 'smackdown', 'winning eleven'];
-
+        const k2 = ['pico park', 'a way out', 'attack on titan', 'basara', 'beach buggy', 'blur', 'captain tsubasa', 'cars 2', 'chained together', 'cuphead', 'dirt 3', 'dirt 5', 'dragon ball', 'dynasty warrior', 'ea sports fc', 'efootball', 'pes 20', 'fifa', 'jump force', 'lego', 'mortal kombat', 'motogp', 'naruto', 'nba 2k', 'one piece', 'overcooked', 'resident evil 5', 'resident evil 6', 'tekken', 'wwe'];
+        const kP = ['ace combat', 'assassin creed', 'battlefield', 'call of duty', 'cod ', 'crysis', 'far cry', 'halo', 'medal of honor', 'metal gear', 'sniper elite', 'wolfenstein'];
+        const kH = ['alan wake', 'amnesia', 'days gone', 'dead space', 'dreadout', 'fatal frame', 'outlast', 'resident evil', 'silent hill', 'the forest'];
+        const kB = ['euro truck', 'american truck', 'forza', 'need for speed', 'nfs', 'assetto', 'grid', 'dirt', 'f1 20', 'motogp', 'ride', 'wrc', 'wreckfest'];
+        const kS = ['age of empires', 'battle realms', 'command and conquer', 'red alert', 'stronghold', 'tropico', 'warcraft', 'civilization', 'simcity', 'cities skylines'];
+        const kSp = ['ea sports fc', 'efootball', 'pes 20', 'fifa', 'nba 2k', 'tennis', 'wwe', 'ufc', 'smackdown', 'winning eleven'];
+        
         if (k2.some(k => n.includes(k))) g.push('Main Berdua');
         if (kP.some(k => n.includes(k))) g.push('Perang');
         if (kH.some(k => n.includes(k))) g.push('Horror');
-        if (kS.some(k => n.includes(k))) g.push('Strategi');
         if (kB.some(k => n.includes(k))) g.push('Balap');
+        if (kS.some(k => n.includes(k))) g.push('Strategi');
         if (kSp.some(k => n.includes(k))) g.push('Sport');
         return [...new Set(g)];
     }
@@ -209,32 +208,52 @@
         title.textContent = gameName;
         modal.style.display = "block";
         slider.querySelectorAll('.slides').forEach(s => s.remove());
-        body.innerHTML = `<div class="req-text">${getFallbackSpec(kategori)}<br><small style="color:gray; font-size:10px;">*Memperbarui data dari internet...</small></div>`;
         ytBtn.href = `https://www.youtube.com/results?search_query=${encodeURIComponent(gameName + " Gameplay PC No Commentary")}`;
 
         try {
+            // STEP 1: PRIORITAS RAWG - Cari Data Secepat Mungkin
             const searchRes = await fetch(`https://api.rawg.io/api/games?key=${apiKey}&search=${encodeURIComponent(gameName)}&page_size=1`);
             const searchData = await searchRes.json();
+            
             if (searchData.results.length) {
                 const game = searchData.results[0];
-                const screenRes = await fetch(`https://api.rawg.io/api/games/${game.id}/screenshots?key=${apiKey}`);
-                const screenData = await screenRes.json();
-                screenData.results.slice(0, 5).forEach(img => {
-                    const div = document.createElement('div');
-                    div.className = "slides";
-                    div.innerHTML = `<img src="${img.image}">`;
-                    slider.insertBefore(div, slider.firstChild);
-                });
-                slideIndex = 1; showSlides(1);
                 const detailRes = await fetch(`https://api.rawg.io/api/games/${game.id}?key=${apiKey}`);
                 const detailData = await detailRes.json();
                 const pc = detailData.platforms.find(p => p.platform.id === 4);
+                
+                // JIKA RAWG ADA SPEK -> TAMPILKAN
                 if (pc && pc.requirements && pc.requirements.minimum) {
                     let text = formatReq(pc.requirements.minimum);
-                    if (text.length > 20) body.innerHTML = `<div class="req-text">${text}</div>`;
+                    if (text.length > 20) {
+                        body.innerHTML = `<div class="req-text">${text}</div>`;
+                    } else {
+                        // CADANGAN: PAKAI KATEGORI TOKO
+                        body.innerHTML = `<div class="req-text">${getFallbackSpec(kategori)}</div>`;
+                    }
+                } else {
+                    // CADANGAN: PAKAI KATEGORI TOKO
+                    body.innerHTML = `<div class="req-text">${getFallbackSpec(kategori)}</div>`;
                 }
+
+                // STEP 2: GAMBAR DAN GAMEPLAY MENYUSUL DI LATAR BELAKANG
+                fetch(`https://api.rawg.io/api/games/${game.id}/screenshots?key=${apiKey}`)
+                    .then(res => res.json())
+                    .then(screenData => {
+                        screenData.results.slice(0, 5).forEach(img => {
+                            const div = document.createElement('div');
+                            div.className = "slides";
+                            div.innerHTML = `<img src="${img.image}">`;
+                            slider.insertBefore(div, slider.firstChild);
+                        });
+                        slideIndex = 1; showSlides(1);
+                    });
+            } else {
+                // JIKA RAWG TIDAK KETEMU GAME-NYA -> PAKAI KATEGORI TOKO
+                body.innerHTML = `<div class="req-text">${getFallbackSpec(kategori)}</div>`;
             }
-        } catch (e) {}
+        } catch (e) {
+            body.innerHTML = `<div class="req-text">${getFallbackSpec(kategori)}</div>`;
+        }
     }
 
     function formatReq(text) {
