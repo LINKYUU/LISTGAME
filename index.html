@@ -130,7 +130,8 @@
         </div>
         <div class="modal-body-padding">
             <h3 id="modalTitle" style="margin:0 0 15px 0;">Memuat...</h3>
-            <div id="modalBody">Sabar Om...</div>
+            <div id="modalBody">
+                </div>
             <div id="gameplaySection" style="margin-top:20px;">
                 <span class="section-title">🎮 GAMEPLAY GAME :</span>
                 <div class="gameplay-box">
@@ -150,7 +151,6 @@
     let currentSpecFilter = null;
     let currentGenreFilter = null;
 
-    // Fungsi Deteksi Genre Otomatis
     function getGameGenres(name) {
         const n = name.toLowerCase();
         const g = [];
@@ -172,9 +172,9 @@
 
     function getFallbackSpec(kategori) {
         const kat = kategori.toLowerCase();
-        if (kat.includes("ringan")) return `<b>Processor:</b> Core 2 Quad / AMD Phenom<br><b>RAM:</b> 4 GB RAM<br><b>VGA:</b> GT 730<br><b>Windows:</b> 7/8/10`;
-        if (kat.includes("sedang")) return `<b>Processor:</b> Intel i3 / AMD Ryzen 3<br><b>RAM:</b> 8 GB RAM<br><b>VGA:</b> GTX 750 Ti<br><b>Windows:</b> 10`;
-        if (kat.includes("agak berat")) return `<b>Processor:</b> Intel i5 / AMD Ryzen 5<br><b>RAM:</b> 8 GB RAM<br><b>VGA:</b> NVIDIA GTX 1050<br><b>Windows:</b> 10`;
+        if (kat.includes("ringan")) return `<b>Processor:</b> Core 2 Quad / AMD Phenom<br><b>RAM:</b> 4 GB RAM<br><b>VGA:</b> GT 730 / HD 7730<br><b>Windows:</b> 7/8/10`;
+        if (kat.includes("sedang")) return `<b>Processor:</b> Intel i3 / AMD Ryzen 3<br><b>RAM:</b> 8 GB RAM<br><b>VGA:</b> GTX 750 Ti / AMD R9 270<br><b>Windows:</b> 10`;
+        if (kat.includes("agak berat")) return `<b>Processor:</b> Intel i5 / AMD Ryzen 5<br><b>RAM:</b> 8 GB RAM<br><b>VGA:</b> NVIDIA GTX 1050 / AMD RX 560<br><b>Windows:</b> 10`;
         return `<b>Processor:</b> Intel i7 / AMD Ryzen 7<br><b>RAM:</b> 16 GB RAM<br><b>VGA:</b> GTX 1660 / RX 580<br><b>Windows:</b> 10/11`;
     }
 
@@ -198,7 +198,6 @@
             l = l.trim();
             if (l === "") continue;
             if (l.toUpperCase().startsWith('NAMA GAME,SIZE,KETERANGAN')) { headerFound = true; continue; }
-
             if (headerFound) {
                 const p = l.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
                 if (p.length >= 3) {
@@ -224,11 +223,15 @@
         const kategori = localGame ? localGame.description : "Sedang";
 
         title.textContent = gameName;
-        body.innerHTML = "Memuat data...";
         modal.style.display = "block";
         slider.querySelectorAll('.slides').forEach(s => s.remove());
+        
+        // --- 1. PASANG SPEK INSTAN DULU (PERCEPATAN) ---
+        body.innerHTML = `<div class="req-text">${getFallbackSpec(kategori)}<br><small style="color:gray; font-size:10px;">*Memperbarui data dari internet...</small></div>`;
+        
         ytBtn.href = `https://www.youtube.com/results?search_query=${encodeURIComponent(gameName + " Gameplay PC No Commentary")}`;
 
+        // --- 2. CARI DATA DETAIL DI LATAR BELAKANG ---
         try {
             const searchRes = await fetch(`https://api.rawg.io/api/games?key=${apiKey}&search=${encodeURIComponent(gameName)}&page_size=1`);
             const searchData = await searchRes.json();
@@ -243,15 +246,20 @@
                     slider.insertBefore(div, slider.firstChild);
                 });
                 slideIndex = 1; showSlides(1);
+                
                 const detailRes = await fetch(`https://api.rawg.io/api/games/${game.id}?key=${apiKey}`);
                 const detailData = await detailRes.json();
                 const pc = detailData.platforms.find(p => p.platform.id === 4);
                 if (pc && pc.requirements && pc.requirements.minimum) {
                     let text = formatReq(pc.requirements.minimum);
-                    body.innerHTML = (text.length < 20) ? `<div class="req-text">${getFallbackSpec(kategori)}</div>` : `<div class="req-text">${text}</div>`;
-                } else { body.innerHTML = `<div class="req-text">${getFallbackSpec(kategori)}</div>`; }
-            } else { body.innerHTML = `<div class="req-text">${getFallbackSpec(kategori)}</div>`; }
-        } catch (e) { body.innerHTML = `<div class="req-text">${getFallbackSpec(kategori)}</div>`; }
+                    if (text.length > 20) {
+                        body.innerHTML = `<div class="req-text">${text}</div>`;
+                    }
+                }
+            }
+        } catch (e) {
+            // Jika gagal internet, spek instan sudah terpasang, jadi tidak error kosong
+        }
     }
 
     function formatReq(text) {
@@ -277,14 +285,8 @@
         function render() {
             const term = searchInput.value.toLowerCase();
             let filtered = allGames.filter(g => g.name.toLowerCase().includes(term));
-            
-            if (currentSpecFilter) {
-                filtered = filtered.filter(g => g.description.toLowerCase() === currentSpecFilter.toLowerCase());
-            }
-            if (currentGenreFilter) {
-                filtered = filtered.filter(g => g.genres.includes(currentGenreFilter));
-            }
-
+            if (currentSpecFilter) filtered = filtered.filter(g => g.description.toLowerCase() === currentSpecFilter.toLowerCase());
+            if (currentGenreFilter) filtered = filtered.filter(g => g.genres.includes(currentGenreFilter));
             tableBody.innerHTML = '';
             filtered.forEach(g => {
                 const tr = document.createElement('tr');
@@ -295,7 +297,6 @@
         }
 
         searchInput.onkeyup = render;
-
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.onclick = () => {
                 const isActive = btn.classList.contains('active');
@@ -305,7 +306,6 @@
                 render();
             };
         });
-
         document.querySelectorAll('.genre-btn').forEach(btn => {
             btn.onclick = () => {
                 const isActive = btn.classList.contains('active');
@@ -315,7 +315,6 @@
                 render();
             };
         });
-
         modal.onclick = (e) => { if (e.target === modal) modal.style.display = "none"; };
         document.querySelector('.close-btn').onclick = () => modal.style.display = "none";
         render();
