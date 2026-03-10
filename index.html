@@ -63,13 +63,13 @@
         
         .clickable-name { color: #0056b3; cursor: pointer; text-decoration: underline; font-weight: 500; }
 
-        /* --- STYLES MODAL DISESUAIKAN UNTUK COVER POTRAIT --- */
+        /* --- STYLES MODAL AGAR GAMBAR FULL & TIDAK TERPOTONG --- */
         .modal {
             display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.85); backdrop-filter: blur(5px);
         }
         .modal-content {
-            background: white; margin: 2% auto; width: 90%; max-width: 450px;
+            background: white; margin: 2vh auto; width: 95%; max-width: 450px;
             border-radius: 15px; position: relative; max-height: 95vh; overflow-y: auto;
             box-shadow: 0 10px 40px rgba(0,0,0,0.5);
         }
@@ -78,10 +78,9 @@
             cursor: pointer; color: #fff; z-index: 1001; text-shadow: 0 0 10px rgba(0,0,0,0.8);
         }
         
-        /* Area Cover Game (Background gelap supaya cover potrait cantik) */
         .cover-container {
             width: 100%;
-            background-color: #1a1a1a;
+            background-color: #000;
             display: flex;
             justify-content: center;
             border-top-left-radius: 15px;
@@ -90,8 +89,9 @@
 
         #gameCover {
             width: 100%; 
-            max-height: 400px; /* Lebih tinggi untuk menampung gambar tegak */
-            object-fit: contain; /* Agar gambar tidak terpotong */
+            height: auto; /* TINGGI OTOMATIS SUPAYA FULL KE BAWAH */
+            max-height: 500px; /* Batas maksimal agar tidak terlalu panjang di HP */
+            object-fit: contain; 
             display: block;
         }
 
@@ -104,7 +104,6 @@
             font-size: 14px; 
             line-height: 1.6; 
             border-left: 5px solid #1a73e8;
-            box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
         }
 
         .instruction-box { text-align: center; margin: 15px 0 5px 0; }
@@ -176,7 +175,7 @@
             <img id="gameCover" src="" alt="Cover Game">
         </div>
         <div class="modal-body-padding">
-            <h3 id="modalTitle" style="margin-top:0; color:#1a1a1a;">Memuat...</h3>
+            <h3 id="modalTitle" style="margin-top:0;">Memuat...</h3>
             <div id="modalBody">Sabar Om Lagi Loading...</div>
         </div>
     </div>
@@ -187,6 +186,7 @@
 <script>
     const apiKey = "158b3858daed4d67af02a839d14ba445";
 
+    // DATABASE KOREKSI MANUAL
     const manualCorrections = {
         "euro truck simulator 2": {
             processor: "Intel i5-6400 / AMD Ryzen 3 1200",
@@ -199,12 +199,6 @@
             memory: "8 GB RAM",
             graphics: "Nvidia GTX 660 / AMD Radeon RX 460 (2GB)",
             windows: "Windows 10/11 (64-bit)"
-        },
-        "gears of war 4": {
-            processor: "Intel i5-3470 / AMD FX-6300",
-            memory: "8 GB RAM",
-            graphics: "Nvidia GTX 750 Ti / AMD Radeon R7 260X (2GB)",
-            windows: "Windows 10 (64-bit)"
         }
     };
 
@@ -226,7 +220,6 @@
         if (keywordsPerang.some(k => n.includes(k))) g.push('Perang');
         if (keywordsSport.some(k => n.includes(k))) g.push('Sport');
         if (keywordsHorror.some(k => n.includes(k))) g.push('Horror');
-        if (keywordsSport.some(k => n.includes(k))) g.push('Sport'); // Double check removed in logical parse
         if (keywordsStrategi.some(k => n.includes(k))) g.push('Strategi');
         if (keywordsBalap.some(k => n.includes(k))) g.push('Balap');
         return [...new Set(g)].length === 0 ? ['Lainnya'] : [...new Set(g)];
@@ -266,7 +259,7 @@
         cleanText = cleanText.replace(/[®™]/g, '');
 
         if ((kategori.includes("berat") || kategori.includes("sedang")) && 
-            (cleanText.includes("Dual Core") || cleanText.includes("2 GB RAM") || cleanText.includes("DirectX 9"))) {
+            (cleanText.includes("Dual Core") || cleanText.includes("2 GB RAM"))) {
             return ""; 
         }
 
@@ -315,7 +308,7 @@
 
         title.textContent = gameName;
         body.innerHTML = "Sabar Om Lagi Loading...";
-        coverImg.src = ""; // Clear old image
+        coverImg.src = ""; 
         modal.style.display = "block";
 
         try {
@@ -324,7 +317,6 @@
             
             if (searchData.results.length) {
                 const res = searchData.results[0];
-                // Set Gambar Cover
                 coverImg.src = res.background_image || "";
 
                 const gameKey = gameName.toLowerCase();
