@@ -23,7 +23,7 @@
         .next { right: 0; }
 
         .modal-body-padding { padding: 20px; text-align: left; }
-        .req-text { background: #f8f9fa; padding: 15px; border-radius: 10px; font-size: 14px; line-height: 1.6; border-left: 5px solid #1a73e8; margin-bottom: 20px; min-height: 80px; }
+        .req-text { background: #f8f9fa; padding: 15px; border-radius: 10px; font-size: 14px; line-height: 1.7; border-left: 5px solid #1a73e8; margin-bottom: 20px; min-height: 80px; }
         .gameplay-box { background: #000; border-radius: 10px; padding: 20px; text-align: center; }
         .btn-youtube { background: #d9534f; color: white; padding: 12px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block; }
         .section-title { font-weight: bold; margin-bottom: 10px; display: block; color: #d9534f; border-bottom: 2px solid #eee; padding-bottom: 5px; }
@@ -129,12 +129,13 @@
         return [...new Set(g)];
     }
 
+    // FALLBACK TERJEMAHAN INDONESIA
     function getFallbackSpec(kat) {
         kat = kat.toLowerCase();
-        if (kat.includes("ringan")) return `<b>Processor:</b> Core 2 Quad<br><b>RAM:</b> 4 GB RAM<br><b>VGA:</b> GT 730`;
-        if (kat.includes("sedang")) return `<b>Processor:</b> Intel i3 Gen 5 / Ryzen 3<br><b>RAM:</b> 8 GB RAM<br><b>VGA:</b> GTX 750 Ti`;
-        if (kat.includes("agak berat")) return `<b>Processor:</b> Intel i5 Gen 8 / Ryzen 5<br><b>RAM:</b> 8 GB RAM<br><b>VGA:</b> GTX 1050`;
-        return `<b>Processor:</b> Intel i7 Gen 9/ Ryzen 7<br><b>RAM:</b> 16 GB RAM<br><b>VGA:</b> GTX 1660 / RX 580`;
+        if (kat.includes("ringan")) return `<b>Prosesor:</b> Core 2 Quad<br><b>RAM:</b> 4 GB RAM<br><b>Kartu Grafis (VGA):</b> GT 730`;
+        if (kat.includes("sedang")) return `<b>Prosesor:</b> Intel i3 / Ryzen 3<br><b>RAM:</b> 8 GB RAM<br><b>Kartu Grafis (VGA):</b> GTX 750 Ti`;
+        if (kat.includes("agak berat")) return `<b>Prosesor:</b> Intel i5 / Ryzen 5<br><b>RAM:</b> 8 GB RAM<br><b>Kartu Grafis (VGA):</b> GTX 1050`;
+        return `<b>Prosesor:</b> Intel i7 / Ryzen 7<br><b>RAM:</b> 16 GB RAM<br><b>Kartu Grafis (VGA):</b> GTX 1660 / RX 580`;
     }
 
     function plusSlides(n, e) { e.stopPropagation(); showSlides(slideIndex += n); }
@@ -164,11 +165,18 @@
         allGames = Array.from(map.values());
     }
 
-    // FUNGSI FORMAT SPEK YANG SANGAT RINGKAS SESUAI REQUEST
+    // FUNGSI FORMAT SPEK: TERJEMAHAN + RINGKAS
     function formatReq(text) {
         let clean = text.split(/Recommended:/i)[0].replace(/[®™]/g, '');
         let lines = [];
-        const targets = {"Processor": "Processor", "Memory": "RAM", "Graphics": "VGA", "OS": "Windows"};
+        
+        // Pemetaan Label ke Bahasa Indonesia
+        const targets = {
+            "Processor": "Prosesor",
+            "Memory": "RAM",
+            "Graphics": "Kartu Grafis (VGA)",
+            "OS": "Sistem Operasi (Windows)"
+        };
         
         Object.keys(targets).forEach(k => {
             if(clean.includes(k + ":")) {
@@ -177,8 +185,12 @@
                              .split("DirectX")[0]
                              .split("Network")[0]
                              .split("Storage")[0]
-                             .replace(/or over|Additional Notes.*/gi, '') // Hilangkan teks sampah
+                             .replace(/or over|Additional Notes.*/gi, '') // Hapus teks sampah
                              .trim();
+                
+                // Terjemahkan isi jika perlu
+                d = d.replace(/available space/gi, 'ruang kosong');
+                
                 lines.push(`<b>${targets[k]}:</b> ${d}`);
             }
         });
@@ -199,7 +211,7 @@
         slider.querySelectorAll('.slides').forEach(s => s.remove());
         ytBtn.href = `https://www.youtube.com/results?search_query=${encodeURIComponent(gameName + " Gameplay PC No Commentary")}`;
 
-        // JIKA ADA DI CACHE, TAMPILKAN LANGSUNG
+        // CEK CACHE
         if (cacheSpecs.has(gameName)) {
             const cached = cacheSpecs.get(gameName);
             body.innerHTML = cached.html;
@@ -207,7 +219,7 @@
             return;
         }
 
-        body.innerHTML = "Mencari spek asli RAWG..."; 
+        body.innerHTML = "Mencari data spesifikasi..."; 
 
         try {
             const res = await fetch(`https://api.rawg.io/api/games?key=${apiKey}&search=${encodeURIComponent(gameName)}&page_size=1`);
@@ -222,17 +234,16 @@
                 let finalHtml = getFallbackSpec(kategori);
                 if (pc && pc.requirements && pc.requirements.minimum) {
                     let formatted = formatReq(pc.requirements.minimum);
-                    if (formatted.length > 15) finalHtml = formatted;
+                    if (formatted.length > 10) finalHtml = formatted;
                 }
 
                 body.innerHTML = finalHtml;
 
-                // AMBIL SCREENSHOT
+                // SCREENSHOT
                 const sRes = await fetch(`https://api.rawg.io/api/games/${game.id}/screenshots?key=${apiKey}`);
                 const sData = await sRes.json();
                 const screens = sData.results.slice(0, 5).map(img => img.image);
                 
-                // SIMPAN KE CACHE
                 cacheSpecs.set(gameName, { html: finalHtml, screens: screens });
                 renderScreenshots(screens);
 
