@@ -211,27 +211,20 @@
         allGames = Array.from(map.values());
     }
 
-    // --- FUNGSI FORMATTING KHUSUS 5 POIN ---
+    // --- FUNGSI FORMATTING KHUSUS 4 POIN (TANPA STORAGE) ---
     function formatReqText(text) {
         if (!text) return "";
-        
-        // Memotong hanya bagian Minimum
         let cleanText = text.split(/Recommended:|Recommended Requirements:/gi)[0];
-
-        // Membersihkan label RAWG agar hanya tersisa data yang relevan
         let lines = cleanText.split('<br>');
         let formattedLines = [];
 
-        // Kata kunci yang dicari
         const targets = {
             "Processor": "Processor",
             "Memory": "Memory / Ram",
             "Graphics": "Graphics",
-            "Storage": "Storage",
             "OS": "Windows"
         };
 
-        // Memproses setiap baris teks dari RAWG
         lines.forEach(line => {
             for (let key in targets) {
                 if (line.includes(key + ":")) {
@@ -241,16 +234,14 @@
             }
         });
 
-        // Jika RAWG tidak memberikan struktur baris yang jelas, gunakan pembersihan regex
         if(formattedLines.length === 0) {
             return cleanText
                 .replace(/Minimum:|Minimum Requirements:/gi, "<strong>Minimum Requirements:</strong><br>")
                 .replace(/Processor:/g, "<b>Processor:</b>")
                 .replace(/Memory:/g, "<br><b>Memory / Ram:</b>")
                 .replace(/Graphics:/g, "<br><b>Graphics:</b>")
-                .replace(/Storage:/g, "<br><b>Storage:</b>")
                 .replace(/OS:/g, "<br><b>Windows:</b>")
-                // Buang DirectX, Sound Card dsb yang tidak diminta
+                .replace(/Storage:.*?(?=<br>|$)/gi, "") // Buang Storage
                 .replace(/DirectX:.*?(?=<br>|$)/gi, "")
                 .replace(/Sound Card:.*?(?=<br>|$)/gi, "");
         }
@@ -294,18 +285,18 @@
         let color = "#f0ad4e"; 
         if (kategori.includes("ringan")) {
             color = "#28a745"; 
-            content = `<b>Processor:</b> Core 2 Quad Q6600 / Phenom 9850<br><b>Memory / Ram:</b> 4 GB<br><b>Graphics:</b> 9800 GT 1GB / HD 4870 1GB<br><b>Storage:</b> 20 GB<br><b>Windows:</b> 7/8/10 (64 Bit)`;
+            content = `<b>Processor:</b> Core 2 Quad Q6600 / Phenom 9850<br><b>Memory / Ram:</b> 4 GB<br><b>Graphics:</b> 9800 GT 1GB / HD 4870 1GB<br><b>Windows:</b> 7/8/10 (64 Bit)`;
         } else if (kategori.includes("sedang")) {
             color = "#007bff"; 
-            content = `<b>Processor:</b> Intel i3-5500k / Ryzen 3 1200<br><b>Memory / Ram:</b> 6 GB<br><b>Graphics:</b> GTX 960 / R9 290X<br><b>Storage:</b> 50 GB<br><b>Windows:</b> 10 (64 Bit)`;
+            content = `<b>Processor:</b> Intel i3-5500k / Ryzen 3 1200<br><b>Memory / Ram:</b> 6 GB<br><b>Graphics:</b> GTX 960 / R9 290X<br><b>Windows:</b> 10 (64 Bit)`;
         } else if (kategori.includes("agak berat")) {
             color = "#fd7e14"; 
-            content = `<b>Processor:</b> Intel i5-7600k / Ryzen 5 2400 G<br><b>Memory / Ram:</b> 8 GB<br><b>Graphics:</b> GTX 1060 / RX 570<br><b>Storage:</b> 70 GB<br><b>Windows:</b> 10 (64 Bit)`;
+            content = `<b>Processor:</b> Intel i5-7600k / Ryzen 5 2400 G<br><b>Memory / Ram:</b> 8 GB<br><b>Graphics:</b> GTX 1060 / RX 570<br><b>Windows:</b> 10 (64 Bit)`;
         } else if (kategori.includes("berat")) {
             color = "#dc3545"; 
-            content = `<b>Processor:</b> Intel Core i7-9700 / Ryzen 5 5500<br><b>Memory / Ram:</b> 16 GB<br><b>Graphics:</b> RTX 2060 / RX 5700 XT<br><b>Storage:</b> 100 GB<br><b>Windows:</b> 10 (64 Bit)`;
+            content = `<b>Processor:</b> Intel Core i7-9700 / Ryzen 5 5500<br><b>Memory / Ram:</b> 16 GB<br><b>Graphics:</b> RTX 2060 / RX 5700 XT<br><b>Windows:</b> 10 (64 Bit)`;
         } else {
-            content = `<b>Processor:</b> Intel i5 / AMD Ryzen 5<br><b>Memory / Ram:</b> 8 GB<br><b>Graphics:</b> GTX 1080 4GB<br><b>Storage:</b> 60 GB<br><b>Windows:</b> 10 (64 Bit)`;
+            content = `<b>Processor:</b> Intel i5 / AMD Ryzen 5<br><b>Memory / Ram:</b> 8 GB<br><b>Graphics:</b> GTX 1080 4GB<br><b>Windows:</b> 10 (64 Bit)`;
         }
         element.innerHTML = `<div class="req-text" style="border-left-color: ${color}; line-height: 1.5; font-size: 13px; padding: 15px; background: #fafafa;"><strong style="display:block; margin-bottom:5px; color:${color};">Minimum Requirements:</strong>${content}</div><p style="font-size: 10px; color: #999; margin-top: 10px;">*Menampilkan spek berdasarkan kategori Link.Yu (Data RAWG kosong).</p>`;
     }
