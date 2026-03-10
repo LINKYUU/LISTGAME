@@ -21,11 +21,22 @@
             overflow: hidden;
         }
         header { padding: 20px 30px; border-bottom: 1px solid #e0e0e0; }
+        
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .header-logo { flex: 0 0 100px; height: 100px; }
+        .header-logo img { width: 100%; height: 100%; object-fit: contain; border-radius: 50%; }
+        .header-info { flex: 1; max-width: 500px; }
+
         .special-notice {
             background-color: #fff4f4;
             border: 1px solid #d9534f;
             padding: 10px 20px;
-            margin-bottom: 15px;
             border-radius: 6px;
             text-align: center;
         }
@@ -34,7 +45,7 @@
         .special-notice p.shopee-link { color: #333; font-weight: bold; font-size: 16px; margin-top: 8px; }
         .special-notice p.shopee-link a { color: #0056b3; text-decoration: none; }
         
-        h1 { text-align: center; color: #1a1a1a; margin: 10px 0 0 0; }
+        h1 { text-align: center; color: #1a1a1a; margin: 15px 0 0 0; }
         #searchInput {
             width: 100%; padding: 12px 15px; margin-top: 15px;
             font-size: 16px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box;
@@ -96,16 +107,27 @@
             animation: blink 1.5s linear infinite;
         }
         @keyframes blink { 50% { opacity: 0.6; } }
+
+        @media (max-width: 600px) {
+            .header-top { flex-direction: column; text-align: center; }
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
     <header>
-        <div class="special-notice">
-            <p>🎮 DAFTAR GAME LINK.YU 🎮</p>
-            <p class="whatsapp">💬 WA: 08 777 26 77776</p>
-            <p class="shopee-link">🛒 Shopee: <a href="https://id.shp.ee/QiepRVW" target="_blank">Klik Disini</a></p>
+        <div class="header-top">
+            <div class="header-logo">
+                <img src="image_0.png" alt="Logo">
+            </div>
+            <div class="header-info">
+                <div class="special-notice">
+                    <p>🎮 DAFTAR GAME LINK.YU 🎮</p>
+                    <p class="whatsapp">💬 WA: 08 777 26 77776</p>
+                    <p class="shopee-link">🛒 Shopee: <a href="https://id.shp.ee/QiepRVW" target="_blank">Klik Disini</a></p>
+                </div>
+            </div>
         </div>
 
         <h1>Daftar Game</h1>
@@ -160,6 +182,16 @@
 <script>
     const apiKey = "158b3858daed4d67af02a839d14ba445";
 
+    // --- FITUR KOREKSI MANUAL (ANTI-SPEK-JADUL) ---
+    const manualCorrections = {
+        "euro truck simulator 2": {
+            processor: "Intel Core i5-6400 / AMD Ryzen 3 1200",
+            memory: "8 GB RAM",
+            graphics: "Nvidia GTX 660 / AMD Radeon RX 460 (2GB)",
+            windows: "Windows 10 / 11 (64-bit)"
+        }
+    };
+
     let allGames = [];
     let currentCategoryFilter = null;
     let currentGenreFilter = null;
@@ -211,10 +243,8 @@
         allGames = Array.from(map.values());
     }
 
-    // --- LOGIKA PEMBERSIHAN (Sangat Spesifik Gen & VRAM) ---
     function formatReqText(text) {
         if (!text) return "";
-        
         let cleanText = text.split(/Recommended:|Recommended Requirements:/gi)[0];
         cleanText = cleanText.replace(/[®™]/g, '');
 
@@ -225,27 +255,17 @@
             if (cleanText.includes(label)) {
                 let start = cleanText.indexOf(label) + label.length;
                 let temp = cleanText.substring(start);
-                
                 let endIdx = temp.search(/Memory:|Graphics:|OS:|DirectX:|Storage:|Sound Card:|Additional Notes:|Notes:|<br>/i);
                 let data = (endIdx !== -1) ? temp.substring(0, endIdx) : temp;
 
                 data = data.trim();
-                
-                // JANGAN hapus kurung untuk VGA (biar GB-nya keliatan)
-                if (label !== "Graphics:") {
-                    data = data.replace(/\s?\([^)]*\)/g, ''); 
-                }
-                
+                if (label !== "Graphics:") data = data.replace(/\s?\([^)]*\)/g, ''); 
                 data = data.replace(/available space|minimum requirements|Home 64 Bit/gi, '').trim();
                 
-                // Proses Ambil 2 Opsi (Intel/AMD & Nvidia/AMD)
                 if (label === "Processor:" || label === "Graphics:") {
                     if (data.includes(" / ") || data.includes(" or ")) {
                         let parts = data.split(/ \/ | or /);
-                        if (parts.length >= 2) {
-                            // Ambil yang mencakup info Gen / VRAM
-                            data = parts[0].trim() + " / " + parts[1].trim();
-                        }
+                        if (parts.length >= 2) data = parts[0].trim() + " / " + parts[1].trim();
                     }
                 } else {
                     if (data.includes(" / ")) data = data.split(" / ")[0].trim();
@@ -274,10 +294,17 @@
         body.innerHTML = "Sabar Om Lagi Loading...";
         modal.style.display = "block";
 
+        // --- CEK KOREKSI MANUAL ---
+        const gameKey = gameName.toLowerCase();
+        if (manualCorrections[gameKey]) {
+            const m = manualCorrections[gameKey];
+            body.innerHTML = `<div class="req-text"><strong>Minimum Requirements:</strong><br><b>Processor:</b> ${m.processor}<br><b>Memory / Ram:</b> ${m.memory}<br><b>Graphics:</b> ${m.graphics}<br><b>Windows:</b> ${m.windows}</div>`;
+            return;
+        }
+
         try {
             const searchRes = await fetch(`https://api.rawg.io/api/games?key=${apiKey}&search=${encodeURIComponent(gameName)}&page_size=1`);
             const searchData = await searchRes.json();
-            
             if (!searchData.results.length) { showFallbackSpec(body, kategori); return; }
 
             const detailRes = await fetch(`https://api.rawg.io/api/games/${searchData.results[0].id}?key=${apiKey}`);
@@ -304,18 +331,18 @@
         let color = "#f0ad4e"; 
         if (kategori.includes("ringan")) {
             color = "#28a745"; 
-            content = `<b>Processor:</b> Intel Core 2 Quad Q6600 / AMD Phenom X4<br><b>Memory / Ram:</b> 4 GB RAM<br><b>Graphics:</b> NVIDIA GT 730 (1GB) / AMD Radeon R7<br><b>Windows:</b> 7 / 8 / 10`;
+            content = `<b>Processor:</b> Intel Core 2 Quad / AMD Phenom<br><b>Memory / Ram:</b> 4 GB RAM<br><b>Graphics:</b> NVIDIA GT 730 / AMD Radeon R7<br><b>Windows:</b> 7 / 8 / 10`;
         } else if (kategori.includes("sedang")) {
             color = "#007bff"; 
-            content = `<b>Processor:</b> Intel Core i3-4130 / AMD Ryzen 3 1200<br><b>Memory / Ram:</b> 8 GB RAM<br><b>Graphics:</b> NVIDIA GTX 750 Ti (2GB) / AMD Radeon R9<br><b>Windows:</b> 10`;
+            content = `<b>Processor:</b> Intel Core i3-4130 / AMD Ryzen 3 1200<br><b>Memory / Ram:</b> 8 GB RAM<br><b>Graphics:</b> NVIDIA GTX 750 Ti / AMD Radeon R9<br><b>Windows:</b> 10`;
         } else if (kategori.includes("agak berat")) {
             color = "#fd7e14"; 
-            content = `<b>Processor:</b> Intel Core i5-6400 / AMD Ryzen 5 1600<br><b>Memory / Ram:</b> 8 GB RAM<br><b>Graphics:</b> NVIDIA GTX 1050 (2GB) / AMD Radeon RX 560<br><b>Windows:</b> 10`;
+            content = `<b>Processor:</b> Intel Core i5-6400 / AMD Ryzen 5 1600<br><b>Memory / Ram:</b> 8 GB RAM<br><b>Graphics:</b> NVIDIA GTX 1050 / AMD Radeon RX 560<br><b>Windows:</b> 10`;
         } else if (kategori.includes("berat")) {
             color = "#dc3545"; 
-            content = `<b>Processor:</b> Intel Core i7-8700 / AMD Ryzen 7 2700<br><b>Memory / Ram:</b> 16 GB RAM<br><b>Graphics:</b> NVIDIA GTX 1660 (6GB) / AMD Radeon RX 580<br><b>Windows:</b> 10`;
+            content = `<b>Processor:</b> Intel Core i7-8700 / AMD Ryzen 7 2700<br><b>Memory / Ram:</b> 16 GB RAM<br><b>Graphics:</b> NVIDIA GTX 1660 / AMD Radeon RX 580<br><b>Windows:</b> 10`;
         } else {
-            content = `<b>Processor:</b> Intel Core i5-4460 / AMD Ryzen 5 1400<br><b>Memory / Ram:</b> 8 GB RAM<br><b>Graphics:</b> NVIDIA GTX 1050 (2GB) / AMD Radeon RX 560<br><b>Windows:</b> 10`;
+            content = `<b>Processor:</b> Intel Core i5 / AMD Ryzen 5<br><b>Memory / Ram:</b> 8 GB RAM<br><b>Graphics:</b> NVIDIA GTX 1050 / AMD Radeon RX 560<br><b>Windows:</b> 10`;
         }
         element.innerHTML = `<div class="req-text" style="border-left-color: ${color};"><strong style="display:block; margin-bottom:5px; color:${color};">Minimum Requirements:</strong>${content}</div>`;
     }
