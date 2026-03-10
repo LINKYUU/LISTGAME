@@ -257,6 +257,10 @@ F1 2015,23.37 GB,Agak Berat
 F1 2017,33.59 GB,Agak Berat
 F1 2017,22.71 GB,Agak Berat
 F1 2018,39.48 GB,Agak Berat
+F1 2019,45 GB,Berat
+F1 2020,50 GB , Berat
+F1 2021,60 GB , Berat
+F1 2022,80 GB , Berat
 F1 Race Stars,5.18 GB,Sedang
 Fae Farm,2.79 GB,Ringan
 Fallout 2,736.01 KB,Ringan
@@ -290,7 +294,7 @@ FIFA 19,33.53 GB,Agak Berat
 FIFA 21,14.40 GB,Sedang
 FIFA 22,13.45 GB,Sedang
 FIFA 23,50.89 GB,Berat
-Fifa 24,15.82 GB,Sedang
+FIFA 25 EMU (NOT RECOMENT), 10 GB , BERAT
 Fifa Street 2,4.73 GB,Ringan
 Fight Night 2004,3.28 GB,Ringan
 Fight Night Champion,5.67 GB,Sedang
@@ -1002,6 +1006,7 @@ POKEMON Z-A,20 GB,Sedang
 MOTO GP 25,40 GB,Berat
 
 `;
+
 
 
 
