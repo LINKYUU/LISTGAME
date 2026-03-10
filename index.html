@@ -13,7 +13,11 @@
             max-width: 900px; margin: 0 auto; background-color: #ffffff;
             border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); overflow: hidden;
         }
-        header { padding: 20px 30px; border-bottom: 1px solid #e0e0e0; }
+        header { 
+            padding: 20px 30px; 
+            border-bottom: 1px solid #e0e0e0; 
+            text-align: center; /* MEMBUAT SEMUA ISI HEADER KE TENGAH */
+        }
         .special-notice {
             background-color: #fff4f4; border: 1px solid #d9534f; padding: 15px;
             margin-bottom: 15px; border-radius: 6px; text-align: center;
@@ -45,7 +49,8 @@
             background: rgba(0,0,0,0.3); transition: 0.3s; user-select: none;
         }
         .next { right: 0; }
-        .modal-body-padding { padding: 20px; }
+        .modal-body-padding { padding: 20px; text-align: left; } /* Isi modal tetap rata kiri agar mudah dibaca */
+
         .req-text { 
             background: #f8f9fa; padding: 15px; border-radius: 10px; 
             font-size: 14px; line-height: 1.6; border-left: 5px solid #1a73e8; margin-bottom: 20px;
@@ -57,11 +62,22 @@
         }
         .section-title { font-weight: bold; margin-bottom: 10px; display: block; color: #d9534f; border-bottom: 2px solid #eee; padding-bottom: 5px; }
 
-        #searchInput { width: 100%; padding: 12px 15px; margin-top: 15px; font-size: 16px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; }
-        #filterContainer, #genreFilterContainer { margin-top: 15px; text-align: center; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+        /* INPUT & FILTER CENTERED */
+        h1 { margin: 10px 0; color: #1a1a1a; }
+        #searchInput { 
+            width: 100%; max-width: 600px; padding: 12px 15px; margin: 15px auto; 
+            font-size: 16px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box;
+            display: block; 
+        }
+        #filterContainer, #genreFilterContainer { 
+            margin-top: 15px; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; 
+        }
         #genreFilterContainer { border-top: 1px dashed #ccc; padding-top: 10px; }
         
-        .filter-btn, .genre-btn { padding: 8px 15px; font-size: 13px; font-weight: 500; background-color: #f0f0f0; border: none; border-radius: 20px; cursor: pointer; color: #555; transition: 0.2s; }
+        .filter-btn, .genre-btn { 
+            padding: 8px 15px; font-size: 13px; font-weight: 500; background-color: #f0f0f0; 
+            border: none; border-radius: 20px; cursor: pointer; color: #555; transition: 0.2s; 
+        }
         .filter-btn.active, .genre-btn.active { background-color: #333; color: white; }
         
         .table-wrapper { max-height: 60vh; overflow-y: auto; border-top: 1px solid #e0e0e0; }
@@ -88,7 +104,9 @@
             <p>🎮 DAFTAR GAME LINK.YU 🎮</p>
             <p style="color:#333; font-weight:bold;">💬 WA: 08 777 26 77776 | 🛒 Shopee: <a href="https://id.shp.ee/QiepRVW" target="_blank">Klik Disini</a></p>
         </div>
+        
         <h1>Daftar Game PC</h1>
+        
         <input type="text" id="searchInput" placeholder="Cari game...">
         
         <div id="filterContainer">
@@ -111,8 +129,10 @@
             <span class="instruction-text">TEKAN JUDUL GAME UNTUK DETAIL & SCREENSHOT</span>
             <span style="font-size: 13px; font-weight: bold;">KHUSUS PESAN DI LINK.YU | SELAIN ITU BUKAN TOKO SAYA</span>
         </div>
-        <div id="gameCount" style="text-align:center; color:#777; font-size:12px; margin-top:5px;"></div>
+        
+        <div id="gameCount" style="color:#777; font-size:12px; margin-top:5px; font-weight:bold;"></div>
     </header>
+    
     <div class="table-wrapper">
         <table id="gameTable">
             <thead><tr><th>Nama Game</th><th>Size</th><th>Speck</th></tr></thead>
@@ -130,8 +150,7 @@
         </div>
         <div class="modal-body-padding">
             <h3 id="modalTitle" style="margin:0 0 15px 0;">Memuat...</h3>
-            <div id="modalBody">
-                </div>
+            <div id="modalBody"></div>
             <div id="gameplaySection" style="margin-top:20px;">
                 <span class="section-title">🎮 GAMEPLAY GAME :</span>
                 <div class="gameplay-box">
@@ -225,13 +244,9 @@
         title.textContent = gameName;
         modal.style.display = "block";
         slider.querySelectorAll('.slides').forEach(s => s.remove());
-        
-        // --- 1. PASANG SPEK INSTAN DULU (PERCEPATAN) ---
-        body.innerHTML = `<div class="req-text">${getFallbackSpec(kategori)}<br><small style="color:gray; font-size:10px;">*Memperbarui data dari internet...</small></div>`;
-        
+        body.innerHTML = `<div class="req-text">${getFallbackSpec(kategori)}<br><small style="color:gray; font-size:10px;">*Memperbarui data detail...</small></div>`;
         ytBtn.href = `https://www.youtube.com/results?search_query=${encodeURIComponent(gameName + " Gameplay PC No Commentary")}`;
 
-        // --- 2. CARI DATA DETAIL DI LATAR BELAKANG ---
         try {
             const searchRes = await fetch(`https://api.rawg.io/api/games?key=${apiKey}&search=${encodeURIComponent(gameName)}&page_size=1`);
             const searchData = await searchRes.json();
@@ -246,20 +261,15 @@
                     slider.insertBefore(div, slider.firstChild);
                 });
                 slideIndex = 1; showSlides(1);
-                
                 const detailRes = await fetch(`https://api.rawg.io/api/games/${game.id}?key=${apiKey}`);
                 const detailData = await detailRes.json();
                 const pc = detailData.platforms.find(p => p.platform.id === 4);
                 if (pc && pc.requirements && pc.requirements.minimum) {
                     let text = formatReq(pc.requirements.minimum);
-                    if (text.length > 20) {
-                        body.innerHTML = `<div class="req-text">${text}</div>`;
-                    }
+                    if (text.length > 20) body.innerHTML = `<div class="req-text">${text}</div>`;
                 }
             }
-        } catch (e) {
-            // Jika gagal internet, spek instan sudah terpasang, jadi tidak error kosong
-        }
+        } catch (e) {}
     }
 
     function formatReq(text) {
