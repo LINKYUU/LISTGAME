@@ -114,7 +114,7 @@ Call of Duty Advanced Warfare,38.42 GB,Agak Berat
 Call Of Duty Black Ops 4,157.74 GB,Berat
 Call of Duty Black Ops III,127.98 GB,Berat
 Call of Duty Ghosts,31.14 GB,Agak Berat
-Call of Duty Modern Warfare III,60.2 GB,Berat
+Call of Duty Modern Warfare III TERBARU,60.2 GB,Berat
 Call of Duty Modern Warfare Remastered,45.06 GB,Berat
 Call of Duty World at War,7.25 GB,Sedang
 Call of Duty Modern Warfare 3,18.19 GB,Sedang
@@ -122,6 +122,8 @@ Call to Arms,44.99 GB,Berat
 Call of Duty Modern Warfare 2,14.6 GB,Sedang
 Call of Duty Modern Warfare 2 Remastered,67.9 GB,Berat
 Call of Duty Vanguard,84.9 GB,Berat
+Call of Duty Modern Warfare TERBARU , 100 GB , Berat
+Call of Duty Modern Warfare 2 TERBARU , 50 GB , Berat
 Captain Tsubasa Rise of New Champions,49.64 GB,Berat
 Car Mechanic Simulator 2018,10.48 GB,Sedang
 Car Mechanic Simulator 2021,25.83 GB,Agak Berat
@@ -330,7 +332,7 @@ Goat Simulator 3,11.71 GB,Sedang
 GOD EATER 2,14.60 GB,Sedang
 God Eater 3,30.68 GB,Agak Berat
 God of War,8.46 GB,Sedang
-God of War,8.5 GB,Sedang
+God of War 2,10.5 GB,Sedang
 GOD OF WAR 2018,67.39 GB,Berat
 GOD OF WAR 3,23.37 GB,Agak Berat
 God of War Ascension,16.47 GB,Sedang
@@ -996,7 +998,6 @@ STARSAND ISLAND,2 GB,Ringan
 TOTAL WAR PHARAOH,40 GB,Berat
 NIOH 3,80 GB,Berat
 DRAGON QUEST VII,10 GB,Sedang
-COD MW 3 2023,40 GB,Berat
 HOLLOW KNIGHT SILKSONG,5 GB,Sedang
 HYTALE,3 GB,Sedang
 MY HERO ACADEMIA ALL JUSTICE,10 GB,Berat
@@ -1006,6 +1007,7 @@ POKEMON Z-A,20 GB,Sedang
 MOTO GP 25,40 GB,Berat
 
 `;
+
 
 
 
