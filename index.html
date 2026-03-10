@@ -11,26 +11,6 @@
         .special-notice { background-color: #fff4f4; border: 1px solid #d9534f; padding: 15px; margin-bottom: 15px; border-radius: 6px; }
         .special-notice p { margin: 5px 0; font-size: 18px; font-weight: 600; color: #d9534f; }
         
-        /* SEARCH INPUT ROUNDED STYLE */
-        #searchInput { 
-            width: 100%; 
-            max-width: 600px; 
-            padding: 14px 25px; /* Padding samping lebih luas agar teks tidak mepet lengkungan */
-            margin: 20px auto; 
-            font-size: 16px; 
-            border: 1px solid #ddd; 
-            border-radius: 50px; /* Membuat bentuk oval sempurna */
-            box-sizing: border-box; 
-            display: block; 
-            outline: none;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06); /* Shadow halus agar terlihat elegan */
-            transition: all 0.3s ease;
-        }
-        #searchInput:focus {
-            border-color: #1a73e8;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-
         /* MODAL STYLE */
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(5px); cursor: pointer; }
         .modal-content { background: white; margin: 2vh auto; width: 95%; max-width: 480px; border-radius: 15px; position: relative; max-height: 95vh; overflow-y: auto; cursor: default; }
@@ -50,11 +30,29 @@
 
         /* UI FILTER */
         h1 { margin: 10px 0; color: #1a1a1a; }
+        #searchInput {
+    width: 100%;
+    max-width: 600px;
+    padding: 12px 25px; /* Padding samping diperbesar agar teks tidak menempel ke lengkungan */
+    margin: 15px auto;
+    font-size: 16px;
+    border: 1px solid #e0e0e0; /* Warna border lebih lembut */
+    border-radius: 50px; /* Ini kunci untuk membuat bentuk rounded/pill */
+    box-sizing: border-box;
+    display: block;
+    outline: none; /* Menghilangkan garis biru saat diklik (opsional) */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Tambahan shadow halus agar mirip gambar */
+    transition: all 0.3s ease;
+}
+
+#searchInput:focus {
+    border-color: #1a73e8; /* Warna saat diklik */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
         #filterContainer, #genreFilterContainer { margin-top: 15px; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
         #genreFilterContainer { border-top: 1px dashed #ccc; padding-top: 10px; }
-        .filter-btn, .genre-btn { padding: 8px 15px; font-size: 13px; font-weight: 500; background-color: #f0f0f0; border: none; border-radius: 20px; cursor: pointer; color: #555; transition: 0.2s; }
+        .filter-btn, .genre-btn { padding: 8px 15px; font-size: 13px; font-weight: 500; background-color: #f0f0f0; border: none; border-radius: 20px; cursor: pointer; color: #555; }
         .filter-btn.active, .genre-btn.active { background-color: #333; color: white; }
-        .filter-btn:hover, .genre-btn:hover { background-color: #e2e2e2; }
         
         .table-wrapper { max-height: 60vh; overflow-y: auto; border-top: 1px solid #e0e0e0; }
         #gameTable { width: 100%; border-collapse: collapse; }
@@ -81,9 +79,7 @@
             <p style="color:#333; font-weight:bold;">💬 WA: 08 777 26 77776 | 🛒 Shopee: <a href="https://id.shp.ee/QiepRVW" target="_blank">Klik Disini</a></p>
         </div>
         <h1>Daftar Game PC</h1>
-        
-        <input type="text" id="searchInput" placeholder="Cari judul game favoritmu...">
-
+        <input type="text" id="searchInput" placeholder="Cari game...">
         <div id="filterContainer">
             <button class="filter-btn" data-filter="Ringan">Ringan</button>
             <button class="filter-btn" data-filter="Sedang">Sedang</button>
@@ -104,18 +100,7 @@
         </div>
         <div id="gameCount" style="text-align:center; color:#777; font-size:12px; margin-top:5px; font-weight:bold;"></div>
     </header>
-    <div class="table-wrapper">
-        <table id="gameTable">
-            <thead>
-                <tr>
-                    <th>Nama Game</th>
-                    <th>Size</th>
-                    <th>Speck</th>
-                </tr>
-            </thead>
-            <tbody id="gameListBody"></tbody>
-        </table>
-    </div>
+    <div class="table-wrapper"><table id="gameTable"><thead><tr><th>Nama Game</th><th>Size</th><th>Speck</th></tr></thead><tbody id="gameListBody"></tbody></table></div>
 </div>
 
 <div id="specModal" class="modal">
@@ -197,14 +182,35 @@
         allGames = Array.from(map.values());
     }
 
+    // FUNGSI PENERJEMAH OTOMATIS (INDONESIA)
     function formatReq(text) {
         let clean = text.split(/Recommended:/i)[0].replace(/[®™]/g, '');
         let lines = [];
-        const targets = { "Processor": "Prosesor", "Memory": "RAM", "Graphics": "Kartu Grafis (VGA)", "OS": "Sistem Operasi (Windows)" };
+        const targets = {
+            "Processor": "Prosesor",
+            "Memory": "RAM",
+            "Graphics": "Kartu Grafis (VGA)",
+            "OS": "Sistem Operasi (Windows)"
+        };
+        
         Object.keys(targets).forEach(k => {
             if(clean.includes(k + ":")) {
-                let d = clean.split(k + ":")[1].split("<br>")[0].split("DirectX")[0].split("Network")[0].split("Storage")[0].replace(/Additional Notes.*/gi, '').trim();
-                d = d.replace(/or higher/gi, 'atau lebih tinggi').replace(/or better/gi, 'atau lebih baik').replace(/or over/gi, 'atau keatas').replace(/available space/gi, 'ruang kosong').replace(/64bit|64-bit/gi, '64-bit').replace(/VRAM/gi, 'VRAM');
+                let d = clean.split(k + ":")[1]
+                             .split("<br>")[0]
+                             .split("DirectX")[0]
+                             .split("Network")[0]
+                             .split("Storage")[0]
+                             .replace(/Additional Notes.*/gi, '') // Hapus catatan teknis panjang
+                             .trim();
+                
+                // PROSES TERJEMAHAN KATA DEMI KATA
+                d = d.replace(/or higher/gi, 'atau lebih tinggi')
+                     .replace(/or better/gi, 'atau lebih baik')
+                     .replace(/or over/gi, 'atau keatas')
+                     .replace(/available space/gi, 'ruang kosong')
+                     .replace(/64bit|64-bit/gi, '64-bit')
+                     .replace(/VRAM/gi, 'VRAM');
+                
                 lines.push(`<b>${targets[k]}:</b> ${d}`);
             }
         });
@@ -237,20 +243,25 @@
         try {
             const res = await fetch(`https://api.rawg.io/api/games?key=${apiKey}&search=${encodeURIComponent(gameName)}&page_size=1`);
             const data = await res.json();
+            
             if (data.results.length) {
                 const game = data.results[0];
                 const detailRes = await fetch(`https://api.rawg.io/api/games/${game.id}?key=${apiKey}`);
                 const detail = await detailRes.json();
                 const pc = detail.platforms.find(p => p.platform.id === 4);
+                
                 let finalHtml = getFallbackSpec(kategori);
                 if (pc && pc.requirements && pc.requirements.minimum) {
                     let formatted = formatReq(pc.requirements.minimum);
                     if (formatted.length > 10) finalHtml = formatted;
                 }
+
                 body.innerHTML = finalHtml;
+
                 const sRes = await fetch(`https://api.rawg.io/api/games/${game.id}/screenshots?key=${apiKey}`);
                 const sData = await sRes.json();
                 const screens = sData.results.slice(0, 5).map(img => img.image);
+                
                 cacheSpecs.set(gameName, { html: finalHtml, screens: screens });
                 renderScreenshots(screens);
             } else {
