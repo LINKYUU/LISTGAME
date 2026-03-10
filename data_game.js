@@ -152,7 +152,7 @@ Cooking Simulator v6 0 11 P2P,13.70 GB,Sedang
 Coral Island,13.12 GB,Sedang
 Counter Strike: Global Offensive (CS:GO),31.02 GB,Agak Berat
 Couple Cultivation Saves the World,32.13 GB,Agak Berat
-Crash Bandicoot 4: It's About Time,24.40 GB,Agak Berat
+Crash Bandicoot 4: Its About Time,24.40 GB,Agak Berat
 Crash Bandicoot N Sane Trilogy,30.5 GB,Agak Berat
 Crisis 2 ME,13.1 GB,Sedang
 CRISIS CORE  FINAL FANTASY VII REUNION,19.0 GB,Sedang
@@ -369,7 +369,7 @@ Harvest Moon: Save the Homeland,229.45 MB,Ringan
 Hearts of Iron IV,9.73 GB,Sedang
 Hearts of Iron IV,9.7 GB,Sedang
 Hell Is Us,21.5 GB,Agak Berat
-Hellblade: Senua's Sacrifice,19.95 GB,Sedang
+Hellblade: Senuas Sacrifice,19.95 GB,Sedang
 Hello Neighbor,50.8 GB,Berat
 Hitman Absolution,24.76 GB,Agak Berat
 Hitman The Complete First Season,68.86 GB,Berat
@@ -422,7 +422,7 @@ Kingdom Hearts HD 2 8 Final Chapter Prologue,31.10 GB,Agak Berat
 Kingdom Hearts III and Re Mind,50.35 GB,Berat
 Kirby and the Forgotten Land,6.25 GB,Sedang
 Kirby Star Allies,3.25 GB,Ringan
-Kirby's Return to Dream Land Deluxe,5.48 GB,Sedang
+Kirby Return to Dream Land Deluxe,5.48 GB,Sedang
 LA Noire,14.17 GB,Sedang
 Le Mans Ultimate,29.75 GB,Agak Berat
 Left 4 Dead,4.67 GB,Ringan
@@ -476,7 +476,7 @@ Little Nightmares II,21.99 GB,Agak Berat
 Lords of the Fallen v2 0 3 P2P,34.68 GB,Agak Berat
 Lost Skies,16.46 GB,Sedang
 LUIGI MANSION 3,7.6 GB,Sedang
-Luigi's Mansion 2,6.62 GB,Sedang
+Luigi Mansion 2,6.62 GB,Sedang
 Mad Max,34.86 GB,Agak Berat
 Mafia,2.80 GB,Ringan
 Mafia II,11.47 GB,Sedang
@@ -494,7 +494,7 @@ mario tennis ultra smash,2.17 GB,Ringan
 Marvel Spider Man Miles Morales,59.65 GB,Berat
 Marvels Spider Man Remastered,70.40 GB,Berat
 Marvels Avengers,63.7 GB,Berat
-Marvel's Spider Man 2 Digital Deluxe Edit,116.2 GB,Berat
+Marvels Spider Man 2 Digital Deluxe Edit,116.2 GB,Berat
 Marvel Ultimate Alliance,5.8 GB,Sedang
 Marvel Ultimate Alliance 2,5.5 GB,Sedang
 MARVEL ULTIMATE ALLIANCE 3  The Black Order NSP,14.1 GB,Sedang
@@ -841,7 +841,7 @@ The Last Stand Aftermath,4.37 GB,Ringan
 The Legend of Korra,2.9 GB,Ringan
 The Legend of Zelda   Breath of the Wild,16.89 GB,Sedang
 The Legend of Zelda   Tears of the Kingdom,17.33 GB,Sedang
-The Legend of Zelda Link's Awakening,6.34 GB,Sedang
+The Legend of Zelda Links Awakening,6.34 GB,Sedang
 The LEGO Movie Videogame,8.98 GB,Sedang
 The LEGO NINJAGO Movie Video Game,18.05 GB,Sedang
 The Sims 2 Legacy Collection,13.22 GB,Sedang
@@ -871,7 +871,7 @@ Tintin Reporter   Cigars of the Pharaoh,35.65 GB,Agak Berat
 Tiny Glade,2.95 GB,Ringan
 TinyHwks Pro1+2,24.2 GB,Agak Berat
 Tom Clancys Ghost Recon Wildlands Repack,90.12 GB,Berat
-Tom Clancy's Splinter Cell Conviction,8.23 GB,Sedang
+Tom Clancys Splinter Cell Conviction,8.23 GB,Sedang
 Tomb Raider GOTY,13.18 GB,Sedang
 Tomb Raider Underworld,7.68 GB,Sedang
 Torchlight II,1.68 GB,Ringan
@@ -911,7 +911,7 @@ Ultimate Marvel vs Capcom 3,3.75 GB,Ringan
 Ultimate Fishing Simulator 2,21.6 GB,Agak Berat
 Ultra Street Fighter IV,11.5 GB,Sedang
 Uncharted 2 Among Thieves (Europe),23.67 GB,Agak Berat
-Uncharted 3 Drake's Deception,41.08 GB,Berat
+Uncharted 3 Drakes Deception,41.08 GB,Berat
 Uncharted Legacy of Thieves Collection,104.11 GB,Berat
 Unravel,3.3 GB,Ringan
 Unravel Two,7.09 GB,Sedang
@@ -1001,6 +1001,7 @@ POKEMON Z-A , 20 GB , SEDANG
 MOTO GP 25 , 40 GB , BERAT
 
 `;
+
 
 
 
