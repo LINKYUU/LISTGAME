@@ -132,9 +132,9 @@
     function getFallbackSpec(kat) {
         kat = kat.toLowerCase();
         if (kat.includes("ringan")) return `<b>Prosesor:</b> Core 2 Quad atau setara<br><b>RAM:</b> 4 GB RAM<br><b>Kartu Grafis (VGA):</b> GT 730`;
-        if (kat.includes("sedang")) return `<b>Prosesor:</b> Intel i3 / Ryzen 3 atau lebih tinggi<br><b>RAM:</b> 8 GB RAM<br><b>Kartu Grafis (VGA):</b> GTX 750 Ti atau lebih baik`;
-        if (kat.includes("agak berat")) return `<b>Prosesor:</b> Intel i5 / Ryzen 5 atau lebih tinggi<br><b>RAM:</b> 8 GB RAM<br><b>Kartu Grafis (VGA):</b> GTX 1050 atau lebih baik`;
-        return `<b>Prosesor:</b> Intel i7 / Ryzen 7 atau lebih tinggi<br><b>RAM:</b> 16 GB RAM<br><b>Kartu Grafis (VGA):</b> GTX 1660 / RX 580 atau lebih baik`;
+        if (kat.includes("sedang")) return `<b>Prosesor:</b> Intel i3 Gen 5 / Ryzen 3 atau lebih tinggi<br><b>RAM:</b> 8 GB RAM<br><b>Kartu Grafis (VGA):</b> GTX 750 Ti (2 GB) atau lebih baik`;
+        if (kat.includes("agak berat")) return `<b>Prosesor:</b> Intel i5 Gen 8 / Ryzen 5 atau lebih tinggi<br><b>RAM:</b> 8 GB RAM<br><b>Kartu Grafis (VGA):</b> GTX 1050 (4 GB) atau lebih baik`;
+        return `<b>Prosesor:</b> Intel i7 Gen 9/ Ryzen 7 atau lebih tinggi<br><b>RAM:</b> 16 GB RAM<br><b>Kartu Grafis (VGA):</b> GTX 1660 (8 GB) / RX 580 atau lebih baik`;
     }
 
     function plusSlides(n, e) { e.stopPropagation(); showSlides(slideIndex += n); }
@@ -310,3 +310,4 @@
 </script>
 </body>
 </html>
+
