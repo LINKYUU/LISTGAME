@@ -22,21 +22,11 @@
         }
         header { padding: 20px 30px; border-bottom: 1px solid #e0e0e0; }
         
-        .header-top {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-        .header-logo { flex: 0 0 100px; height: 100px; }
-        .header-logo img { width: 100%; height: 100%; object-fit: contain; border-radius: 50%; }
-        .header-info { flex: 1; max-width: 500px; }
-
         .special-notice {
             background-color: #fff4f4;
             border: 1px solid #d9534f;
-            padding: 10px 20px;
+            padding: 15px;
+            margin-bottom: 15px;
             border-radius: 6px;
             text-align: center;
         }
@@ -45,7 +35,7 @@
         .special-notice p.shopee-link { color: #333; font-weight: bold; font-size: 16px; margin-top: 8px; }
         .special-notice p.shopee-link a { color: #0056b3; text-decoration: none; }
         
-        h1 { text-align: center; color: #1a1a1a; margin: 15px 0 0 0; }
+        h1 { text-align: center; color: #1a1a1a; margin: 10px 0 0 0; }
         #searchInput {
             width: 100%; padding: 12px 15px; margin-top: 15px;
             font-size: 16px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box;
@@ -107,30 +97,19 @@
             animation: blink 1.5s linear infinite;
         }
         @keyframes blink { 50% { opacity: 0.6; } }
-
-        @media (max-width: 600px) {
-            .header-top { flex-direction: column; text-align: center; }
-        }
     </style>
 </head>
 <body>
 
 <div class="container">
     <header>
-        <div class="header-top">
-            <div class="header-logo">
-                <img src="image_0.png" alt="Logo">
-            </div>
-            <div class="header-info">
-                <div class="special-notice">
-                    <p>🎮 DAFTAR GAME LINK.YU 🎮</p>
-                    <p class="whatsapp">💬 WA: 08 777 26 77776</p>
-                    <p class="shopee-link">🛒 Shopee: <a href="https://id.shp.ee/QiepRVW" target="_blank">Klik Disini</a></p>
-                </div>
-            </div>
+        <div class="special-notice">
+            <p>🎮 DAFTAR GAME LINK.YU 🎮</p>
+            <p class="whatsapp">💬 WA: 08 777 26 77776</p>
+            <p class="shopee-link">🛒 Shopee: <a href="https://id.shp.ee/QiepRVW" target="_blank">Klik Disini</a></p>
         </div>
 
-        <h1>Daftar Game</h1>
+        <h1>Daftar Game PC</h1>
         <input type="text" id="searchInput" placeholder="Cari game...">
         
         <div id="filterContainer">
@@ -182,13 +161,37 @@
 <script>
     const apiKey = "158b3858daed4d67af02a839d14ba445";
 
-    // --- FITUR KOREKSI MANUAL (ANTI-SPEK-JADUL) ---
+    // --- DATABASE KOREKSI MANUAL (Game yang sering salah spek di internet) ---
     const manualCorrections = {
         "euro truck simulator 2": {
-            processor: "Intel Core i5-6400 / AMD Ryzen 3 1200",
+            processor: "Intel i5-6400 / AMD Ryzen 3 1200",
             memory: "8 GB RAM",
             graphics: "Nvidia GTX 660 / AMD Radeon RX 460 (2GB)",
-            windows: "Windows 10 / 11 (64-bit)"
+            windows: "Windows 10/11 (64-bit)"
+        },
+        "american truck simulator": {
+            processor: "Intel i5-6400 / AMD Ryzen 3 1200",
+            memory: "8 GB RAM",
+            graphics: "Nvidia GTX 660 / AMD Radeon RX 460 (2GB)",
+            windows: "Windows 10/11 (64-bit)"
+        },
+        "grand theft auto v": {
+            processor: "Intel i5-3470 / AMD FX-8350",
+            memory: "8 GB RAM",
+            graphics: "Nvidia GTX 660 (2GB) / AMD HD 7870",
+            windows: "Windows 10/11 (64-bit)"
+        },
+        "baldur's gate 3": {
+            processor: "Intel i5-4690 / AMD FX-8350",
+            memory: "8 GB RAM",
+            graphics: "Nvidia GTX 970 / AMD RX 480 (4GB)",
+            windows: "Windows 10 (64-bit)"
+        },
+        "black myth wukong": {
+            processor: "Intel i5-8400 / AMD Ryzen 5 1600",
+            memory: "16 GB RAM",
+            graphics: "Nvidia GTX 1060 (6GB) / AMD RX 580",
+            windows: "Windows 10/11 (64-bit)"
         }
     };
 
@@ -196,10 +199,11 @@
     let currentCategoryFilter = null;
     let currentGenreFilter = null;
 
+    // ... (Fungsi getGameGenres, parseSizeToMB, parseData tetap sama) ...
     function getGameGenres(gameName) {
         const n = gameName.toLowerCase();
         const g = [];
-        const keywordsMainBerdua = ['pico park', 'a way out', 'ao international tennis', 'attack on titan 2', 'baldurs gate 3', 'basara 2', 'basara 3', 'battletoads', 'beach buggy racing 2', 'beyond two souls', 'bloons td 6', 'blur', 'borderlands 2', 'borderlands 3', 'brothers a tale of two sons', 'call of duty black ops iii', 'captain tsubasa', 'cars 2', 'chained together', 'chocobo gp', 'crash bandicoot 4', 'ctr yuzu', 'cult of the lamb', 'cuphead', 'def jam vendetta', 'demon slayer', 'dirt 3', 'dirt 5', 'donkey kong country', 'downhill domination', 'dragon ball fighterz', 'dragon ball xenoverse', 'sparking! zero', 'dynasty warrior', 'ea sports fc', 'efootball pes', 'pro evolution soccer', 'f1 20', 'f1 race stars', 'fifa', 'fita street', 'fight night', 'gears of war', 'gears of war 4', 'goat simulator 3', 'gran turismo 4', 'guilty gear strive', 'guitar hero', 'halo the master chief collection', 'hot wheels unleashed', 'human fall flat', 'hyrule warriors', 'jujutsu kaisen', 'jump force', 'kamen rider', 'kirby and the forgotten land', 'kirby star allies', "kirby's return to dream land", 'left 4 dead 2', 'lego', 'luigi mansion 3', "luigi's mansion 2", 'mario kart 8', 'mario sonic at the', 'mario tennis', 'marvel ultimate alliance', 'melty blood', 'minecraft dungeons', 'mortal kombat', 'motogp', 'moving out', 'my hero ones justice 2', 'naruto', 'nascar', 'nba 2k', 'nickelodeon all star brawl', 'nickelodeon kart racers', 'one piece burning blood', 'one piece pirate warriors', 'one punch man', 'overcooked 2', 'persona 4 arena', "pokemon let's go", 'pokkén tournament', 'power rangers battle for the grid', 'rayman legends', 'resident evil 5', 'resident evil 6', 'resident evil revelations 2', 'river city girls 2', 'rocket league', 'saint seiya soldiers soul', 'samurai warriors', 'sbk 22', 'sengoku basara', 'shieldwall', 'sonic & all stars', 'sonic superstar', 'spider man friend or foe', 'splitsecond', 'street fighter v', 'streets of rage 4', 'stronghold crusader', 'super bomberman r', 'super smash bros', 'team sonic racing', 'tekken', 'tt isle of man', 'twisted metal', 'ufc', 'ultimate marvel vs capcom 3', 'ultra street fighter iv', 'unravel two', 'wrc', 'wreckfest', 'wwe'];
+        const keywordsMainBerdua = ['pico park', 'a way out', 'ao international tennis', 'attack on titan 2', 'baldurs gate 3', 'basara 2', 'basara 3', 'battletoads', 'beach buggy racing 2', 'beyond two souls', 'bloons td 6', 'blur', 'borderlands 2', 'borderlands 3', 'brothers a tale of two sons', 'call of duty black ops iii', 'captain tsubasa', 'cars 2', 'chained together', 'chocobo gp', 'crash bandicoot 4', 'ctr yuzu', 'cult of the lamb', 'cuphead', 'def jam vendetta', 'demon slayer', 'dirt 3', 'dirt 5', 'donkey kong country', 'downhill domination', 'dragon ball fighterz', 'dragon ball xenoverse', 'sparking! zero', 'dynasty warrior', 'ea sports fc', 'efootball pes', 'pro evolution soccer', 'f1 20', 'f1 race stars', 'fifa', 'fita street', 'fight night', 'gears of war', 'gears of war 4', 'goat simulator 3', 'gran turismo 4', 'guilty gear strive', 'guitar hero', 'halo the master chief collection', 'hot wheels unleashed', 'human fall flat', 'hyrule warriors', 'jujutsu kaisen', 'jump force', 'kamen rider', 'kirby and the forgotten land', 'kirby star allies', "kirby's return to dream land", 'left 4 dead 2', 'lego', 'luigi mansion 3', "luigi's mansion 2", 'mario kart 8', 'mario sonic at the', 'mario tennis', 'marvel ultimate alliance', 'melty blood', 'minecraft dungeons', 'mortal kongbat', 'motogp', 'moving out', 'my hero ones justice 2', 'naruto', 'nascar', 'nba 2k', 'nickelodeon all star brawl', 'nickelodeon kart racers', 'one piece burning blood', 'one piece pirate warriors', 'one punch man', 'overcooked 2', 'persona 4 arena', "pokemon let's go", 'pokkén tournament', 'power rangers battle for the grid', 'rayman legends', 'resident evil 5', 'resident evil 6', 'resident evil revelations 2', 'river city girls 2', 'rocket league', 'saint seiya soldiers soul', 'samurai warriors', 'sbk 22', 'sengoku basara', 'shieldwall', 'sonic & all stars', 'sonic superstar', 'spider man friend or foe', 'splitsecond', 'street fighter v', 'streets of rage 4', 'stronghold crusader', 'super bomberman r', 'super smash bros', 'team sonic racing', 'tekken', 'tt isle of man', 'twisted metal', 'ufc', 'ultimate marvel vs capcom 3', 'ultra street fighter iv', 'unravel two', 'wrc', 'wreckfest', 'wwe'];
         const keywordsPerang = ['ace combat', 'assassin creed', 'battlefield', 'call of duty', 'cod ', 'commandos', 'company of heroes', 'crysis', 'dynasty warrior', 'far cry', 'gears of war', 'ghost recon', 'halo', 'homefront', 'medal of honor', 'metal gear', 'mount & blade', 'partisan', 'samurai warriors', 'sengoku basara', 'sniper elite', 'sniper ghost warrior', 'star wars battlefront', 'terminator resistance', 'tom clancy', 'total war', 'transformers', 'viking battle', 'warhammer', 'warriors orochi', 'wolfenstein', 'world war z'];
         const keywordsSport = ['ao international tennis', 'captain tsubasa', 'ea sports fc', 'efootball pes', 'pro evolution soccer', 'euro fishing', 'fifa', 'fight night', 'football manager', 'mario tennis', 'nba 2k', 'pes', 'session skateboarding', 'ufc', 'ultimate fishing', 'wwe 2k', 'wwe smackdown', 'wwe all stars', 'winning eleven'];
         const keywordsHorror = ['a plague tale', 'alan wake', 'amnesia', 'back 4 blood', 'days gone', 'dead island', 'dead rising', 'dead space', 'dreadout', 'dying light', 'ebola 2', 'fatal frame', 'five nights at freddys', 'gylt', 'hello neighbor', 'home sweet home', 'ibilis', 'indika', 'into the dead', 'left 4 dead', 'lies of p', 'little nightmares', 'nightmare side', 'outlast', 'pamali', 'poppy playtime', 'resident evil', 'september 7th', 'silent hill', 'sons of the forest', 'the bridge curse', 'the coffin of andy', 'the evil within', 'the forest', 'the last of us', 'the walking dead', 'until dawn', 'zombie army'];
@@ -243,10 +247,16 @@
         allGames = Array.from(map.values());
     }
 
-    function formatReqText(text) {
+    function formatReqText(text, kategori) {
         if (!text) return "";
         let cleanText = text.split(/Recommended:|Recommended Requirements:/gi)[0];
         cleanText = cleanText.replace(/[®™]/g, '');
+
+        // CEK APAKAH DATA TERLALU JADUL UNTUK GAME BERAT
+        if ((kategori.includes("berat") || kategori.includes("sedang")) && 
+            (cleanText.includes("Dual Core") || cleanText.includes("2 GB RAM") || cleanText.includes("DirectX 9"))) {
+            return ""; // Paksa fallback kalau datanya gak masuk akal
+        }
 
         let labels = ["Processor:", "Memory:", "Graphics:", "OS:"];
         let formattedLines = [];
@@ -294,7 +304,6 @@
         body.innerHTML = "Sabar Om Lagi Loading...";
         modal.style.display = "block";
 
-        // --- CEK KOREKSI MANUAL ---
         const gameKey = gameName.toLowerCase();
         if (manualCorrections[gameKey]) {
             const m = manualCorrections[gameKey];
@@ -312,8 +321,8 @@
             const pcPlatform = detailData.platforms.find(p => p.platform.id === 4);
             
             if (pcPlatform && pcPlatform.requirements && pcPlatform.requirements.minimum) {
-                let minReq = formatReqText(pcPlatform.requirements.minimum);
-                if (minReq === "" || minReq.includes("TBA")) {
+                let minReq = formatReqText(pcPlatform.requirements.minimum, kategori);
+                if (minReq === "") {
                     showFallbackSpec(body, kategori);
                 } else {
                     body.innerHTML = `<div class="req-text">${minReq}</div>`;
@@ -331,22 +340,23 @@
         let color = "#f0ad4e"; 
         if (kategori.includes("ringan")) {
             color = "#28a745"; 
-            content = `<b>Processor:</b> Intel Core 2 Quad / AMD Phenom<br><b>Memory / Ram:</b> 4 GB RAM<br><b>Graphics:</b> NVIDIA GT 730 / AMD Radeon R7<br><b>Windows:</b> 7 / 8 / 10`;
+            content = `<b>Processor:</b> Core 2 Quad / AMD Phenom<br><b>Memory / Ram:</b> 4 GB RAM<br><b>Graphics:</b> GT 730 / HD 7730 (1GB)<br><b>Windows:</b> 7/8/10`;
         } else if (kategori.includes("sedang")) {
             color = "#007bff"; 
-            content = `<b>Processor:</b> Intel Core i3-4130 / AMD Ryzen 3 1200<br><b>Memory / Ram:</b> 8 GB RAM<br><b>Graphics:</b> NVIDIA GTX 750 Ti / AMD Radeon R9<br><b>Windows:</b> 10`;
+            content = `<b>Processor:</b> Intel Core i3-4130 / AMD Ryzen 3 1200<br><b>Memory / Ram:</b> 8 GB RAM<br><b>Graphics:</b> GTX 750 Ti / AMD R9 270 (2GB)<br><b>Windows:</b> 10`;
         } else if (kategori.includes("agak berat")) {
             color = "#fd7e14"; 
-            content = `<b>Processor:</b> Intel Core i5-6400 / AMD Ryzen 5 1600<br><b>Memory / Ram:</b> 8 GB RAM<br><b>Graphics:</b> NVIDIA GTX 1050 / AMD Radeon RX 560<br><b>Windows:</b> 10`;
+            content = `<b>Processor:</b> Intel Core i5-6400 / AMD Ryzen 5 1600<br><b>Memory / Ram:</b> 8 GB RAM<br><b>Graphics:</b> GTX 1050 / AMD RX 560 (2GB)<br><b>Windows:</b> 10`;
         } else if (kategori.includes("berat")) {
             color = "#dc3545"; 
-            content = `<b>Processor:</b> Intel Core i7-8700 / AMD Ryzen 7 2700<br><b>Memory / Ram:</b> 16 GB RAM<br><b>Graphics:</b> NVIDIA GTX 1660 / AMD Radeon RX 580<br><b>Windows:</b> 10`;
+            content = `<b>Processor:</b> Intel Core i7-8700 / AMD Ryzen 7 2700<br><b>Memory / Ram:</b> 16 GB RAM<br><b>Graphics:</b> GTX 1660 / AMD RX 580 (6GB)<br><b>Windows:</b> 10/11`;
         } else {
-            content = `<b>Processor:</b> Intel Core i5 / AMD Ryzen 5<br><b>Memory / Ram:</b> 8 GB RAM<br><b>Graphics:</b> NVIDIA GTX 1050 / AMD Radeon RX 560<br><b>Windows:</b> 10`;
+            content = `<b>Processor:</b> Intel Core i5 / AMD Ryzen 5<br><b>Memory / Ram:</b> 8 GB RAM<br><b>Graphics:</b> GTX 1050 (2GB)<br><b>Windows:</b> 10`;
         }
-        element.innerHTML = `<div class="req-text" style="border-left-color: ${color};"><strong style="display:block; margin-bottom:5px; color:${color};">Minimum Requirements:</strong>${content}</div>`;
+        element.innerHTML = `<div class="req-text" style="border-left-color: ${color};"><strong style="display:block; margin-bottom:5px; color:${color};">Minimum Requirements:</strong>${content}</div><p style="font-size: 10px; color: #999; margin-top: 8px;">*Data internet jadul, menampilkan estimasi Link.Yu.</p>`;
     }
 
+    // ... (Filter render, button event listener tetap sama) ...
     document.addEventListener('DOMContentLoaded', () => {
         const tableBody = document.getElementById('gameListBody');
         const searchInput = document.getElementById('searchInput');
