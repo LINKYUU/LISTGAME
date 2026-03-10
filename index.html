@@ -63,16 +63,29 @@
         
         .clickable-name { color: #0056b3; cursor: pointer; text-decoration: underline; font-weight: 500; }
 
+        /* --- STYLES MODAL DENGAN COVER --- */
         .modal {
             display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7); backdrop-filter: blur(3px);
+            background: rgba(0,0,0,0.8); backdrop-filter: blur(5px);
         }
         .modal-content {
-            background: white; margin: 10% auto; padding: 20px; width: 90%; max-width: 500px;
-            border-radius: 12px; position: relative; max-height: 70vh; overflow-y: auto;
+            background: white; margin: 5% auto; width: 90%; max-width: 500px;
+            border-radius: 15px; position: relative; max-height: 85vh; overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
-        .close-btn { position: absolute; right: 15px; top: 10px; font-size: 24px; cursor: pointer; color: #999; }
+        .close-btn { 
+            position: absolute; right: 15px; top: 10px; font-size: 28px; 
+            cursor: pointer; color: white; z-index: 1001; text-shadow: 0 0 10px rgba(0,0,0,0.8);
+        }
         
+        #gameCover {
+            width: 100%; height: 250px; object-fit: cover;
+            border-top-left-radius: 15px; border-top-right-radius: 15px;
+            background-color: #333; display: block;
+        }
+
+        .modal-body-padding { padding: 20px; }
+
         .req-text { 
             background: #f9f9f9; 
             padding: 15px; 
@@ -83,32 +96,15 @@
             word-wrap: break-word;
         }
 
+        .instruction-box { text-align: center; margin: 15px 0 5px 0; }
+        .instruction-text { display: block; font-weight: bold; color: #d9534f; font-size: 18px; animation: blink 1.5s linear infinite; }
+        .warning-text { display: block; font-size: 13px; font-weight: bold; color: #333; margin-top: 5px; }
+        @keyframes blink { 50% { opacity: 0.6; } }
+
         .ket-ringan { color: #28a745; font-weight: 600; }
         .ket-sedang { color: #007bff; font-weight: 600; }
         .ket-agak-berat { color: #fd7e14; font-weight: 600; }
         .ket-berat { color: #dc3545; font-weight: 600; }
-
-        /* --- STYLING INSTRUKSI & PERINGATAN TOKO --- */
-        .instruction-box {
-            text-align: center; 
-            margin: 15px 0 5px 0;
-        }
-        .instruction-text {
-            display: block;
-            font-weight: bold; 
-            color: #d9534f; 
-            font-size: 18px;
-            animation: blink 1.5s linear infinite;
-        }
-        .warning-text {
-            display: block;
-            font-size: 13px;
-            font-weight: bold;
-            color: #333;
-            margin-top: 5px;
-            letter-spacing: 0.5px;
-        }
-        @keyframes blink { 50% { opacity: 0.6; } }
     </style>
 </head>
 <body>
@@ -142,7 +138,7 @@
 
         <div class="instruction-box">
             <span class="instruction-text">TEKAN JUDUL GAME UNTUK MELIHAT SPESIFIKASI GAME</span>
-            <span class="warning-text">KHUSUS YANG PESAN DI LINK.YU SELAIN ITU BUKAN TOKO KAMI</span>
+            <span class="warning-text">KHUSUS YANG PESAN DI LINK.YU SELAIN ITU BUKAN TOKO SAYA</span>
         </div>
         
         <div id="gameCount" style="text-align:center; padding-top:5px; color:#777; font-size:13px;"></div>
@@ -165,8 +161,11 @@
 <div id="specModal" class="modal">
     <div class="modal-content">
         <span class="close-btn">&times;</span>
-        <h3 id="modalTitle" style="margin-top:0;">Memuat...</h3>
-        <div id="modalBody">Sabar Om Lagi Loading...</div>
+        <img id="gameCover" src="" alt="Cover Game">
+        <div class="modal-body-padding">
+            <h3 id="modalTitle" style="margin-top:0;">Memuat...</h3>
+            <div id="modalBody">Sabar Om Lagi Loading...</div>
+        </div>
     </div>
 </div>
 
@@ -175,7 +174,6 @@
 <script>
     const apiKey = "158b3858daed4d67af02a839d14ba445";
 
-    // DATABASE KOREKSI MANUAL (ETS2, ATS, GTA V, dll)
     const manualCorrections = {
         "euro truck simulator 2": {
             processor: "Intel i5-6400 / AMD Ryzen 3 1200",
@@ -198,7 +196,7 @@
     function getGameGenres(gameName) {
         const n = gameName.toLowerCase();
         const g = [];
-        const keywordsMainBerdua = ['pico park', 'a way out', 'ao international tennis', 'attack on titan 2', 'baldurs gate 3', 'basara 2', 'basara 3', 'battletoads', 'beach buggy racing 2', 'beyond two souls', 'bloons td 6', 'blur', 'borderlands 2', 'borderlands 3', 'brothers a tale of two sons', 'call of duty black ops iii', 'captain tsubasa', 'cars 2', 'chained together', 'chocobo gp', 'crash bandicoot 4', 'ctr yuzu', 'cult of the lamb', 'cuphead', 'def jam vendetta', 'demon slayer', 'dirt 3', 'dirt 5', 'donkey kong country', 'downhill domination', 'dragon ball fighterz', 'dragon ball xenoverse', 'sparking! zero', 'dynasty warrior', 'ea sports fc', 'efootball pes', 'pro evolution soccer', 'f1 20', 'f1 race stars', 'fifa', 'fita street', 'fight night', 'gears of war', 'gears of war 4', 'goat simulator 3', 'gran turismo 4', 'guilty gear strive', 'guitar hero', 'halo the master chief collection', 'hot wheels unleashed', 'human fall flat', 'hyrule warriors', 'jujutsu kaisen', 'jump force', 'kamen rider', 'kirby and the forgotten land', 'kirby star allies', "kirby's return to dream land", 'left 4 dead 2', 'lego', 'luigi mansion 3', "luigi's mansion 2", 'mario kart 8', 'mario sonic at the', 'mario tennis', 'marvel ultimate alliance', 'melty blood', 'minecraft dungeons', 'mortal kombat', 'motogp', 'moving out', 'my hero ones justice 2', 'naruto', 'nascar', 'nba 2k', 'nickelodeon all star brawl', 'nickelodeon kart racers', 'one piece burning blood', 'one piece pirate warriors', 'one punch man', 'overcooked 2', 'persona 4 arena', "pokemon let's go", 'pokkén tournament', 'power rangers battle for the grid', 'rayman legends', 'resident evil 5', 'resident evil 6', 'resident evil revelations 2', 'river city girls 2', 'rocket league', 'saint seiya soldiers soul', 'samurai warriors', 'sbk 22', 'sengoku basara', 'shieldwall', 'sonic & all stars', 'sonic superstar', 'spider man friend or foe', 'splitsecond', 'street fighter v', 'streets of rage 4', 'stronghold crusader', 'super bomberman r', 'super smash bros', 'team sonic racing', 'tekken', 'tt isle of man', 'twisted metal', 'ufc', 'ultimate marvel vs capcom 3', 'ultra street fighter iv', 'unravel two', 'wrc', 'wreckfest', 'wwe'];
+        const keywordsMainBerdua = ['pico park', 'a way out', 'ao international tennis', 'attack on titan 2', 'baldurs gate 3', 'basara 2', 'basara 3', 'battletoads', 'beach buggy racing 2', 'beyond two souls', 'bloons td 6', 'blur', 'borderlands 2', 'borderlands 3', 'brothers a tale of two sons', 'call of duty black ops iii', 'captain tsubasa', 'cars 2', 'chained together', 'chocobo gp', 'crash bandicoot 4', 'ctr yuzu', 'cult of the lamb', 'cuphead', 'def jam vendetta', 'demon slayer', 'dirt 3', 'dirt 5', 'donkey kong country', 'downhill domination', 'dragon ball fighterz', 'dragon ball xenoverse', 'sparking! zero', 'dynasty warrior', 'ea sports fc', 'efootball pes', 'pro evolution soccer', 'f1 20', 'f1 race stars', 'fifa', 'fita street', 'fight night', 'gears of war', 'gears of war 4', 'goat simulator 3', 'gran turismo 4', 'guilty gear strive', 'guitar hero', 'halo the master chief collection', 'hot wheels unleashed', 'human fall flat', 'hyrule warriors', 'jujutsu kaisen', 'jump force', 'kamen rider', 'kirby and the forgotten land', 'kirby star allies', "kirby's return to dream land", 'left 4 dead 2', 'lego', 'luigi mansion 3', "luigi's mansion 2", 'mario kart 8', 'mario sonic at the', 'mario tennis', 'marvel ultimate alliance', 'melty blood', 'minecraft dungeons', 'mortal kongbat', 'motogp', 'moving out', 'my hero ones justice 2', 'naruto', 'nascar', 'nba 2k', 'nickelodeon all star brawl', 'nickelodeon kart racers', 'one piece burning blood', 'one piece pirate warriors', 'one punch man', 'overcooked 2', 'persona 4 arena', "pokemon let's go", 'pokkén tournament', 'power rangers battle for the grid', 'rayman legends', 'resident evil 5', 'resident evil 6', 'resident evil revelations 2', 'river city girls 2', 'rocket league', 'saint seiya soldiers soul', 'samurai warriors', 'sbk 22', 'sengoku basara', 'shieldwall', 'sonic & all stars', 'sonic superstar', 'spider man friend or foe', 'splitsecond', 'street fighter v', 'streets of rage 4', 'stronghold crusader', 'super bomberman r', 'super smash bros', 'team sonic racing', 'tekken', 'tt isle of man', 'twisted metal', 'ufc', 'ultimate marvel vs capcom 3', 'ultra street fighter iv', 'unravel two', 'wrc', 'wreckfest', 'wwe'];
         const keywordsPerang = ['ace combat', 'assassin creed', 'battlefield', 'call of duty', 'cod ', 'commandos', 'company of heroes', 'crysis', 'dynasty warrior', 'far cry', 'gears of war', 'ghost recon', 'halo', 'homefront', 'medal of honor', 'metal gear', 'mount & blade', 'partisan', 'samurai warriors', 'sengoku basara', 'sniper elite', 'sniper ghost warrior', 'star wars battlefront', 'terminator resistance', 'tom clancy', 'total war', 'transformers', 'viking battle', 'warhammer', 'warriors orochi', 'wolfenstein', 'world war z'];
         const keywordsSport = ['ao international tennis', 'captain tsubasa', 'ea sports fc', 'efootball pes', 'pro evolution soccer', 'euro fishing', 'fifa', 'fight night', 'football manager', 'mario tennis', 'nba 2k', 'pes', 'session skateboarding', 'ufc', 'ultimate fishing', 'wwe 2k', 'wwe smackdown', 'wwe all stars', 'winning eleven'];
         const keywordsHorror = ['a plague tale', 'alan wake', 'amnesia', 'back 4 blood', 'days gone', 'dead island', 'dead rising', 'dead space', 'dreadout', 'dying light', 'ebola 2', 'fatal frame', 'five nights at freddys', 'gylt', 'hello neighbor', 'home sweet home', 'ibilis', 'indika', 'into the dead', 'left 4 dead', 'lies of p', 'little nightmares', 'nightmare side', 'outlast', 'pamali', 'poppy playtime', 'resident evil', 'september 7th', 'silent hill', 'sons of the forest', 'the bridge curse', 'the coffin of andy', 'the evil within', 'the forest', 'the last of us', 'the walking dead', 'until dawn', 'zombie army'];
@@ -291,37 +289,45 @@
         const modal = document.getElementById('specModal');
         const title = document.getElementById('modalTitle');
         const body = document.getElementById('modalBody');
+        const coverImg = document.getElementById('gameCover');
         const localGame = allGames.find(g => g.name === gameName);
         const kategori = localGame ? localGame.description.toLowerCase() : "";
 
         title.textContent = gameName;
         body.innerHTML = "Sabar Om Lagi Loading...";
+        coverImg.src = "https://via.placeholder.com/500x250?text=Memuat+Gambar...";
         modal.style.display = "block";
-
-        const gameKey = gameName.toLowerCase();
-        if (manualCorrections[gameKey]) {
-            const m = manualCorrections[gameKey];
-            body.innerHTML = `<div class="req-text"><strong>Minimum Requirements:</strong><br><b>Processor:</b> ${m.processor}<br><b>Memory / Ram:</b> ${m.memory}<br><b>Graphics:</b> ${m.graphics}<br><b>Windows:</b> ${m.windows}</div>`;
-            return;
-        }
 
         try {
             const searchRes = await fetch(`https://api.rawg.io/api/games?key=${apiKey}&search=${encodeURIComponent(gameName)}&page_size=1`);
             const searchData = await searchRes.json();
-            if (!searchData.results.length) { showFallbackSpec(body, kategori); return; }
-
-            const detailRes = await fetch(`https://api.rawg.io/api/games/${searchData.results[0].id}?key=${apiKey}`);
-            const detailData = await detailRes.json();
-            const pcPlatform = detailData.platforms.find(p => p.platform.id === 4);
             
-            if (pcPlatform && pcPlatform.requirements && pcPlatform.requirements.minimum) {
-                let minReq = formatReqText(pcPlatform.requirements.minimum, kategori);
-                if (minReq === "") {
-                    showFallbackSpec(body, kategori);
+            if (searchData.results.length) {
+                const res = searchData.results[0];
+                // Set Gambar Cover
+                coverImg.src = res.background_image || "https://via.placeholder.com/500x250?text=No+Image";
+
+                // Jika ada koreksi manual
+                const gameKey = gameName.toLowerCase();
+                if (manualCorrections[gameKey]) {
+                    const m = manualCorrections[gameKey];
+                    body.innerHTML = `<div class="req-text"><strong>Minimum Requirements:</strong><br><b>Processor:</b> ${m.processor}<br><b>Memory / Ram:</b> ${m.memory}<br><b>Graphics:</b> ${m.graphics}<br><b>Windows:</b> ${m.windows}</div>`;
+                    return;
+                }
+
+                const detailRes = await fetch(`https://api.rawg.io/api/games/${res.id}?key=${apiKey}`);
+                const detailData = await detailRes.json();
+                const pcPlatform = detailData.platforms.find(p => p.platform.id === 4);
+                
+                if (pcPlatform && pcPlatform.requirements && pcPlatform.requirements.minimum) {
+                    let minReq = formatReqText(pcPlatform.requirements.minimum, kategori);
+                    if (minReq === "") { showFallbackSpec(body, kategori); } 
+                    else { body.innerHTML = `<div class="req-text">${minReq}</div>`; }
                 } else {
-                    body.innerHTML = `<div class="req-text">${minReq}</div>`;
+                    showFallbackSpec(body, kategori);
                 }
             } else {
+                coverImg.src = "https://via.placeholder.com/500x250?text=Gambar+Tidak+Tersedia";
                 showFallbackSpec(body, kategori);
             }
         } catch (e) {
@@ -334,18 +340,18 @@
         let color = "#f0ad4e"; 
         if (kategori.includes("ringan")) {
             color = "#28a745"; 
-            content = `<b>Processor:</b> Core 2 Quad / AMD Phenom<br><b>Memory / Ram:</b> 4 GB RAM<br><b>Graphics:</b> GT 730 / HD 7730 (1GB)<br><b>Windows:</b> 7/8/10`;
+            content = `<b>Processor:</b> Core 2 Quad / AMD Phenom<br><b>Memory / Ram:</b> 4 GB RAM<br><b>Graphics:</b> GT 730 / HD 7730<br><b>Windows:</b> 7/8/10`;
         } else if (kategori.includes("sedang")) {
             color = "#007bff"; 
-            content = `<b>Processor:</b> Intel Core i3-4130 / AMD Ryzen 3 1200<br><b>Memory / Ram:</b> 8 GB RAM<br><b>Graphics:</b> GTX 750 Ti / AMD R9 270 (2GB)<br><b>Windows:</b> 10`;
+            content = `<b>Processor:</b> Intel Core i3-4130 / AMD Ryzen 3 1200<br><b>Memory / Ram:</b> 8 GB RAM<br><b>Graphics:</b> GTX 750 Ti / AMD R9 270<br><b>Windows:</b> 10`;
         } else if (kategori.includes("agak berat")) {
             color = "#fd7e14"; 
-            content = `<b>Processor:</b> Intel Core i5-6400 / AMD Ryzen 5 1600<br><b>Memory / Ram:</b> 8 GB RAM<br><b>Graphics:</b> GTX 1050 / AMD RX 560 (2GB)<br><b>Windows:</b> 10`;
+            content = `<b>Processor:</b> Intel Core i5-6400 / AMD Ryzen 5 1600<br><b>Memory / Ram:</b> 8 GB RAM<br><b>Graphics:</b> GTX 1050 / AMD RX 560<br><b>Windows:</b> 10`;
         } else if (kategori.includes("berat")) {
             color = "#dc3545"; 
-            content = `<b>Processor:</b> Intel Core i7-8700 / AMD Ryzen 7 2700<br><b>Memory / Ram:</b> 16 GB RAM<br><b>Graphics:</b> GTX 1660 / AMD RX 580 (6GB)<br><b>Windows:</b> 10/11`;
+            content = `<b>Processor:</b> Intel Core i7-8700 / AMD Ryzen 7 2700<br><b>Memory / Ram:</b> 16 GB RAM<br><b>Graphics:</b> GTX 1660 / AMD RX 580<br><b>Windows:</b> 10/11`;
         } else {
-            content = `<b>Processor:</b> Intel Core i5 / AMD Ryzen 5<br><b>Memory / Ram:</b> 8 GB RAM<br><b>Graphics:</b> NVIDIA GTX 1050 (2GB)<br><b>Windows:</b> 10`;
+            content = `<b>Processor:</b> Intel Core i5 / AMD Ryzen 5<br><b>Memory / Ram:</b> 8 GB RAM<br><b>Graphics:</b> NVIDIA GTX 1050<br><b>Windows:</b> 10`;
         }
         element.innerHTML = `<div class="req-text" style="border-left-color: ${color};"><strong style="display:block; margin-bottom:5px; color:${color};">Minimum Requirements:</strong>${content}</div>`;
     }
