@@ -110,7 +110,7 @@
 <script>
     const apiKey = "158b3858daed4d67af02a839d14ba445";
     let slideIndex = 1, allGames = [], currentSpecFilter = null, currentGenreFilter = null;
-    const cacheSpecs = new Map(); // Cache untuk performa cepat
+    const cacheSpecs = new Map();
 
     function getGameGenres(name) {
         const n = name.toLowerCase(); const g = [];
@@ -129,13 +129,12 @@
         return [...new Set(g)];
     }
 
-    // FALLBACK TERJEMAHAN INDONESIA
     function getFallbackSpec(kat) {
         kat = kat.toLowerCase();
-        if (kat.includes("ringan")) return `<b>Prosesor:</b> Core 2 Quad<br><b>RAM:</b> 4 GB RAM<br><b>Kartu Grafis (VGA):</b> GT 730`;
-        if (kat.includes("sedang")) return `<b>Prosesor:</b> Intel i3 / Ryzen 3<br><b>RAM:</b> 8 GB RAM<br><b>Kartu Grafis (VGA):</b> GTX 750 Ti`;
-        if (kat.includes("agak berat")) return `<b>Prosesor:</b> Intel i5 / Ryzen 5<br><b>RAM:</b> 8 GB RAM<br><b>Kartu Grafis (VGA):</b> GTX 1050`;
-        return `<b>Prosesor:</b> Intel i7 / Ryzen 7<br><b>RAM:</b> 16 GB RAM<br><b>Kartu Grafis (VGA):</b> GTX 1660 / RX 580`;
+        if (kat.includes("ringan")) return `<b>Prosesor:</b> Core 2 Quad atau setara<br><b>RAM:</b> 4 GB RAM<br><b>Kartu Grafis (VGA):</b> GT 730`;
+        if (kat.includes("sedang")) return `<b>Prosesor:</b> Intel i3 / Ryzen 3 atau lebih tinggi<br><b>RAM:</b> 8 GB RAM<br><b>Kartu Grafis (VGA):</b> GTX 750 Ti atau lebih baik`;
+        if (kat.includes("agak berat")) return `<b>Prosesor:</b> Intel i5 / Ryzen 5 atau lebih tinggi<br><b>RAM:</b> 8 GB RAM<br><b>Kartu Grafis (VGA):</b> GTX 1050 atau lebih baik`;
+        return `<b>Prosesor:</b> Intel i7 / Ryzen 7 atau lebih tinggi<br><b>RAM:</b> 16 GB RAM<br><b>Kartu Grafis (VGA):</b> GTX 1660 / RX 580 atau lebih baik`;
     }
 
     function plusSlides(n, e) { e.stopPropagation(); showSlides(slideIndex += n); }
@@ -165,12 +164,10 @@
         allGames = Array.from(map.values());
     }
 
-    // FUNGSI FORMAT SPEK: TERJEMAHAN + RINGKAS
+    // FUNGSI PENERJEMAH OTOMATIS (INDONESIA)
     function formatReq(text) {
         let clean = text.split(/Recommended:/i)[0].replace(/[®™]/g, '');
         let lines = [];
-        
-        // Pemetaan Label ke Bahasa Indonesia
         const targets = {
             "Processor": "Prosesor",
             "Memory": "RAM",
@@ -185,11 +182,16 @@
                              .split("DirectX")[0]
                              .split("Network")[0]
                              .split("Storage")[0]
-                             .replace(/or over|Additional Notes.*/gi, '') // Hapus teks sampah
+                             .replace(/Additional Notes.*/gi, '') // Hapus catatan teknis panjang
                              .trim();
                 
-                // Terjemahkan isi jika perlu
-                d = d.replace(/available space/gi, 'ruang kosong');
+                // PROSES TERJEMAHAN KATA DEMI KATA
+                d = d.replace(/or higher/gi, 'atau lebih tinggi')
+                     .replace(/or better/gi, 'atau lebih baik')
+                     .replace(/or over/gi, 'atau keatas')
+                     .replace(/available space/gi, 'ruang kosong')
+                     .replace(/64bit|64-bit/gi, '64-bit')
+                     .replace(/VRAM/gi, 'VRAM');
                 
                 lines.push(`<b>${targets[k]}:</b> ${d}`);
             }
@@ -211,7 +213,6 @@
         slider.querySelectorAll('.slides').forEach(s => s.remove());
         ytBtn.href = `https://www.youtube.com/results?search_query=${encodeURIComponent(gameName + " Gameplay PC No Commentary")}`;
 
-        // CEK CACHE
         if (cacheSpecs.has(gameName)) {
             const cached = cacheSpecs.get(gameName);
             body.innerHTML = cached.html;
@@ -239,14 +240,12 @@
 
                 body.innerHTML = finalHtml;
 
-                // SCREENSHOT
                 const sRes = await fetch(`https://api.rawg.io/api/games/${game.id}/screenshots?key=${apiKey}`);
                 const sData = await sRes.json();
                 const screens = sData.results.slice(0, 5).map(img => img.image);
                 
                 cacheSpecs.set(gameName, { html: finalHtml, screens: screens });
                 renderScreenshots(screens);
-
             } else {
                 body.innerHTML = getFallbackSpec(kategori);
             }
