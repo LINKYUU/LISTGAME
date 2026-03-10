@@ -63,13 +63,13 @@
         
         .clickable-name { color: #0056b3; cursor: pointer; text-decoration: underline; font-weight: 500; }
 
-        /* --- STYLES MODAL AGAR GAMBAR FULL & TIDAK TERPOTONG --- */
+        /* --- STYLES MODAL --- */
         .modal {
             display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.85); backdrop-filter: blur(5px);
         }
         .modal-content {
-            background: white; margin: 2vh auto; width: 95%; max-width: 450px;
+            background: white; margin: 2vh auto; width: 95%; max-width: 500px;
             border-radius: 15px; position: relative; max-height: 95vh; overflow-y: auto;
             box-shadow: 0 10px 40px rgba(0,0,0,0.5);
         }
@@ -79,32 +79,25 @@
         }
         
         .cover-container {
-            width: 100%;
-            background-color: #000;
-            display: flex;
-            justify-content: center;
-            border-top-left-radius: 15px;
-            border-top-right-radius: 15px;
+            width: 100%; background-color: #000; display: flex; justify-content: center;
+            border-top-left-radius: 15px; border-top-right-radius: 15px;
         }
-
-        #gameCover {
-            width: 100%; 
-            height: auto; /* TINGGI OTOMATIS SUPAYA FULL KE BAWAH */
-            max-height: 500px; /* Batas maksimal agar tidak terlalu panjang di HP */
-            object-fit: contain; 
-            display: block;
-        }
+        #gameCover { width: 100%; height: auto; max-height: 400px; object-fit: contain; display: block; }
 
         .modal-body-padding { padding: 20px; }
 
         .req-text { 
-            background: #f8f9fa; 
-            padding: 15px; 
-            border-radius: 10px; 
-            font-size: 14px; 
-            line-height: 1.6; 
-            border-left: 5px solid #1a73e8;
+            background: #f8f9fa; padding: 15px; border-radius: 10px; 
+            font-size: 14px; line-height: 1.6; border-left: 5px solid #1a73e8; margin-bottom: 20px;
         }
+
+        /* Styling Video Youtube */
+        .video-container {
+            position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;
+            border-radius: 10px; background: #000; margin-top: 10px;
+        }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+        .gameplay-title { font-weight: bold; margin-bottom: 10px; display: block; color: #d9534f; border-bottom: 2px solid #eee; padding-bottom: 5px; }
 
         .instruction-box { text-align: center; margin: 15px 0 5px 0; }
         .instruction-text { display: block; font-weight: bold; color: #d9534f; font-size: 18px; animation: blink 1.5s linear infinite; }
@@ -177,6 +170,12 @@
         <div class="modal-body-padding">
             <h3 id="modalTitle" style="margin-top:0;">Memuat...</h3>
             <div id="modalBody">Sabar Om Lagi Loading...</div>
+            
+            <div id="youtubeSection" style="display:none; margin-top:20px;">
+                <span class="gameplay-title">🎮 GAMEPLAY GAME :</span>
+                <div class="video-container" id="videoWrapper">
+                    </div>
+            </div>
         </div>
     </div>
 </div>
@@ -186,7 +185,7 @@
 <script>
     const apiKey = "158b3858daed4d67af02a839d14ba445";
 
-    // DATABASE KOREKSI MANUAL
+    // KOREKSI MANUAL (ETS2, ATS, DLL)
     const manualCorrections = {
         "euro truck simulator 2": {
             processor: "Intel i5-6400 / AMD Ryzen 3 1200",
@@ -298,6 +297,28 @@
         return "<strong>Minimum Requirements:</strong><br>" + formattedLines.join("<br>");
     }
 
+    // --- FUNGSI AMBIL VIDEO YOUTUBE ---
+    async function getYouTubeVideo(gameName) {
+        const videoWrapper = document.getElementById('videoWrapper');
+        const youtubeSection = document.getElementById('youtubeSection');
+        videoWrapper.innerHTML = "Memuat Video Gameplay...";
+        youtubeSection.style.display = "block";
+
+        try {
+            // Pencarian video melalui DuckDuckGo / API YouTube palsu sederhana via scraping tidak disarankan,
+            // Namun di sini kita pakai teknik pencarian link video YouTube yang bersih.
+            // Sebagai alternatif tanpa API Key berbayar yang rumit, kita gunakan judul game untuk mencari di YT.
+            const query = encodeURIComponent(gameName + " Gameplay PC No Commentary");
+            // Karena kita tidak punya API YouTube Key di Client Side (bahaya bocor), 
+            // Kita arahkan user ke pencarian YouTube atau pakai Iframe pencarian jika memungkinkan.
+            // Namun cara paling rapi adalah menggunakan judul game di Iframe.
+            
+            videoWrapper.innerHTML = `<iframe src="https://www.youtube.com/embed?listType=search&list=${query}" allowfullscreen></iframe>`;
+        } catch (e) {
+            youtubeSection.style.display = "none";
+        }
+    }
+
     async function showSpec(gameName) {
         const modal = document.getElementById('specModal');
         const title = document.getElementById('modalTitle');
@@ -310,6 +331,9 @@
         body.innerHTML = "Sabar Om Lagi Loading...";
         coverImg.src = ""; 
         modal.style.display = "block";
+        
+        // Panggil Fungsi Video Gameplay
+        getYouTubeVideo(gameName);
 
         try {
             const searchRes = await fetch(`https://api.rawg.io/api/games?key=${apiKey}&search=${encodeURIComponent(gameName)}&page_size=1`);
@@ -409,8 +433,16 @@
         });
 
         searchInput.onkeyup = filter;
-        document.querySelector('.close-btn').onclick = () => modal.style.display = "none";
-        window.onclick = (e) => { if(e.target == modal) modal.style.display = "none"; };
+        document.querySelector('.close-btn').onclick = () => {
+            modal.style.display = "none";
+            document.getElementById('videoWrapper').innerHTML = ""; // Stop video saat tutup
+        };
+        window.onclick = (e) => { 
+            if(e.target == modal) {
+                modal.style.display = "none";
+                document.getElementById('videoWrapper').innerHTML = ""; // Stop video
+            }
+        };
         render(allGames);
     });
 </script>
