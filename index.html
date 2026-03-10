@@ -211,7 +211,7 @@
         allGames = Array.from(map.values());
     }
 
-    // --- LOGIKA PEMBERSIHAN TOTAL (MENAMPILKAN INTEL/AMD & NVIDIA/AMD) ---
+    // --- LOGIKA PEMBERSIHAN (Sangat Spesifik Gen & VRAM) ---
     function formatReqText(text) {
         if (!text) return "";
         
@@ -230,21 +230,25 @@
                 let data = (endIdx !== -1) ? temp.substring(0, endIdx) : temp;
 
                 data = data.trim();
-                data = data.replace(/\s?\([^)]*\)/g, ''); 
+                
+                // JANGAN hapus kurung untuk VGA (biar GB-nya keliatan)
+                if (label !== "Graphics:") {
+                    data = data.replace(/\s?\([^)]*\)/g, ''); 
+                }
+                
                 data = data.replace(/available space|minimum requirements|Home 64 Bit/gi, '').trim();
                 
-                // KHUSUS PROCESSOR & GRAPHICS: Ambil 2 opsi (Intel/AMD atau Nvidia/AMD)
+                // Proses Ambil 2 Opsi (Intel/AMD & Nvidia/AMD)
                 if (label === "Processor:" || label === "Graphics:") {
                     if (data.includes(" / ") || data.includes(" or ")) {
                         let parts = data.split(/ \/ | or /);
                         if (parts.length >= 2) {
+                            // Ambil yang mencakup info Gen / VRAM
                             data = parts[0].trim() + " / " + parts[1].trim();
                         }
                     }
                 } else {
-                    // RAM & OS: Ambil yang pertama saja
                     if (data.includes(" / ")) data = data.split(" / ")[0].trim();
-                    if (data.includes(" or ")) data = data.split(" or ")[0].trim();
                 }
 
                 if (data && data.toUpperCase() !== "TBA") {
@@ -300,18 +304,18 @@
         let color = "#f0ad4e"; 
         if (kategori.includes("ringan")) {
             color = "#28a745"; 
-            content = `<b>Processor:</b> Intel Core 2 Quad / AMD Phenom X4<br><b>Memory / Ram:</b> 4 GB RAM<br><b>Graphics:</b> NVIDIA GT 730 / AMD Radeon R7<br><b>Windows:</b> 7 / 8 / 10`;
+            content = `<b>Processor:</b> Intel Core 2 Quad Q6600 / AMD Phenom X4<br><b>Memory / Ram:</b> 4 GB RAM<br><b>Graphics:</b> NVIDIA GT 730 (1GB) / AMD Radeon R7<br><b>Windows:</b> 7 / 8 / 10`;
         } else if (kategori.includes("sedang")) {
             color = "#007bff"; 
-            content = `<b>Processor:</b> Intel Core i3 / AMD Ryzen 3<br><b>Memory / Ram:</b> 8 GB RAM<br><b>Graphics:</b> NVIDIA GTX 750 Ti / AMD Radeon R9<br><b>Windows:</b> 10`;
+            content = `<b>Processor:</b> Intel Core i3-4130 / AMD Ryzen 3 1200<br><b>Memory / Ram:</b> 8 GB RAM<br><b>Graphics:</b> NVIDIA GTX 750 Ti (2GB) / AMD Radeon R9<br><b>Windows:</b> 10`;
         } else if (kategori.includes("agak berat")) {
             color = "#fd7e14"; 
-            content = `<b>Processor:</b> Intel Core i5 / AMD Ryzen 5<br><b>Memory / Ram:</b> 8 GB RAM<br><b>Graphics:</b> NVIDIA GTX 1050 / AMD Radeon RX 560<br><b>Windows:</b> 10`;
+            content = `<b>Processor:</b> Intel Core i5-6400 / AMD Ryzen 5 1600<br><b>Memory / Ram:</b> 8 GB RAM<br><b>Graphics:</b> NVIDIA GTX 1050 (2GB) / AMD Radeon RX 560<br><b>Windows:</b> 10`;
         } else if (kategori.includes("berat")) {
             color = "#dc3545"; 
-            content = `<b>Processor:</b> Intel Core i7 / AMD Ryzen 7<br><b>Memory / Ram:</b> 16 GB RAM<br><b>Graphics:</b> NVIDIA GTX 1660 / AMD Radeon RX 580<br><b>Windows:</b> 10`;
+            content = `<b>Processor:</b> Intel Core i7-8700 / AMD Ryzen 7 2700<br><b>Memory / Ram:</b> 16 GB RAM<br><b>Graphics:</b> NVIDIA GTX 1660 (6GB) / AMD Radeon RX 580<br><b>Windows:</b> 10`;
         } else {
-            content = `<b>Processor:</b> Intel Core i5 / AMD Ryzen 5<br><b>Memory / Ram:</b> 8 GB RAM<br><b>Graphics:</b> NVIDIA GTX 1050 / AMD Radeon RX 560<br><b>Windows:</b> 10`;
+            content = `<b>Processor:</b> Intel Core i5-4460 / AMD Ryzen 5 1400<br><b>Memory / Ram:</b> 8 GB RAM<br><b>Graphics:</b> NVIDIA GTX 1050 (2GB) / AMD Radeon RX 560<br><b>Windows:</b> 10`;
         }
         element.innerHTML = `<div class="req-text" style="border-left-color: ${color};"><strong style="display:block; margin-bottom:5px; color:${color};">Minimum Requirements:</strong>${content}</div>`;
     }
