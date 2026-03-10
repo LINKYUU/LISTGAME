@@ -23,7 +23,7 @@
         .next { right: 0; }
 
         .modal-body-padding { padding: 20px; text-align: left; }
-        .req-text { background: #f8f9fa; padding: 15px; border-radius: 10px; font-size: 14px; line-height: 1.6; border-left: 5px solid #1a73e8; margin-bottom: 20px; min-height: 100px; }
+        .req-text { background: #f8f9fa; padding: 15px; border-radius: 10px; font-size: 14px; line-height: 1.6; border-left: 5px solid #1a73e8; margin-bottom: 20px; min-height: 80px; }
         .gameplay-box { background: #000; border-radius: 10px; padding: 20px; text-align: center; }
         .btn-youtube { background: #d9534f; color: white; padding: 12px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block; }
         .section-title { font-weight: bold; margin-bottom: 10px; display: block; color: #d9534f; border-bottom: 2px solid #eee; padding-bottom: 5px; }
@@ -110,6 +110,7 @@
 <script>
     const apiKey = "158b3858daed4d67af02a839d14ba445";
     let slideIndex = 1, allGames = [], currentSpecFilter = null, currentGenreFilter = null;
+    const cacheSpecs = new Map(); // Cache untuk performa cepat
 
     function getGameGenres(name) {
         const n = name.toLowerCase(); const g = [];
@@ -130,10 +131,10 @@
 
     function getFallbackSpec(kat) {
         kat = kat.toLowerCase();
-        if (kat.includes("ringan")) return `<b>Processor:</b> Core 2 Quad / AMD Phenom<br><b>RAM:</b> 4 GB RAM<br><b>VGA:</b> GT 730<br><b>Windows:</b> 7/8/10`;
-        if (kat.includes("sedang")) return `<b>Processor:</b> Intel i3 / AMD Ryzen 3<br><b>RAM:</b> 8 GB RAM<br><b>VGA:</b> GTX 750 Ti<br><b>Windows:</b> 10`;
-        if (kat.includes("agak berat")) return `<b>Processor:</b> Intel i5 / AMD Ryzen 5<br><b>RAM:</b> 8 GB RAM<br><b>VGA:</b> GTX 1050<br><b>Windows:</b> 10`;
-        return `<b>Processor:</b> Intel i7 / AMD Ryzen 7<br><b>RAM:</b> 16 GB RAM<br><b>VGA:</b> GTX 1660 / RX 580<br><b>Windows:</b> 10/11`;
+        if (kat.includes("ringan")) return `<b>Processor:</b> Core 2 Quad<br><b>RAM:</b> 4 GB RAM<br><b>VGA:</b> GT 730`;
+        if (kat.includes("sedang")) return `<b>Processor:</b> Intel i3 Gen 5 / Ryzen 3<br><b>RAM:</b> 8 GB RAM<br><b>VGA:</b> GTX 750 Ti`;
+        if (kat.includes("agak berat")) return `<b>Processor:</b> Intel i5 Gen 8 / Ryzen 5<br><b>RAM:</b> 8 GB RAM<br><b>VGA:</b> GTX 1050`;
+        return `<b>Processor:</b> Intel i7 Gen 9/ Ryzen 7<br><b>RAM:</b> 16 GB RAM<br><b>VGA:</b> GTX 1660 / RX 580`;
     }
 
     function plusSlides(n, e) { e.stopPropagation(); showSlides(slideIndex += n); }
@@ -163,6 +164,27 @@
         allGames = Array.from(map.values());
     }
 
+    // FUNGSI FORMAT SPEK YANG SANGAT RINGKAS SESUAI REQUEST
+    function formatReq(text) {
+        let clean = text.split(/Recommended:/i)[0].replace(/[®™]/g, '');
+        let lines = [];
+        const targets = {"Processor": "Processor", "Memory": "RAM", "Graphics": "VGA", "OS": "Windows"};
+        
+        Object.keys(targets).forEach(k => {
+            if(clean.includes(k + ":")) {
+                let d = clean.split(k + ":")[1]
+                             .split("<br>")[0]
+                             .split("DirectX")[0]
+                             .split("Network")[0]
+                             .split("Storage")[0]
+                             .replace(/or over|Additional Notes.*/gi, '') // Hilangkan teks sampah
+                             .trim();
+                lines.push(`<b>${targets[k]}:</b> ${d}`);
+            }
+        });
+        return lines.join("<br>");
+    }
+
     async function showSpec(gameName) {
         const modal = document.getElementById('specModal');
         const title = document.getElementById('modalTitle');
@@ -175,11 +197,19 @@
         title.textContent = gameName;
         modal.style.display = "block";
         slider.querySelectorAll('.slides').forEach(s => s.remove());
-        body.innerHTML = "Mencari spek asli RAWG..."; 
         ytBtn.href = `https://www.youtube.com/results?search_query=${encodeURIComponent(gameName + " Gameplay PC No Commentary")}`;
 
+        // JIKA ADA DI CACHE, TAMPILKAN LANGSUNG
+        if (cacheSpecs.has(gameName)) {
+            const cached = cacheSpecs.get(gameName);
+            body.innerHTML = cached.html;
+            renderScreenshots(cached.screens);
+            return;
+        }
+
+        body.innerHTML = "Mencari spek asli RAWG..."; 
+
         try {
-            // STEP 1: CARI SPEK ASLI RAWG (SANGAT CEPAT)
             const res = await fetch(`https://api.rawg.io/api/games?key=${apiKey}&search=${encodeURIComponent(gameName)}&page_size=1`);
             const data = await res.json();
             
@@ -189,47 +219,39 @@
                 const detail = await detailRes.json();
                 const pc = detail.platforms.find(p => p.platform.id === 4);
                 
+                let finalHtml = getFallbackSpec(kategori);
                 if (pc && pc.requirements && pc.requirements.minimum) {
                     let formatted = formatReq(pc.requirements.minimum);
-                    if (formatted.length > 20) {
-                        body.innerHTML = formatted; // TAMPILKAN SPEK RAWG
-                    } else {
-                        body.innerHTML = getFallbackSpec(kategori); // JIKA DATA RAWG PENDEK/ANEH -> PAKAI MANUAL
-                    }
-                } else {
-                    body.innerHTML = getFallbackSpec(kategori); // JIKA DATA SPEK RAWG KOSONG -> PAKAI MANUAL
+                    if (formatted.length > 15) finalHtml = formatted;
                 }
 
-                // STEP 2: GAMBAR MENYUSUL (BACKGROUND)
-                fetch(`https://api.rawg.io/api/games/${game.id}/screenshots?key=${apiKey}`)
-                    .then(r => r.json()).then(sData => {
-                        sData.results.slice(0, 5).forEach(img => {
-                            const div = document.createElement('div'); div.className = "slides";
-                            div.innerHTML = `<img src="${img.image}">`;
-                            slider.insertBefore(div, slider.firstChild);
-                        });
-                        slideIndex = 1; showSlides(1);
-                    });
+                body.innerHTML = finalHtml;
+
+                // AMBIL SCREENSHOT
+                const sRes = await fetch(`https://api.rawg.io/api/games/${game.id}/screenshots?key=${apiKey}`);
+                const sData = await sRes.json();
+                const screens = sData.results.slice(0, 5).map(img => img.image);
+                
+                // SIMPAN KE CACHE
+                cacheSpecs.set(gameName, { html: finalHtml, screens: screens });
+                renderScreenshots(screens);
+
             } else {
-                body.innerHTML = getFallbackSpec(kategori); // GAME TIDAK ADA DI RAWG -> PAKAI MANUAL
+                body.innerHTML = getFallbackSpec(kategori);
             }
         } catch (e) {
-            body.innerHTML = getFallbackSpec(kategori); // ERROR KONEKSI -> PAKAI MANUAL
+            body.innerHTML = getFallbackSpec(kategori);
         }
     }
 
-    function formatReq(text) {
-        let clean = text.split(/Recommended:/i)[0].replace(/[®™]/g, '');
-        let lines = [];
-        const targets = {"Processor": "Processor", "Memory": "RAM", "Graphics": "VGA", "OS": "Windows"};
-        Object.keys(targets).forEach(k => {
-            if(clean.includes(k + ":")) {
-                let d = clean.split(k + ":")[1].split("<br>")[0].trim().replace(/\s?\([^)]*\)/g, '');
-                if(d.includes(" / ")) d = d.split(" / ")[0] + " / " + d.split(" / ")[1];
-                lines.push(`<b>${targets[k]}:</b> ${d}`);
-            }
+    function renderScreenshots(screens) {
+        const slider = document.getElementById('sliderContainer');
+        screens.forEach(url => {
+            const div = document.createElement('div'); div.className = "slides";
+            div.innerHTML = `<img src="${url}">`;
+            slider.insertBefore(div, slider.firstChild);
         });
-        return lines.join("<br>");
+        slideIndex = 1; showSlides(1);
     }
 
     document.addEventListener('DOMContentLoaded', () => {
