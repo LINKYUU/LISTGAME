@@ -11,6 +11,7 @@
         .special-notice { background-color: #fff4f4; border: 1px solid #d9534f; padding: 15px; margin-bottom: 15px; border-radius: 6px; }
         .special-notice p { margin: 5px 0; font-size: 18px; font-weight: 600; color: #d9534f; }
         
+        /* MODAL */
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(5px); cursor: pointer; }
         .modal-content { background: white; margin: 2vh auto; width: 95%; max-width: 480px; border-radius: 15px; position: relative; max-height: 95vh; overflow-y: auto; cursor: default; }
         .close-btn { position: absolute; right: 15px; top: 10px; font-size: 35px; cursor: pointer; color: #fff; z-index: 1010; text-shadow: 0 0 10px #000; }
@@ -27,27 +28,19 @@
         .btn-youtube { background: #d9534f; color: white; padding: 12px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block; }
         .section-title { font-weight: bold; margin-bottom: 10px; display: block; color: #d9534f; border-bottom: 2px solid #eee; padding-bottom: 5px; }
 
-        h1 { margin: 10px 0; color: #1a1a1a; }
-        #searchInput { width: 100%; max-width: 600px; padding: 12px 25px; margin: 15px auto; font-size: 16px; border: 1px solid #e0e0e0; border-radius: 50px; box-sizing: border-box; display: block; outline: none; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: all 0.3s ease; }
-        #searchInput:focus { border-color: #1a73e8; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        #searchInput { width: 100%; max-width: 600px; padding: 12px 25px; margin: 15px auto; font-size: 16px; border: 1px solid #e0e0e0; border-radius: 50px; box-sizing: border-box; display: block; outline: none; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        
         #filterContainer, #genreFilterContainer { margin-top: 15px; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
-        #genreFilterContainer { border-top: 1px dashed #ccc; padding-top: 10px; }
         .filter-btn, .genre-btn { padding: 8px 15px; font-size: 13px; font-weight: 500; background-color: #f0f0f0; border: none; border-radius: 20px; cursor: pointer; color: #555; }
         .filter-btn.active, .genre-btn.active { background-color: #333; color: white; }
         
         .table-wrapper { max-height: 60vh; overflow-y: auto; border-top: 1px solid #e0e0e0; }
         #gameTable { width: 100%; border-collapse: collapse; }
         #gameTable th, #gameTable td { padding: 12px 15px; border-bottom: 1px solid #e0e0e0; text-align: left; }
-        #gameTable th { background-color: #f9f9f9; position: sticky; top: 0; z-index: 1; }
-        
-        #sizeHeader, #specHeader { cursor: pointer; user-select: none; }
-        #sizeHeader:hover, #specHeader:hover { background-color: #f0f0f0; }
+        #gameTable th { background-color: #f9f9f9; position: sticky; top: 0; z-index: 1; cursor: pointer; user-select: none; }
+        #gameTable th:hover { background-color: #f0f0f0; }
 
         .clickable-name { color: #0056b3; cursor: pointer; text-decoration: underline; font-weight: 500; }
-        .instruction-box { text-align: center; margin: 15px 0 5px 0; }
-        .instruction-text { display: block; font-weight: bold; color: #d9534f; font-size: 18px; animation: blink 1.5s linear infinite; }
-        @keyframes blink { 50% { opacity: 0.6; } }
-
         .ket-ringan { color: #28a745; font-weight: bold; }
         .ket-sedang { color: #007bff; font-weight: bold; }
         .ket-agak-berat { color: #fd7e14; font-weight: bold; }
@@ -78,11 +71,7 @@
             <button class="genre-btn" data-filter="Strategi">Strategi</button>
             <button class="genre-btn" data-filter="Balap">Balap</button>
         </div>
-        <div class="instruction-box">
-            <span class="instruction-text">TEKAN JUDUL GAME UNTUK DETAIL & SCREENSHOT</span>
-            <span style="font-size: 13px; font-weight: bold;">KHUSUS PESAN DI LINK.YU | SELAIN ITU BUKAN TOKO SAYA</span>
-        </div>
-        <div id="gameCount" style="text-align:center; color:#777; font-size:12px; margin-top:5px; font-weight:bold;"></div>
+        <div id="gameCount" style="text-align:center; color:#777; font-size:12px; margin-top:15px; font-weight:bold;"></div>
     </header>
     <div class="table-wrapper">
         <table id="gameTable">
@@ -107,7 +96,7 @@
         </div>
         <div class="modal-body-padding">
             <h3 id="modalTitle" style="margin:0 0 15px 0;">Memuat...</h3>
-            <div id="modalBody" class="req-text">Memuat spesifikasi asli...</div>
+            <div id="modalBody" class="req-text"></div>
             <div id="gameplaySection" style="margin-top:20px;">
                 <span class="section-title">🎮 GAMEPLAY GAME :</span>
                 <div class="gameplay-box">
@@ -124,51 +113,73 @@
     const apiKey = "158b3858daed4d67af02a839d14ba445";
     let allGames = [], currentSpecFilter = null, currentGenreFilter = null;
     let sizeSortDir = 1;
+    let specSortIdx = -1;
     const specOrder = ["Ringan", "Sedang", "Agak Berat", "Berat"];
-    let currentSpecSortIdx = -1; 
 
-    // LOGIKA PERBAIKAN: Konversi ke MB agar pengurutan akurat
     function convertToMB(sizeStr) {
         if (!sizeStr) return 0;
         const s = sizeStr.toUpperCase();
         const val = parseFloat(s.replace(/[^0-9.]/g, '')) || 0;
         if (s.includes("KB")) return val / 1024;
         if (s.includes("GB")) return val * 1024;
-        return val; // Asumsi MB jika tidak ada satuan
+        return val;
     }
 
-    function getGameGenres(name) {
-        const n = name.toLowerCase(); const g = [];
-        const k2 = ['pico park', 'a way out', 'attack on titan', 'basara', 'beach buggy', 'blur', 'captain tsubasa', 'cars 2', 'chained together', 'cuphead', 'dirt 3', 'dirt 5', 'dragon ball', 'dynasty warrior', 'ea sports fc', 'efootball', 'pes 20', 'pro evolution', 'fifa', 'jump force', 'lego', 'mortal kombat', 'motogp', 'naruto', 'nba 2k', 'one piece', 'overcooked', 'resident evil 5', 'resident evil 6', 'tekken', 'wwe'];
-        const kP = ['ace combat', 'assassin creed', 'battlefield', 'call of duty', 'cod ', 'crysis', 'far cry', 'halo', 'medal of honor', 'metal gear', 'sniper elite', 'wolfenstein'];
-        const kH = ['alan wake', 'amnesia', 'days gone', 'dead island', 'dead space', 'dead rising', 'dreadout', 'dying light', 'fatal frame', 'outlast', 'resident evil', 'silent hill', 'the forest'];
-        const kB = ['euro truck', 'american truck', 'forza', 'need for speed', 'nfs', 'assetto', 'grid', 'dirt', 'f1 20', 'motogp', 'ride', 'wrc', 'wreckfest'];
-        const kS = ['age of empires', 'battle realms', 'command and conquer', 'red alert', 'stronghold', 'tropico', 'warcraft', 'civilization', 'simcity', 'cities skylines'];
-        const kSp = ['ao international', 'captain tsubasa', 'ea sports fc', 'efootball', 'pes 20', 'pro evolution', 'fifa', 'football manager', 'nba 2k', 'ufc', 'wwe', 'smackdown', 'winning eleven'];
-        if (k2.some(k => n.includes(k))) g.push('Main Berdua');
-        if (kP.some(k => n.includes(k))) g.push('Perang');
-        if (kH.some(k => n.includes(k))) g.push('Horror');
-        if (kB.some(k => n.includes(k))) g.push('Balap');
-        if (kS.some(k => n.includes(k))) g.push('Strategi');
-        if (kSp.some(k => n.includes(k))) g.push('Sport');
-        return [...new Set(g)];
+    function getFallbackSpec(kat) {
+        kat = (kat || "").toLowerCase();
+        if (kat.includes("ringan")) return `<b>Prosesor:</b> Core 2 Quad<br><b>RAM:</b> 4 GB<br><b>VGA:</b> GT 730`;
+        if (kat.includes("sedang")) return `<b>Prosesor:</b> i3 Gen 5 / Ryzen 3<br><b>RAM:</b> 8 GB<br><b>VGA:</b> GTX 750 Ti`;
+        if (kat.includes("agak berat")) return `<b>Prosesor:</b> i5 Gen 8 / Ryzen 5<br><b>RAM:</b> 8 GB<br><b>VGA:</b> GTX 1050`;
+        return `<b>Prosesor:</b> i7 Gen 9 / Ryzen 7<br><b>RAM:</b> 16 GB<br><b>VGA:</b> GTX 1660 / RX 580`;
     }
 
     function parseData() {
         if (typeof csvData === 'undefined') return;
         const lines = csvData.split(/\r?\n/); const map = new Map(); let h = false;
         for (let l of lines) {
-            l = l.trim(); if (l === "") continue;
+            l = l.trim(); if (!l) continue;
             if (l.toUpperCase().startsWith('NAMA GAME,SIZE,KETERANGAN')) { h = true; continue; }
             if (h) {
                 const p = l.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
                 if (p.length >= 3) {
                     const name = p[0].replace(/"/g, '').trim();
-                    map.set(name, { name, size: p[1].trim(), description: p[2].trim(), genres: getGameGenres(name) });
+                    map.set(name, { name, size: p[1].trim(), description: p[2].trim() });
                 }
             }
         }
         allGames = Array.from(map.values());
+    }
+
+    async function showSpec(gameName) {
+        const modal = document.getElementById('specModal');
+        const title = document.getElementById('modalTitle');
+        const body = document.getElementById('modalBody');
+        const slider = document.getElementById('sliderContainer');
+        const ytBtn = document.getElementById('youtubeBtn');
+        
+        const gameData = allGames.find(g => g.name === gameName);
+        title.textContent = gameName;
+        // TAMPILKAN SPEK BAWAAN DULU AGAR TIDAK KOSONG
+        body.innerHTML = getFallbackSpec(gameData ? gameData.description : "Sedang");
+        modal.style.display = "block";
+        slider.querySelectorAll('.slides').forEach(s => s.remove());
+        ytBtn.href = `https://www.youtube.com/results?search_query=${encodeURIComponent(gameName + " Gameplay PC")}`;
+
+        try {
+            const res = await fetch(`https://api.rawg.io/api/games?key=${apiKey}&search=${encodeURIComponent(gameName)}&page_size=1`);
+            const data = await res.json();
+            if (data.results.length) {
+                const game = data.results[0];
+                const sRes = await fetch(`https://api.rawg.io/api/games/${game.id}/screenshots?key=${apiKey}`);
+                const sData = await sRes.json();
+                sData.results.slice(0, 5).forEach(img => {
+                    const div = document.createElement('div'); div.className = "slides";
+                    div.innerHTML = `<img src="${img.image}">`;
+                    slider.insertBefore(div, slider.firstChild);
+                });
+                showSlides(1);
+            }
+        } catch (e) { console.log("Gagal muat screenshot"); }
     }
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -183,7 +194,6 @@
             const term = searchInput.value.toLowerCase();
             let f = [...allGames].filter(g => g.name.toLowerCase().includes(term));
             if (currentSpecFilter) f = f.filter(g => g.description.toLowerCase() === currentSpecFilter.toLowerCase());
-            if (currentGenreFilter) f = f.filter(g => g.genres.includes(currentGenreFilter));
             
             tableBody.innerHTML = '';
             f.forEach(g => {
@@ -194,7 +204,6 @@
             document.getElementById('gameCount').textContent = `Total: ${f.length} Game`;
         }
 
-        // --- SORT SIZE (FIXED) ---
         sizeHeader.onclick = () => {
             sizeSortDir *= -1;
             allGames.sort((a, b) => (convertToMB(a.size) - convertToMB(b.size)) * sizeSortDir);
@@ -202,10 +211,9 @@
             render();
         };
 
-        // --- SORT SPECK (ROTASI 4 TAHAP) ---
         specHeader.onclick = () => {
-            currentSpecSortIdx = (currentSpecSortIdx + 1) % specOrder.length;
-            const target = specOrder[currentSpecSortIdx];
+            specSortIdx = (specSortIdx + 1) % specOrder.length;
+            const target = specOrder[specSortIdx];
             allGames.sort((a, b) => {
                 if (a.description === target && b.description !== target) return -1;
                 if (a.description !== target && b.description === target) return 1;
@@ -216,8 +224,6 @@
         };
 
         searchInput.onkeyup = render;
-        
-        // Filter Buttons
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.onclick = () => {
                 const act = btn.classList.contains('active');
@@ -228,20 +234,11 @@
             };
         });
 
-        document.querySelectorAll('.genre-btn').forEach(btn => {
-            btn.onclick = () => {
-                const act = btn.classList.contains('active');
-                document.querySelectorAll('.genre-btn').forEach(b => b.classList.remove('active'));
-                currentGenreFilter = act ? null : btn.dataset.filter;
-                if (!act) btn.classList.add('active');
-                render();
-            };
-        });
-
+        document.querySelector('.close-btn').onclick = () => document.getElementById('specModal').style.display = "none";
+        window.onclick = (e) => { if (e.target.className === 'modal') e.target.style.display = "none"; };
         render();
     });
 
-    // Modal & Slider logic (sama seperti sebelumnya)
     let slideIndex = 1;
     function plusSlides(n, e) { e.stopPropagation(); showSlides(slideIndex += n); }
     function showSlides(n) {
@@ -251,38 +248,6 @@
         for (let i = 0; i < s.length; i++) s[i].style.display = "none";
         s[slideIndex-1].style.display = "block";
     }
-
-    async function showSpec(gameName) {
-        const modal = document.getElementById('specModal');
-        const title = document.getElementById('modalTitle');
-        const body = document.getElementById('modalBody');
-        const slider = document.getElementById('sliderContainer');
-        const ytBtn = document.getElementById('youtubeBtn');
-        
-        title.textContent = gameName;
-        modal.style.display = "block";
-        slider.querySelectorAll('.slides').forEach(s => s.remove());
-        ytBtn.href = `https://www.youtube.com/results?search_query=${encodeURIComponent(gameName + " Gameplay PC")}`;
-        body.innerHTML = "Memuat data...";
-        
-        try {
-            const res = await fetch(`https://api.rawg.io/api/games?key=${apiKey}&search=${encodeURIComponent(gameName)}&page_size=1`);
-            const data = await res.json();
-            if (data.results.length) {
-                const game = data.results[0];
-                const sRes = await fetch(`https://api.rawg.io/api/games/${game.id}/screenshots?key=${apiKey}`);
-                const sData = await sRes.json();
-                sData.results.slice(0, 5).forEach(img => {
-                    const div = document.createElement('div'); div.className = "slides";
-                    div.innerHTML = `<img src="${img.image}">`;
-                    slider.insertBefore(div, slider.firstChild);
-                });
-                body.innerHTML = "Klik gambar atau geser untuk melihat screenshot.";
-                showSlides(1);
-            }
-        } catch (e) { body.innerHTML = "Data tidak tersedia."; }
-    }
-    document.querySelector('.close-btn').onclick = () => document.getElementById('specModal').style.display = "none";
 </script>
 </body>
 </html>
