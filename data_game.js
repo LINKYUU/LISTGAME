@@ -967,9 +967,11 @@ Ys VIII Lacrimosa of Dana,29.38 GB,Sedang
 Yu Gi Oh Empire Total War,16.8 GB,Sedang
 Yu Gi Oh RUSH DUEL,3.43 GB,Sedang
 Zombie Army 4,59.07 GB,Agak Berat
-
+Until Then , 3 GB , Sedang
+Luma Island , 2 GB , Ringan
 
 `;
+
 
 
 
