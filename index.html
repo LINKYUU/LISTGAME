@@ -35,6 +35,10 @@
         .filter-btn, .genre-btn { padding: 8px 15px; font-size: 13px; font-weight: 500; background-color: #f0f0f0; border: none; border-radius: 20px; cursor: pointer; color: #555; }
         .filter-btn.active, .genre-btn.active { background-color: #333; color: white; }
         
+        .instruction-box { text-align: center; margin: 15px 0 5px 0; }
+        .instruction-text { display: block; font-weight: bold; color: #d9534f; font-size: 18px; animation: blink 1.5s linear infinite; }
+        @keyframes blink { 50% { opacity: 0.6; } }
+
         .table-wrapper { max-height: 60vh; overflow-y: auto; border-top: 1px solid #e0e0e0; }
         #gameTable { width: 100%; border-collapse: collapse; }
         #gameTable th, #gameTable td { padding: 12px 15px; border-bottom: 1px solid #e0e0e0; text-align: left; }
@@ -75,7 +79,12 @@
             <button class="genre-btn" data-filter="Balap">Balap</button>
         </div>
 
-        <div id="gameCount" style="text-align:center; color:#777; font-size:12px; margin-top:15px; font-weight:bold;"></div>
+        <div class="instruction-box">
+            <span class="instruction-text">TEKAN JUDUL GAME UNTUK DETAIL & SCREENSHOT</span>
+            <span style="font-size: 13px; font-weight: bold; display: block; margin-top: 5px;">KHUSUS PESAN DI LINK.YU | SELAIN ITU BUKAN TOKO SAYA</span>
+        </div>
+
+        <div id="gameCount" style="text-align:center; color:#777; font-size:12px; margin-top:10px; font-weight:bold;"></div>
     </header>
     <div class="table-wrapper">
         <table id="gameTable">
@@ -121,8 +130,9 @@
     const specOrder = ["Ringan", "Sedang", "Agak Berat", "Berat"];
     const cacheSpecs = new Map();
 
+    // HANDLING TBA PADA SIZE
     function convertToMB(sizeStr) {
-        if (!sizeStr) return 0;
+        if (!sizeStr || sizeStr.toUpperCase() === "TBA") return 0;
         const s = sizeStr.toUpperCase();
         const val = parseFloat(s.replace(/[^0-9.]/g, '')) || 0;
         if (s.includes("KB")) return val / 1024;
@@ -219,14 +229,18 @@
                 const detailRes = await fetch(`https://api.rawg.io/api/games/${game.id}?key=${apiKey}`);
                 const detail = await detailRes.json();
                 const pc = detail.platforms.find(p => p.platform.id === 4);
-                if (pc && pc.requirements && pc.requirements.minimum) {
+                
+                // JIKA RAWG ADA DATA MINIMUM DAN BUKAN TBA
+                if (pc && pc.requirements && pc.requirements.minimum && !pc.requirements.minimum.includes("TBA")) {
                     let formatted = formatReq(pc.requirements.minimum);
-                    if (formatted.length > 10) finalHtml = formatted;
+                    if (formatted.length > 20) finalHtml = formatted;
                 }
+
                 const sRes = await fetch(`https://api.rawg.io/api/games/${game.id}/screenshots?key=${apiKey}`);
                 const sData = await sRes.json();
                 screens = sData.results.slice(0, 5).map(img => img.image);
             }
+
             body.innerHTML = finalHtml;
             cacheSpecs.set(gameName, { html: finalHtml, screens: screens });
             renderScreenshots(screens);
@@ -288,8 +302,6 @@
         };
 
         searchInput.onkeyup = render;
-        
-        // LOGIKA TOMBOL FILTER SPECK
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.onclick = () => {
                 const act = btn.classList.contains('active');
@@ -299,8 +311,6 @@
                 render();
             };
         });
-
-        // LOGIKA TOMBOL FILTER GENRE
         document.querySelectorAll('.genre-btn').forEach(btn => {
             btn.onclick = () => {
                 const act = btn.classList.contains('active');
