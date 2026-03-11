@@ -1,1012 +1,975 @@
 // 1. Data mentah dari CSV Anda
 const csvData = `
 NAMA GAME,SIZE,KETERANGAN
-PICO PARK,82.71 MB,Ringan
-PICO PARK 2,227.65 MB,Ringan
 25 To Life,1.99 GB,Ringan
-9 Monkeys of Shaolin,6.94 GB,Sedang
-A Plague Tale Innocence,43.58 GB,Berat
+9 Monkeys of Shaolin,6.94 GB,Ringan
+A Plague Tale Innocence,43.58 GB,Agak Berat
 A Space for the Unbound,2.45 GB,Ringan
-A Way Out,21.64 GB,Agak Berat
+A Way Out,21.64 GB,Sedang
 ACE COMBAT 7 SKIES UNKNOWN,64.07 GB,Berat
 Age of Empires 3 Complete Collection,2.88 GB,Ringan
 Age of Empires II Definitive Edition,32.94 GB,Agak Berat
-Age of Empires III Definitive Edition,56.17 GB,Berat
+Age of Empires III Definitive Edition,56.17 GB,Agak Berat
 Age of Empires IV,78.09 GB,Berat
-Age of Mythology: Retold,24.73 GB,Agak Berat
-Age of Wonders 4,25.50 GB,Agak Berat
-Aircraft Carrier Survival,9.61 GB,Sedang
-Alan Wake Remastered,39.67 GB,Agak Berat
+Age of Mythology: Retold,24.73 GB,Sedang
+Age of Wonders 4,25.50 GB,Sedang
+Aircraft Carrier Survival,9.61 GB,Ringan
 Alan Wake 2,112.2 GB,Berat
-Albatroz,41.27 GB,Berat
-Alien Rogue Incursion,21.0 GB,Agak Berat
+Alan Wake Remastered,39.67 GB,Agak Berat
+Albatroz,41.27 GB,Agak Berat
+Alien Rogue Incursion,21.0 GB,Berat
 Altered Beast,2.2 GB,Ringan
-American Truck Simulator,24.16 GB,Agak Berat
+American Truck Simulator,24.16 GB,Sedang
 Amnesia Rebirth,36.46 GB,Agak Berat
 Among Us,762.88 MB,Ringan
-Ancestors The Humankind Odyssey,8.33 GB,Sedang
-Animal Crossing,7.12 GB,Sedang
-Animal Revolt Battle Simulator,2.34 GB,Ringan
+Ancestors The Humankind Odyssey,8.33 GB,Ringan
+Animal Crossing,7.12 GB,Ringan
+Animal Revolt Battle Simulator,2.34 GB,Sedang
 AO International Tennis,13.36 GB,Sedang
 AOE 3 Complete Edition,2.0 GB,Ringan
 Aragami 2,9.19 GB,Sedang
 Assassin Creed Odyssey,103.47 GB,Berat
-Assassins Creed,6.98 GB,Sedang
-Assassins Creed,7.0 GB,Sedang
-Assassins Creed Unity,47.5 GB,Berat
-Assassins Creed Brotherhood,7.50 GB,Sedang
+Assassins Creed Brotherhood,7.50 GB,Ringan
 Assassins Creed II,4.08 GB,Ringan
+Assassins Creed III Remastered,41.64 GB,Agak Berat
 Assassins Creed III,16.44 GB,Sedang
-Assassins Creed III Remastered,41.64 GB,Berat
 Assassins Creed IV Black Flag,18.27 GB,Sedang
 Assassins Creed Liberation HD,3.47 GB,Ringan
 Assassins Creed Mirage,43.16 GB,Berat
-Assassins Creed Revelations,9.44 GB,Sedang
+Assassins Creed Revelations,9.44 GB,Ringan
 Assassins Creed Rogue,12.24 GB,Sedang
 Assassins Creed Syndicate,65.13 GB,Berat
-Assassins Creed Unity,47.50 GB,Berat
+Assassins Creed Unity,47.5 GB,Agak Berat
 Assassins Creed Valhalla,165.96 GB,Berat
-Assetto Corsa,42.17 GB,Berat
+Assassins Creed,6.98 GB,Ringan
 Assetto Corsa Competizione,19.87 GB,Sedang
+Assetto Corsa,42.17 GB,Agak Berat
 Asterix & Obelix Slap Them All 2,2.44 GB,Ringan
 Asterix & Obelix XXL 3,2.74 GB,Ringan
 Asterix at the Olympic Games,2.08 GB,Ringan
 Astral Chain,10.3 GB,Sedang
 Atelier Ryza 2,13.58 GB,Sedang
 Atelier Ryza 3,31.55 GB,Agak Berat
-Atelier Ryza,23.35 GB,Agak Berat
-Atelier Sophie 2,20.68 GB,Agak Berat
+Atelier Ryza,23.35 GB,Sedang
+Atelier Sophie 2,20.68 GB,Sedang
+Attack on Titan 2,42.23 GB,Agak Berat
 Attack on Titan,18.52 GB,Sedang
-Attack on Titan 2,42.23 GB,Berat
-Automaton The Car Company Tycoon,29.80 GB,Agak Berat
-Avatar The Last Airbender Quest,9.03 GB,Sedang
+Automaton The Car Company Tycoon,29.80 GB,Sedang
+Avatar The Last Airbender Quest,9.03 GB,Ringan
 AyoDance,19.74 GB,Sedang
-Back 4 Blood,52.98 GB,Berat
+Back 4 Blood,52.98 GB,Agak Berat
 Baisu,6.56 GB,Sedang
 Bakery Shop Simulator,13.72 GB,Sedang
 Bakugan Champions of Vestoria,1.78 GB,Ringan
 Baldurs Gate 3,167.47 GB,Berat
-Sengoku Basara 2,4.72 GB,Ringan
-Sengoku Basara 3 Utage,12.5 GB,Sedang
-Batman Arkham Asylum,8.41 GB,Sedang
-Batman Arkham Origins,18.50 GB,Sedang
+Batman Arkham Asylum,8.41 GB,Ringan
 Batman Arkham City,19.49 GB,Sedang
+Batman Arkham Origins,18.50 GB,Sedang
 Battle Realms,791.35 KB,Ringan
-Battlefield 1,52.15 GB,Ringan
+Battlefield 1,52.15 GB,Agak Berat
 Battlefield 2,3.89 GB,Ringan
 Battlefield 3,16.52 GB,Sedang
-Battlefield Bad Company 2,8.60 GB,Sedang
 Battlefield 4,75.7 GB,Berat
-Battlefield Bad Company 2,8.6 GB,Sedang
-Battlefield Hardline,51.1 GB,Berat
+Battlefield Bad Company 2,8.60 GB,Ringan
+Battlefield Hardline,51.1 GB,Agak Berat
 Battletoads,12.43 GB,Sedang
-Bayonetta,12.64 GB,Sedang
 Bayonetta 3,13.2 GB,Sedang
+Bayonetta,12.64 GB,Sedang
 Beach Buggy Racing 2,0.6 GB,Ringan
-BeamNG drive,56.52 GB,Berat
-BeamNG drive,51.42 GB,Berat
-Bellwright,16.78 GB,Sedang
-Beyond Two Souls,45.28 GB,Berat
-Biomutant,26.57 GB,Agak Berat
-Bioshock Infinite,46.65 GB,Berat
-BioShock Remastered,21.76 GB,Agak Berat
+BeamNG drive,56.52 GB,Agak Berat
+Bellwright,16.78 GB,Berat
+Beyond Two Souls,45.28 GB,Agak Berat
+Biomutant,26.57 GB,Sedang
+Bioshock Infinite,46.65 GB,Agak Berat
+BioShock Remastered,21.76 GB,Sedang
 Blasphemous 2,3.49 GB,Ringan
 BLERCH Rebirth of Souls,75.4 GB,Berat
-Bloody Spell,21.76 GB,Agak Berat
+Bloody Spell,21.76 GB,Sedang
 Bloons TD 6,1.78 GB,Ringan
 BLUE REFLECTION Second Light,16.45 GB,Sedang
-Blur,8.23 GB,Sedang
-Borderlands 3,145.15 GB,Berat
+Blur,8.23 GB,Ringan
 Borderlands 2,35.2 GB,Agak Berat
+Borderlands 3,145.15 GB,Berat
 Bramble The Mountain King,7.59 GB,Sedang
-Brigandine,21.09 GB,Agak Berat
+Brigandine,21.09 GB,Sedang
 Bright Memory,4.34 GB,Ringan
 Brothers A Tale of Two Sons,1.45 GB,Ringan
 Builder Simulator,11.58 GB,Sedang
-Bully Scholarship Edition,5.21 GB,Sedang
+Bully Scholarship Edition,5.21 GB,Ringan
 Bum Simulator,12.22 GB,Sedang
 Burnout Paradise,3.02 GB,Ringan
 Bus Simulator 21,16.14 GB,Sedang
 C C Red Alert 3,14.95 GB,Sedang
+CAIRN,2 GB,Ringan
 Call of Duty 2,3.66 GB,Ringan
-Call of Duty 4 Modern Warfare,6.76 GB,Sedang
+Call of Duty 4 Modern Warfare,6.76 GB,Ringan
 Call of Duty Advanced Warfare,38.42 GB,Agak Berat
 Call Of Duty Black Ops 4,157.74 GB,Berat
 Call of Duty Black Ops III,127.98 GB,Berat
 Call of Duty Ghosts,31.14 GB,Agak Berat
-Call of Duty Modern Warfare III TERBARU,60.2 GB,Berat
-Call of Duty Modern Warfare Remastered,45.06 GB,Berat
-Call of Duty World at War,7.25 GB,Sedang
-Call of Duty Modern Warfare 3,18.19 GB,Sedang
-Call to Arms,44.99 GB,Berat
-Call of Duty Modern Warfare 2,14.6 GB,Sedang
 Call of Duty Modern Warfare 2 Remastered,67.9 GB,Berat
+Call of Duty Modern Warfare 2 TERBARU , 50 GB ,Agak Berat
+Call of Duty Modern Warfare 2,14.6 GB,Sedang
+Call of Duty Modern Warfare 3,18.19 GB,Sedang
+Call of Duty Modern Warfare III TERBARU,60.2 GB,Berat
+Call of Duty Modern Warfare Remastered,45.06 GB,Agak Berat
+Call of Duty Modern Warfare TERBARU , 100 GB ,Berat
 Call of Duty Vanguard,84.9 GB,Berat
-Call of Duty Modern Warfare TERBARU , 100 GB , Berat
-Call of Duty Modern Warfare 2 TERBARU , 50 GB , Berat
-Captain Tsubasa Rise of New Champions,49.64 GB,Berat
+Call of Duty World at War,7.25 GB,Ringan
+Call to Arms,44.99 GB,Agak Berat
+Captain Tsubasa Rise of New Champions,49.64 GB,Agak Berat
 Car Mechanic Simulator 2018,10.48 GB,Sedang
-Car Mechanic Simulator 2021,25.83 GB,Agak Berat
-Cars 2,1.73 GB,Ringan
+Car Mechanic Simulator 2021,25.83 GB,Sedang
+Cars 2,1.73 GB,Sedang
 CarX Street,18.09 GB,Sedang
 Castle Of Illusion,929.71 KB,Ringan
-Chained Together,7.78 GB,Sedang
-Chocobo GP,6.66 GB,Sedang
+Chained Together,7.78 GB,Ringan
+Chocobo GP,6.66 GB,Ringan
 Choo Choo Charles,2.40 GB,Ringan
 CHRONO CROSS,3.78 GB,Ringan
-CHRONO CROSS,3.78 GB,Ringan
-Citadel Forged with Fire,165.30 KB,Ringan
-Cities Skylines,17.01 GB,Sedang
+Citadel Forged with Fire,165.30 KB,Sedang
 Cities Skylines II,66.30 GB,Berat
+Cities Skylines,17.01 GB,Sedang
 City Bus Manager,13.8 GB,Sedang
-City Bus Manager,40.2 GB,Berat
 Clair Obscur Expedition 33,44.30 GB,Berat
 COD Modern Warfare 2,32.30 GB,Agak Berat
 Command and Conquer Generals,2.89 GB,Ringan
-Command And Conquer Remastered,25.44 GB,Agak Berat
-Command and Conquer Remastered,25.4 GB,Agak Berat
+Command and Conquer Remastered,25.4 GB,Sedang
+Command And Conquer Remastered,25.44 GB,Sedang
 Commandos 3 HD,7.73 GB,Sedang
-Commandos Origins,31.40 GB,Agak Berat
-Company of Heroes 2,42.98 GB,Berat
-Company Of Heroes,9.23 GB,Sedang
+Commandos Origins,31.40 GB,Berat
+Company of Heroes 2,42.98 GB,Agak Berat
+Company Of Heroes,9.23 GB,Ringan
 Contraband Police,13.07 GB,Sedang
-Control,44.93 GB,Berat
+Control,44.93 GB,Agak Berat
 Cooking Simulator,13.70 GB,Sedang
 Coral Island,13.12 GB,Sedang
 Counter Strike Global Offensive,31.02 GB,Agak Berat
 Couple Cultivation Saves the World,32.13 GB,Agak Berat
-Crash Bandicoot 4,24.40 GB,Agak Berat
+Crash Bandicoot 4,24.40 GB,Sedang
 Crash Bandicoot N Sane Trilogy,30.5 GB,Agak Berat
 Crisis 2 ME,13.1 GB,Sedang
 CRISIS CORE FINAL FANTASY VII REUNION,19.0 GB,Sedang
-Crysis 1,5.88 GB,Sedang
+Crysis 1,5.88 GB,Ringan
 Crysis 3,10.96 GB,Sedang
-Crysis Remastered,21.02 GB,Agak Berat
-CTR,6.28 GB,Sedang
-Cult of the Lamb,1.99 GB,Ringan
-Cuphead,5.71 GB,Sedang
+Crysis Remastered,21.02 GB,Sedang
+CTR,6.28 GB,Ringan
+Cult of the Lamb,1.99 GB,Sedang
+Cuphead,5.71 GB,Ringan
 Dakar Desert Rally,35.4 GB,Agak Berat
 Dark Souls 2,18.86 GB,Sedang
-Dark Souls III,26.25 GB,Agak Berat
+Dark Souls III,26.25 GB,Sedang
 DARK SOULS Prepare To Die,3.92 GB,Ringan
 DARK SOULS REMASTERED,7.25 GB,Sedang
-Darksiders,10.1 GB,Sedang
 Darksiders 2,13.1 GB,Sedang
-Darksiders III,23.5 GB,Agak Berat
-Darksiders Warmastered Edition,23.5 GB,Agak Berat
+Darksiders III,23.5 GB,Sedang
+Darksiders Warmastered Edition,23.5 GB,Sedang
+Darksiders,10.1 GB,Sedang
 Dating Simulator,4.03 GB,Ringan
 Days Gone,65.87 GB,Berat
-Dead Island 2,48.23 GB,Berat
-Dead Island Riptide,9.68 GB,Sedang
-Dead Rising 4,64.13 GB,Berat
-Dead Space 2,9.79 GB,Sedang
-Dead Space 3,11.94 GB,Sedang
-Dead or Alive 6,57.0 GB,Berat
 Dead Cells,4.3 GB,Ringan
-Deadpool,6.57 GB,Sedang
-Dead Rising 3,25.7 GB,Agak Berat
-Dead Space,9.9 GB,Sedang
+Dead Island 2,48.23 GB,Berat
+Dead Island Riptide,9.68 GB,Ringan
+Dead or Alive 6,57.0 GB,Agak Berat
+Dead Rising 3,25.7 GB,Sedang
+Dead Rising 4,64.13 GB,Berat
+Dead Space 2,9.79 GB,Ringan
+Dead Space 3,11.94 GB,Sedang
+Dead Space,9.9 GB,Ringan
+Deadpool,6.57 GB,Ringan
 Death Stranding,67.08 GB,Berat
 Def Jam Vendetta,2.30 GB,Ringan
-Demon Slayer,9.60 GB,Sedang
-Desperados III,22.08 GB,Agak Berat
+Demon Slayer,9.60 GB,Ringan
+Desperados III,22.08 GB,Sedang
 Devil May Cry 3,4.74 GB,Ringan
-Devil May Cry 4,25.92 GB,Agak Berat
-Devil May Cry 5,41.95 GB,Berat
+Devil May Cry 4,25.92 GB,Sedang
+Devil May Cry 5,41.95 GB,Agak Berat
+DIABLO 2 RESURRETED,30 GB,Sedang
 Diablo II,2.0 GB,Ringan
-Digimon Story Cyber Sleuth,5.77 GB,Sedang
+Digimon Story Cyber Sleuth,5.77 GB,Ringan
 Digimon Survive,6.92 GB,Sedang
 DiRT 3,14.33 GB,Sedang
-DiRT 5,40.69 GB,Berat
+DiRT 5,40.69 GB,Agak Berat
 Dirt Rally 2,11.49 GB,Sedang
-DiRT21,6.28 GB,Sedang
+DiRT21,6.28 GB,Ringan
 Disco Elysium,10.09 GB,Sedang
-Disgaea 4,6.59 GB,Sedang
-Disgaea 5,8.46 GB,Sedang
-Disgaea 6,6.0 GB,Sedang
-Dishonored 2,41.90 GB,Berat
+Disgaea 4,6.59 GB,Ringan
+Disgaea 5,8.46 GB,Ringan
+Disgaea 6,6.0 GB,Ringan
+Dishonored 2,41.90 GB,Agak Berat
 Disney Pixar Cars Race O Rama,4.26 GB,Ringan
 Disney Pixar Up,1.72 GB,Ringan
-Disney Planes,7.08 GB,Sedang
 Disney Planes Mater National,3.91 GB,Ringan
+Disney Planes,7.08 GB,Ringan
 Divinity Original Sin,11.92 GB,Sedang
-Donkey Kong Country Tropical Freeze,7.21 GB,Sedang
-DOOM,75.1 GB,Berat
+Donkey Kong Country Tropical Freeze,7.21 GB,Ringan
 DOOM Eternal,93.2 GB,Berat
+DOOM,75.1 GB,Berat
 Doraemon Story of Seasons,813.91 KB,Ringan
 Downhill Domination,2.86 GB,Ringan
 Dragon Age Inquisition,39.15 GB,Agak Berat
-DRAGON BALL FighterZ,6.29 GB,Sedang
-Dragon Ball XenoVerse,10.69 GB,Sedang
-DRAGON BALL XENOVERSE 2,31.76 GB,Agak Berat
-Dragon Ball Z Budokai 2,4.69 GB,Ringan
-Dragon Ball Z Kakarot,25.59 GB,Agak Berat
-DRAGON BALL SPARKING ZERO,30.17 GB,Agak Berat
-DRAGON QUEST BUILDERS 2,4.20 GB,Ringan
 Dragon Age The Veilguard,94.6 GB,Berat
-DreadOut,8.95 GB,Sedang
+DRAGON BALL FighterZ,6.29 GB,Berat
+DRAGON BALL SPARKING ZERO,30.17 GB,Agak Berat
+DRAGON BALL XENOVERSE 2,31.76 GB,Agak Berat
+Dragon Ball XenoVerse,10.69 GB,Sedang
+Dragon Ball Z Budokai 2,4.69 GB,Ringan
+Dragon Ball Z Kakarot,25.59 GB,Sedang
+DRAGON QUEST BUILDERS 2,4.20 GB,Ringan
+DRAGON QUEST VII,10 GB,Ringan
 DreadOut 2,17.95 GB,Sedang
-Driver San Francisco,6.82 GB,Sedang
+DreadOut,8.95 GB,Ringan
+Driver San Francisco,6.82 GB,Ringan
 Duck Season,5.80 GB,Sedang
 Dying Light 2,74.04 GB,Berat
-Dying Light,47.86 GB,Berat
-Dynasty warriors Gundam reborn,12.03 GB,Sedang
-DYNASTY WARRIORS ORIGINS,53.6 GB,Berat
-Dynasty Warriors 6,5.0 GB,Sedang
-Dynasty Warriors 7,24.60 GB,Agak Berat
+Dying Light,47.86 GB,Agak Berat
+Dynasty Warriors 6,5.0 GB,Ringan
+Dynasty Warriors 7,24.60 GB,Sedang
 Dynasty Warriors 8 Empires,15.29 GB,Sedang
 Dynasty Warriors 8,14.33 GB,Sedang
-Dynasty Warriors 9,47.00 GB,Berat
-Dynasty Warriors 9 Empires,43.16 GB,Berat
-Dynasty Warriors Gundam 3,8.65 GB,Sedang
+Dynasty Warriors 9 Empires,43.16 GB,Agak Berat
+Dynasty Warriors 9,47.00 GB,Agak Berat
+Dynasty Warriors Gundam 3,8.65 GB,Ringan
+Dynasty warriors Gundam reborn,12.03 GB,Sedang
+DYNASTY WARRIORS ORIGINS,53.6 GB,Agak Berat
 EA Sports FC 25,12.26 GB,Sedang
-Earth Defense Force 5,21.08 GB,Agak Berat
-EARTH DEFENSE FORCE 6,43.28 GB,Berat
-Ebola 2,428.71 MB,Ringan
-Echoes of Yi Samsara,24.73 GB,Agak Berat
-PES 2021,80 GB,Berat
-ELDEN RING NIGHTREIGN,21.7 GB,Agak Berat
+Earth Defense Force 5,21.08 GB,Sedang
+EARTH DEFENSE FORCE 6,43.28 GB,Agak Berat
+Ebola 2,428.71 MB,Sedang
+Echoes of Yi Samsara,24.73 GB,Sedang
+ELDEN RING NIGHTREIGN,21.7 GB,Sedang
 ELDEN RING Shadow of the Erdtree,69.40 GB,Berat
 ELDEN RING,69.4 GB,Berat
 Euro Fishing,15.98 GB,Sedang
 Euro Truck Simulator 2,34.03 GB,Agak Berat
-Europa Universalis IV,9.82 GB,Sedang
+Europa Universalis IV,9.82 GB,Ringan
 Everdream Valley,2.84 GB,Ringan
-Expeditions A MudRunner Game,24.22 GB,Agak Berat
-Eyuden Chronicle Hundred Heroes,26.1 GB,Agak Berat
+Expeditions A MudRunner Game,24.22 GB,Sedang
+Eyuden Chronicle Hundred Heroes,26.1 GB,Sedang
 F1 2014,15.97 GB,Sedang
-F1 2015,23.37 GB,Agak Berat
+F1 2015,23.37 GB,Sedang
 F1 2017,33.59 GB,Agak Berat
-F1 2017,22.71 GB,Agak Berat
 F1 2018,39.48 GB,Agak Berat
-F1 2019,45 GB,Berat
-F1 2020,50 GB , Berat
-F1 2021,60 GB , Berat
-F1 2022,80 GB , Berat
-F1 Race Stars,5.18 GB,Sedang
-Fae Farm,2.79 GB,Ringan
+F1 2019,45 GB,Agak Berat
+F1 2020,50 GB ,Agak Berat
+F1 2021,60 GB ,Berat
+F1 2022,80 GB ,Berat
+F1 Race Stars,5.18 GB,Ringan
+Fae Farm,2.79 GB,Sedang
 Fallout 2,736.01 KB,Ringan
-Fallout 3,9.0 GB,Sedang
+Fallout 3,9.0 GB,Ringan
 Fallout 4,37.8 GB,Agak Berat
-Fallout New Vegas,9.68 GB,Sedang
+Fallout New Vegas,9.68 GB,Ringan
+Far Changing Tides,3.51 GB,Ringan
 Far Cry 3,13.14 GB,Sedang
 Far Cry 4,32.57 GB,Agak Berat
 FAR CRY 5,97.4 GB,Berat
 Far Cry 6,140.68 GB,Berat
-Far Cry New Dawn,47.52 GB,Berat
-Far Cry Primal,20.65 GB,Agak Berat
-Far Changing Tides,3.51 GB,Ringan
+Far Cry New Dawn,47.52 GB,Agak Berat
+Far Cry Primal,20.65 GB,Sedang
 Farm Manager 2021,5.47 GB,Sedang
-Farming Simulator 22,39.96 GB,Agak Berat
 Farming Simulator 19,15.8 GB,Sedang
-Farming Simulator 25,40.8 GB,Berat
-Farm Manager 2021,11.4 GB,Sedang
-Fast Food Manager,4.82 GB,Ringan
+Farming Simulator 22,39.96 GB,Agak Berat
+Farming Simulator 25,40.8 GB,Agak Berat
+Fast Food Manager,4.82 GB,Sedang
 Fatal Frame Mask of the Lunar Eclipse,14.93 GB,Sedang
 FATAL FURY City of the Wolves,35.20 GB,Agak Berat
 Fate Extella,13.44 GB,Sedang
 Feed and Grow Fish,1.47 GB,Ringan
 FFXV,102.79 GB,Berat
 FIFA 14,4.72 GB,Ringan
-FIFA 14,22.71 GB,Agak Berat
-FIFA 15,9.14 GB,Sedang
+FIFA 15,9.14 GB,Ringan
 FIFA 16,32.78 GB,Agak Berat
 FIFA 18,38.98 GB,Agak Berat
 FIFA 19,33.53 GB,Agak Berat
 FIFA 21,14.40 GB,Sedang
 FIFA 22,13.45 GB,Sedang
-FIFA 23,50.89 GB,Berat
-FIFA 25 EMU (NOT RECOMENT), 10 GB , BERAT
+FIFA 23,50.89 GB,Agak Berat
+FIFA 25 EMU (NOT RECOMENT), 10 GB ,Sedang
 Fifa Street 2,4.73 GB,Ringan
 Fight Night 2004,3.28 GB,Ringan
-Fight Night Champion,5.67 GB,Sedang
+Fight Night Champion,5.67 GB,Ringan
+Final Fantasy Type-0 HD,25.9 GB,Sedang
 FINAL FANTASY VII REBIRTH,161.0 GB,Berat
+Final Fantasy VII Remake,98.8 GB,Berat
 Final Fantasy X-2,38.69 GB,Agak Berat
 FINAL FANTASY XII,30.69 GB,Agak Berat
-Final Fantasy XIII 2,28.94 GB,Agak Berat
+Final Fantasy XIII 2,28.94 GB,Sedang
 FINAL FANTASY XVI,160.67 GB,Berat
-Final Fantasy Type-0 HD,25.9 GB,Agak Berat
-Final Fantasy VII Remake,98.8 GB,Berat
 Fire Emblem Three Houses,12.3 GB,Sedang
 Fishing North Atlantic,13.88 GB,Sedang
 Fita Street,4.73 GB,Ringan
 Five Hearts Under One Roof,32.94 GB,Agak Berat
-Five Nights at Freddys 2,7.89 GB,Sedang
-Five Nights At Freddys Into The Pit,3.73 GB,Ringan
+Five Nights at Freddys 2,7.89 GB,Ringan
+Five Nights At Freddys Into The Pit,3.73 GB,Sedang
 Five Nights at Freddys Security Breach,63.19 GB,Berat
-Football Manager 2023,5.11 GB,Sedang
-Football Manager 2021,8.7 GB,Sedang
-Forza Horizon,9.22 GB,Sedang
-Forza Horizon 2,7.77 GB,Sedang
+Football Manager 2021,8.7 GB,Ringan
+Football Manager 2023,5.11 GB,Ringan
+Forza Horizon 2,7.77 GB,Ringan
 Forza Horizon 3,65.52 GB,Berat
 Forza Horizon 5,112.15 GB,Berat
+Forza Horizon,9.22 GB,Ringan
 FRONT MISSION 2 Remake,9.50 GB,Sedang
-Frostpunk,9.64 GB,Sedang
+Frostpunk,9.64 GB,Berat
 Gas Station Simulator,15.04 GB,Sedang
-Gears Of War,12.83 GB,Sedang
 Gears of War 4,128.23 GB,Berat
+Gears Of War,12.83 GB,Sedang
+Ghost of Tsushima,56.3 GB,Agak Berat
 Ghost Recon Future Soldier,14.89 GB,Sedang
-Ghost of Tsushima,56.3 GB,Berat
+Ghost Recon Wildlands,90.12 GB,Berat
 Ghostwire Tokyo,18.64 GB,Sedang
 Goat Simulator 3,11.71 GB,Sedang
 GOD EATER 2,14.60 GB,Sedang
 God Eater 3,30.68 GB,Agak Berat
-God of War,8.46 GB,Sedang
 God of War 2,10.5 GB,Sedang
 GOD OF WAR 2018,67.39 GB,Berat
-GOD OF WAR 3,23.37 GB,Agak Berat
+GOD OF WAR 3,23.37 GB,Sedang
 God of War Ascension,16.47 GB,Sedang
 God of War Ghost of Olympus,1.62 GB,Ringan
 God of War Ragnarok,112.0 GB,Berat
-Godfall,51.11 GB,Berat
-"Good Pizza, Great Pizza",1.73 GB,Ringan
-Gran Turismo 4,5.3 GB,Sedang
-Grand Theft Auto Vice City,1.5 GB,Ringan
+God of War,8.46 GB,Ringan
+Godfall,51.11 GB,Agak Berat
+Gran Turismo 4,5.3 GB,Ringan
 Grand Theft Auto III,1.5 GB,Ringan
+Grand Theft Auto IV,32.5 GB,Agak Berat
 Grand Theft Auto Liberty City Stories,4.06 GB,Ringan
 Grand Theft Auto San Andreas,4.92 GB,Ringan
-GTA The Trilogy,33.38 GB,Agak Berat
 Grand Theft Auto V,119.71 GB,Berat
-GTA San Andreas Definitive,19.76 GB,Sedang
+Grand Theft Auto Vice City,1.5 GB,Ringan
 Green Hell,10.33 GB,Sedang
 Grid 2,11.08 GB,Sedang
 GRID Autosport,16.23 GB,Sedang
 Grounded,30.82 GB,Agak Berat
-Grounded,9.50 GB,Sedang
-GTA The Trilogy,33.4 GB,Agak Berat
-GUILTY GEAR STRIVE,27.41 GB,Agak Berat
-Guitar Hero rocks the 80s,2.0 GB,Ringan
-Guitar Hero 5,8.47 GB,Sedang
-Guitar Hero Indonesia,2.73 GB,Ringan
-Guitar Hero Indonesia,5.5 GB,Sedang
-Guitar Hero Indonesia,2.59 GB,Ringan
+GTA San Andreas Definitive,19.76 GB,Sedang
+GTA The Trilogy,33.38 GB,Agak Berat
+GUILTY GEAR STRIVE,27.41 GB,Sedang
+Guitar Hero 5,8.47 GB,Ringan
 Guitar Hero II,4.7 GB,Ringan
-Guitar Hero Metallica,8.48 GB,Sedang
+Guitar Hero Indonesia,2.73 GB,Ringan
+Guitar Hero Metallica,8.48 GB,Ringan
 Guitar Hero Peterpan NOAH,1.24 GB,Ringan
 Guitar Hero Pop Indonesia,3.1 GB,Ringan
+Guitar Hero rocks the 80s,2.0 GB,Ringan
 GUNDAM BREAKER 4,10.57 GB,Sedang
-Gundam Extreme Vs Full Boost,9.00 GB,Sedang
+Gundam Extreme Vs Full Boost,9.00 GB,Ringan
 GYLT,6.85 GB,Sedang
 HADES,11.63 GB,Sedang
-Halo Infinite,48.7 GB,Berat
+Halo Infinite,48.7 GB,Agak Berat
 Halo The Master Chief Collection,140.8 GB,Berat
-Harvest Moon One World,989.51 KB,Ringan
 Harvest Moon Light of Hope,890.68 MB,Ringan
+Harvest Moon One World,989.51 KB,Sedang
 Harvest Moon Save the Homeland,229.45 MB,Ringan
-Hearts of Iron IV,9.73 GB,Sedang
-Hearts of Iron IV,9.7 GB,Sedang
-Hell Is Us,21.5 GB,Agak Berat
+Hearts of Iron IV,9.73 GB,Ringan
+Hell Is Us,21.5 GB,Berat
 Hellblade Senua's Sacrifice,19.95 GB,Sedang
-Hello Neighbor,50.8 GB,Berat
-Hitman Absolution,24.76 GB,Agak Berat
-Hitman,68.86 GB,Berat
+Hello Neighbor,50.8 GB,Agak Berat
 Hitman 3,75.9 GB,Berat
+Hitman Absolution,24.76 GB,Sedang
+Hitman,68.86 GB,Berat
 Hogwarts Legacy,76.48 GB,Berat
-Hollow Knight Silksong,7.94 GB,Sedang
+HOLLOW KNIGHT SILKSONG,5 GB,Ringan
+Hollow Knight Silksong,7.94 GB,Ringan
 Home Sweet Home,11.23 GB,Sedang
-Homefront,9.93 GB,Sedang
+Homefront,9.93 GB,Ringan
 Horizon Zero Dawn,75.74 GB,Berat
-HOT WHEELS UNLEASHED,28.24 GB,Agak Berat
 HOT WHEELS UNLEASHED 2,15.76 GB,Sedang
-House Builder,29.32 GB,Agak Berat
-House Flipper,27.33 GB,Agak Berat
+HOT WHEELS UNLEASHED,28.24 GB,Sedang
+House Builder,29.32 GB,Sedang
 House Flipper 2,12.67 GB,Sedang
-Human Fall Flat,5.26 GB,Sedang
-HumanitZ,26.73 GB,Agak Berat
+House Flipper,27.33 GB,Sedang
+Human Fall Flat,5.26 GB,Ringan
+HumanitZ,26.73 GB,Sedang
 HUMANKIND,36.15 GB,Agak Berat
 Hunting Simulator 2,15.4 GB,Sedang
 Hyrule Warriors,11.51 GB,Sedang
+HYTALE,3 GB,Ringan
 I Am Fish,10.78 GB,Sedang
-I Am Part Time Worker,4.94 GB,Ringan
+I Am Part Time Worker,4.94 GB,Berat
 IBILIS,12.09 GB,Sedang
 Ice Age 3,3.44 GB,Ringan
-Immortals Fenyx Rising,56.03 GB,Berat
+Immortals Fenyx Rising,56.03 GB,Agak Berat
 INDIKA,51.0 GB,Berat
-INDORIYIX,23.34 GB,Agak Berat
+INDORIYIX,23.34 GB,Sedang
 INSIDE,2.3 GB,Ringan
+Internet Cafe Simulator 2,7.01 GB,Ringan
 Internet Cafe Simulator,4.09 GB,Ringan
-Internet Cafe Simulator 2,7.01 GB,Sedang
 Into The Dead Our Darkest Days,6.01 GB,Sedang
+It Takes Two,50 GB,Agak Berat
 Jackie Chan Adventures,1.6 GB,Ringan
-JDM Japanese Drift Master,14.86 GB,Sedang
+JDM Japanese Drift Master,14.86 GB,Berat
 Judgment,37.7 GB,Agak Berat
 Juiced 2,1.68 GB,Ringan
 Jujutsu Kaisen,13.39 GB,Sedang
-Jump Force,46.88 GB,Berat
-Jump Force,23.48 GB,Agak Berat
+Jump Force,46.88 GB,Agak Berat
 Jurassic Park Operation,305.48 KB,Ringan
-Jurassic World Evolution,7.72 GB,Sedang
 Jurassic World Evolution 2,12.75 GB,Sedang
-Just Cause 4,52.36 GB,Berat
+Jurassic World Evolution,7.72 GB,Sedang
+Just Cause 4,52.36 GB,Agak Berat
 Justice League Heroes,2.65 GB,Ringan
-Kamen Rider Battride War,2.34 GB,Ringan
 Kamen Rider Battride War II,4.25 GB,Ringan
+Kamen Rider Battride War,2.34 GB,Ringan
 Kamen Rider Climax Scramble,3.04 GB,Ringan
-Kamen Rider Memory of Heroez,6.79 GB,Sedang
-Kena Bridge of Spirits,26.40 GB,Agak Berat
+Kamen Rider Memory of Heroez,6.79 GB,Ringan
+Kena Bridge of Spirits,26.40 GB,Sedang
 Kingdom Come Deliverance II,93.76 GB,Berat
 Kingdom Hearts HD 2.8,31.10 GB,Agak Berat
-Kingdom Hearts III,50.35 GB,Berat
-Kirby and the Forgotten Land,6.25 GB,Sedang
+Kingdom Hearts III,50.35 GB,Agak Berat
+Kirby and the Forgotten Land,6.25 GB,Ringan
+Kirby Return to Dream Land Deluxe,5.48 GB,Ringan
 Kirby Star Allies,3.25 GB,Ringan
-Kirby Return to Dream Land Deluxe,5.48 GB,Sedang
 LA Noire,14.17 GB,Sedang
-Le Mans Ultimate,29.75 GB,Agak Berat
-Left 4 Dead,4.67 GB,Ringan
+Le Mans Ultimate,29.75 GB,Sedang
 Left 4 Dead 2,14.68 GB,Sedang
-Left 4 Dead 2,14.7 GB,Sedang
-Legend of Mana,9.62 GB,Sedang
+Left 4 Dead,4.67 GB,Ringan
+Legend of Mana,9.62 GB,Ringan
 LEGO 2K Drive,10.81 GB,Sedang
 Lego Batman 2,3.94 GB,Ringan
-LEGO Batman 3,8.38 GB,Sedang
+LEGO Batman 3,8.38 GB,Ringan
 LEGO City Undercover,18.12 GB,Sedang
 LEGO DC Super Villains,18.53 GB,Sedang
-Lego Harry Potter,6.08 GB,Sedang
-LEGO Harry Potter,7.71 GB,Sedang
-LEGO Horizon Adventures,14.84 GB,Sedang
-LEGO Indiana Jones 2,5.94 GB,Sedang
-LEGO Indiana Jones 2,4.53 GB,Ringan
+Lego Harry Potter,6.08 GB,Ringan
+LEGO Harry Potter,7.71 GB,Ringan
+LEGO Horizon Adventures,14.84 GB,Berat
+LEGO Indiana Jones 2,5.94 GB,Ringan
 LEGO Jurassic World,10.28 GB,Sedang
-LEGO Lord of the Rings,6.07 GB,Sedang
-LEGO Marvel Avengers,25.33 GB,Agak Berat
-Lego Marvel Super Heroes,6.34 GB,Sedang
-LEGO Marvel Super Heroes 2,24.64 GB,Agak Berat
-LEGO Party,7.9 GB,Sedang
-LEGO Pirates of the Caribbean,7.76 GB,Sedang
-LEGO Star Wars III,7.08 GB,Sedang
-Lego Star Wars The Force Awakens,20.17 GB,Agak Berat
+LEGO Lord of the Rings,6.07 GB,Ringan
+LEGO Marvel Avengers,25.33 GB,Sedang
+LEGO Marvel Super Heroes 2,24.64 GB,Sedang
+Lego Marvel Super Heroes,6.34 GB,Ringan
+LEGO Party,7.9 GB,Ringan
+LEGO Pirates of the Caribbean,7.76 GB,Ringan
+LEGO Star Wars III,7.08 GB,Ringan
+Lego Star Wars The Force Awakens,20.17 GB,Sedang
 LEGO Star Wars The Skywalker Saga,39.99 GB,Agak Berat
-LEGO The Hobbit,8.80 GB,Sedang
-LEGO Voyagers,3.6 GB,Ringan
-Lens Island,3.98 GB,Ringan
-Lies of P,41.50 GB,Berat
+LEGO The Hobbit,8.80 GB,Ringan
+LEGO Voyagers,3.6 GB,Sedang
+Lens Island,3.98 GB,Sedang
+Lies of P,41.50 GB,Agak Berat
+Life is Strange Before the Storm,20.58 GB,Sedang
+Life is Strange Double Exposure,24.10 GB,Sedang
+Life is Strange Remastered,43.78 GB,Agak Berat
+Life Is Strange True Colors,25.55 GB,Sedang
 Life is Strange,14.67 GB,Sedang
-Life is Strange Before the Storm,20.58 GB,Agak Berat
-Life is Strange Double Exposure,24.10 GB,Agak Berat
-Life is Strange Remastered,43.78 GB,Berat
-Life is Strange Before the Storm,19.17 GB,Sedang
-Life is Strange,41.88 GB,Berat
-Life Is Strange True Colors,25.55 GB,Agak Berat
-Lightning Returns Final Fantasy XIII,21.68 GB,Agak Berat
+Lightning Returns Final Fantasy XIII,21.68 GB,Sedang
 LIMBO,111.52 KB,Ringan
-Tsubasa,1.3 GB,Ringan
-Yoshie,6.0 GB,Sedang
-Yu Gi Oh Empire Total War,16.8 GB,Sedang
-Command And Conquer Remastered,25.44 GB,Agak Berat
-Grand Theft Auto IV,32.5 GB,Agak Berat
-Guitar Hero 5,8.5 GB,Sedang
-Motorcycle Mechanic Simulator 2021,19.9 GB,Sedang
-Star Wars Battlefront 2,94.3 GB,Ringan
-Supernatural,11.0 GB,Sedang
-Wolfenstein Youngblood,41.1 GB,Berat
-Little Nightmares II,21.99 GB,Agak Berat
+Little Nightmares 3,15 GB,Sedang
+Little Nightmares II,21.99 GB,Sedang
 Lords of the Fallen,34.68 GB,Agak Berat
 Lost Skies,16.46 GB,Sedang
-LUIGI MANSION 3,7.6 GB,Sedang
-Luigi Mansion 2,6.62 GB,Sedang
+Luigi Mansion 2,6.62 GB,Ringan
+LUIGI MANSION 3,7.6 GB,Ringan
 Mad Max,34.86 GB,Agak Berat
-Mafia,2.80 GB,Ringan
-Mafia II,11.47 GB,Sedang
-Mafia II Definitive Edition,46.1 GB,Berat
-Mafia III Definitive Edition,56.07 GB,Berat
 Mafia Definitive Edition,37.29 GB,Agak Berat
+Mafia II Definitive Edition,46.1 GB,Agak Berat
+Mafia II,11.47 GB,Sedang
+Mafia III Definitive Edition,56.07 GB,Agak Berat
+Mafia,2.80 GB,Ringan
 Maneater,18.43 GB,Sedang
 Manhunt,2.04 GB,Ringan
 Manor Lords,12.82 GB,Sedang
-Mario Kart 8,7.53 GB,Sedang
-Mario Sonic Olympic Games,6.89 GB,Sedang
-Mario Sonic Olympic Games,7.15 GB,Sedang
+Mario Kart 8,7.53 GB,Ringan
+Mario Sonic Olympic Games,6.89 GB,Ringan
 Mario Tennis Aces,3.03 GB,Ringan
 mario tennis ultra smash,2.17 GB,Ringan
-Marvel Spider-Man Miles Morales,59.65 GB,Berat
-Marvel Spider-Man Remastered,70.40 GB,Berat
-Marvels Avengers,63.7 GB,Berat
 Marvel Spider Man 2,116.2 GB,Berat
-Marvel Ultimate Alliance,5.8 GB,Sedang
-Marvel Ultimate Alliance 2,5.5 GB,Sedang
+Marvel Spider-Man Miles Morales,59.65 GB,Agak Berat
+Marvel Spider-Man Remastered,70.40 GB,Berat
+Marvel Ultimate Alliance 2,5.5 GB,Ringan
 MARVEL ULTIMATE ALLIANCE 3,14.1 GB,Sedang
+Marvel Ultimate Alliance,5.8 GB,Ringan
+Marvels Avengers,63.7 GB,Berat
 MASS Builder,13.24 GB,Sedang
-Mass Effect Andromeda,49.48 GB,Berat
+Mass Effect Andromeda,49.48 GB,Agak Berat
 Max Payne 3,33.02 GB,Agak Berat
-Medal Of Honor,7.78 GB,Sedang
 Medal Of Honor Allied Assault,2.65 GB,Ringan
 Medal of Honor Warfighter,16.47 GB,Sedang
-Medieval Dynasty,9.61 GB,Sedang
+Medal Of Honor,7.78 GB,Ringan
+Medieval Dynasty,9.61 GB,Ringan
 MELTY BLOOD TYPE LUMINA,12.73 GB,Sedang
-Metal Gear Rising,25.81 GB,Agak Berat
+Metal Gear Rising,25.81 GB,Sedang
 Metal Gear Solid 3,4.61 GB,Ringan
 METAL GEAR SOLID DELTA,98.8 GB,Berat
-Metal Gear Solid V,24.15 GB,Agak Berat
+Metal Gear Solid V,24.15 GB,Sedang
 METAL GEAR SOLID V,3.08 GB,Ringan
-METAL SLUG ATTACK RELOADED,2.68 GB,Ringan
+METAL SLUG ATTACK RELOADED,2.68 GB,Berat
 Metaphor Refantazio,85.33 GB,Berat
-Metro 2033 Redux,8.42 GB,Sedang
-Metro Last Light Redux,17.89 GB,Sedang
+Metro 2033 Redux,8.42 GB,Ringan
 Metro Exodus,81.8 GB,Berat
+Metro Last Light Redux,17.89 GB,Sedang
 Microsoft Flight Simulator X,16.83 GB,Sedang
+Middle Earth Shadow of Mordor,41.2 GB,Agak Berat
 Middle Earth Shadow of War,114.99 GB,Berat
-Middle Earth Shadow of Mordor,41.2 GB,Berat
 MIGHT AND MAGIC HEROS V,10.60 GB,Sedang
-Minecraft Dungeons,5.66 GB,Sedang
+Minecraft Dungeons,5.66 GB,Ringan
 Minecraft Legends,11.03 GB,Sedang
-Minecraft Story Mode,6.24 GB,Sedang
-Minecraft Story Mode,6.67 GB,Sedang
-Mist Survival,25.70 GB,Agak Berat
-Monster Energy Supercross 25,17.42 GB,Sedang
+Minecraft Story Mode,6.24 GB,Ringan
+Mist Survival,25.70 GB,Sedang
+Monster Energy Supercross 25,17.42 GB,Berat
 Monster Hunter Generations,12.32 GB,Sedang
-Monster Hunter Generations,12.11 GB,Sedang
 Monster Hunter Rise,36.17 GB,Agak Berat
-Monster Hunter Stories 2,28.0 GB,Agak Berat
+Monster Hunter Stories 2,28.0 GB,Sedang
 Monster Hunter Stories,11.10 GB,Sedang
-Monster Truck Championship,27.61 GB,Agak Berat
-Monster Hunter World Iceborne,53.8 GB,Berat
+Monster Hunter World Iceborne,53.8 GB,Agak Berat
+Monster Truck Championship,27.61 GB,Sedang
 Mortal Kombat 1,6.40 GB,Sedang
-Mortal Kombat XL,38.85 GB,Agak Berat
 Mortal Kombat 11,152.9 GB,Berat
+Mortal Kombat XL,38.85 GB,Agak Berat
 Motel Manager Simulator,2.44 GB,Ringan
+MOTO GP 25,40 GB,Agak Berat
 MotoGP 15,15.94 GB,Sedang
 MotoGP 17,12.07 GB,Sedang
 MotoGP 18,15.21 GB,Sedang
-MotoGP 20,24.09 GB,Agak Berat
-MotoGP 22,26.08 GB,Agak Berat
-MotoGP 23,26.15 GB,Agak Berat
-MotoGP 23,23.43 GB,Agak Berat
-MotoGP 24,25.65 GB,Agak Berat
-MotoGP 25,26.00 GB,Agak Berat
-MotoGP 22,31.1 GB,Agak Berat
-Mount & Blade II Bannerlord,49.4 GB,Berat
+MotoGP 20,24.09 GB,Sedang
+MotoGP 22,26.08 GB,Sedang
+MotoGP 23,26.15 GB,Sedang
+MotoGP 24,25.65 GB,Sedang
+MotoGP 25,26.00 GB,Sedang
+Motorcycle Mechanic Simulator 2021,19.9 GB,Sedang
+Mount & Blade II Bannerlord,49.4 GB,Agak Berat
+Moving Out 2,1.39 GB,Sedang
 Moving Out,715.92 MB,Ringan
-Moving Out 2,1.39 GB,Ringan
 Ms Office 2021,1.98 GB,Ringan
 MX vs ATV Legends,38.22 GB,Agak Berat
-MXGP,2.75 GB,Ringan
 MXGP 2019,12.9 GB,Sedang
 MXGP 2021,18.02 GB,Sedang
 MXGP 2022,31.11 GB,Agak Berat
 MXGP PRO,13.65 GB,Sedang
-My Friend Pedro,3.7 GB,Ringan
+MXGP,2.75 GB,Ringan
+My Friend Pedro,3.7 GB,Sedang
+MY HERO ACADEMIA ALL JUSTICE,10 GB,Sedang
 MY HERO ONES JUSTICE 2,12.5 GB,Sedang
-MySims,4.22 GB,Ringan
+My Time at Sandrock,29.3 GB,Sedang
 MySims Kingdom,4.00 GB,Ringan
-My Time at Sandrock,29.3 GB,Agak Berat
-Naruto STORM 1,8.19 GB,Sedang
-Naruto STORM 2,7.45 GB,Sedang
+MySims,4.22 GB,Ringan
+NARUTO SHIPPUDEN Ultimate Ninja STORM 4,40.82 GB,Agak Berat
+Naruto STORM 1,8.19 GB,Ringan
+Naruto STORM 2,7.45 GB,Ringan
 Naruto STORM 3,17.06 GB,Sedang
-NARUTO SHIPPUDEN Ultimate Ninja STORM 4,40.82 GB,Berat
-NARUTO TO BORUTO SHINOBI STRIKER,29.99 GB,Agak Berat
-Naruto Ultimate Ninja Storm,7.90 GB,Sedang
+NARUTO TO BORUTO SHINOBI STRIKER,29.99 GB,Sedang
+Naruto Ultimate Ninja Storm,7.90 GB,Ringan
 NARUTO X BORUTO STORM CONNECTIONS,31.3 GB,Agak Berat
-NASCAR Arcade Rush,4.73 GB,Ringan
+NASCAR Arcade Rush,4.73 GB,Berat
 NASCAR Heat 4,18.1 GB,Sedang
 NASCAR Heat 5,16.4 GB,Sedang
+NBA 2K16,44.5 GB,Agak Berat
 NBA 2K20,103.23 GB,Berat
 NBA 2K22,121.77 GB,Berat
 NBA 2K24,7.70 GB,Sedang
-NBA BOUNCE,0.8 GB,Ringan
-NBA 2K16,44.5 GB,Berat
-Need for Speed Carbon,5.36 GB,Sedang
+NBA BOUNCE,0.8 GB,Sedang
+Need for Speed Carbon,5.36 GB,Ringan
 Need for Speed Heat,32.0 GB,Agak Berat
-Need For Speed Most Wanted,8.99 GB,Sedang
-Need for Speed Most Wanted,6.54 GB,Sedang
+Need for Speed Most Wanted,6.54 GB,Ringan
+Need For Speed Most Wanted,8.99 GB,Ringan
+Need for Speed Payback,28.71 GB,Sedang
 Need For Speed ProStreet,10.46 GB,Sedang
 Need for Speed Rivals,11.55 GB,Sedang
-Need for Speed Shift 2,6.90 GB,Sedang
-Need for Speed Shift 2,6.90 GB,Sedang
-Need For Speed Underground 2,1.82 GB,Ringan
-Need for Speed Payback,28.71 GB,Agak Berat
-Need for Speed Shift,5.44 GB,Sedang
+Need for Speed Shift 2,6.90 GB,Ringan
+Need for Speed Shift,5.44 GB,Ringan
 Need for Speed The Run,16.46 GB,Sedang
+Need for Speed Undercover,6.2 GB,Ringan
+Need For Speed Underground 2,1.82 GB,Ringan
 Need for Speed Underground,1.33 GB,Ringan
-Need for Speed Undercover,6.2 GB,Sedang
-New Pokemon Snap,6.3 GB,Sedang
+New Pokemon Snap,6.3 GB,Ringan
 New Super Mario Bros U Deluxe,2.8 GB,Ringan
-NFS Hot Pursuit,5.89 GB,Sedang
+NFS Hot Pursuit,5.89 GB,Ringan
 NFS Most Wanted,2.95 GB,Ringan
-NFS Most Wanted,3.0 GB,Ringan
 Nickelodeon All Star Brawl,16.26 GB,Sedang
-Nickelodeon All Star Brawl,14.24 GB,Sedang
-Nickelodeon Avatar,2.03 GB,Ringan
+Nickelodeon Avatar,2.03 GB,Sedang
 Nickelodeon Kart Racers 2,5.18 GB,Sedang
 Nickelodeon Kart Racers 3,5.62 GB,Sedang
-Nier Automata,50.46 GB,Berat
-NieR Replicant,26.29 GB,Agak Berat
+Nier Automata,50.46 GB,Agak Berat
+NieR Replicant,26.29 GB,Sedang
 Nightmare Side,9.87 GB,Sedang
+Ninja Gaiden 4,40 GB,Berat
 Ninja Gaiden,3.7 GB,Ringan
 Nioh 2,80.25 GB,Berat
-No Man Sky,23.27 GB,Agak Berat
-NOBUNAGAS AMBITION Awakening,26.80 GB,Agak Berat
-Norland,1.03 GB,Ringan
+NIOH 3,80 GB,Berat
+No Man Sky,23.27 GB,Sedang
+NOBUNAGAS AMBITION Awakening,26.80 GB,Sedang
+Norland,1.03 GB,Sedang
 Northgard,3.36 GB,Ringan
 Octopath Traveler,3.80 GB,Ringan
-Omega Crafter,1.99 GB,Ringan
+Omega Crafter,1.99 GB,Sedang
 One Piece Burning Blood,12.09 GB,Sedang
-One Piece Pirate Warriors 3,12.01 GB,Sedang
-ONE PIECE PIRATE WARRIORS 4,27.44 GB,Agak Berat
-One Piece Unlimited World Red,12.36 GB,Sedang
 ONE PIECE ODYSSEY,33.0 GB,Agak Berat
-One Piece World Seeker,25.2 GB,Agak Berat
+One Piece Pirate Warriors 3,12.01 GB,Sedang
+ONE PIECE PIRATE WARRIORS 4,27.44 GB,Sedang
+One Piece Unlimited World Red,12.36 GB,Sedang
+One Piece World Seeker,25.2 GB,Sedang
 ONE PUNCH MAN A HERO NOBODY KNOWS,7.8 GB,Sedang
 Onimusha 3,1.21 GB,Ringan
 Only Up 2,6.37 GB,Sedang
 Open Country,18.17 GB,Sedang
-Outlast,5.95 GB,Sedang
-Outpost Infinity Siege,38.95 GB,Agak Berat
-Overcooked 2,8.39 GB,Sedang
+Outlast,5.95 GB,Ringan
+Outpost Infinity Siege,38.95 GB,Berat
+Overcooked 2,8.39 GB,Ringan
 Oxygen Not Included,2.94 GB,Ringan
-Pacific Drive,20.64 GB,Agak Berat
-Paleo Pines,4.19 GB,Ringan
+Pacific Drive,20.64 GB,Berat
+Paleo Pines,4.19 GB,Sedang
 Pamali,5.76 GB,Sedang
-Paper Mario The Origami King,7.23 GB,Sedang
+Paper Mario The Origami King,7.23 GB,Ringan
 Partisans 1941,9.58 GB,Sedang
-PayDay The Heist,5.42 GB,Sedang
 PAYDAY 2,86.6 GB,Berat
-PC Building Simulator,23.4 GB,Agak Berat
-PC Building Simulator 2,29.59 GB,Agak Berat
-PEAK,5.52 GB,Sedang
+PayDay The Heist,5.42 GB,Ringan
+PC Building Simulator 2,29.59 GB,Sedang
+PC Building Simulator,23.4 GB,Sedang
+PEAK,5.52 GB,Ringan
 People Playground,452.04 KB,Ringan
 Persona 3,8.11 GB,Sedang
 Persona 4 Arena Ultimax,15.43 GB,Sedang
-Persona 5 Royal,34.26 GB,Agak Berat
-It Takes Two,50 GB,Berat
-Persona 5 Strikers,25.03 GB,Agak Berat
-Persona 5 Tactica,7.43 GB,Sedang
 Persona 4 Golden,12.8 GB,Sedang
-PES 2013,11.4 GB,Ringan
+Persona 5 Royal,34.26 GB,Berat
+Persona 5 Strikers,25.03 GB,Sedang
+Persona 5 Tactica,7.43 GB,Sedang
+PES 2013,11.4 GB,Sedang
+PES 2016,23.8 GB,Sedang
+PES 2017,45 GB,Agak Berat
+PES 2018,43 GB,Agak Berat
+PES 2019,44 GB,Agak Berat
+PES 2021,80 GB,Berat
 PES 6,3.67 GB,Ringan
+PICO PARK 2,227.65 MB,Ringan
+PICO PARK,82.71 MB,Ringan
 PixARK,17.77 GB,Sedang
 Planet Coaster,12.06 GB,Sedang
 Planet of the Apes,19.63 GB,Sedang
 Planet Zoo,10.33 GB,Sedang
-Plants Vs Zombies GOTY,48.07 GB,Berat
+Plants Vs Zombies GOTY,48.07 GB,Agak Berat
+PokÃ©mon Shield,10.43 GB,Sedang
+PokÃ©mon Sword,10.43 GB,Sedang
+PokÃ©mon Violet,7.16 GB,Ringan
 Pokemon Lets Go Pikachu,4.82 GB,Ringan
-Pokemon Scarlet,6.78 GB,Sedang
-Pokémon Shield,10.43 GB,Sedang
-Pokémon Sword,10.43 GB,Sedang
-Pokémon Violet,7.16 GB,Sedang
-Pokkén Tournament DX,3.64 GB,Ringan
+Pokemon Scarlet,6.78 GB,Ringan
+POKEMON Z-A,20 GB,Sedang
+PokkÃ©n Tournament DX,3.64 GB,Ringan
 Police Simulator Patrol Officers,12.66 GB,Sedang
 Poppy Playtime Chapter 3,38.3 GB,Agak Berat
+Poppy Playtime Chapter 5,30 GB,Sedang
 Portal 2,13.23 GB,Sedang
 Portal Knights,10.97 GB,Sedang
-Power And Revolution 2021,7.41 GB,Sedang
-Power Rangers Legends,1.5 GB,Ringan
-Power Rangers Battle For The Grid,1.63 GB,Ringan
+Power And Revolution 2021,7.41 GB,Ringan
+Power Rangers Battle For The Grid,1.63 GB,Sedang
+Power Rangers Legends,1.5 GB,Sedang
 PowerWash Simulator,10.95 GB,Sedang
-Praetorians HD,1.73 GB,Ringan
-Prince of Persia The Lost Crown,6.77 GB,Sedang
+Praetorians HD,1.73 GB,Sedang
+Prince of Persia The Lost Crown,6.77 GB,Ringan
 Prison Simulator,3.52 GB,Ringan
-PES 2016,23.8 GB,Ringan
-PES 2017,45 GB,Sedang
-PES 2018,43 GB,Sedang
-PES 2019,44 GB,Agak Berat
-Project Cars 3,51.85 GB,Berat
+Project Cars 3,51.85 GB,Agak Berat
 Project Wingman,13.95 GB,Sedang
 Project Zomboid,1.99 GB,Ringan
 Prototype 2,10.27 GB,Sedang
-Pumping Simulator 2,6.36 GB,Sedang
-Raft,7.0 GB,Sedang
+Pumping Simulator 2,6.36 GB,Ringan
+Raft,7.0 GB,Ringan
 Raiden IV,1.85 GB,Ringan
 Rampage Total Destruction,4.66 GB,Ringan
-Ranch Simulator,21.49 GB,Agak Berat
-Ratchet and Clank Rift Apart,40.7 GB,Berat
+Ranch Simulator,21.49 GB,Sedang
+Ratchet and Clank Rift Apart,40.7 GB,Agak Berat
 Ravenfield,1.97 GB,Ringan
-Rayman Legends,8.74 GB,Sedang
+Rayman Legends,8.74 GB,Ringan
 Ready or Not,68.5 GB,Berat
+REANIMAL,5 GB,Ringan
 Red Alert 4,1.57 GB,Ringan
 Red Dead Redemption,12.94 GB,Sedang
 Remnant From the Ashes,12.3 GB,Sedang
 Resident Evil 0,12.19 GB,Sedang
-Resident Evil 2,25.16 GB,Agak Berat
-Resident Evil 3,24.95 GB,Agak Berat
+Resident Evil 2,25.16 GB,Sedang
+Resident Evil 3,24.95 GB,Sedang
 Resident Evil 4 REMAKE,60.40 GB,Berat
-Resident Evil 4,12.26 GB,Sedang
-Resident Evil 5,8.91 GB,Sedang
+Resident Evil 4,12.26 GB,Berat
+Resident Evil 5,8.91 GB,Ringan
 Resident Evil 6,18.07 GB,Sedang
+Resident Evil 7,6.8 GB,Ringan
 Resident Evil Revelations 2,19.24 GB,Sedang
-Resident Evil Village,39.19 GB,Agak Berat
-Resident Evil 7,6.8 GB,Sedang
-Resident Evil Revelations,7.5 GB,Sedang
+Resident Evil Revelations,7.5 GB,Ringan
+Resident Evil Village,39.19 GB,Berat
 Ride 2,32.38 GB,Agak Berat
-RiDE 4,49.10 GB,Berat
+RiDE 4,49.10 GB,Agak Berat
+RIDE 6,40 GB,Agak Berat
 RiMS Racing,13.74 GB,Sedang
 Rise of the Tomb Raider,37.67 GB,Agak Berat
-River City Girls 2,6.0 GB,Sedang
+River City Girls 2,6.0 GB,Ringan
 Rocket League,11.40 GB,Sedang
 RollerCoaster Tycoon 3,1.39 GB,Ringan
 Ronin,156.52 GB,Berat
-Rune Factory 3 Special,3.2 GB,Ringan
+Rune Factory 3 Special,3.2 GB,Sedang
 Rune Factory 5,9.07 GB,Sedang
-Saint Seiya Soldiers Soul,9.05 GB,Sedang
+Saint Seiya Soldiers Soul,9.05 GB,Ringan
 Saints Row IV,10.41 GB,Sedang
+Samurai Warriors 4 DX,22.6 GB,Sedang
 SAMURAI WARRIORS 4 II,10.61 GB,Sedang
 SAMURAI WARRIORS 5,15.95 GB,Sedang
-Samurai Warriors 4 DX,22.6 GB,Agak Berat
 SBK 22,9.14 GB,Sedang
 Scarface,3.8 GB,Ringan
-Scarlet Nexus,21.0 GB,Agak Berat
+Scarlet Nexus,21.0 GB,Sedang
 Schedule Lu,7.1 GB,Sedang
-Scrap Mechanic,9.46 GB,Sedang
+Scrap Mechanic,9.46 GB,Ringan
 SCUM,67.0 GB,Berat
 Seduction of beauty,4.08 GB,Ringan
 Sekiro Shadows Die Twice,15.67 GB,Sedang
-Sengoku Basara,4.7 GB,Ringan
+Sengoku Basara 2,4.72 GB,Ringan
+Sengoku Basara 3 Utage,12.5 GB,Sedang
 Sengoku Basara 4 Sumeragi,18.69 GB,Sedang
 Sengoku Basara Samurai Heroes,12.12 GB,Sedang
-Sengoku Dynasty,20.07 GB,Agak Berat
+Sengoku Basara,4.7 GB,Ringan
+Sengoku Dynasty,20.07 GB,Berat
 September 7th,9.62 GB,Sedang
 Session Skateboarding,13.98 GB,Sedang
-Shadow Warrior 2,14.01 GB,Sedang
 Shadow of the Tomb Raider,39.9 GB,Agak Berat
+Shadow Warrior 2,14.01 GB,Sedang
 Sherlock Holmes,19.21 GB,Sedang
-Shieldwall,7.87 GB,Sedang
+Shieldwall,7.87 GB,Ringan
 Shin chan Shiro and the Coal Town,4.66 GB,Ringan
-Sid Meiers Civilization VI,22.50 GB,Agak Berat
+Sid Meiers Civilization VI,22.50 GB,Sedang
 SIFU,30.92 GB,Agak Berat
 Silent Hill 2 Remake,35.84 GB,Agak Berat
-Silent Hill Downpour,5.0 GB,Sedang
+Silent Hill Downpour,5.0 GB,Ringan
 SILENT HILL F,50.5 GB,Berat
-SILENT HILL F,50.2 GB,Berat
 SimCity 4,1.23 GB,Ringan
 Simcity Deluxe,3.6 GB,Ringan
 Sims 2 The Castaway,4.66 GB,Ringan
 Sims of a Solar Empire II,15.0 GB,Sedang
-Six Days in Fallujah,21.04 GB,Agak Berat
-Sleeping Dogs,7.2 GB,Sedang
-Sleeping Dogs,17.32 GB,Sedang
-Sniper Elite 3,27.49 GB,Agak Berat
-Sniper Elite V2,13.67 GB,Sedang
-Sniper Ghost Warrior,7.2 GB,Sedang
-Sniper Ghost Warrior 2,8.63 GB,Sedang
-Sniper Ghost Warrior 3,60.25 GB,Berat
-Sniper Ghost Warrior 3,60.25 GB,Berat
+Six Days in Fallujah,21.04 GB,Sedang
+Sleeping Dogs,7.2 GB,Ringan
+Sniper Elite 3,27.49 GB,Sedang
 Sniper Elite 4,70.6 GB,Berat
-Snowrunner,42.55 GB,Berat
-Song Of The Prairie,3.15 GB,Ringan
-Sonic & All Stars Racing,7.57 GB,Sedang
-Sonic And All Stars Racing,7.52 GB,Sedang
+Sniper Elite V2,13.67 GB,Sedang
+Sniper Ghost Warrior 2,8.63 GB,Ringan
+Sniper Ghost Warrior 3,60.25 GB,Berat
+Sniper Ghost Warrior,7.2 GB,Ringan
+Snowrunner,42.55 GB,Agak Berat
+Song Of The Prairie,3.15 GB,Sedang
+Sonic & All Stars Racing,7.57 GB,Ringan
+Sonic And All Stars Racing,7.52 GB,Ringan
 Sonic Colors Ultimate,7.50 GB,Sedang
 Sonic Forces,17.93 GB,Sedang
 Sonic Frontier,11.4 GB,Sedang
-Sonic Generations,8.8 GB,Sedang
-Sonic Superstar,4.75 GB,Ringan
-Sonic Unleashed,9.80 GB,Sedang
+Sonic Generations,8.8 GB,Ringan
+Sonic Superstar,4.75 GB,Sedang
+Sonic Unleashed,9.80 GB,Ringan
 SONIC X SHADOW GENERATIONS,14.14 GB,Sedang
 Sons Of The Forest,15.66 GB,Sedang
-SOS Pioneers of Olive Town,1.55 GB,Ringan
-Soulmask,10.13 GB,Sedang
+SOS Pioneers of Olive Town,1.55 GB,Sedang
+Soulmask,10.13 GB,Berat
 Soulslinger Envoy of Death,15.91 GB,Sedang
 South of Midnight,88.8 GB,Berat
-Spider Man Shattered Dimensions,14.09 GB,Sedang
 Spider Man Friend Or Foe,3.7 GB,Ringan
+Spider Man Shattered Dimensions,14.09 GB,Sedang
 Spiritires,956.98 KB,Ringan
+Splinter Cell Conviction,8.23 GB,Ringan
 Split Fiction,92.0 GB,Berat
-SplitSecond,7.20 GB,Sedang
+SplitSecond,7.20 GB,Ringan
 SpongeBob SquarePants Bikini Bottom,9.14 GB,Sedang
-SPORE,6.1 GB,Sedang
-Star Wars Battlefront,54.91 GB,Berat
+SPORE,6.1 GB,Ringan
+Star Wars Battlefront 2,94.3 GB,Berat
+Star Wars Battlefront,54.91 GB,Agak Berat
+STAR WARS Jedi Fallen Order,59.4 GB,Agak Berat
 STAR WARS Jedi Survivor,136.22 GB,Berat
 STAR WARS The Force Unleashed,30.07 GB,Agak Berat
-StarCraft II,20.89 GB,Agak Berat
+StarCraft II,20.89 GB,Sedang
 StarCraft Remastered,10.73 GB,Sedang
 Stardew Valley,716.18 KB,Ringan
-STAR WARS Jedi Fallen Order,59.4 GB,Berat
-STAR WARS The Force Unleashed,30.1 GB,Agak Berat
-State of Decay 2,21.39 GB,Agak Berat
+STARSAND ISLAND,2 GB,Sedang
+State of Decay 2,21.39 GB,Sedang
 State of Decay,3.09 GB,Ringan
-STORY OF SEASONS A Wonderful Life,1.40 GB,Ringan
-Story of Seasons Friends of Mineral Town,1.14 GB,Ringan
-Story of Seasons Grand Bazaar,4.95 GB,Ringan
+STORY OF SEASON GRAND BAZZAR,5 GB,Sedang
+STORY OF SEASONS A Wonderful Life,1.40 GB,Sedang
+Story of Seasons Friends of Mineral Town,1.14 GB,Sedang
+Story of Seasons Grand Bazaar,4.95 GB,Sedang
 Stranded Deep,2.2 GB,Ringan
 Stray,6.52 GB,Sedang
-Streamer Life Simulator,5.48 GB,Sedang
-Street Fighter V,47.83 GB,Berat
+Streamer Life Simulator,5.48 GB,Ringan
+Street Fighter V,47.83 GB,Agak Berat
 Streets of Rage 4,6.47 GB,Sedang
 Stronghold Crusader HD,0.9 GB,Ringan
 Stronghold Crusader II,4.9 GB,Ringan
-Stronghold Definitive Edition,3.97 GB,Ringan
+Stronghold Definitive Edition,3.97 GB,Sedang
 Stuart Little 3,2.0 GB,Ringan
-Subnautica,6.95 GB,Sedang
 Subnautica Below Zero,8.41 GB,Sedang
+Subnautica,6.95 GB,Ringan
 Suikoden I&II Remaster,10.74 GB,Sedang
 Suikoden V,4.54 GB,Ringan
 Summer in Mara,1.77 GB,Ringan
-Super Bomberman R,6.21 GB,Sedang
-SUPER ROBOT WARS V,14.52 GB,Sedang
-Supercar Collection Simulator,5.21 GB,Sedang
+Super Bomberman R,6.21 GB,Ringan
 Super Robot Wars 30,19.9 GB,Sedang
+SUPER ROBOT WARS V,14.52 GB,Sedang
 Super Smash Bros Ultimate,16.8 GB,Sedang
+Supercar Collection Simulator,5.21 GB,Sedang
+Supernatural,11.0 GB,Sedang
 Sword and Fairy 7,68.19 GB,Berat
-SWORD ART ONLINE Fractured Daydream,44.24 GB,Berat
 SWORD ART ONLINE Alicization Lycoris,93.2 GB,Berat
-Sword Art Online Fatal Bullet,7.2 GB,Sedang
+Sword Art Online Fatal Bullet,7.2 GB,Berat
+SWORD ART ONLINE Fractured Daydream,44.24 GB,Agak Berat
 TABS,4.83 GB,Ringan
 Tales of Berseria,14.28 GB,Sedang
 Tales of Zestiria,12.63 GB,Sedang
-Taxi Life,4.45 GB,Ringan
-TCG Card Shop Simulator,3.06 GB,Ringan
+Taxi Life,4.45 GB,Sedang
+TCG Card Shop Simulator,3.06 GB,Sedang
 Team Sonic Racing,30.72 GB,Agak Berat
-Teardown,5.5 GB,Sedang
+Teardown,5.5 GB,Ringan
 Tekken 5,4.5 GB,Ringan
-TEKKEN 8,122.09 GB,Berat
 Tekken 7,85.0 GB,Berat
-Tenchu Wrath of Heaven,4.0 GB,Ringan
+TEKKEN 8,122.09 GB,Berat
 Tenchu Fatal Shadows,3.90 GB,Ringan
-Terminator Resistance,27.8 GB,Agak Berat
+Tenchu Wrath of Heaven,4.0 GB,Ringan
+Terminator Resistance,27.8 GB,Sedang
 Terraria,668.74 KB,Ringan
-The Amazing Spider Man,8.67 GB,Sedang
+The Amazing Spider Man 2,8.4 GB,Ringan
+The Amazing Spider Man,8.67 GB,Ringan
 The Bridge Curse 2,6.1 GB,Sedang
 The Coffin of Andy and Leyley,705.20 KB,Ringan
-The Crew,26.0 GB,Agak Berat
-The Elder Scrolls V Skyrim,24.83 GB,Agak Berat
-The Elder Scrolls V Skyrim,49.21 GB,Berat
+THe Crew 2,40 GB,Agak Berat
+The Crew,26.0 GB,Sedang
+The Dark Pictures Anthology,65.3 GB,Berat
+The Elder Scrolls V Skyrim,24.83 GB,Sedang
 The Evil Within 2,36.07 GB,Agak Berat
-The Forest,5.84 GB,Sedang
-The Good Life,3.7 GB,Ringan
+The Evil Within,57.1 GB,Agak Berat
+The Forest,5.84 GB,Ringan
+The Good Life,3.7 GB,Sedang
 The Hinokami Chronicles 2,14.38 GB,Sedang
+The Hunter Call of the Wild,83.3 GB,Berat
+The King of Fighters XIV,17.5 GB,Sedang
+The King of Fighters XV,47.9 GB,Agak Berat
 The Last of Us Part 1,83.94 GB,Berat
-The Last Stand Aftermath,4.37 GB,Ringan
+The Last of Us Part II Remastered,121.4 GB,Berat
+The Last Stand Aftermath,4.37 GB,Sedang
 The Legend of Korra,2.9 GB,Ringan
 The Legend of Zelda Breath of the Wild,16.89 GB,Sedang
+The Legend of Zelda Links Awakening,6.34 GB,Ringan
 The Legend of Zelda Tears of the Kingdom,17.33 GB,Sedang
-The Legend of Zelda Links Awakening,6.34 GB,Sedang
-The LEGO Movie,8.98 GB,Sedang
+The LEGO Movie,8.98 GB,Ringan
 The LEGO NINJAGO Movie,18.05 GB,Sedang
+The Precinct,7.8 GB,Sedang
 The Sims 2 Legacy,13.22 GB,Sedang
+The Sims 3,27.6 GB,Sedang
 The Sims 4,69.56 GB,Berat
-The Sims 4,78.5 GB,Berat
 The Sims Legacy,3.63 GB,Ringan
 The Smurfs Dreams,5.18 GB,Sedang
 The Smurfs Mission Vileaf,5.00 GB,Sedang
-The Tenants,6.95 GB,Sedang
-The Walking Dead Definitive,47.69 GB,Berat
+The Tenants,6.95 GB,Ringan
+The Walking Dead Definitive,47.69 GB,Agak Berat
 The Walking Dead Final Season,14.47 GB,Sedang
 The Witcher 3 Wild Hunt,93.39 GB,Berat
-The Amazing Spider Man 2,8.4 GB,Sedang
-The Dark Pictures Anthology,65.3 GB,Berat
-The Evil Within,57.1 GB,Berat
-The Hunter Call of the Wild,83.3 GB,Berat
-The King of Fighters XIV,17.5 GB,Sedang
-The King of Fighters XV,47.9 GB,Berat
-The Last of Us Part II Remastered,121.4 GB,Berat
-The Precinct,7.8 GB,Sedang
-The Sims 3,27.6 GB,Agak Berat
-Thief,24.72 GB,Agak Berat
-Thief Simulator,21.20 GB,Agak Berat
 Thief Simulator 2,14.7 GB,Sedang
+Thief Simulator,21.20 GB,Sedang
+Thief,24.72 GB,Sedang
 This War of Mine,3.5 GB,Ringan
 Tintin Reporter,35.65 GB,Agak Berat
 Tiny Glade,2.95 GB,Ringan
-Tony Hawk's Pro Skater 1+2,24.2 GB,Agak Berat
-Ghost Recon Wildlands,90.12 GB,Berat
-Splinter Cell Conviction,8.23 GB,Sedang
 Tomb Raider GOTY,13.18 GB,Sedang
-Tomb Raider Underworld,7.68 GB,Sedang
+Tomb Raider Underworld,7.68 GB,Ringan
+Tony Hawk's Pro Skater 1+2,24.2 GB,Sedang
 Torchlight II,1.68 GB,Ringan
-Torchlight III,6.06 GB,Sedang
-Total War Rome Remastered,55.33 GB,Berat
-Total War WARHAMMER,34.90 GB,Agak Berat
+Torchlight III,6.06 GB,Ringan
+TOTAL WAR PHARAOH,40 GB,Agak Berat
+Total War Rome Remastered,55.33 GB,Agak Berat
+Total War SHOGUN 2,24.2 GB,Sedang
 Total War Warhammer 2,62.53 GB,Berat
-Total War SHOGUN 2,24.2 GB,Agak Berat
+Total War WARHAMMER,34.90 GB,Agak Berat
 Touken Ranbu Warriors,13.30 GB,Sedang
 Toukiden 2,13.63 GB,Sedang
 Toy Story 3,3.83 GB,Ringan
 TRADER LIFE SIMULATOR 2,13.31 GB,Sedang
-TRAIN SIM WORLD,67.34 GB,Berat
-Train Simulator 2017,16.76 GB,Sedang
 Train Sim World 4,30.4 GB,Agak Berat
 Train Sim World 6,74.2 GB,Berat
+TRAIN SIM WORLD,67.34 GB,Berat
+Train Simulator 2017,16.76 GB,Sedang
+TRANSFORMERS Dark Spark,9.33 GB,Ringan
+Transformers Fall of Cybertron,8.37 GB,Ringan
+Transformers Revenge of the Fallen,6.6 GB,Ringan
 Transformers The Game,2.6 GB,Ringan
-Transformers Fall of Cybertron,8.37 GB,Sedang
-TRANSFORMERS Dark Spark,9.33 GB,Sedang
-Transformers Revenge of the Fallen,6.6 GB,Sedang
-Transformers War For Cybertron,8.6 GB,Sedang
+Transformers War For Cybertron,8.6 GB,Ringan
 Transport Fever 2,39.9 GB,Agak Berat
 Trials of Mana,16.18 GB,Sedang
 Triangle Strategy,6.3 GB,Sedang
-Trine 4,17.12 GB,Sedang
+Trine 4,17.12 GB,Berat
 Tropico 5,2.66 GB,Ringan
-Tropico 6,24.09 GB,Agak Berat
+Tropico 6,24.09 GB,Sedang
 Troublemaker,9.94 GB,Sedang
-TT Isle Of Man Ride Edge 3,14.6 GB,Sedang
+Tsubasa,1.3 GB,Sedang
 TT Isle of Man Ride Edge 2,16.8 GB,Sedang
+TT Isle Of Man Ride Edge 3,14.6 GB,Sedang
 Twisted Metal Black,3.9 GB,Ringan
 Two Point Campus,2.48 GB,Ringan
-Two Point Hospital,8.66 GB,Sedang
-UFC 2009,8.22 GB,Sedang
-UFC Undisputed 2010,43.16 GB,Berat
+Two Point Hospital,8.66 GB,Ringan
+UFC 2009,8.22 GB,Ringan
+UFC Undisputed 2010,43.16 GB,Agak Berat
+Ultimate Fishing Simulator 2,21.6 GB,Sedang
 Ultimate Marvel vs Capcom 3,3.75 GB,Ringan
-Ultimate Fishing Simulator 2,21.6 GB,Agak Berat
 Ultra Street Fighter IV,11.5 GB,Sedang
-Uncharted 2 Among Thieves,23.67 GB,Agak Berat
-Uncharted 3 Drakes Deception,41.08 GB,Berat
+Uncharted 2 Among Thieves,23.67 GB,Sedang
+Uncharted 3 Drakes Deception,41.08 GB,Agak Berat
 Uncharted Legacy of Thieves,104.11 GB,Berat
+Unravel Two,7.09 GB,Ringan
 Unravel,3.3 GB,Ringan
-Unravel Two,7.09 GB,Sedang
 Until Dawn,62.32 GB,Berat
-Until Dawn,62.3 GB,Berat
 Untitled Goose Game,918.95 KB,Ringan
 Upin and Ipin Universe,5.51 GB,Berat
 Valiant Hearts The Great War,1.21 GB,Ringan
 Valkyrie Elysium,19.6 GB,Sedang
-Viking Battle for Asgard,5.6 GB,Sedang
+Viking Battle for Asgard,5.6 GB,Ringan
 War of the Monsters,4.2 GB,Ringan
 Warcraft III,2.08 GB,Ringan
-Warhammer 40000 Dawn of War II,6.58 GB,Sedang
+Warhammer 40000 Dawn of War II,6.58 GB,Ringan
+Warhammer 40000 Dawn of War III,30.0 GB,Sedang
 Warhammer 40000 Space Marine 2,71.76 GB,Berat
-Warhammer 40000 Dawn of War III,30.0 GB,Agak Berat
+WARRIORS OROCHI 3 Ultimate,21.4 GB,Sedang
 Warriors Orochi 4,17.59 GB,Sedang
-Warriors Orochi 4,17.59 GB,Sedang
-WARRIORS OROCHI 3 Ultimate,21.4 GB,Agak Berat
-Watch Dogs,26.58 GB,Agak Berat
-Watch Dogs 2,49.65 GB,Berat
+Watch Dogs 2,49.65 GB,Agak Berat
 Watch Dogs Legion,111.0 GB,Berat
-Way Of The Hunter,23.91 GB,Agak Berat
-Way of the Samurai 4,7.0 GB,Sedang
+Watch Dogs,26.58 GB,Sedang
+Way Of The Hunter,23.91 GB,Sedang
+Way of the Samurai 4,7.0 GB,Ringan
 Winning Eleven 2011,2.57 GB,Ringan
 WitchSpring R,6.11 GB,Sedang
-Wo Long Fallen Dynasty,56.64 GB,Berat
-Wobbly Life,1.78 GB,Ringan
+Wo Long Fallen Dynasty,56.64 GB,Agak Berat
+Wobbly Life,1.78 GB,Sedang
 Wolfenstein II The New Colossus,62.18 GB,Berat
 Wolfenstein The Old Blood,34.61 GB,Agak Berat
-World War Z Aftermath,69.99 GB,Berat
-World War Z Aftermath,70.0 GB,Berat
+Wolfenstein Youngblood,41.1 GB,Agak Berat
 WORLD OF FINAL FANTASY,12.4 GB,Sedang
-WRC 4,5.56 GB,Sedang
-WRC 6,15.80 GB,Sedang
-WRC 7,20.03 GB,Agak Berat
-WRC 8,20.97 GB,Agak Berat
-WRC 9,23.04 GB,Agak Berat
+World War Z Aftermath,69.99 GB,Berat
 WRC 10,38.4 GB,Agak Berat
-Wreckfest,33.68 GB,Agak Berat
+WRC 4,5.56 GB,Ringan
+WRC 6,15.80 GB,Sedang
+WRC 7,20.03 GB,Sedang
+WRC 8,20.97 GB,Sedang
+WRC 9,23.04 GB,Sedang
 Wreckfest 2,13.64 GB,Sedang
+Wreckfest,33.68 GB,Agak Berat
 Wuchang Fallen Feathers,47.67 GB,Berat
 WWE 2K Battlegrounds,9.16 GB,Sedang
 WWE 2K15,34.70 GB,Agak Berat
-WWE 2K16,46.3 GB,Berat
-WWE 2K18,46.1 GB,Berat
-WWE 2K19,51.52 GB,Berat
-WWE 2K22,50.70 GB,Berat
+WWE 2K16,46.3 GB,Agak Berat
+WWE 2K18,46.1 GB,Agak Berat
+WWE 2K19,51.52 GB,Agak Berat
+WWE 2K22,50.70 GB,Agak Berat
 WWE 2K23,76.79 GB,Berat
-WWE All Stars,4.71 GB,Ringan
-WWE Smackdown Raw 2010,4.0 GB,Ringan
-WWE SmackDown! Shut Your Mouth,3.6 GB,Ringan
-WWE SmackDown! Here Comes the Pain,4.56 GB,Ringan
 WWE 2K24,99.1 GB,Berat
 WWE 2K25,101.8 GB,Berat
+WWE All Stars,4.71 GB,Ringan
+WWE Smackdown Raw 2010,4.0 GB,Ringan
+WWE SmackDown! Here Comes the Pain,4.56 GB,Ringan
+WWE SmackDown! Shut Your Mouth,3.6 GB,Ringan
 Xenoblade Chronicles 3,14.69 GB,Sedang
-Yakuza 3 Remastered,26.44 GB,Agak Berat
+Yakuza 0,25.7 GB,Sedang
+Yakuza 3 Remastered,26.44 GB,Sedang
 Yakuza 4 Remastered,35.84 GB,Agak Berat
 Yakuza 5 Remastered,32.91 GB,Agak Berat
-Yakuza 6 The Song of Life,40.88 GB,Berat
-Yakuza Kiwami,21.37 GB,Agak Berat
-Yakuza Kiwami 2,43.02 GB,Berat
-Yakuza Like a Dragon,59.11 GB,Berat
-Yakuza 0,25.7 GB,Agak Berat
+Yakuza 6 The Song of Life,40.88 GB,Agak Berat
+Yakuza Kiwami 2,43.02 GB,Agak Berat
+Yakuza Kiwami,21.37 GB,Sedang
+Yakuza Like a Dragon,59.11 GB,Agak Berat
+Yoshie,6.0 GB,Ringan
 Youtubers Life 2,2.56 GB,Ringan
 Ys IX Monstrum Nox,9.67 GB,Sedang
-Ys VIII Lacrimosa of Dana,29.38 GB,Agak Berat
-Yu Gi Oh RUSH DUEL,3.43 GB,Ringan
-Zombie Army 4,59.07 GB,Berat
-Ninja Gaiden 4,40 GB,Berat
-THe Crew 2,40 GB,Berat
-Little Nightmares 3,15 GB,Agak Berat
-DIABLO 2 RESURRETED,30 GB,Berat
-Poppy Playtime Chapter 5,30 GB,Berat
-REANIMAL,5 GB,Sedang
-RIDE 6,40 GB,Berat
-STARSAND ISLAND,2 GB,Ringan
-TOTAL WAR PHARAOH,40 GB,Berat
-NIOH 3,80 GB,Berat
-DRAGON QUEST VII,10 GB,Sedang
-HOLLOW KNIGHT SILKSONG,5 GB,Sedang
-HYTALE,3 GB,Sedang
-MY HERO ACADEMIA ALL JUSTICE,10 GB,Berat
-CAIRN,2 GB,Sedang
-STORY OF SEASON GRAND BAZZAR,5 GB,Sedang
-POKEMON Z-A,20 GB,Sedang
-MOTO GP 25,40 GB,Berat
+Ys VIII Lacrimosa of Dana,29.38 GB,Sedang
+Yu Gi Oh Empire Total War,16.8 GB,Sedang
+Yu Gi Oh RUSH DUEL,3.43 GB,Sedang
+Zombie Army 4,59.07 GB,Agak Berat
+
 
 `;
+
 
 
 
