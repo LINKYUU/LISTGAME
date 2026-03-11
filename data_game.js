@@ -65,7 +65,7 @@ Baldurs Gate 3,167.47 GB,Berat
 Batman Arkham Asylum,8.41 GB,Ringan
 Batman Arkham City,19.49 GB,Sedang
 Batman Arkham Origins,18.50 GB,Sedang
-Battle Realms,791.35 KB,Ringan
+Battle Realms,791.35 MB,Ringan
 Battlefield 1,52.15 GB,Agak Berat
 Battlefield 2,3.89 GB,Ringan
 Battlefield 3,16.52 GB,Sedang
@@ -122,12 +122,12 @@ Car Mechanic Simulator 2018,10.48 GB,Sedang
 Car Mechanic Simulator 2021,25.83 GB,Sedang
 Cars 2,1.73 GB,Sedang
 CarX Street,18.09 GB,Sedang
-Castle Of Illusion,929.71 KB,Ringan
+Castle Of Illusion,929.71 MB,Ringan
 Chained Together,7.78 GB,Ringan
 Chocobo GP,6.66 GB,Ringan
 Choo Choo Charles,2.40 GB,Ringan
 CHRONO CROSS,3.78 GB,Ringan
-Citadel Forged with Fire,165.30 KB,Sedang
+Citadel Forged with Fire,165.30 MB,Sedang
 Cities Skylines II,66.30 GB,Berat
 Cities Skylines,17.01 GB,Sedang
 City Bus Manager,13.8 GB,Sedang
@@ -205,7 +205,7 @@ Divinity Original Sin,11.92 GB,Sedang
 Donkey Kong Country Tropical Freeze,7.21 GB,Ringan
 DOOM Eternal,93.2 GB,Berat
 DOOM,75.1 GB,Berat
-Doraemon Story of Seasons,813.91 KB,Ringan
+Doraemon Story of Seasons,813.91 MB,Ringan
 Downhill Domination,2.86 GB,Ringan
 Dragon Age Inquisition,39.15 GB,Agak Berat
 Dragon Age The Veilguard,94.6 GB,Berat
@@ -256,7 +256,7 @@ F1 2021,60 GB ,Berat
 F1 2022,80 GB ,Berat
 F1 Race Stars,5.18 GB,Ringan
 Fae Farm,2.79 GB,Sedang
-Fallout 2,736.01 KB,Ringan
+Fallout 2,736.01 MB,Ringan
 Fallout 3,9.0 GB,Ringan
 Fallout 4,37.8 GB,Agak Berat
 Fallout New Vegas,9.68 GB,Ringan
@@ -357,7 +357,7 @@ HADES,11.63 GB,Sedang
 Halo Infinite,48.7 GB,Agak Berat
 Halo The Master Chief Collection,140.8 GB,Berat
 Harvest Moon Light of Hope,890.68 MB,Ringan
-Harvest Moon One World,989.51 KB,Sedang
+Harvest Moon One World,989.51 MB,Sedang
 Harvest Moon Save the Homeland,229.45 MB,Ringan
 Hearts of Iron IV,9.73 GB,Ringan
 Hell Is Us,21.5 GB,Berat
@@ -401,7 +401,7 @@ Judgment,37.7 GB,Agak Berat
 Juiced 2,1.68 GB,Ringan
 Jujutsu Kaisen,13.39 GB,Sedang
 Jump Force,46.88 GB,Agak Berat
-Jurassic Park Operation,305.48 KB,Ringan
+Jurassic Park Operation,305.48 MB,Ringan
 Jurassic World Evolution 2,12.75 GB,Sedang
 Jurassic World Evolution,7.72 GB,Sedang
 Just Cause 4,52.36 GB,Agak Berat
@@ -451,7 +451,7 @@ Life is Strange Remastered,43.78 GB,Agak Berat
 Life Is Strange True Colors,25.55 GB,Sedang
 Life is Strange,14.67 GB,Sedang
 Lightning Returns Final Fantasy XIII,21.68 GB,Sedang
-LIMBO,111.52 KB,Ringan
+LIMBO,111.52 MB,Ringan
 Little Nightmares 3,15 GB,Sedang
 Little Nightmares II,21.99 GB,Sedang
 Lords of the Fallen,34.68 GB,Agak Berat
@@ -614,7 +614,7 @@ PayDay The Heist,5.42 GB,Ringan
 PC Building Simulator 2,29.59 GB,Sedang
 PC Building Simulator,23.4 GB,Sedang
 PEAK,5.52 GB,Ringan
-People Playground,452.04 KB,Ringan
+People Playground,452.04 MB,Ringan
 Persona 3,8.11 GB,Sedang
 Persona 4 Arena Ultimax,15.43 GB,Sedang
 Persona 4 Golden,12.8 GB,Sedang
@@ -754,7 +754,7 @@ Soulslinger Envoy of Death,15.91 GB,Sedang
 South of Midnight,88.8 GB,Berat
 Spider Man Friend Or Foe,3.7 GB,Ringan
 Spider Man Shattered Dimensions,14.09 GB,Sedang
-Spiritires,956.98 KB,Ringan
+Spiritires,956.98 MB,Ringan
 Splinter Cell Conviction,8.23 GB,Ringan
 Split Fiction,92.0 GB,Berat
 SplitSecond,7.20 GB,Ringan
@@ -767,7 +767,7 @@ STAR WARS Jedi Survivor,136.22 GB,Berat
 STAR WARS The Force Unleashed,30.07 GB,Agak Berat
 StarCraft II,20.89 GB,Sedang
 StarCraft Remastered,10.73 GB,Sedang
-Stardew Valley,716.18 KB,Ringan
+Stardew Valley,716.18 MB,Ringan
 STARSAND ISLAND,2 GB,Sedang
 State of Decay 2,21.39 GB,Sedang
 State of Decay,3.09 GB,Ringan
@@ -812,11 +812,11 @@ TEKKEN 8,122.09 GB,Berat
 Tenchu Fatal Shadows,3.90 GB,Ringan
 Tenchu Wrath of Heaven,4.0 GB,Ringan
 Terminator Resistance,27.8 GB,Sedang
-Terraria,668.74 KB,Ringan
+Terraria,668.74 MB,Ringan
 The Amazing Spider Man 2,8.4 GB,Ringan
 The Amazing Spider Man,8.67 GB,Ringan
 The Bridge Curse 2,6.1 GB,Sedang
-The Coffin of Andy and Leyley,705.20 KB,Ringan
+The Coffin of Andy and Leyley,705.20 MB,Ringan
 THe Crew 2,40 GB,Agak Berat
 The Crew,26.0 GB,Sedang
 The Dark Pictures Anthology,65.3 GB,Berat
@@ -902,7 +902,7 @@ Uncharted Legacy of Thieves,104.11 GB,Berat
 Unravel Two,7.09 GB,Ringan
 Unravel,3.3 GB,Ringan
 Until Dawn,62.32 GB,Berat
-Untitled Goose Game,918.95 KB,Ringan
+Untitled Goose Game,918.95 MB,Ringan
 Upin and Ipin Universe,5.51 GB,Berat
 Valiant Hearts The Great War,1.21 GB,Ringan
 Valkyrie Elysium,19.6 GB,Sedang
@@ -969,6 +969,7 @@ Zombie Army 4,59.07 GB,Agak Berat
 
 
 `;
+
 
 
 
