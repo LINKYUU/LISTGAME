@@ -153,7 +153,7 @@ CRISIS CORE FINAL FANTASY VII REUNION,19.0 GB,Sedang
 Crysis 1,5.88 GB,Ringan
 Crysis 3,10.96 GB,Sedang
 Crysis Remastered,21.02 GB,Sedang
-CTR,6.28 GB,Ringan
+CRASH TEAM RACING CTR,6.28 GB,Ringan
 Cult of the Lamb,1.99 GB,Sedang
 Cuphead,5.71 GB,Ringan
 Dakar Desert Rally,35.4 GB,Agak Berat
@@ -971,6 +971,7 @@ Until Then , 3 GB , Sedang
 Luma Island , 2 GB , Ringan
 
 `;
+
 
 
 
