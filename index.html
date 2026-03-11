@@ -40,7 +40,6 @@
         #gameTable th, #gameTable td { padding: 12px 15px; border-bottom: 1px solid #e0e0e0; text-align: left; }
         #gameTable th { background-color: #f9f9f9; position: sticky; top: 0; z-index: 1; }
         
-        /* HOVER EFFECT HEADER */
         #sizeHeader, #specHeader { cursor: pointer; user-select: none; }
         #sizeHeader:hover, #specHeader:hover { background-color: #f0f0f0; }
 
@@ -125,10 +124,18 @@
     const apiKey = "158b3858daed4d67af02a839d14ba445";
     let allGames = [], currentSpecFilter = null, currentGenreFilter = null;
     let sizeSortDir = 1;
-    
-    // Logic untuk Speck Sort (Ringan -> Sedang -> Agak Berat -> Berat)
     const specOrder = ["Ringan", "Sedang", "Agak Berat", "Berat"];
     let currentSpecSortIdx = -1; 
+
+    // LOGIKA PERBAIKAN: Konversi ke MB agar pengurutan akurat
+    function convertToMB(sizeStr) {
+        if (!sizeStr) return 0;
+        const s = sizeStr.toUpperCase();
+        const val = parseFloat(s.replace(/[^0-9.]/g, '')) || 0;
+        if (s.includes("KB")) return val / 1024;
+        if (s.includes("GB")) return val * 1024;
+        return val; // Asumsi MB jika tidak ada satuan
+    }
 
     function getGameGenres(name) {
         const n = name.toLowerCase(); const g = [];
@@ -164,8 +171,6 @@
         allGames = Array.from(map.values());
     }
 
-    function parseSize(s) { return parseFloat(s.replace(/[^0-9.]/g, '')) || 0; }
-
     document.addEventListener('DOMContentLoaded', () => {
         const tableBody = document.getElementById('gameListBody');
         const searchInput = document.getElementById('searchInput');
@@ -177,8 +182,6 @@
         function render() {
             const term = searchInput.value.toLowerCase();
             let f = [...allGames].filter(g => g.name.toLowerCase().includes(term));
-            
-            // Apply Button Filters
             if (currentSpecFilter) f = f.filter(g => g.description.toLowerCase() === currentSpecFilter.toLowerCase());
             if (currentGenreFilter) f = f.filter(g => g.genres.includes(currentGenreFilter));
             
@@ -191,10 +194,11 @@
             document.getElementById('gameCount').textContent = `Total: ${f.length} Game`;
         }
 
-        // --- SORT SIZE ---
+        // --- SORT SIZE (FIXED) ---
         sizeHeader.onclick = () => {
             sizeSortDir *= -1;
-            allGames.sort((a, b) => (parseSize(a.size) - parseSize(b.size)) * sizeSortDir);
+            allGames.sort((a, b) => (convertToMB(a.size) - convertToMB(b.size)) * sizeSortDir);
+            sizeHeader.innerHTML = `Size ${sizeSortDir === 1 ? '↑' : '↓'}`;
             render();
         };
 
@@ -202,22 +206,18 @@
         specHeader.onclick = () => {
             currentSpecSortIdx = (currentSpecSortIdx + 1) % specOrder.length;
             const target = specOrder[currentSpecSortIdx];
-            
-            // Pindahkan yang sesuai target ke atas
             allGames.sort((a, b) => {
                 if (a.description === target && b.description !== target) return -1;
                 if (a.description !== target && b.description === target) return 1;
                 return 0;
             });
-
             specHeader.innerHTML = `Speck (${target}) ↕`;
-            specHeader.style.color = "#d9534f";
             render();
         };
 
         searchInput.onkeyup = render;
         
-        // Filter Button Logic
+        // Filter Buttons
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.onclick = () => {
                 const act = btn.classList.contains('active');
@@ -241,14 +241,23 @@
         render();
     });
 
-    // Modal & API Functions (Sama seperti sebelumnya)
+    // Modal & Slider logic (sama seperti sebelumnya)
+    let slideIndex = 1;
+    function plusSlides(n, e) { e.stopPropagation(); showSlides(slideIndex += n); }
+    function showSlides(n) {
+        let s = document.getElementsByClassName("slides");
+        if (s.length === 0) return;
+        if (n > s.length) slideIndex = 1; if (n < 1) slideIndex = s.length;
+        for (let i = 0; i < s.length; i++) s[i].style.display = "none";
+        s[slideIndex-1].style.display = "block";
+    }
+
     async function showSpec(gameName) {
         const modal = document.getElementById('specModal');
         const title = document.getElementById('modalTitle');
         const body = document.getElementById('modalBody');
         const slider = document.getElementById('sliderContainer');
         const ytBtn = document.getElementById('youtubeBtn');
-        const localGame = allGames.find(g => g.name === gameName);
         
         title.textContent = gameName;
         modal.style.display = "block";
@@ -261,7 +270,6 @@
             const data = await res.json();
             if (data.results.length) {
                 const game = data.results[0];
-                body.innerHTML = `Game ditemukan. Silakan cek detail di modal.`;
                 const sRes = await fetch(`https://api.rawg.io/api/games/${game.id}/screenshots?key=${apiKey}`);
                 const sData = await sRes.json();
                 sData.results.slice(0, 5).forEach(img => {
@@ -269,19 +277,10 @@
                     div.innerHTML = `<img src="${img.image}">`;
                     slider.insertBefore(div, slider.firstChild);
                 });
+                body.innerHTML = "Klik gambar atau geser untuk melihat screenshot.";
                 showSlides(1);
             }
-        } catch (e) { body.innerHTML = "Spek tidak ditemukan."; }
-    }
-    
-    let slideIndex = 1;
-    function plusSlides(n, e) { e.stopPropagation(); showSlides(slideIndex += n); }
-    function showSlides(n) {
-        let s = document.getElementsByClassName("slides");
-        if (s.length === 0) return;
-        if (n > s.length) slideIndex = 1; if (n < 1) slideIndex = s.length;
-        for (let i = 0; i < s.length; i++) s[i].style.display = "none";
-        s[slideIndex-1].style.display = "block";
+        } catch (e) { body.innerHTML = "Data tidak tersedia."; }
     }
     document.querySelector('.close-btn').onclick = () => document.getElementById('specModal').style.display = "none";
 </script>
