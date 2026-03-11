@@ -621,13 +621,13 @@ Persona 4 Golden,12.8 GB,Sedang
 Persona 5 Royal,34.26 GB,Berat
 Persona 5 Strikers,25.03 GB,Sedang
 Persona 5 Tactica,7.43 GB,Sedang
-PES 2013,11.4 GB,Sedang
-PES 2016,23.8 GB,Sedang
-PES 2017,45 GB,Agak Berat
-PES 2018,43 GB,Agak Berat
-PES 2019,44 GB,Agak Berat
-PES 2021,80 GB,Berat
-PES 6,3.67 GB,Ringan
+Pro Evolution Soccer PES 2013,11.4 GB,Sedang
+Pro Evolution Soccer PES 2016,23.8 GB,Sedang
+Pro Evolution Soccer PES 2017,45 GB,Agak Berat
+Pro Evolution Soccer PES 2018,43 GB,Agak Berat
+Pro Evolution Soccer PES 2019,44 GB,Agak Berat
+Pro Evolution Soccer PES 2021,80 GB,Berat
+Pro Evolution Soccer PES 6,3.67 GB,Ringan
 PICO PARK 2,227.65 MB,Ringan
 PICO PARK,82.71 MB,Ringan
 PixARK,17.77 GB,Sedang
@@ -635,13 +635,13 @@ Planet Coaster,12.06 GB,Sedang
 Planet of the Apes,19.63 GB,Sedang
 Planet Zoo,10.33 GB,Sedang
 Plants Vs Zombies GOTY,48.07 GB,Agak Berat
-PokÃ©mon Shield,10.43 GB,Sedang
-PokÃ©mon Sword,10.43 GB,Sedang
-PokÃ©mon Violet,7.16 GB,Ringan
+Pokemon Shield,10.43 GB,Sedang
+Pokemon Sword,10.43 GB,Sedang
+Pokemon Violet,7.16 GB,Ringan
 Pokemon Lets Go Pikachu,4.82 GB,Ringan
 Pokemon Scarlet,6.78 GB,Ringan
-POKEMON Z-A,20 GB,Sedang
-PokkÃ©n Tournament DX,3.64 GB,Ringan
+Pokemon Z-A,20 GB,Sedang
+Pokemon Tournament DX,3.64 GB,Ringan
 Police Simulator Patrol Officers,12.66 GB,Sedang
 Poppy Playtime Chapter 3,38.3 GB,Agak Berat
 Poppy Playtime Chapter 5,30 GB,Sedang
@@ -969,6 +969,7 @@ Zombie Army 4,59.07 GB,Agak Berat
 
 
 `;
+
 
 
 
