@@ -31,24 +31,21 @@
         /* UI FILTER */
         h1 { margin: 10px 0; color: #1a1a1a; }
         #searchInput {
-    width: 100%;
-    max-width: 600px;
-    padding: 12px 25px; /* Padding samping diperbesar agar teks tidak menempel ke lengkungan */
-    margin: 15px auto;
-    font-size: 16px;
-    border: 1px solid #e0e0e0; /* Warna border lebih lembut */
-    border-radius: 50px; /* Ini kunci untuk membuat bentuk rounded/pill */
-    box-sizing: border-box;
-    display: block;
-    outline: none; /* Menghilangkan garis biru saat diklik (opsional) */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Tambahan shadow halus agar mirip gambar */
-    transition: all 0.3s ease;
-}
+            width: 100%;
+            max-width: 600px;
+            padding: 12px 25px;
+            margin: 15px auto;
+            font-size: 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 50px;
+            box-sizing: border-box;
+            display: block;
+            outline: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
 
-#searchInput:focus {
-    border-color: #1a73e8; /* Warna saat diklik */
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
+        #searchInput:focus { border-color: #1a73e8; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
         #filterContainer, #genreFilterContainer { margin-top: 15px; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
         #genreFilterContainer { border-top: 1px dashed #ccc; padding-top: 10px; }
         .filter-btn, .genre-btn { padding: 8px 15px; font-size: 13px; font-weight: 500; background-color: #f0f0f0; border: none; border-radius: 20px; cursor: pointer; color: #555; }
@@ -58,6 +55,12 @@
         #gameTable { width: 100%; border-collapse: collapse; }
         #gameTable th, #gameTable td { padding: 12px 15px; border-bottom: 1px solid #e0e0e0; text-align: left; }
         #gameTable th { background-color: #f9f9f9; position: sticky; top: 0; z-index: 1; }
+        
+        /* STYLE KHUSUS HEADER SIZE */
+        #sizeHeader { cursor: pointer; user-select: none; position: relative; }
+        #sizeHeader:hover { background-color: #f0f0f0; }
+        #sizeHeader::after { content: ' ↕'; font-size: 12px; color: #aaa; }
+
         .clickable-name { color: #0056b3; cursor: pointer; text-decoration: underline; font-weight: 500; }
         
         .instruction-box { text-align: center; margin: 15px 0 5px 0; }
@@ -100,7 +103,18 @@
         </div>
         <div id="gameCount" style="text-align:center; color:#777; font-size:12px; margin-top:5px; font-weight:bold;"></div>
     </header>
-    <div class="table-wrapper"><table id="gameTable"><thead><tr><th>Nama Game</th><th>Size</th><th>Speck</th></tr></thead><tbody id="gameListBody"></tbody></table></div>
+    <div class="table-wrapper">
+        <table id="gameTable">
+            <thead>
+                <tr>
+                    <th>Nama Game</th>
+                    <th id="sizeHeader">Size</th>
+                    <th>Speck</th>
+                </tr>
+            </thead>
+            <tbody id="gameListBody"></tbody>
+        </table>
+    </div>
 </div>
 
 <div id="specModal" class="modal">
@@ -128,6 +142,7 @@
 <script>
     const apiKey = "158b3858daed4d67af02a839d14ba445";
     let slideIndex = 1, allGames = [], currentSpecFilter = null, currentGenreFilter = null;
+    let sortDirection = 1; // 1 = Asc, -1 = Desc
     const cacheSpecs = new Map();
 
     function getGameGenres(name) {
@@ -182,35 +197,14 @@
         allGames = Array.from(map.values());
     }
 
-    // FUNGSI PENERJEMAH OTOMATIS (INDONESIA)
     function formatReq(text) {
         let clean = text.split(/Recommended:/i)[0].replace(/[®™]/g, '');
         let lines = [];
-        const targets = {
-            "Processor": "Prosesor",
-            "Memory": "RAM",
-            "Graphics": "Kartu Grafis (VGA)",
-            "OS": "Sistem Operasi (Windows)"
-        };
-        
+        const targets = { "Processor": "Prosesor", "Memory": "RAM", "Graphics": "Kartu Grafis (VGA)", "OS": "Sistem Operasi (Windows)" };
         Object.keys(targets).forEach(k => {
             if(clean.includes(k + ":")) {
-                let d = clean.split(k + ":")[1]
-                             .split("<br>")[0]
-                             .split("DirectX")[0]
-                             .split("Network")[0]
-                             .split("Storage")[0]
-                             .replace(/Additional Notes.*/gi, '') // Hapus catatan teknis panjang
-                             .trim();
-                
-                // PROSES TERJEMAHAN KATA DEMI KATA
-                d = d.replace(/or higher/gi, 'atau lebih tinggi')
-                     .replace(/or better/gi, 'atau lebih baik')
-                     .replace(/or over/gi, 'atau keatas')
-                     .replace(/available space/gi, 'ruang kosong')
-                     .replace(/64bit|64-bit/gi, '64-bit')
-                     .replace(/VRAM/gi, 'VRAM');
-                
+                let d = clean.split(k + ":")[1].split("<br>")[0].split("DirectX")[0].split("Network")[0].split("Storage")[0].replace(/Additional Notes.*/gi, '').trim();
+                d = d.replace(/or higher/gi, 'atau lebih tinggi').replace(/or better/gi, 'atau lebih baik').replace(/or over/gi, 'atau keatas').replace(/available space/gi, 'ruang kosong').replace(/64bit|64-bit/gi, '64-bit').replace(/VRAM/gi, 'VRAM');
                 lines.push(`<b>${targets[k]}:</b> ${d}`);
             }
         });
@@ -243,33 +237,26 @@
         try {
             const res = await fetch(`https://api.rawg.io/api/games?key=${apiKey}&search=${encodeURIComponent(gameName)}&page_size=1`);
             const data = await res.json();
-            
             if (data.results.length) {
                 const game = data.results[0];
                 const detailRes = await fetch(`https://api.rawg.io/api/games/${game.id}?key=${apiKey}`);
                 const detail = await detailRes.json();
                 const pc = detail.platforms.find(p => p.platform.id === 4);
-                
                 let finalHtml = getFallbackSpec(kategori);
                 if (pc && pc.requirements && pc.requirements.minimum) {
                     let formatted = formatReq(pc.requirements.minimum);
                     if (formatted.length > 10) finalHtml = formatted;
                 }
-
                 body.innerHTML = finalHtml;
-
                 const sRes = await fetch(`https://api.rawg.io/api/games/${game.id}/screenshots?key=${apiKey}`);
                 const sData = await sRes.json();
                 const screens = sData.results.slice(0, 5).map(img => img.image);
-                
                 cacheSpecs.set(gameName, { html: finalHtml, screens: screens });
                 renderScreenshots(screens);
             } else {
                 body.innerHTML = getFallbackSpec(kategori);
             }
-        } catch (e) {
-            body.innerHTML = getFallbackSpec(kategori);
-        }
+        } catch (e) { body.innerHTML = getFallbackSpec(kategori); }
     }
 
     function renderScreenshots(screens) {
@@ -282,10 +269,17 @@
         slideIndex = 1; showSlides(1);
     }
 
+    // FUNGSI UNTUK MENGUBAH SIZE STRING KE ANGKA
+    function parseSize(sizeStr) {
+        return parseFloat(sizeStr.replace(/[^0-9.]/g, '')) || 0;
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
         const tableBody = document.getElementById('gameListBody');
         const searchInput = document.getElementById('searchInput');
         const modal = document.getElementById('specModal');
+        const sizeHeader = document.getElementById('sizeHeader');
+        
         parseData();
 
         function render() {
@@ -293,6 +287,7 @@
             let f = allGames.filter(g => g.name.toLowerCase().includes(term));
             if (currentSpecFilter) f = f.filter(g => g.description.toLowerCase() === currentSpecFilter.toLowerCase());
             if (currentGenreFilter) f = f.filter(g => g.genres.includes(currentGenreFilter));
+            
             tableBody.innerHTML = '';
             f.forEach(g => {
                 const tr = document.createElement('tr');
@@ -301,6 +296,19 @@
             });
             document.getElementById('gameCount').textContent = `Total: ${f.length} Game`;
         }
+
+        // LOGIKA SORTING SAAT HEADER SIZE DIKLIK
+        sizeHeader.onclick = () => {
+            sortDirection *= -1; // Balikkan arah
+            allGames.sort((a, b) => {
+                const valA = parseSize(a.size);
+                const valB = parseSize(b.size);
+                return (valA - valB) * sortDirection;
+            });
+            render();
+            // Beri feedback visual sederhana
+            sizeHeader.style.color = sortDirection === 1 ? "#1a73e8" : "#d9534f";
+        };
 
         searchInput.onkeyup = render;
         document.querySelectorAll('.filter-btn').forEach(btn => {
