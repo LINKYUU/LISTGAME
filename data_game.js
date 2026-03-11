@@ -542,11 +542,11 @@ My Time at Sandrock,29.3 GB,Sedang
 MySims Kingdom,4.00 GB,Ringan
 MySims,4.22 GB,Ringan
 NARUTO SHIPPUDEN Ultimate Ninja STORM 4,40.82 GB,Agak Berat
-Naruto STORM 1,8.19 GB,Ringan
-Naruto STORM 2,7.45 GB,Ringan
-Naruto STORM 3,17.06 GB,Sedang
+NARUTO SHIPPUDEN Ultimate Ninja STORM 1,8.19 GB,Ringan
+NARUTO SHIPPUDEN Ultimate Ninja STORM 2,7.45 GB,Ringan
+NARUTO SHIPPUDEN Ultimate Ninja STORM 3 Full Brush,17.06 GB,Sedang
+NARUTO SHIPPUDEN Ultimate Ninja STORM Revolution, 10GB , Sedang
 NARUTO TO BORUTO SHINOBI STRIKER,29.99 GB,Sedang
-Naruto Ultimate Ninja Storm,7.90 GB,Ringan
 NARUTO X BORUTO STORM CONNECTIONS,31.3 GB,Agak Berat
 NASCAR Arcade Rush,4.73 GB,Berat
 NASCAR Heat 4,18.1 GB,Sedang
@@ -969,6 +969,7 @@ Zombie Army 4,59.07 GB,Agak Berat
 
 
 `;
+
 
 
 
