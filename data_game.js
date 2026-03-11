@@ -101,21 +101,21 @@ Burnout Paradise,3.02 GB,Ringan
 Bus Simulator 21,16.14 GB,Sedang
 C C Red Alert 3,14.95 GB,Sedang
 CAIRN,2 GB,Ringan
-Call of Duty 2,3.66 GB,Ringan
-Call of Duty 4 Modern Warfare,6.76 GB,Ringan
-Call of Duty Advanced Warfare,38.42 GB,Agak Berat
-Call Of Duty Black Ops 4,157.74 GB,Berat
-Call of Duty Black Ops III,127.98 GB,Berat
-Call of Duty Ghosts,31.14 GB,Agak Berat
-Call of Duty Modern Warfare 2 Remastered,67.9 GB,Berat
-Call of Duty Modern Warfare 2 TERBARU , 50 GB ,Agak Berat
-Call of Duty Modern Warfare 2,14.6 GB,Sedang
-Call of Duty Modern Warfare 3,18.19 GB,Sedang
-Call of Duty Modern Warfare III TERBARU,60.2 GB,Berat
-Call of Duty Modern Warfare Remastered,45.06 GB,Agak Berat
-Call of Duty Modern Warfare TERBARU , 100 GB ,Berat
-Call of Duty Vanguard,84.9 GB,Berat
-Call of Duty World at War,7.25 GB,Ringan
+Call of Duty COD 2,3.66 GB,Ringan
+Call of Duty 4 Modern Warfare COD,6.76 GB,Ringan
+Call of Duty Advanced Warfare COD,38.42 GB,Agak Berat
+Call Of Duty Black Ops 4 COD,157.74 GB,Berat
+Call of Duty Black Ops III COD,127.98 GB,Berat
+Call of Duty Ghosts COD,31.14 GB,Agak Berat
+Call of Duty Modern Warfare 2 Remastered COD,67.9 GB,Berat
+Call of Duty Modern Warfare 2 TERBARU COD , 50 GB ,Agak Berat
+Call of Duty Modern Warfare 2 COD,14.6 GB,Sedang
+Call of Duty Modern Warfare 3 COD,18.19 GB,Sedang
+Call of Duty Modern Warfare III TERBARU COD,60.2 GB,Berat
+Call of Duty Modern Warfare Remastered COD,45.06 GB,Agak Berat
+Call of Duty Modern Warfare TERBARU COD , 100 GB ,Berat
+Call of Duty Vanguard COD,84.9 GB,Berat
+Call of Duty World at War COD,7.25 GB,Ringan
 Call to Arms,44.99 GB,Agak Berat
 Captain Tsubasa Rise of New Champions,49.64 GB,Agak Berat
 Car Mechanic Simulator 2018,10.48 GB,Sedang
@@ -969,6 +969,7 @@ Zombie Army 4,59.07 GB,Agak Berat
 
 
 `;
+
 
 
 
