@@ -1,6 +1,13 @@
 // 1. Data mentah dari CSV Anda
 const csvData = `
 NAMA GAME,SIZE,KETERANGAN
+Resident Evil Requiem [NEW GAME] , 78 GB , BERAT
+Avatar: Frontiers of Pandora [NEW GAME] , 141 GB , BERAT
+Assassins Creed Shadows [NEW GAME] , 140 GB , BERAT
+Monster Hunter Wilds [NEW GAME] , 155 GB , BERAT
+GreedFall: The Dying World [NEW GAME] , 40 GB , Berat
+FATAL FRAME II: Crimson Butterfly REMAKE [NEW GAME] , 37 GB , BERAT
+PLANET OF LANA 2 [NEW GAME] , 17 GB , SEDANG
 25 To Life,1.99 GB,Ringan
 9 Monkeys of Shaolin,6.94 GB,Ringan
 A Plague Tale Innocence,43.58 GB,Agak Berat
