@@ -49,6 +49,9 @@
         .ket-sedang { color: #007bff; font-weight: bold; }
         .ket-agak-berat { color: #fd7e14; font-weight: bold; }
         .ket-berat { color: #dc3545; font-weight: bold; }
+
+        /* STYLE BARU UNTUK NEW GAME */
+        .new-game-label { color: red; font-weight: bold; margin-left: 5px; }
     </style>
 </head>
 <body>
@@ -146,7 +149,6 @@
         return `<b>Prosesor:</b> i7 Gen 9 / Ryzen 7<br><b>RAM:</b> 16 GB RAM<br><b>VGA:</b> GTX 1660 / RX 580`;
     }
 
-    // LOGIKA KATA KUNCI GENRE
     function getGameGenres(name) {
         const n = name.toLowerCase();
         const g = [];
@@ -194,7 +196,7 @@
                         name, 
                         size: p[1].trim(), 
                         description: p[2].trim(), 
-                        genres: getGameGenres(name) // Generate genres here
+                        genres: getGameGenres(name)
                     });
                 }
             }
@@ -211,11 +213,14 @@
         const gameData = allGames.find(g => g.name === gameName);
         const kategori = gameData ? gameData.description : "Sedang";
 
+        // Bersihkan nama dari [NEW GAME] untuk pencarian API agar akurat
+        const cleanName = gameName.replace(/\[NEW GAME\]/gi, '').trim();
+
         title.textContent = gameName;
         modal.style.display = "block";
         body.innerHTML = "Mencari data spesifikasi...";
         slider.querySelectorAll('.slides').forEach(s => s.remove());
-        ytBtn.href = `https://www.youtube.com/results?search_query=${encodeURIComponent(gameName + " Gameplay PC No Commentary")}`;
+        ytBtn.href = `https://www.youtube.com/results?search_query=${encodeURIComponent(cleanName + " Gameplay PC No Commentary")}`;
 
         if (cacheSpecs.has(gameName)) {
             const cached = cacheSpecs.get(gameName);
@@ -225,7 +230,7 @@
         }
 
         try {
-            const res = await fetch(`https://api.rawg.io/api/games?key=${apiKey}&search=${encodeURIComponent(gameName)}&page_size=1`);
+            const res = await fetch(`https://api.rawg.io/api/games?key=${apiKey}&search=${encodeURIComponent(cleanName)}&page_size=1`);
             const data = await res.json();
             let finalHtml = getFallbackSpec(kategori);
             let screens = [];
@@ -276,12 +281,10 @@
             const term = searchInput.value.toLowerCase();
             let f = [...allGames].filter(g => g.name.toLowerCase().includes(term));
             
-            // Filter Speck
             if (currentSpecFilter) {
                 f = f.filter(g => g.description.toLowerCase() === currentSpecFilter.toLowerCase());
             }
             
-            // Filter Genre
             if (currentGenreFilter) {
                 f = f.filter(g => g.genres.includes(currentGenreFilter));
             }
@@ -289,7 +292,14 @@
             tableBody.innerHTML = '';
             f.forEach(g => {
                 const tr = document.createElement('tr');
-                tr.innerHTML = `<td><span class="clickable-name" onclick="showSpec('${g.name}')">${g.name}</span></td><td>${g.size}</td><td class="ket-${g.description.toLowerCase().replace(' ', '-')}">${g.description}</td>`;
+                
+                // Pisahkan teks [NEW GAME] untuk diwarnai merah
+                let nameHtml = g.name;
+                if (nameHtml.includes("[NEW GAME]")) {
+                    nameHtml = nameHtml.replace(/\[NEW GAME\]/gi, '<span class="new-game-label">[NEW GAME]</span>');
+                }
+
+                tr.innerHTML = `<td><span class="clickable-name" onclick="showSpec('${g.name}')">${nameHtml}</span></td><td>${g.size}</td><td class="ket-${g.description.toLowerCase().replace(' ', '-')}">${g.description}</td>`;
                 tableBody.appendChild(tr);
             });
             document.getElementById('gameCount').textContent = `Total: ${f.length} Game`;
