@@ -50,7 +50,7 @@
         .ket-agak-berat { color: #fd7e14; font-weight: bold; }
         .ket-berat { color: #dc3545; font-weight: bold; }
 
-        /* STYLE BARU UNTUK NEW GAME */
+        /* STYLE BARU UNTUK NEWGAME */
         .new-game-label { color: red; font-weight: bold; margin-left: 5px; }
     </style>
 </head>
@@ -213,8 +213,8 @@
         const gameData = allGames.find(g => g.name === gameName);
         const kategori = gameData ? gameData.description : "Sedang";
 
-        // Bersihkan nama dari [NEW GAME] untuk pencarian API agar akurat
-        const cleanName = gameName.replace(/\[NEW GAME\]/gi, '').trim();
+        // Bersihkan nama dari [NEWGAME] untuk pencarian API agar akurat
+        const cleanName = gameName.replace(/\[NEWGAME\]/gi, '').trim();
 
         title.textContent = gameName;
         modal.style.display = "block";
@@ -293,10 +293,10 @@
             f.forEach(g => {
                 const tr = document.createElement('tr');
                 
-                // Pisahkan teks [NEW GAME] untuk diwarnai merah
+                // Pisahkan teks [NEWGAME] untuk diwarnai merah
                 let nameHtml = g.name;
-                if (nameHtml.includes("[NEW GAME]")) {
-                    nameHtml = nameHtml.replace(/\[NEW GAME\]/gi, '<span class="new-game-label">[NEW GAME]</span>');
+                if (nameHtml.includes("[NEWGAME]")) {
+                    nameHtml = nameHtml.replace(/\[NEWGAME\]/gi, '<span class="new-game-label">[NEWGAME]</span>');
                 }
 
                 tr.innerHTML = `<td><span class="clickable-name" onclick="showSpec('${g.name}')">${nameHtml}</span></td><td>${g.size}</td><td class="ket-${g.description.toLowerCase().replace(' ', '-')}">${g.description}</td>`;
