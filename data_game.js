@@ -686,7 +686,7 @@ Resident Evil 4 REMAKE,60.40 GB,Berat
 Resident Evil 4,12.26 GB,Berat
 Resident Evil 5,8.91 GB,Ringan
 Resident Evil 6,18.07 GB,Sedang
-Resident Evil 7,6.8 GB,Ringan
+Resident Evil 7,64 GB,Berat
 Resident Evil Revelations 2,19.24 GB,Sedang
 Resident Evil Revelations,7.5 GB,Ringan
 Resident Evil Village,39.19 GB,Berat
