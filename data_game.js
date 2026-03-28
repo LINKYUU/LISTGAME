@@ -2,30 +2,30 @@
 const csvData = `
 NAMA GAME,SIZE,KETERANGAN
 [NEW GAME] Crimson Desert , 130 Gb , Berat
+[NEW GAME] Black Myth: Wukong , 155GB , Berat
+[NEW GAME] Resident Evil Requiem - RE 9 , 78 GB , Berat
+[NEW GAME] Assassins Creed Shadows  , 140 GB , Berat
+[NEW GAME] Avatar: Frontiers of Pandora , 141 GB , Berat
+[NEW GAME] WWE 2026 , 135 Gb , Berat
+[NEW GAME] DEATH STRANDING 2 ONTHE BEACH , 118 Gb , Berat 
+[NEW GAME] Stellar Blade , 63 Gb , Berat
+[NEW GAME] Monster Hunter Wilds , 155 GB , Berat
+[NEW GAME] Monster Hunter Stories 3 Twisted Reflection , 37 Gb , Berat
+[NEW GAME] Lost Judgment , 66 Gb , Berat
+[NEW GAME] Mafia The Old Country , 47 Gb , Berat
 [NEW GAME] Demon Slayer Kimetsu no Yaiba The Hinokami Chronicles 2 , 26 Gb , Berat
 [NEW GAME] Demon Slayer Kimetsu no Yaiba TheHinokami Chronicles 1 , 26 Gb Berat
 [NEW GAME] F1 2025 , 89 Gb , Berat
 [NEW GAME] Football Manager 26 , 8 Gb , Sedang
 [NEW GAME] Jurassic World Evolution 3 , 21 Gb , Berat
 [NEW GAME] Life is Strange Reunion , 27 Gb , Agak Berat
-[NEW GAME] Mafia The Old Country , 47 Gb , Berat
-[NEW GAME] Monster Hunter Stories 3 Twisted Reflection , 37 Gb , Berat
 [NEW GAME] Persona 4 Golden , 10 Gb , Sedang
-[NEW GAME] Stellar Blade , 63 Gb , Berat
 [NEW GAME] Two Point Museum , 6 Gb , Sedang
 [NEW GAME] Yakuza Kiwami 3 and Dark Ties , 50 Gb , Berat
 [NEW GAME] Digimon Story Time Stranger , 32 Gb , Berat
-[NEW GAME] Lost Judgment , 66 Gb , Berat
-[NEW GAME] DEATH STRANDING 2 ONTHE BEACH , 118 Gb , Berat 
 [NEW GAME] Borderlands 4 , 90 Gb , Berat
 [NEW GAME] Total War Warhammer III , 88 Gb , Berat
-[NEW GAME] WWE 2026 , 135 Gb , Berat
 [NEW GAME] Dragon Quest VII Reimagined , 8 Gb , Agak berat
-[NEW GAME] Resident Evil Requiem , 78 GB , Berat
-[NEW GAME] Avatar: Frontiers of Pandora , 141 GB , Berat
-[NEW GAME] Assassins Creed Shadows  , 140 GB , Berat
-[NEW GAME] Black Myth: Wukong , 155GB , Berat
-[NEW GAME] Monster Hunter Wilds , 155 GB , Berat
 [NEW GAME] GreedFall: The Dying World , 40 GB , Berat
 [NEW GAME] FATAL FRAME II: Crimson Butterfly REMAKE , 37 GB , Agak Berat
 [NEW GAME] PLANET OF LANA 2 , 17 GB , Sedang
