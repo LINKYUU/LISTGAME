@@ -548,7 +548,6 @@ Monster Hunter Stories 2,28.0 GB,Sedang
 Monster Hunter Stories,11.10 GB,Sedang
 Monster Hunter World Iceborne,53.8 GB,Agak Berat
 Monster Truck Championship,27.61 GB,Sedang
-Mortal Kombat 1,6.40 GB,Sedang
 Mortal Kombat 11,152.9 GB,Berat
 Mortal Kombat XL,38.85 GB,Agak Berat
 Motel Manager Simulator,2.44 GB,Ringan
