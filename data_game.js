@@ -138,6 +138,7 @@ Bus Simulator 21,16.14 GB,Sedang
 C C Red Alert 3,14.95 GB,Sedang
 CAIRN,2 GB,Ringan
 Call of Duty COD 2,3.66 GB,Ringan
+Call Of Duty Black Ops Cold War , 145 Gb , Berat
 Call of Duty 4 Modern Warfare COD,6.76 GB,Ringan
 Call of Duty Advanced Warfare COD,38.42 GB,Agak Berat
 Call Of Duty Black Ops 4 COD,157.74 GB,Berat
