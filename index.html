@@ -5,79 +5,89 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daftar Game Link.Yu</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f4f7f6; color: #333; margin: 0; padding: 20px; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f4f7f6; color: #333; margin: 0; padding: 10px; }
         .container { max-width: 900px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); overflow: hidden; }
-        header { padding: 20px 30px; border-bottom: 1px solid #e0e0e0; text-align: center; }
+        header { padding: 15px; border-bottom: 1px solid #e0e0e0; text-align: center; }
         
         /* Notifikasi Atas */
         .special-notice { background-color: #fff4f4; border: 1px solid #d9534f; padding: 15px; margin-bottom: 15px; border-radius: 6px; }
-        .special-notice p { margin: 5px 0; font-size: 18px; font-weight: 600; color: #d9534f; }
+        .special-notice p { margin: 5px 0; font-size: 16px; font-weight: 600; color: #d9534f; }
         
-        /* STYLE BADGE NEW GAME KEREN */
+        /* BADGE NEW GAME DI DEPAN */
         .new-game-badge {
             background: linear-gradient(45deg, #ff416c, #ff4b2b);
             color: white;
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 800;
-            padding: 2px 10px;
-            border-radius: 50px;
-            margin-left: 8px;
+            padding: 1px 6px;
+            border-radius: 3px 10px 3px 10px;
+            margin-right: 8px;
             text-transform: uppercase;
-            box-shadow: 0 2px 8px rgba(255, 75, 43, 0.4);
+            box-shadow: 0 2px 5px rgba(255, 75, 43, 0.3);
             display: inline-block;
-            vertical-align: middle;
-            letter-spacing: 1px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            flex-shrink: 0; /* Biar badge gak gepeng */
             animation: pulse-red 2s infinite;
         }
 
         @keyframes pulse-red {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 75, 43, 0.7); }
-            70% { transform: scale(1.05); box-shadow: 0 0 0 6px rgba(255, 75, 43, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 75, 43, 0); }
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
 
         /* Modal & Slider */
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(5px); cursor: pointer; }
         .modal-content { background: white; margin: 2vh auto; width: 95%; max-width: 480px; border-radius: 15px; position: relative; max-height: 95vh; overflow-y: auto; cursor: default; }
         .close-btn { position: absolute; right: 15px; top: 10px; font-size: 35px; cursor: pointer; color: #fff; z-index: 1010; text-shadow: 0 0 10px #000; }
-        .slider-container { position: relative; width: 100%; height: 280px; background: #000; border-top-left-radius: 15px; border-top-right-radius: 15px; overflow: hidden; }
+        .slider-container { position: relative; width: 100%; height: 250px; background: #000; border-top-left-radius: 15px; border-top-right-radius: 15px; overflow: hidden; }
         .slides { display: none; width: 100%; height: 100%; }
         .slides img { width: 100%; height: 100%; object-fit: cover; }
         .prev, .next { cursor: pointer; position: absolute; top: 50%; width: auto; padding: 16px; margin-top: -22px; color: white; font-weight: bold; font-size: 20px; background: rgba(0,0,0,0.3); transition: 0.3s; user-select: none; }
         .next { right: 0; }
 
-        /* Detail Game */
-        .modal-body-padding { padding: 20px; text-align: left; }
-        .req-text { background: #f8f9fa; padding: 15px; border-radius: 10px; font-size: 14px; line-height: 1.7; border-left: 5px solid #1a73e8; margin-bottom: 20px; min-height: 80px; }
-        .gameplay-box { background: #000; border-radius: 10px; padding: 20px; text-align: center; }
-        .btn-youtube { background: #d9534f; color: white; padding: 12px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block; }
-        .section-title { font-weight: bold; margin-bottom: 10px; display: block; color: #d9534f; border-bottom: 2px solid #eee; padding-bottom: 5px; }
-
         /* Search & Filter */
-        #searchInput { width: 100%; max-width: 600px; padding: 12px 25px; margin: 15px auto; font-size: 16px; border: 1px solid #e0e0e0; border-radius: 50px; box-sizing: border-box; display: block; outline: none; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        #filterContainer, #genreFilterContainer { margin-top: 15px; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+        #searchInput { width: 100%; max-width: 600px; padding: 12px 20px; margin: 10px auto; font-size: 15px; border: 1px solid #e0e0e0; border-radius: 50px; box-sizing: border-box; display: block; outline: none; }
+        #filterContainer, #genreFilterContainer { margin-top: 10px; display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; }
         #genreFilterContainer { border-top: 1px dashed #ccc; padding-top: 10px; }
-        .filter-btn, .genre-btn { padding: 8px 15px; font-size: 13px; font-weight: 500; background-color: #f0f0f0; border: none; border-radius: 20px; cursor: pointer; color: #555; transition: 0.2s; }
+        .filter-btn, .genre-btn { padding: 6px 12px; font-size: 12px; font-weight: 500; background-color: #f0f0f0; border: none; border-radius: 20px; cursor: pointer; color: #555; }
         .filter-btn.active, .genre-btn.active { background-color: #333; color: white; }
         
-        .instruction-box { text-align: center; margin: 15px 0 5px 0; }
-        .instruction-text { display: block; font-weight: bold; color: #d9534f; font-size: 18px; animation: blink 1.5s linear infinite; }
+        .instruction-text { display: block; font-weight: bold; color: #d9534f; font-size: 16px; margin-top: 10px; animation: blink 1.5s linear infinite; }
         @keyframes blink { 50% { opacity: 0.6; } }
 
-        /* Table Style */
-        .table-wrapper { max-height: 60vh; overflow-y: auto; border-top: 1px solid #e0e0e0; }
-        #gameTable { width: 100%; border-collapse: collapse; }
-        #gameTable th, #gameTable td { padding: 12px 15px; border-bottom: 1px solid #e0e0e0; text-align: left; }
-        #gameTable th { background-color: #f9f9f9; position: sticky; top: 0; z-index: 1; cursor: pointer; user-select: none; }
-        #gameTable tr:hover { background-color: #fcfcfc; }
+        /* TABEL FIX UNTUK HP */
+        .table-wrapper { max-height: 65vh; overflow-y: auto; border-top: 1px solid #e0e0e0; }
+        #gameTable { width: 100%; border-collapse: collapse; table-layout: auto; }
+        #gameTable th, #gameTable td { padding: 10px 8px; border-bottom: 1px solid #e0e0e0; text-align: left; font-size: 14px; }
+        #gameTable th { background-color: #f9f9f9; position: sticky; top: 0; z-index: 1; white-space: nowrap; }
 
-        .clickable-name { color: #0056b3; cursor: pointer; text-decoration: none; font-weight: 600; }
-        .clickable-name:hover { text-decoration: underline; }
+        /* Lebar Kolom Diatur */
+        .col-name { width: auto; } /* Judul ambil sisa ruang paling banyak */
+        .col-size { width: 65px; text-align: center !important; } /* Kolom Size dikecilkan */
+        .col-spec { width: 85px; text-align: center !important; } /* Kolom Speck dikecilkan */
+
+        .clickable-name { 
+            color: #0056b3; 
+            cursor: pointer; 
+            font-weight: 600; 
+            display: flex; 
+            align-items: center; 
+            line-height: 1.3; 
+            word-break: break-word; /* Biar judul tetap rapi */
+        }
+
         .ket-ringan { color: #28a745; font-weight: bold; }
         .ket-sedang { color: #007bff; font-weight: bold; }
         .ket-agak-berat { color: #fd7e14; font-weight: bold; }
         .ket-berat { color: #dc3545; font-weight: bold; }
+
+        /* Responsif HP */
+        @media screen and (max-width: 480px) {
+            #gameTable th, #gameTable td { padding: 10px 5px; font-size: 13px; }
+            .col-size { width: 55px; }
+            .col-spec { width: 75px; }
+            .new-game-badge { margin-right: 5px; padding: 1px 4px; font-size: 8px; }
+        }
     </style>
 </head>
 <body>
@@ -86,10 +96,9 @@
     <header>
         <div class="special-notice">
             <p>🎮 DAFTAR GAME LINK.YU 🎮</p>
-            <p style="color:#333; font-weight:bold; font-size:14px;">💬 WA: 08 777 26 77776 | 🛒 Shopee: <a href="https://id.shp.ee/QiepRVW" target="_blank" style="color:#ee4d2d;">Klik Disini</a></p>
+            <p style="color:#333; font-weight:bold; font-size:12px;">💬 WA: 08 777 26 77776 | 🛒 Shopee: <a href="https://id.shp.ee/QiepRVW" target="_blank" style="color:#ee4d2d;">Klik Disini</a></p>
         </div>
-        <h1 style="margin:10px 0; font-size:24px;">List Koleksi Game PC</h1>
-        <input type="text" id="searchInput" placeholder="Cari judul game kesukaanmu...">
+        <input type="text" id="searchInput" placeholder="Cari judul game...">
         
         <div id="filterContainer">
             <button class="filter-btn" data-filter="Ringan">Ringan</button>
@@ -107,19 +116,17 @@
             <button class="genre-btn" data-filter="Balap">Balap</button>
         </div>
 
-        <div class="instruction-box">
-            <span class="instruction-text">KLIK NAMA GAME UNTUK DETAIL & SPEK</span>
-        </div>
-
-        <div id="gameCount" style="text-align:center; color:#777; font-size:12px; margin-top:10px; font-weight:bold;"></div>
+        <span class="instruction-text">KLIK NAMA GAME UNTUK SPEK</span>
+        <div id="gameCount" style="color:#777; font-size:11px; margin-top:5px; font-weight:bold;"></div>
     </header>
+
     <div class="table-wrapper">
         <table id="gameTable">
             <thead>
                 <tr>
-                    <th>Nama Game</th>
-                    <th id="sizeHeader" style="width:100px;">Size ↕</th>
-                    <th id="specHeader" style="width:120px;">Speck ↕</th>
+                    <th class="col-name">Nama Game</th>
+                    <th id="sizeHeader" class="col-size">Size ↕</th>
+                    <th id="specHeader" class="col-spec">Speck ↕</th>
                 </tr>
             </thead>
             <tbody id="gameListBody"></tbody>
@@ -134,14 +141,11 @@
             <a class="prev" onclick="plusSlides(-1, event)">&#10094;</a>
             <a class="next" onclick="plusSlides(1, event)">&#10095;</a>
         </div>
-        <div class="modal-body-padding">
-            <h3 id="modalTitle" style="margin:0 0 15px 0; color:#333;">Memuat...</h3>
-            <div id="modalBody" class="req-text">Mencari data...</div>
-            <div id="gameplaySection" style="margin-top:20px;">
-                <span class="section-title">🎮 CUPLIKAN GAMEPLAY :</span>
-                <div class="gameplay-box">
-                    <a id="youtubeBtn" href="#" target="_blank" class="btn-youtube">▶ LIHAT DI YOUTUBE</a>
-                </div>
+        <div class="modal-body-padding" style="padding: 15px;">
+            <h3 id="modalTitle" style="margin:0 0 10px 0; font-size:18px;">Memuat...</h3>
+            <div id="modalBody" style="background:#f8f9fa; padding:12px; border-radius:8px; font-size:13px; line-height:1.6; border-left:4px solid #1a73e8;">Mencari data...</div>
+            <div style="margin-top:15px; text-align:center;">
+                <a id="youtubeBtn" href="#" target="_blank" style="background:#d9534f; color:white; padding:10px; text-decoration:none; border-radius:5px; font-weight:bold; display:block; font-size:13px;">▶ LIHAT GAMEPLAY DI YOUTUBE</a>
             </div>
         </div>
     </div>
@@ -168,10 +172,10 @@
 
     function getFallbackSpec(kat) {
         kat = (kat || "").toLowerCase();
-        if (kat.includes("ringan")) return `<b>Prosesor:</b> Core 2 Quad / i3 Gen 2<br><b>RAM:</b> 4 GB RAM<br><b>VGA:</b> GT 730 / Intel HD`;
-        if (kat.includes("sedang")) return `<b>Prosesor:</b> i3 Gen 6 / Ryzen 3<br><b>RAM:</b> 8 GB RAM<br><b>VGA:</b> GTX 750 Ti / RX 550`;
-        if (kat.includes("agak berat")) return `<b>Prosesor:</b> i5 Gen 8 / Ryzen 5<br><b>RAM:</b> 8-16 GB RAM<br><b>VGA:</b> GTX 1050 Ti / RX 570`;
-        return `<b>Prosesor:</b> i7 Gen 9 / Ryzen 7<br><b>RAM:</b> 16 GB RAM<br><b>VGA:</b> GTX 1660 Super / RTX Series`;
+        if (kat.includes("ringan")) return `<b>CPU:</b> Core 2 Quad<br><b>RAM:</b> 4 GB<br><b>VGA:</b> GT 730`;
+        if (kat.includes("sedang")) return `<b>CPU:</b> i3 Gen 6<br><b>RAM:</b> 8 GB<br><b>VGA:</b> GTX 750 Ti`;
+        if (kat.includes("agak berat")) return `<b>CPU:</b> i5 Gen 8<br><b>RAM:</b> 8-16 GB<br><b>VGA:</b> GTX 1050 Ti`;
+        return `<b>CPU:</b> i7 Gen 9<br><b>RAM:</b> 16 GB<br><b>VGA:</b> GTX 1660 Super`;
     }
 
     function getGameGenres(name) {
@@ -183,7 +187,6 @@
         const kB = ['euro truck', 'american truck', 'forza', 'need for speed', 'nfs', 'assetto', 'grid', 'dirt', 'f1 20', 'motogp', 'ride', 'wrc', 'wreckfest', 'burnout'];
         const kS = ['age of empires', 'battle realms', 'command and conquer', 'red alert', 'stronghold', 'tropico', 'warcraft', 'civilization', 'simcity', 'cities skylines', 'total war'];
         const kSp = ['ao international', 'captain tsubasa', 'ea sports fc', 'efootball', 'pes 20', 'pro evolution', 'fifa', 'football manager', 'nba 2k', 'ufc', 'wwe', 'smackdown', 'winning eleven', 'tennis', 'golf'];
-        
         if (k2.some(k => n.includes(k))) g.push('Main Berdua');
         if (kP.some(k => n.includes(k))) g.push('Perang');
         if (kH.some(k => n.includes(k))) g.push('Horror');
@@ -191,20 +194,6 @@
         if (kS.some(k => n.includes(k))) g.push('Strategi');
         if (kSp.some(k => n.includes(k))) g.push('Sport');
         return g;
-    }
-
-    function formatReq(text) {
-        let clean = text.split(/Recommended:/i)[0].replace(/[®™]/g, '');
-        let lines = [];
-        const targets = { "Processor": "Prosesor", "Memory": "RAM", "Graphics": "VGA", "OS": "OS" };
-        Object.keys(targets).forEach(k => {
-            if(clean.includes(k + ":")) {
-                let d = clean.split(k + ":")[1].split("<br>")[0].split("DirectX")[0].split("Network")[0].split("Storage")[0].replace(/Additional Notes.*/gi, '').trim();
-                d = d.replace(/or higher/gi, '+').replace(/64bit|64-bit/gi, '64-bit');
-                lines.push(`<b>${targets[k]}:</b> ${d}`);
-            }
-        });
-        return lines.join("<br>");
     }
 
     function parseData() {
@@ -217,12 +206,7 @@
                 const p = l.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
                 if (p.length >= 3) {
                     const name = p[0].replace(/"/g, '').trim();
-                    map.set(name, { 
-                        name, 
-                        size: p[1].trim(), 
-                        description: p[2].trim(), 
-                        genres: getGameGenres(name)
-                    });
+                    map.set(name, { name, size: p[1].trim(), description: p[2].trim(), genres: getGameGenres(name) });
                 }
             }
         }
@@ -236,52 +220,35 @@
         const slider = document.getElementById('sliderContainer');
         const ytBtn = document.getElementById('youtubeBtn');
         const gameData = allGames.find(g => g.name === gameName);
-        const kategori = gameData ? gameData.description : "Sedang";
-
-        // Bersihkan nama untuk API
         const cleanName = gameName.replace(/\[NEW GAME\]/gi, '').trim();
-
         title.textContent = cleanName;
         modal.style.display = "block";
-        body.innerHTML = "Sedang mengambil data spek...";
+        body.innerHTML = "Loading spek...";
         slider.querySelectorAll('.slides').forEach(s => s.remove());
-        ytBtn.href = `https://www.youtube.com/results?search_query=${encodeURIComponent(cleanName + " Gameplay PC No Commentary")}`;
-
+        ytBtn.href = `https://www.youtube.com/results?search_query=${encodeURIComponent(cleanName + " Gameplay PC")}`;
         if (cacheSpecs.has(gameName)) {
             const cached = cacheSpecs.get(gameName);
             body.innerHTML = cached.html;
             renderScreenshots(cached.screens);
             return;
         }
-
         try {
             const res = await fetch(`https://api.rawg.io/api/games?key=${apiKey}&search=${encodeURIComponent(cleanName)}&page_size=1`);
             const data = await res.json();
-            let finalHtml = getFallbackSpec(kategori);
+            let finalHtml = getFallbackSpec(gameData ? gameData.description : "");
             let screens = [];
-
             if (data.results.length) {
                 const game = data.results[0];
                 const detailRes = await fetch(`https://api.rawg.io/api/games/${game.id}?key=${apiKey}`);
                 const detail = await detailRes.json();
-                const pc = detail.platforms.find(p => p.platform.id === 4);
-                
-                if (pc && pc.requirements && pc.requirements.minimum && !pc.requirements.minimum.includes("TBA")) {
-                    let formatted = formatReq(pc.requirements.minimum);
-                    if (formatted.length > 20) finalHtml = formatted;
-                }
-
                 const sRes = await fetch(`https://api.rawg.io/api/games/${game.id}/screenshots?key=${apiKey}`);
                 const sData = await sRes.json();
                 screens = sData.results.slice(0, 5).map(img => img.image);
             }
-
             body.innerHTML = finalHtml;
             cacheSpecs.set(gameName, { html: finalHtml, screens: screens });
             renderScreenshots(screens);
-        } catch (e) {
-            body.innerHTML = getFallbackSpec(kategori);
-        }
+        } catch (e) { body.innerHTML = getFallbackSpec(""); }
     }
 
     function renderScreenshots(screens) {
@@ -297,86 +264,44 @@
     document.addEventListener('DOMContentLoaded', () => {
         const tableBody = document.getElementById('gameListBody');
         const searchInput = document.getElementById('searchInput');
-        const sizeHeader = document.getElementById('sizeHeader');
-        const specHeader = document.getElementById('specHeader');
-        
         parseData();
-
         function render() {
             const term = searchInput.value.toLowerCase();
             let f = [...allGames].filter(g => g.name.toLowerCase().includes(term));
-            
-            if (currentSpecFilter) {
-                f = f.filter(g => g.description.toLowerCase() === currentSpecFilter.toLowerCase());
-            }
-            if (currentGenreFilter) {
-                f = f.filter(g => g.genres.includes(currentGenreFilter));
-            }
-            
+            if (currentSpecFilter) f = f.filter(g => g.description.toLowerCase() === currentSpecFilter.toLowerCase());
+            if (currentGenreFilter) f = f.filter(g => g.genres.includes(currentGenreFilter));
             tableBody.innerHTML = '';
             f.forEach(g => {
                 const tr = document.createElement('tr');
-                
-                // LOGIKA BADGE NEW GAME KEREN
                 let nameHtml = g.name;
                 if (nameHtml.includes("[NEW GAME]")) {
                     let clean = nameHtml.replace(/\[NEW GAME\]/gi, '').trim();
-                    nameHtml = `${clean} <span class="new-game-badge">NEW</span>`;
+                    nameHtml = `<span class="new-game-badge">NEW</span>${clean}`;
                 }
-
                 tr.innerHTML = `
-                    <td><span class="clickable-name" onclick="showSpec('${g.name}')">${nameHtml}</span></td>
-                    <td>${g.size}</td>
-                    <td class="ket-${g.description.toLowerCase().replace(' ', '-')}">${g.description}</td>
+                    <td class="col-name"><span class="clickable-name" onclick="showSpec('${g.name}')">${nameHtml}</span></td>
+                    <td class="col-size">${g.size}</td>
+                    <td class="col-spec ket-${g.description.toLowerCase().replace(' ', '-')}">${g.description}</td>
                 `;
                 tableBody.appendChild(tr);
             });
-            document.getElementById('gameCount').textContent = `Menampilkan: ${f.length} Game`;
+            document.getElementById('gameCount').textContent = `Total: ${f.length} Game`;
         }
-
-        sizeHeader.onclick = () => {
-            sizeSortDir *= -1;
-            allGames.sort((a, b) => (convertToMB(a.size) - convertToMB(b.size)) * sizeSortDir);
-            sizeHeader.innerHTML = `Size ${sizeSortDir === 1 ? '↑' : '↓'}`;
-            render();
-        };
-
-        specHeader.onclick = () => {
-            specSortIdx = (specSortIdx + 1) % specOrder.length;
-            const target = specOrder[specSortIdx];
-            allGames.sort((a, b) => {
-                if (a.description === target && b.description !== target) return -1;
-                if (a.description !== target && b.description === target) return 1;
-                return 0;
-            });
-            specHeader.innerHTML = `Speck (${target}) ↕`;
-            render();
-        };
-
+        document.getElementById('sizeHeader').onclick = () => { sizeSortDir *= -1; allGames.sort((a, b) => (convertToMB(a.size) - convertToMB(b.size)) * sizeSortDir); render(); };
+        document.getElementById('specHeader').onclick = () => { specSortIdx = (specSortIdx + 1) % specOrder.length; const target = specOrder[specSortIdx]; allGames.sort((a, b) => (a.description === target ? -1 : 1)); render(); };
         searchInput.onkeyup = render;
-        
-        document.querySelectorAll('.filter-btn').forEach(btn => {
+        document.querySelectorAll('.filter-btn, .genre-btn').forEach(btn => {
             btn.onclick = () => {
+                const isGenre = btn.classList.contains('genre-btn');
                 const isAct = btn.classList.contains('active');
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                currentSpecFilter = isAct ? null : btn.dataset.filter;
+                document.querySelectorAll(isGenre ? '.genre-btn' : '.filter-btn').forEach(b => b.classList.remove('active'));
+                if (isGenre) currentGenreFilter = isAct ? null : btn.dataset.filter;
+                else currentSpecFilter = isAct ? null : btn.dataset.filter;
                 if (!isAct) btn.classList.add('active');
                 render();
             };
         });
-
-        document.querySelectorAll('.genre-btn').forEach(btn => {
-            btn.onclick = () => {
-                const isAct = btn.classList.contains('active');
-                document.querySelectorAll('.genre-btn').forEach(b => b.classList.remove('active'));
-                currentGenreFilter = isAct ? null : btn.dataset.filter;
-                if (!isAct) btn.classList.add('active');
-                render();
-            };
-        });
-
         document.querySelector('.close-btn').onclick = () => document.getElementById('specModal').style.display = "none";
-        window.onclick = (e) => { if (e.target.className === 'modal') e.target.style.display = "none"; };
         render();
     });
 
