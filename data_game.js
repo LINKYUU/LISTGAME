@@ -23,6 +23,8 @@ NAMA GAME,SIZE,KETERANGAN
 [NEW GAME] Jurassic World Evolution 3 , 21 Gb , Berat
 [NEW GAME] Life is Strange Reunion , 27 Gb , Agak Berat
 [NEW GAME] Persona 4 Golden , 10 Gb , Sedang
+[NEW GAME] Persona 3 Reload , 19 Gb , Sedang
+[NEW GAME] Yakuza Like A ragon Pirate Yakuza In Hawaii , 55 Gb , Berat
 [NEW GAME] Two Point Museum , 6 Gb , Sedang
 [NEW GAME] Digimon Story Time Stranger , 32 Gb , Berat
 [NEW GAME] Borderlands 4 , 90 Gb , Berat
