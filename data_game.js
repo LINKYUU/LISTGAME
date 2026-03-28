@@ -11,6 +11,7 @@ NAMA GAME,SIZE,KETERANGAN
 [NEW GAME] Stellar Blade , 63 Gb , Berat
 [NEW GAME] Monster Hunter Wilds , 155 GB , Berat
 [NEW GAME] Monster Hunter Stories 3 Twisted Reflection , 37 Gb , Berat
+[NEW GAME] NBA 2026 , 98 Gb , Berat
 [NEW GAME] Lost Judgment , 66 Gb , Berat
 [NEW GAME] Mafia The Old Country , 47 Gb , Berat
 [NEW GAME] Demon Slayer Kimetsu no Yaiba The Hinokami Chronicles 2 , 26 Gb , Berat
