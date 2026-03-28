@@ -7,22 +7,23 @@ NAMA GAME,SIZE,KETERANGAN
 [NEW GAME] Assassins Creed Shadows  , 140 GB , Berat
 [NEW GAME] Avatar: Frontiers of Pandora , 141 GB , Berat
 [NEW GAME] WWE 2026 , 135 Gb , Berat
+[NEW GAME] NBA 2026 , 98 Gb , Berat
 [NEW GAME] DEATH STRANDING 2 ONTHE BEACH , 118 Gb , Berat 
 [NEW GAME] Stellar Blade , 63 Gb , Berat
+[NEW GAME] Planet Coaster 2 , 28 Gb , Berat
+[NEW GAME] Star Wars Outlaws , 74 Gb Berat
 [NEW GAME] Monster Hunter Wilds , 155 GB , Berat
 [NEW GAME] Monster Hunter Stories 3 Twisted Reflection , 37 Gb , Berat
-[NEW GAME] NBA 2026 , 98 Gb , Berat
 [NEW GAME] Lost Judgment , 66 Gb , Berat
 [NEW GAME] Mafia The Old Country , 47 Gb , Berat
-[NEW GAME] Demon Slayer Kimetsu no Yaiba The Hinokami Chronicles 2 , 26 Gb , Berat
 [NEW GAME] Demon Slayer Kimetsu no Yaiba TheHinokami Chronicles 1 , 26 Gb Berat
+[NEW GAME] Demon Slayer Kimetsu no Yaiba The Hinokami Chronicles 2 , 26 Gb , Berat
 [NEW GAME] F1 2025 , 89 Gb , Berat
 [NEW GAME] Football Manager 26 , 8 Gb , Sedang
 [NEW GAME] Jurassic World Evolution 3 , 21 Gb , Berat
 [NEW GAME] Life is Strange Reunion , 27 Gb , Agak Berat
 [NEW GAME] Persona 4 Golden , 10 Gb , Sedang
 [NEW GAME] Two Point Museum , 6 Gb , Sedang
-[NEW GAME] Yakuza Kiwami 3 and Dark Ties , 50 Gb , Berat
 [NEW GAME] Digimon Story Time Stranger , 32 Gb , Berat
 [NEW GAME] Borderlands 4 , 90 Gb , Berat
 [NEW GAME] Total War Warhammer III , 88 Gb , Berat
@@ -30,6 +31,10 @@ NAMA GAME,SIZE,KETERANGAN
 [NEW GAME] GreedFall: The Dying World , 40 GB , Berat
 [NEW GAME] FATAL FRAME II: Crimson Butterfly REMAKE , 37 GB , Agak Berat
 [NEW GAME] PLANET OF LANA 2 , 17 GB , Sedang
+[NEW GAME] Sniper Elite: Resistance , 90 Gb , Berat
+[NEW GAME] Yakuza Like a Dragon Infinite Wealth , 50 Gb , Berat
+[NEW GAME] Yakuza Kiwami 3 and Dark Ties , 50 Gb , Berat
+[NEW GAME] Brothers A Tale of Two Sons Remake , 16 Gb , Sedang
 25 To Life,1.99 GB,Ringan
 9 Monkeys of Shaolin,6.94 GB,Ringan
 A Plague Tale Innocence,43.58 GB,Agak Berat
