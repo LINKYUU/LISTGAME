@@ -11,7 +11,7 @@ NAMA GAME,SIZE,KETERANGAN
 [NEW GAME] Mafia The Old Country , 47 Gb , Berat
 [NEW GAME] Monster Hunter Stories 3 Twisted Reflection , 37 Gb , Berat
 [NEW GAME] Persona 4 Golden , 10 Gb , Sedang
-[NEW GAME] Stellar-Blade , 63 Gb , Berat
+[NEW GAME] Stellar Blade , 63 Gb , Berat
 [NEW GAME] Two Point Museum , 6 Gb , Sedang
 [NEW GAME] Yakuza Kiwami 3 and Dark Ties , 50 Gb , Berat
 [NEW GAME] Digimon Story Time Stranger , 32 Gb , Berat
@@ -19,7 +19,7 @@ NAMA GAME,SIZE,KETERANGAN
 [NEW GAME] DEATH STRANDING 2 ONTHE BEACH , 118 Gb , Berat 
 [NEW GAME] Borderlands 4 , 90 Gb , Berat
 [NEW GAME] Total War Warhammer III , 88 Gb , Berat
-[NEW GAME] WWE 20226 , 135 Gb , Berat
+[NEW GAME] WWE 2026 , 135 Gb , Berat
 [NEW GAME] Dragon Quest VII Reimagined , 8 Gb , Agak berat
 [NEW GAME] Resident Evil Requiem , 78 GB , Berat
 [NEW GAME] Avatar: Frontiers of Pandora , 141 GB , Berat
