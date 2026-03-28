@@ -8,73 +8,65 @@
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f4f7f6; color: #333; margin: 0; padding: 10px; }
         .container { max-width: 900px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); overflow: hidden; }
         
-        header { padding: 20px 15px; border-bottom: 1px solid #e0e0e0; text-align: center; }
-        .special-notice { background-color: #fff4f4; border: 2px solid #d9534f; padding: 15px; margin-bottom: 15px; border-radius: 10px; }
-        .special-notice .title-top { margin: 0 0 10px 0; font-size: 22px; font-weight: 900; color: #d9534f; letter-spacing: 1px; }
-        .special-notice .sub-title { margin: 5px 0; font-size: 15px; font-weight: 800; color: #333; line-height: 1.5; }
-        .shopee-link { color: #ee4d2d; text-decoration: underline; font-weight: 900; }
+        header { padding: 15px; border-bottom: 1px solid #e0e0e0; text-align: center; }
+        .special-notice { background-color: #fff4f4; border: 2px solid #d9534f; padding: 12px; margin-bottom: 12px; border-radius: 10px; }
+        .special-notice .title-top { margin: 0 0 5px 0; font-size: 20px; font-weight: 900; color: #d9534f; letter-spacing: 1px; }
+        .special-notice .sub-title { margin: 5px 0; font-size: 14px; font-weight: 700; color: #333; line-height: 1.4; }
+        .shopee-link { color: #ee4d2d; text-decoration: underline; font-weight: 800; }
 
         /* BADGE NEW GAME DI TABEL */
         .new-game-badge {
             background: linear-gradient(45deg, #ff416c, #ff4b2b);
             color: white;
-            font-size: 10px;
-            font-weight: 900;
-            padding: 2px 7px;
-            border-radius: 4px;
-            margin-right: 10px;
+            font-size: 9px;
+            font-weight: 800;
+            padding: 2px 6px;
+            border-radius: 3px;
+            margin-right: 8px;
             text-transform: uppercase;
             display: inline-block;
             flex-shrink: 0;
-            box-shadow: 0 2px 4px rgba(255, 75, 43, 0.4);
         }
 
-        #searchInput { width: 100%; max-width: 600px; padding: 14px 20px; margin: 15px auto; font-size: 17px; border: 2px solid #ddd; border-radius: 50px; box-sizing: border-box; display: block; outline: none; }
+        #searchInput { width: 100%; max-width: 600px; padding: 12px 20px; margin: 10px auto; font-size: 16px; border: 2px solid #ddd; border-radius: 50px; box-sizing: border-box; display: block; outline: none; }
         
-        #filterContainer, #genreFilterContainer, #newFilterContainer { margin-top: 10px; display: flex; flex-wrap: wrap; justify-content: center; gap: 7px; }
-        #genreFilterContainer { border-top: 1px dashed #ccc; padding-top: 12px; margin-top: 12px; }
-        #newFilterContainer { margin-top: 10px; margin-bottom: 15px; }
+        #filterContainer, #genreFilterContainer, #newFilterContainer { margin-top: 8px; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+        #genreFilterContainer { border-top: 1px dashed #ccc; padding-top: 10px; margin-top: 10px; }
+        #newFilterContainer { margin-top: 8px; margin-bottom: 10px; }
 
-        .filter-btn, .genre-btn { padding: 8px 15px; font-size: 13px; font-weight: 700; background-color: #f0f0f0; border: none; border-radius: 25px; cursor: pointer; color: #555; transition: 0.2s; }
-        .filter-btn.active, .genre-btn.active { background-color: #333; color: white; transform: scale(1.05); }
+        .filter-btn, .genre-btn { padding: 6px 12px; font-size: 12px; font-weight: 600; background-color: #f0f0f0; border: none; border-radius: 20px; cursor: pointer; color: #555; transition: 0.2s; }
+        .filter-btn.active, .genre-btn.active { background-color: #333; color: white; }
 
-        /* TOMBOL NEW GAME FILTER (MENYALA MERAH) */
+        /* TOMBOL NEW GAME FILTER (DIPERKECIL) */
         .new-filter-btn {
             background: #ff4b2b;
             color: white;
-            padding: 10px 20px;
-            font-size: 14px;
-            font-weight: 900;
+            padding: 6px 15px; /* Lebih kecil */
+            font-size: 12px;   /* Lebih kecil */
+            font-weight: 800;
             border: none;
-            border-radius: 25px;
+            border-radius: 20px;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(255, 75, 43, 0.4);
+            box-shadow: 0 3px 8px rgba(255, 75, 43, 0.3);
             transition: 0.3s;
-            animation: pulse-red-btn 2s infinite;
         }
         .new-filter-btn.active {
             background: #d93025;
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
-            transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+            transform: scale(1.05);
         }
 
-        @keyframes pulse-red-btn {
-            0% { transform: scale(1); box-shadow: 0 4px 10px rgba(255, 75, 43, 0.4); }
-            50% { transform: scale(1.05); box-shadow: 0 4px 20px rgba(255, 75, 43, 0.7); }
-            100% { transform: scale(1); box-shadow: 0 4px 10px rgba(255, 75, 43, 0.4); }
-        }
-
-        /* TABEL SETTING */
+        /* TABEL SETTING - BOLD DIATUR ULANG */
         .table-wrapper { max-height: 60vh; overflow-y: auto; border-top: 1px solid #e0e0e0; }
         #gameTable { width: 100%; border-collapse: collapse; table-layout: fixed; }
-        #gameTable th, #gameTable td { padding: 15px 8px; border-bottom: 1px solid #eee; text-align: left; vertical-align: middle; }
-        #gameTable th { background: #fdfdfd; font-size: 15px; font-weight: 900; position: sticky; top: 0; z-index: 10; }
+        #gameTable th, #gameTable td { padding: 12px 8px; border-bottom: 1px solid #eee; text-align: left; vertical-align: middle; }
+        #gameTable th { background: #fdfdfd; font-size: 14px; font-weight: 900; position: sticky; top: 0; z-index: 10; }
 
         .col-name { width: 56%; } 
-        .col-size { width: 20%; text-align: center !important; font-size: 14px; font-weight: 800; color: #333; }
-        .col-spec { width: 24%; text-align: center !important; font-size: 14px; font-weight: 900; }
+        .col-size { width: 20%; text-align: center !important; font-size: 14px; font-weight: 500; color: #555; } /* Tidak bold semua */
+        .col-spec { width: 24%; text-align: center !important; font-size: 14px; font-weight: 700; } /* Tetap bold dikit buat kategori */
 
-        .clickable-name { color: #0056b3; cursor: pointer; font-weight: 800; font-size: 16px; display: flex; align-items: center; line-height: 1.3; }
+        .clickable-name { color: #0056b3; cursor: pointer; font-weight: 700; font-size: 15px; display: flex; align-items: center; line-height: 1.3; }
         
         .ket-ringan { color: #28a745; }
         .ket-sedang { color: #007bff; }
@@ -82,18 +74,18 @@
         .ket-berat { color: #dc3545; }
 
         /* MODAL */
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); backdrop-filter: blur(5px); cursor: pointer; }
-        .modal-content { background: white; margin: 4vh auto; width: 92%; max-width: 450px; border-radius: 15px; position: relative; max-height: 92vh; overflow-y: auto; cursor: default; }
-        .close-btn { position: absolute; right: 15px; top: 10px; font-size: 40px; cursor: pointer; color: #fff; z-index: 1010; text-shadow: 0 0 10px #000; }
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(5px); cursor: pointer; }
+        .modal-content { background: white; margin: 5vh auto; width: 92%; max-width: 450px; border-radius: 12px; position: relative; max-height: 90vh; overflow-y: auto; cursor: default; }
+        .close-btn { position: absolute; right: 15px; top: 10px; font-size: 35px; cursor: pointer; color: #fff; z-index: 1010; }
 
-        .slider-container { position: relative; width: 100%; height: 240px; background: #000; overflow: hidden; }
+        .slider-container { position: relative; width: 100%; height: 230px; background: #000; overflow: hidden; }
         .slides { display: none; width: 100%; height: 100%; }
         .slides img { width: 100%; height: 100%; object-fit: cover; }
-        .prev, .next { cursor: pointer; position: absolute; top: 50%; width: auto; padding: 16px; color: white; font-weight: bold; font-size: 20px; background: rgba(0,0,0,0.4); user-select: none; }
+        .prev, .next { cursor: pointer; position: absolute; top: 50%; width: auto; padding: 15px; color: white; font-weight: bold; font-size: 18px; background: rgba(0,0,0,0.3); }
         .next { right: 0; }
 
-        .req-text { background: #f8f9fa; padding: 15px; border-radius: 10px; font-size: 14px; line-height: 1.8; border-left: 6px solid #1a73e8; margin: 15px 0; }
-        .btn-youtube { background: #d9534f; color: white; padding: 15px; text-decoration: none; border-radius: 8px; font-weight: 800; display: block; text-align: center; font-size: 15px; }
+        .req-text { background: #f8f9fa; padding: 12px; border-radius: 8px; font-size: 14px; line-height: 1.7; border-left: 5px solid #1a73e8; margin: 15px 0; }
+        .btn-youtube { background: #d9534f; color: white; padding: 12px; text-decoration: none; border-radius: 6px; font-weight: 700; display: block; text-align: center; font-size: 14px; }
     </style>
 </head>
 <body>
@@ -105,7 +97,7 @@
             <p class="sub-title">💬 WA: 08 777 26 77776 <br> 🛒 Shopee: <a href="https://id.shp.ee/QiepRVW" target="_blank" class="shopee-link">Klik Disini</a></p>
         </div>
         
-        <input type="text" id="searchInput" placeholder="Cari judul game kesukaanmu...">
+        <input type="text" id="searchInput" placeholder="Cari judul game...">
         
         <div id="filterContainer">
             <button class="filter-btn" data-filter="Ringan">Ringan</button>
@@ -127,7 +119,7 @@
             <button class="new-filter-btn" id="newGameFilter">🔥 NEW GAME 🔥</button>
         </div>
         
-        <div id="gameCount" style="color:#d9534f; font-size:13px; font-weight:900; margin-top:5px;"></div>
+        <div id="gameCount" style="color:#d9534f; font-size:12px; font-weight:800; margin-top:5px;"></div>
     </header>
 
     <div class="table-wrapper">
@@ -151,9 +143,9 @@
             <a class="prev" onclick="plusSlides(-1, event)">&#10094;</a>
             <a class="next" onclick="plusSlides(1, event)">&#10095;</a>
         </div>
-        <div style="padding: 20px;">
-            <h3 id="modalTitle" style="margin:0; font-size:20px; color:#333;">Memuat...</h3>
-            <div id="modalBody" class="req-text">Memproses detail spek...</div>
+        <div style="padding: 15px;">
+            <h3 id="modalTitle" style="margin:0; font-size:18px;">Memuat...</h3>
+            <div id="modalBody" class="req-text">Memproses spek...</div>
             <a id="youtubeBtn" href="#" target="_blank" class="btn-youtube">▶ LIHAT GAMEPLAY DI YOUTUBE</a>
         </div>
     </div>
@@ -164,8 +156,7 @@
 <script>
     const apiKey = "158b3858daed4d67af02a839d14ba445";
     let allGames = [], currentSpecFilter = null, currentGenreFilter = null, isNewOnly = false;
-    let sizeSortDir = 1, specSortIdx = -1;
-    const specOrder = ["Ringan", "Sedang", "Agak Berat", "Berat"];
+    let sizeSortDir = 1;
     const cacheSpecs = new Map();
 
     function getFallbackSpec(kat) {
@@ -185,12 +176,12 @@
     function getGameGenres(name) {
         const n = name.toLowerCase();
         const g = [];
-        const k2 = ['pes ','fifa','football','wwe','tekken','mortal','overcooked','lego','it takes two','a way out','pico park','cuphead','human fall flat','street fighter','naruto','dragon ball','jump force'];
-        const kP = ['cod ','call of duty','battlefield','sniper','far cry','medal of honor','halo','crysis','wolfenstein','ghost recon','metal gear','ace combat'];
-        const kH = ['resident','outlast','silent','horror','dreadout','evil within','dead space','alan wake','amnesia','fatal frame','the forest','dying light'];
-        const kB = ['nfs','forza','dirt','f1 20','asphalt','grid','motogp','burnout','wreckfest','assetto','ride','euro truck','american truck'];
-        const kS = ['age of empires','civilization','red alert','stronghold','tropico','simcity','cities skylines','command and conquer','battle realms','starcraft','warcraft','total war'];
-        const kSp = ['pes 2','fifa','football manager','ao tennis','nba 2k','moto gp','tennis','golf','ufc','tony hawk','skate','captain tsubasa','winning eleven','ea sports'];
+        const k2 = ['pes ','fifa','football','wwe','tekken','mortal','overcooked','lego','it takes two','a way out'];
+        const kP = ['cod ','call of duty','battlefield','sniper','far cry','medal of honor','halo'];
+        const kH = ['resident','outlast','silent','horror','dreadout','evil within'];
+        const kB = ['nfs','forza','dirt','f1 20','asphalt','grid','motogp'];
+        const kS = ['age of empires','civilization','red alert','stronghold','tropico','simcity','cities skylines'];
+        const kSp = ['pes 2','fifa','football manager','ao tennis','nba 2k','moto gp','tennis','ufc'];
 
         if (k2.some(k => n.includes(k))) g.push('Main Berdua');
         if (kP.some(k => n.includes(k))) g.push('Perang');
@@ -220,10 +211,8 @@
         const modal = document.getElementById('specModal');
         const cleanName = gameName.replace(/\[NEW GAME\]/gi, '').trim();
         const gameData = allGames.find(g => g.name === gameName);
-        const kategori = gameData ? gameData.description : "Sedang";
-
         document.getElementById('modalTitle').textContent = cleanName;
-        document.getElementById('modalBody').innerHTML = "Mengambil data spek asli...";
+        document.getElementById('modalBody').innerHTML = "Mencari data spek...";
         document.getElementById('sliderContainer').querySelectorAll('.slides').forEach(s => s.remove());
         modal.style.display = "block";
         document.getElementById('youtubeBtn').href = `https://www.youtube.com/results?search_query=${encodeURIComponent(cleanName + " Gameplay")}`;
@@ -238,17 +227,24 @@
         try {
             const res = await fetch(`https://api.rawg.io/api/games?key=${apiKey}&search=${encodeURIComponent(cleanName)}&page_size=1`);
             const data = await res.json();
-            let finalHtml = getFallbackSpec(kategori);
+            let finalHtml = getFallbackSpec(gameData ? gameData.description : "Sedang");
             let screens = [];
-
             if (data.results.length) {
                 const game = data.results[0];
                 const detailRes = await fetch(`https://api.rawg.io/api/games/${game.id}?key=${apiKey}`);
                 const detail = await detailRes.json();
                 const pc = detail.platforms.find(p => p.platform.id === 4);
                 if (pc && pc.requirements && pc.requirements.minimum) {
-                    let formatted = formatReq(pc.requirements.minimum);
-                    if (formatted.length > 20) finalHtml = formatted;
+                    let clean = pc.requirements.minimum.split(/Recommended:/i)[0];
+                    let lines = [];
+                    const targets = { "Processor": "Prosesor", "Memory": "RAM", "Graphics": "VGA" };
+                    Object.keys(targets).forEach(k => {
+                        if(clean.includes(k + ":")) {
+                            let d = clean.split(k + ":")[1].split("<br>")[0].split("DirectX")[0].trim();
+                            lines.push(`<b>${targets[k]}:</b> ${d}`);
+                        }
+                    });
+                    if (lines.length) finalHtml = lines.join("<br>");
                 }
                 const sRes = await fetch(`https://api.rawg.io/api/games/${game.id}/screenshots?key=${apiKey}`);
                 const sData = await sRes.json();
@@ -257,7 +253,7 @@
             cacheSpecs.set(gameName, { html: finalHtml, screens });
             document.getElementById('modalBody').innerHTML = finalHtml;
             renderScreens(screens);
-        } catch (e) { document.getElementById('modalBody').innerHTML = getFallbackSpec(kategori); }
+        } catch (e) { document.getElementById('modalBody').innerHTML = getFallbackSpec(gameData ? gameData.description : ""); }
     }
 
     function renderScreens(imgs) {
@@ -274,7 +270,6 @@
         const body = document.getElementById('gameListBody');
         const term = document.getElementById('searchInput').value.toLowerCase();
         let f = [...allGames].filter(g => g.name.toLowerCase().includes(term));
-        
         if (currentSpecFilter) f = f.filter(g => g.description === currentSpecFilter);
         if (currentGenreFilter) f = f.filter(g => g.genres.includes(currentGenreFilter));
         if (isNewOnly) f = f.filter(g => g.name.includes("[NEW GAME]"));
@@ -289,20 +284,7 @@
                 <td class="col-spec ket-${g.description.toLowerCase().replace(' ', '-')}">${g.description}</td>`;
             body.appendChild(tr);
         });
-        document.getElementById('gameCount').textContent = `Total: ${f.length} Game`;
-    }
-
-    function formatReq(text) {
-        let clean = text.split(/Recommended:/i)[0];
-        let lines = [];
-        const targets = { "Processor": "Prosesor", "Memory": "RAM", "Graphics": "VGA" };
-        Object.keys(targets).forEach(k => {
-            if(clean.includes(k + ":")) {
-                let d = clean.split(k + ":")[1].split("<br>")[0].split("DirectX")[0].trim();
-                lines.push(`<b>${targets[k]}:</b> ${d}`);
-            }
-        });
-        return lines.join("<br>");
+        document.getElementById('gameCount').textContent = `Menampilkan: ${f.length} Game`;
     }
 
     let slideIndex = 1;
@@ -318,7 +300,6 @@
     document.addEventListener('DOMContentLoaded', () => {
         parseData();
         document.getElementById('searchInput').onkeyup = render;
-        
         document.querySelectorAll('.filter-btn, .genre-btn').forEach(btn => {
             btn.onclick = () => {
                 const isGenre = btn.classList.contains('genre-btn');
@@ -330,15 +311,8 @@
                 render();
             };
         });
-
-        // LOGIKA FILTER NEW GAME
-        const newBtn = document.getElementById('newGameFilter');
-        newBtn.onclick = () => {
-            isNewOnly = !isNewOnly;
-            newBtn.classList.toggle('active');
-            render();
-        };
-
+        const nBtn = document.getElementById('newGameFilter');
+        nBtn.onclick = () => { isNewOnly = !isNewOnly; nBtn.classList.toggle('active'); render(); };
         window.onclick = (e) => { if (e.target.className === 'modal') e.target.style.display = "none"; };
         document.querySelector('.close-btn').onclick = () => document.getElementById('specModal').style.display = "none";
         render();
