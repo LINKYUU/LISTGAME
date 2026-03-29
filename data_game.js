@@ -8,7 +8,7 @@ NAMA GAME,SIZE,KETERANGAN
 [NEW GAME] Avatar: Frontiers of Pandora , 141 GB , Berat
 [NEW GAME] WWE 2026 , 135 Gb , Berat
 [NEW GAME] NBA 2026 , 98 Gb , Berat
-[NEW GAME] DEATH STRANDING 2 ONTHE BEACH , 118 Gb , Berat 
+[NEW GAME] DEATH STRANDING 2 ON THE BEACH , 118 Gb , Berat 
 [NEW GAME] Stellar Blade , 63 Gb , Berat
 [NEW GAME] Planet Coaster 2 , 28 Gb , Berat
 [NEW GAME] Star Wars Outlaws , 74 Gb Berat
@@ -36,6 +36,7 @@ NAMA GAME,SIZE,KETERANGAN
 [NEW GAME] Sniper Elite: Resistance , 90 Gb , Berat
 [NEW GAME] Yakuza Like a Dragon Infinite Wealth , 50 Gb , Berat
 [NEW GAME] Yakuza Kiwami 3 and Dark Ties , 50 Gb , Berat
+[NEW GAME] Yakuza Like A Dragon Pirate Yakuza In Hawaii , 58 Gb , berat
 [NEW GAME] Brothers A Tale of Two Sons Remake , 16 Gb , Sedang
 25 To Life,1.99 GB,Ringan
 9 Monkeys of Shaolin,6.94 GB,Ringan
