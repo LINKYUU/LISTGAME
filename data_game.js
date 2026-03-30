@@ -39,6 +39,17 @@ NAMA GAME,SIZE,KETERANGAN
 [NEW GAME] Yakuza Kiwami 3 and Dark Ties , 50 Gb , Berat
 [NEW GAME] Yakuza Like A Dragon Pirate Yakuza In Hawaii , 58 Gb , berat
 [NEW GAME] Brothers A Tale of Two Sons Remake , 16 Gb , Sedang
+[NEW GAME] BRAVELY DEFAULT FLYING FAIRY HD Remaster , 9 Gb , Sedang
+[NEW GAME] Like A Dragon Ishin , 61 Gb , Berat
+[NEW GAME] Shin Megami Tensei V Vengeance , 31 Gb , Berat
+[NEW GAME] Lord Of Fallen , 34 Gb , Berat
+[NEW GAME] Sonic Origins , 8 Gb , Sedang
+[NEW GAME] Sonic SuperStars , 13 Gb , Sedang
+[NEW GAME] Sonic Racing Cross Worlds , 20 Gb , Berat
+[NEW GAME] Shinobi Art Of Vengeance , 9 Gb , Sedang
+[NEW GAME] Soul Hackers 2 , 21 Gb , Agak Berat
+[NEW GAME] CODE VEIN II , 65 Gb , Berat
+[NEW GAME] Prince Of Persia The Lost Crown , 20 Gb , Berat
 25 To Life,1.99 GB,Ringan
 9 Monkeys of Shaolin,6.94 GB,Ringan
 A Plague Tale Innocence,43.58 GB,Agak Berat
