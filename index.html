@@ -33,6 +33,19 @@
 
         /* BADGE NEW GAME DI TABEL */
         .new-game-badge {
+            /* BADGE HYPERVISOR DI TABEL (KUNING) */
+        .hypervisor-badge {
+            background: linear-gradient(45deg, #f1c40f, #f39c12);
+            color: #000; /* Tulisan hitam agar kontras dengan kuning */
+            font-size: 9px;
+            font-weight: 800;
+            padding: 2px 6px;
+            border-radius: 3px;
+            margin-right: 8px;
+            text-transform: uppercase;
+            display: inline-block;
+            flex-shrink: 0;
+        }
             background: linear-gradient(45deg, #ff416c, #ff4b2b);
             color: white;
             font-size: 9px;
@@ -227,9 +240,10 @@
         }
     }
 
-    async function showSpec(gameName) {
-        const modal = document.getElementById('specModal');
-        const cleanName = gameName.replace(/\[NEW GAME\]/gi, '').trim();
+   async function showSpec(gameName) {
+    const modal = document.getElementById('specModal');
+    // Bersihkan semua tag dari judul modal
+    const cleanName = gameName.replace(/\[NEW GAME\]/gi, '').replace(/\[HYPERVISOR\]/gi, '').trim();
         const gameData = allGames.find(g => g.name === gameName);
         document.getElementById('modalTitle').textContent = cleanName;
         document.getElementById('modalBody').innerHTML = "Mencari data spek...";
@@ -297,11 +311,26 @@
         body.innerHTML = '';
         f.forEach(g => {
             let n = g.name;
-            if (n.includes("[NEW GAME]")) n = `<span class="new-game-badge">NEW</span>${n.replace(/\[NEW GAME\]/gi, '')}`;
+            
+            // Logika deteksi Badge
+            let badgeHtml = "";
+            if (n.includes("[NEW GAME]")) {
+                badgeHtml += `<span class="new-game-badge">NEW</span>`;
+                n = n.replace(/\[NEW GAME\]/gi, '');
+            }
+            if (n.includes("[HYPERVISOR]")) {
+                badgeHtml += `<span class="hypervisor-badge">HYPERVISOR</span>`;
+                n = n.replace(/\[HYPERVISOR\]/gi, '');
+            }
+
             const tr = document.createElement('tr');
-            tr.innerHTML = `<td class="col-name"><span class="clickable-name" onclick="showSpec('${g.name}')">${n}</span></td>
-                <td class="col-size">${g.size}</td>
-                <td class="col-spec ket-${g.description.toLowerCase().replace(' ', '-')}">${g.description}</td>`;
+            tr.innerHTML = `<td class="col-name">
+                <span class="clickable-name" onclick="showSpec('${g.name}')">
+                    ${badgeHtml}${n.trim()}
+                </span>
+            </td>
+            <td class="col-size">${g.size}</td>
+            <td class="col-spec ket-${g.description.toLowerCase().replace(/\s+/g, '-')}">${g.description}</td>`;
             body.appendChild(tr);
         });
         document.getElementById('gameCount').textContent = `Menampilkan: ${f.length} Game`;
