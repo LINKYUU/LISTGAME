@@ -33,6 +33,19 @@
 
         /* BADGE NEW GAME DI TABEL */
         .new-game-badge {
+            /* BADGE HYPERVISOR (BIRU) */
+        .hypervisor-badge-blue {
+            background: #007bff; /* Warna Biru */
+            color: white;
+            font-size: 9px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 3px;
+            text-transform: uppercase;
+            display: inline-block;
+            flex-shrink: 0;
+            margin-left: 10px; /* Jarak dari nama game */
+        }
             /* BADGE HYPERVISOR DI TABEL (KUNING) */
         .hypervisor-badge {
             background: linear-gradient(45deg, #f1c40f, #f39c12);
@@ -300,7 +313,7 @@
         slideIndex = 1; showSlides(1);
     }
 
-    function render() {
+   function render() {
         const body = document.getElementById('gameListBody');
         const term = document.getElementById('searchInput').value.toLowerCase();
         let f = [...allGames].filter(g => g.name.toLowerCase().includes(term));
@@ -312,40 +325,33 @@
         f.forEach(g => {
             let n = g.name;
             
-            // 1. Cek dan simpan status badge "NEW", lalu hapus teks [NEW GAME] dari nama
+            // Logika Badge NEW
             let newBadgeHtml = "";
             if (n.includes("[NEW GAME]")) {
                 newBadgeHtml = `<span class="new-game-badge">NEW</span>`;
                 n = n.replace(/\[NEW GAME\]/gi, '');
             }
 
-            // 2. Cek dan simpan status "HYPERVISOR", lalu hapus teks [HYPERVISOR] dari nama
-            let isHypervisor = false;
+            // Logika Badge HYPERVISOR (Kotak Biru)
+            let hyperBadgeHtml = "";
             if (n.includes("[HYPERVISOR]")) {
-                isHypervisor = true;
+                hyperBadgeHtml = `<span class="hypervisor-badge-blue">HYPERVISOR</span>`;
                 n = n.replace(/\[HYPERVISOR\]/gi, '');
             }
 
-            // Bersihkan nama dari spasi berlebih
-            n = n.trim();
-
             const tr = document.createElement('tr');
             
-            // 3. Buat HTML untuk kolom Nama Game
-            // Gunakan `display: flex` dan `justify-content: space-between` untuk memisahkan
-            // nama game (di kiri) dan teks HYPERVISOR (di kanan).
-            let nameCellContent = `
-                <div class="clickable-name" onclick="showSpec('${g.name}')" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
-                    <div style="display: flex; align-items: center; gap: 5px;">
-                        ${newBadgeHtml}
-                        <span>${n}</span>
-                    </div>
-                    ${isHypervisor ? `<span style="color: #3182ce; font-weight: 700; font-size: 13px; margin-left: 10px; flex-shrink: 0;">HYPERVISOR</span>` : ''}
-                </div>
-            `;
-
+            // Kita gunakan flexbox agar badge HYPERVISOR nempel di kanan area nama
             tr.innerHTML = `
-                <td class="col-name">${nameCellContent}</td>
+                <td class="col-name">
+                    <div class="clickable-name" onclick="showSpec('${g.name}')" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                        <div style="display: flex; align-items: center; gap: 5px;">
+                            ${newBadgeHtml}
+                            <span>${n.trim()}</span>
+                        </div>
+                        ${hyperBadgeHtml}
+                    </div>
+                </td>
                 <td class="col-size">${g.size}</td>
                 <td class="col-spec ket-${g.description.toLowerCase().replace(/\s+/g, '-')}">${g.description}</td>
             `;
