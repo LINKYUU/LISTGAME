@@ -2,60 +2,60 @@
 const csvData = `
 NAMA GAME,SIZE,KETERANGAN
 --- WAJIB PESAN DI LINK.YU --- , 999 GB , LINK.YU
-[NEW GAME] Crimson Desert - Hypervisor , 130 Gb , Berat
-[NEW GAME] Black Myth: Wukong - Hypervisor , 155GB , Berat
-[NEW GAME] Resident Evil Requiem - Hypervisor - RE 9 , 78 GB , Berat
-[NEW GAME] Assassins Creed Shadows - Hypervisor , 140 GB , Berat
-[NEW GAME] Avatar: Frontiers of Pandora - Hypervisor , 141 GB , Berat
-[NEW GAME] WWE 2026 - Hypervisor , 135 Gb , Berat
-[NEW GAME] NBA 2026 - Hypervisor , 98 Gb , Berat
+[NEW GAME] Crimson Desert [HYPERVISOR] , 130 Gb , Berat
+[NEW GAME] Black Myth: Wukong [HYPERVISOR] , 155GB , Berat
+[NEW GAME] Resident Evil Requiem [HYPERVISOR] - RE 9 , 78 GB , Berat
+[NEW GAME] Assassins Creed Shadows [HYPERVISOR] , 140 GB , Berat
+[NEW GAME] Avatar: Frontiers of Pandora [HYPERVISOR] , 141 GB , Berat
+[NEW GAME] WWE 2026 [HYPERVISOR] , 135 Gb , Berat
+[NEW GAME] NBA 2026 [HYPERVISOR] , 98 Gb , Berat
 [NEW GAME] DEATH STRANDING 2 ON THE BEACH , 118 Gb , Berat 
-[NEW GAME] Stellar Blade - Hypervisor , 63 Gb , Berat
-[NEW GAME] Planet Coaster 2 - Hypervisor , 28 Gb , Berat
-[NEW GAME] Star Wars Outlaws - Hypervisor , 74 Gb Berat
-[NEW GAME] Monster Hunter Wilds - Hypervisor , 155 GB , Berat
-[NEW GAME] Monster Hunter Stories 3 Twisted Reflection - Hypervisor , 37 Gb , Berat
-[NEW GAME] Lost Judgment - Hypervisor , 66 Gb , Berat
-[NEW GAME] Mafia The Old Country - Hypervisor , 47 Gb , Berat
-[NEW GAME] Demon Slayer Kimetsu no Yaiba TheHinokami Chronicles 1 - Hypervisor , 26 Gb Berat
-[NEW GAME] Demon Slayer Kimetsu no Yaiba The Hinokami Chronicles 2 - Hypervisor , 26 Gb , Berat
-[NEW GAME] F1 2025 - Hypervisor , 89 Gb , Berat
-[NEW GAME] Football Manager 26 - Hypervisor , 8 Gb , Sedang
-[NEW GAME] Jurassic World Evolution 3 - Hypervisor , 21 Gb , Berat
-[NEW GAME] Life is Strange Reunion - Hypervisor , 27 Gb , Agak Berat
-[NEW GAME] Persona 4 Golden - Hypervisor , 10 Gb , Sedang
-[NEW GAME] Persona 3 Reload - Hypervisor , 19 Gb , Sedang
-[NEW GAME] Yakuza Like A ragon Pirate Yakuza In Hawaii - Hypervisor , 55 Gb , Berat
-[NEW GAME] Two Point Museum - Hypervisor , 6 Gb , Sedang
-[NEW GAME] Digimon Story Time Stranger - Hypervisor , 32 Gb , Berat
-[NEW GAME] Borderlands 4 - Hypervisor , 90 Gb , Berat
-[NEW GAME] Total War Warhammer III - Hypervisor , 88 Gb , Berat
-[NEW GAME] Dragon Quest VII Reimagined - Hypervisor , 8 Gb , Agak berat
+[NEW GAME] Stellar Blade [HYPERVISOR] , 63 Gb , Berat
+[NEW GAME] Planet Coaster 2 [HYPERVISOR] , 28 Gb , Berat
+[NEW GAME] Star Wars Outlaws [HYPERVISOR] , 74 Gb Berat
+[NEW GAME] Monster Hunter Wilds [HYPERVISOR] , 155 GB , Berat
+[NEW GAME] Monster Hunter Stories 3 Twisted Reflection [HYPERVISOR] , 37 Gb , Berat
+[NEW GAME] Lost Judgment [HYPERVISOR] , 66 Gb , Berat
+[NEW GAME] Mafia The Old Country [HYPERVISOR] , 47 Gb , Berat
+[NEW GAME] Demon Slayer Kimetsu no Yaiba TheHinokami Chronicles 1 [HYPERVISOR] , 26 Gb Berat
+[NEW GAME] Demon Slayer Kimetsu no Yaiba The Hinokami Chronicles 2 [HYPERVISOR] , 26 Gb , Berat
+[NEW GAME] F1 2025 [HYPERVISOR] , 89 Gb , Berat
+[NEW GAME] Football Manager 26 [HYPERVISOR] , 8 Gb , Sedang
+[NEW GAME] Jurassic World Evolution 3 [HYPERVISOR] , 21 Gb , Berat
+[NEW GAME] Life is Strange Reunion [HYPERVISOR] , 27 Gb , Agak Berat
+[NEW GAME] Persona 4 Golden [HYPERVISOR] , 10 Gb , Sedang
+[NEW GAME] Persona 3 Reload [HYPERVISOR] , 19 Gb , Sedang
+[NEW GAME] Yakuza Like A ragon Pirate Yakuza In Hawaii [HYPERVISOR] , 55 Gb , Berat
+[NEW GAME] Two Point Museum [HYPERVISOR] , 6 Gb , Sedang
+[NEW GAME] Digimon Story Time Stranger [HYPERVISOR] , 32 Gb , Berat
+[NEW GAME] Borderlands 4 [HYPERVISOR] , 90 Gb , Berat
+[NEW GAME] Total War Warhammer III [HYPERVISOR] , 88 Gb , Berat
+[NEW GAME] Dragon Quest VII Reimagined [HYPERVISOR] , 8 Gb , Agak berat
 [NEW GAME] GreedFall: The Dying World , 40 GB , Berat
 [NEW GAME] FATAL FRAME II: Crimson Butterfly REMAKE , 37 GB , Agak Berat
 [NEW GAME] PLANET OF LANA 2 , 17 GB , Sedang
-[NEW GAME] Sniper Elite: Resistance - Hypervisor , 90 Gb , Berat
-[NEW GAME] Yakuza Like a Dragon Infinite Wealth - Hypervisor , 50 Gb , Berat
-[NEW GAME] Yakuza Kiwami 3 and Dark Ties - Hypervisor , 50 Gb , Berat
-[NEW GAME] Yakuza Like A Dragon Pirate Yakuza In Hawaii - Hypervisor , 58 Gb , berat
-[NEW GAME] Brothers A Tale of Two Sons Remake - Hypervisor , 16 Gb , Sedang
-[NEW GAME] BRAVELY DEFAULT FLYING FAIRY HD Remaster - Hypervisor , 9 Gb , Sedang
-[NEW GAME] Like A Dragon Ishin - Hypervisor , 61 Gb , Berat
-[NEW GAME] Shin Megami Tensei V Vengeance - Hypervisor , 31 Gb , Berat
+[NEW GAME] Sniper Elite: Resistance [HYPERVISOR] , 90 Gb , Berat
+[NEW GAME] Yakuza Like a Dragon Infinite Wealth [HYPERVISOR] , 50 Gb , Berat
+[NEW GAME] Yakuza Kiwami 3 and Dark Ties [HYPERVISOR] , 50 Gb , Berat
+[NEW GAME] Yakuza Like A Dragon Pirate Yakuza In Hawaii [HYPERVISOR] , 58 Gb , berat
+[NEW GAME] Brothers A Tale of Two Sons Remake [HYPERVISOR] , 16 Gb , Sedang
+[NEW GAME] BRAVELY DEFAULT FLYING FAIRY HD Remaster [HYPERVISOR] , 9 Gb , Sedang
+[NEW GAME] Like A Dragon Ishin [HYPERVISOR] , 61 Gb , Berat
+[NEW GAME] Shin Megami Tensei V Vengeance [HYPERVISOR] , 31 Gb , Berat
 [NEW GAME] Lord Of Fallen , 34 Gb , Berat
-[NEW GAME] Sonic Origins - Hypervisor , 8 Gb , Sedang
-[NEW GAME] Sonic SuperStars - Hypervisor , 13 Gb , Sedang
-[NEW GAME] Sonic Racing Cross Worlds - Hypervisor , 20 Gb , Berat
-[NEW GAME] Shinobi Art Of Vengeance - Hypervisor , 9 Gb , Sedang
-[NEW GAME] Soul Hackers 2 - Hypervisor , 21 Gb , Agak Berat
-[NEW GAME] CODE VEIN II - Hypervisor , 65 Gb , Berat
-[NEW GAME] Prince Of Persia The Lost Crown - Hypervisor , 20 Gb , Berat
-[NEW GAME] The Bus , 70 GB - Hypervisor , Berat
-[NEW GAME] The First Berserker Khazan - Hypervisor , 50 Gb , Berat
-[NEW GAME] Warhammer Age Of Sigmar Realms Of Ruin - Hypervisor , 15 Gb , Sedang
-[NEW GAME] Final Fantasy Tactics The Ivalice Chronicles - Hypervisor , 10 Gb , Sedang
-[NEW GAME] Street Figher 6 - Hypervisor , 102 Gb , Berat
-[NEW GAME] Mortal Kombat 1 - Hypervisor , 105 Gb , Berat
+[NEW GAME] Sonic Origins [HYPERVISOR] , 8 Gb , Sedang
+[NEW GAME] Sonic SuperStars [HYPERVISOR] , 13 Gb , Sedang
+[NEW GAME] Sonic Racing Cross Worlds [HYPERVISOR] , 20 Gb , Berat
+[NEW GAME] Shinobi Art Of Vengeance [HYPERVISOR] , 9 Gb , Sedang
+[NEW GAME] Soul Hackers 2 [HYPERVISOR] , 21 Gb , Agak Berat
+[NEW GAME] CODE VEIN II [HYPERVISOR] , 65 Gb , Berat
+[NEW GAME] Prince Of Persia The Lost Crown [HYPERVISOR] , 20 Gb , Berat
+[NEW GAME] The Bus , 70 GB [HYPERVISOR] , Berat
+[NEW GAME] The First Berserker Khazan [HYPERVISOR] , 50 Gb , Berat
+[NEW GAME] Warhammer Age Of Sigmar Realms Of Ruin [HYPERVISOR] , 15 Gb , Sedang
+[NEW GAME] Final Fantasy Tactics The Ivalice Chronicles [HYPERVISOR] , 10 Gb , Sedang
+[NEW GAME] Street Figher 6 [HYPERVISOR] , 102 Gb , Berat
+[NEW GAME] Mortal Kombat 1 [HYPERVISOR] , 105 Gb , Berat
 25 To Life,1.99 GB,Ringan
 9 Monkeys of Shaolin,6.94 GB,Ringan
 A Plague Tale Innocence,43.58 GB,Agak Berat
