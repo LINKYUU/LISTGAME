@@ -312,25 +312,43 @@
         f.forEach(g => {
             let n = g.name;
             
-            // Logika deteksi Badge
-            let badgeHtml = "";
+            // 1. Cek dan simpan status badge "NEW", lalu hapus teks [NEW GAME] dari nama
+            let newBadgeHtml = "";
             if (n.includes("[NEW GAME]")) {
-                badgeHtml += `<span class="new-game-badge">NEW</span>`;
+                newBadgeHtml = `<span class="new-game-badge">NEW</span>`;
                 n = n.replace(/\[NEW GAME\]/gi, '');
             }
+
+            // 2. Cek dan simpan status "HYPERVISOR", lalu hapus teks [HYPERVISOR] dari nama
+            let isHypervisor = false;
             if (n.includes("[HYPERVISOR]")) {
-                badgeHtml += `<span class="hypervisor-badge">HYPERVISOR</span>`;
+                isHypervisor = true;
                 n = n.replace(/\[HYPERVISOR\]/gi, '');
             }
 
+            // Bersihkan nama dari spasi berlebih
+            n = n.trim();
+
             const tr = document.createElement('tr');
-            tr.innerHTML = `<td class="col-name">
-                <span class="clickable-name" onclick="showSpec('${g.name}')">
-                    ${badgeHtml}${n.trim()}
-                </span>
-            </td>
-            <td class="col-size">${g.size}</td>
-            <td class="col-spec ket-${g.description.toLowerCase().replace(/\s+/g, '-')}">${g.description}</td>`;
+            
+            // 3. Buat HTML untuk kolom Nama Game
+            // Gunakan `display: flex` dan `justify-content: space-between` untuk memisahkan
+            // nama game (di kiri) dan teks HYPERVISOR (di kanan).
+            let nameCellContent = `
+                <div class="clickable-name" onclick="showSpec('${g.name}')" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                    <div style="display: flex; align-items: center; gap: 5px;">
+                        ${newBadgeHtml}
+                        <span>${n}</span>
+                    </div>
+                    ${isHypervisor ? `<span style="color: #3182ce; font-weight: 700; font-size: 13px; margin-left: 10px; flex-shrink: 0;">HYPERVISOR</span>` : ''}
+                </div>
+            `;
+
+            tr.innerHTML = `
+                <td class="col-name">${nameCellContent}</td>
+                <td class="col-size">${g.size}</td>
+                <td class="col-spec ket-${g.description.toLowerCase().replace(/\s+/g, '-')}">${g.description}</td>
+            `;
             body.appendChild(tr);
         });
         document.getElementById('gameCount').textContent = `Menampilkan: ${f.length} Game`;
