@@ -342,15 +342,14 @@ FATAL FURY City of the Wolves,35.20 GB,Agak Berat
 Fate Extella,13.44 GB,Sedang
 Feed and Grow Fish,1.47 GB,Ringan
 FFXV,102.79 GB,Berat
-FIFA 14,4.72 GB,Ringan
-FIFA 15,9.14 GB,Ringan
-FIFA 16,32.78 GB,Agak Berat
-FIFA 18,38.98 GB,Agak Berat
-FIFA 19,33.53 GB,Agak Berat
-FIFA 21,14.40 GB,Sedang
-FIFA 22,13.45 GB,Sedang
-FIFA 23,50.89 GB,Agak Berat
-FIFA 25 EMU (NOT RECOMENT), 10 GB ,Sedang
+FIFA 14, 4 GB,Ringan
+FIFA 15, 9 GB,Ringan
+FIFA 16, 32 GB,Agak Berat
+FIFA 18, 38 GB,Agak Berat
+FIFA 19, 33 GB,Agak Berat
+FIFA 21, 40 GB,Sedang
+FIFA 22, 45 GB,Sedang
+FIFA 23, 50.89 GB,Agak Berat
 Fifa Street 2,4.73 GB,Ringan
 Fight Night 2004,3.28 GB,Ringan
 Fight Night Champion,5.67 GB,Ringan
