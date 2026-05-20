@@ -2,6 +2,7 @@
 const csvData = `
 NAMA GAME,SIZE,KETERANGAN
 --- WAJIB PESAN DI LINK.YU --- , 999 GB , LINK.YU
+[NEW GAME] Fifa 2026 , 80 Gb , Berat
 [NEW GAME] Crimson Desert , 130 Gb , Berat
 [NEW GAME] Black Myth: Wukong , 155GB , Berat
 [NEW GAME] Resident Evil Requiem - RE 9 , 78 GB , Berat
