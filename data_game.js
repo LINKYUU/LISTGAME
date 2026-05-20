@@ -2,8 +2,13 @@
 const csvData = `
 NAMA GAME,SIZE,KETERANGAN
 --- WAJIB PESAN DI LINK.YU --- , 999 GB , LINK.YU
+[NEW GAME] Forza Horizon 6 , 155 Gb , Berat
 [NEW GAME] Fifa 2026 , 80 Gb , Berat
-[NEW GAME] Crimson Desert , 130 Gb , Berat
+[NEW GAME] Tomodachi Life living The Dream, 10 Gb , Berat
+[NEW GAME] Moto GP 2026 , 40 Gb , Berat
+[NEW GAME] Subnatica 2 , 15 Gb , Berat
+[NEW GAME] Mixtape , 10 Gb , Berat
+[NEW GAME] Dead As Disco , 10 Gb , Berat
 [NEW GAME] Black Myth: Wukong , 155GB , Berat
 [NEW GAME] Resident Evil Requiem - RE 9 , 78 GB , Berat
 [NEW GAME] Assassins Creed Shadows , 140 GB , Berat
@@ -57,6 +62,9 @@ NAMA GAME,SIZE,KETERANGAN
 [NEW GAME] Final Fantasy Tactics The Ivalice Chronicles , 10 Gb , Sedang
 [NEW GAME] Street Figher 6 , 102 Gb , Berat
 [NEW GAME] Mortal Kombat 1 , 105 Gb , Berat
+[NEW GAME] CarX Drif racing 2 , 15 Gb , Berat
+[NEW GAME] Directive 8020 , 30 Gb , Berat
+[NEW GAME] OutBound , 10 Gb , Berat
 25 To Life,1.99 GB,Ringan
 9 Monkeys of Shaolin,6.94 GB,Ringan
 A Plague Tale Innocence,43.58 GB,Agak Berat
