@@ -2,7 +2,7 @@
 const csvData = `
 NAMA GAME,SIZE,KETERANGAN
 --- WAJIB PESAN DI LINK.YU --- , 999 GB , LINK.YU
-[NEW GAME] 007 First Light - Hypervisor , 56 Gb , Berat
+[NEW GAME] 007 First Light , 56 Gb , Berat
 [NEW GAME] LEGO Batman Legacy of the Dark Knight , 15 Gb , Berat
 [NEW GAME] Forza Horizon 6 , 155 Gb , Berat
 [NEW GAME] Fifa 2026 - Hypervisor , 80 Gb , Berat
