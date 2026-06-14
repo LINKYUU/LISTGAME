@@ -2,6 +2,9 @@
 const csvData = `
 NAMA GAME,SIZE,KETERANGAN
 --- WAJIB PESAN DI LINK.YU --- , 999 GB , LINK.YU
+[NEW GAME] Paralives , 8 Gb , Sedang
+[NEW GAME] Outbound , 12 Gb , Sedang
+[NEW GAME] Undisputed , 18 , Berat
 [NEW GAME] 007 First Light , 56 Gb , Berat
 [NEW GAME] LEGO Batman Legacy of the Dark Knight , 15 Gb , Berat
 [NEW GAME] Forza Horizon 6 , 155 Gb , Berat
