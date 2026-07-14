@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0B0E1A">
 <meta http-equiv="refresh" content="6;url=https://www.listgame.my.id/">
 <title>LIST GAME LINK.YU — Sudah Pindah</title>
 <style>
@@ -11,24 +13,29 @@
     --accent-2:#BF8EDA;
     --accent-3:#72BC8F;
     --bg:#0B0E1A;
-    --surface:rgba(255,255,255,0.06);
-    --border:rgba(255,255,255,0.14);
+    --surface:rgba(32,36,58,0.72);
+    --border:rgba(255,255,255,0.16);
     --text:#FFFFFF;
     --text-soft:rgba(255,255,255,0.68);
+    color-scheme:dark;
   }
   *{box-sizing:border-box;}
+  html{color-scheme:dark;background:var(--bg);}
   html,body{margin:0;padding:0;}
+  html,body,.card,.orb,.badge,.cta,.tag,.url-chip,.logo{
+    forced-color-adjust:none;
+  }
   body{
     min-height:100vh;
     display:flex;
     align-items:center;
     justify-content:center;
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    background:
+    background-color:var(--bg);
+    background-image:
       radial-gradient(60% 55% at 18% 12%, rgba(94,159,232,0.28), transparent 60%),
       radial-gradient(55% 50% at 85% 18%, rgba(191,142,218,0.24), transparent 60%),
-      radial-gradient(60% 60% at 50% 100%, rgba(114,188,143,0.16), transparent 60%),
-      var(--bg);
+      radial-gradient(60% 60% at 50% 100%, rgba(114,188,143,0.16), transparent 60%);
     color:var(--text);
     overflow:hidden;
     position:relative;
@@ -69,11 +76,12 @@
     z-index:2;
     width:100%;
     max-width:480px;
-    background:var(--surface);
+    background-color:var(--surface);
     border:1px solid var(--border);
     border-radius:20px;
     padding:40px 36px 32px;
     text-align:center;
+    -webkit-backdrop-filter:blur(18px);
     backdrop-filter:blur(18px);
     box-shadow:0 20px 60px rgba(0,0,0,0.45);
     animation:rise 0.7s cubic-bezier(.2,.9,.25,1) both;
@@ -251,7 +259,7 @@
   </main>
 ​
   <script>
-    var n = 3;
+    var n = 6;
     var c1 = document.getElementById('countdown');
     var c2 = document.getElementById('countdown2');
     var timer = setInterval(function () {
@@ -267,3 +275,4 @@
   </script>
 </body>
 </html>
+​
